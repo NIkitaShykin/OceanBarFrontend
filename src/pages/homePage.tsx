@@ -1,9 +1,14 @@
 import React from 'react'
+import OceanBarHeader from '../components/homePageComponents/Header'
+import HowItWorks from '../components/homePageComponents/HowItWorks'
+import BookATable from '../components/homePageComponents/BookATable'
 
 const Home = () => {
   return (
     <div>
-      <h1 className='m-3'>HOME</h1>
+      <OceanBarHeader />
+      <HowItWorks />
+      <BookATable />
     </div>
   )
 }
