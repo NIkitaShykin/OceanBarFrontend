@@ -28,6 +28,13 @@ module.exports = {
         test: /\.s[ac]ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /\.(png|jpe?g|svg|webp)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'src/resources/img/[name].[ext]'
+        }
+      },
     ],
   },
   resolve: {
