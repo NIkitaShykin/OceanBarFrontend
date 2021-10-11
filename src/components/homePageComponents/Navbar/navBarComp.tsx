@@ -10,7 +10,7 @@ import {
   BrowserRouter as Router,
   Link
 } from 'react-router-dom'
-import SwitchPager from '../../utils/swich'
+import SwitchPager from '../../../utils/swich'
 import Image from 'react-bootstrap/Image'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faShoppingBasket, faUserCircle} from '@fortawesome/free-solid-svg-icons'
