@@ -45,10 +45,6 @@ const NavBarComponent = () => {
               className='mr-auto m-3 my-lg-0'
               navbarScroll
             >
-              {/* --------------------------- */}
-              <Nav.Link as={Link} to={'/menu'}>MЕНЮ
-              </Nav.Link>
-               {/* --------------------------- */}
               <Nav.Link as={Link} to={'/booking-table'}>Забронировать стол
               </Nav.Link>
               <Nav.Link as={Link} to={'/order'}>Оформить заказ

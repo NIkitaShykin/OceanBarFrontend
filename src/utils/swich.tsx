@@ -9,6 +9,7 @@ import Booking from '../pages/bookingPage'
 import Login from '../pages/loginPage'
 import Home from '../pages/homePage'
 
+
 const SwitchPager = () => {
   return (
     <div>
