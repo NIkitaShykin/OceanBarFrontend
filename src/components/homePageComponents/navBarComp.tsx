@@ -16,7 +16,6 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faShoppingBasket, faUserCircle} from '@fortawesome/free-solid-svg-icons'
 // import logo from '../../../resources/img/seafood.png'
 
-
 const NavBarComponent = () => {
   return (
     <Router>
