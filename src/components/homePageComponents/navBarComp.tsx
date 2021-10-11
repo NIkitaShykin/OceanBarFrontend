@@ -38,7 +38,8 @@ const NavBarComponent = () => {
                 className='mr-2'
                 aria-label='Search'
               />
-              <Button variant='outline-success'>Искать</Button>
+              <Button variant='outline-warning'
+                className='mx-2'>Искать</Button>
             </Form>
             <Nav
               className='mr-auto m-3 my-lg-0'
