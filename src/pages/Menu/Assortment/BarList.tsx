@@ -1,19 +1,19 @@
 import foodData from '../DB/foodData';
-import {Row } from 'react-bootstrap';
+import {Row, CardGroup } from 'react-bootstrap';
 import ListItem from './ListItem';
 
 
-function BarMenu() {
+function BarList() {
 
   return (
-    <div>
-        <Row>
-          <ListItem data={foodData[2]} />
-        </Row>
-    </div>
+    <>
+        <Row >
+              <ListItem data={foodData[2]} />
+         </Row>
+    </>
   );
 }
 
-export default BarMenu;
+export default BarList;
 
 

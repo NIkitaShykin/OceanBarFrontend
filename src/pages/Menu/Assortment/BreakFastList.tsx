@@ -4,16 +4,16 @@ import ListItem from './ListItem';
 import foodData from '../DB/foodData';
 
 
-function BreakfastMenu() {
+function BreakfastList() {
 
   return (
-    <div>
+    <>
         <Row>
           <ListItem data={foodData[0]} />
         </Row>
-    </div>
+    </>
 
   );
 }
 
-export default BreakfastMenu;
+export default BreakfastList;

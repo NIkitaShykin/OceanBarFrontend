@@ -1,6 +1,6 @@
 import React from 'react';
 import foodData from "../DB/foodData";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import DishIngridients from "./DishIngridients";
 import { Button, Col, Stack, Card } from 'react-bootstrap';
 import { useParams } from "react-router-dom";

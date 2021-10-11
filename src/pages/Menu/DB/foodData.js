@@ -186,11 +186,19 @@ const foodData = [
             weight: '450г',
             image: 'https://www.edimdoma.ru/system/images/contents/0000/6789/wide/AdobeStock_196463507_result.jpeg?1564134469',
             ingredients: ["петрушка — 2–3 веточки","соус табаско — 2–3 капли","чеснок — 2 зубчика","лук-шалот — 1 головка","мясистый томат — 2 шт."]
+        },
+        {
+            id: 4,
+            name: 'Стейк из лосося',
+            prise: '270',
+            weight: '150г',
+            image: 'https://dellos-delivery.ru/upload/iblock/7d7/7d714d455bce1370400c3ba18cbab127.jpg',
+            ingredients: ["зеленую спаржа - 20г","маринад — 2–3 капли","специи - по вкусу"]
         }
+
     ]
 ];
 
 export default foodData;
 
-// https://www.edimdoma.ru/jivem_doma/posts/22893-vysokaya-kuhnya-gotovim-blyuda-iz-ryby-i-moreproduktov
 

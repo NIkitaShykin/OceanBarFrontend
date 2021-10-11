@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Card, Nav } from 'react-bootstrap';
+import { Button, Card, Col, CardGroup } from 'react-bootstrap';
 import {useParams} from "react-router-dom";
 
 
@@ -17,16 +16,16 @@ function ListItem(props: any) {
     //@ts-ignore
     const arrayDishes = props.data.map(dish => {
         return (
+          <Col>
             <Card
-                border="dark"
+                border="warning"
                 bg="white"
                 key="`${dish.id}`"
                 text='dark'
                 className="mb-3 mx-2 my-2"
                 style={{ width: '18rem' }}
             >
-
-                {/* <NavLink to={'/TestPage/' + dish.id}> */}
+                
                 <NavLink to={'/Menu/Dishes/Dish/'+dish.id}>
                     <Card.Img variant="top" src={dish.image} id={dish.id}
                         onClick={() => console.log("открыть" + `${dish.id}`)}
@@ -43,7 +42,8 @@ function ListItem(props: any) {
                     </Button>
                     <br />
                  </Card.Body>
-            </Card>
+            </Card>   
+        </Col>     
         )
     }
     )
@@ -52,10 +52,12 @@ function ListItem(props: any) {
 
     return (
         <div>
-            <div className="row my-5">
+            <Col className="row my-3">
                 {arrayDishes}
-            </div>
+            </Col>
+
         </div>
+           
     );
 }
 
