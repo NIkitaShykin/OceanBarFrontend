@@ -17,7 +17,6 @@ const BookATable = () => {
           type='date'
           id='start'
           name='trip-start'
-          value='2021-10-01'
         ></input>
         Время
         <input
