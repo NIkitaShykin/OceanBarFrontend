@@ -24,6 +24,7 @@ const BookATable = () => {
           required
         ></input>
       </div>
+
       <Button className='menu-btn' type='submit' variant='secondary'>
         <span className='menu-text-main-page'>Забронировать</span>
       </Button>
