@@ -3,45 +3,55 @@
 .App {
   text-align: center;
 }
-.menu-text-main-page{
-  color: #ff9e05
+
+.menu-text-main-page {
+  color: #ffc13b
 }
-.OceanBarHeader{
+
+.OceanBarHeader {
   background-color: #eee;
   padding: 40px;
 }
-.menu-btn{
+
+.menu-btn {
   margin-top: 20px;
 }
-.HowItWorks{
+
+.HowItWorks {
   text-align: center;
   margin-top: 20px;
 }
-.howItWorks-info{
+
+.howItWorks-info {
   color: #979797;
 }
-.steps{
+
+.steps {
   display: flex;
-  list-style-type:none;
+  list-style-type: none;
   justify-content: space-evenly;
 }
-.step{
+
+.step {
   font-size: 40px;
-  color: #ff9e05;
+  gap: 5%;
+  color: #ffc13b
 }
-.hint{
+
+.hint {
   font-size: 13px;
 }
-.book-a-table{
-  //display: flex;
-  border-color: #ff9e05;
+
+.book-a-table {
+  color: #ffc13b;
   border-style: solid;
   padding: 10px;
   text-align: center;
   width: 430px;
   margin: 0 auto;
 }
-.time-date{
+
+.time-date {
   display: flex;
   justify-content: space-around;
 }
