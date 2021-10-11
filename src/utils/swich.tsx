@@ -13,11 +13,10 @@ const SwitchPager = () => {
   return (
     <div>
       <Switch>
-        <Route path='/'>
-          <Home />
-        </Route>
+
+      <Route path='/' exact render={() => <Home/>}/>
         <Route path='/menu'>
-          <Menu />
+          <Menu/>
         </Route>
         <Route path='/order'>
           <Checkout />

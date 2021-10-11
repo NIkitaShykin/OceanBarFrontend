@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Form} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 
 const BookATable = () => {
   return (
@@ -13,7 +13,12 @@ const BookATable = () => {
       <br />
       <div className='time-date'>
         Дата
-        <input type='date' id='start' name='trip-start'></input>
+        <input
+          type='date'
+          id='start'
+          name='trip-start'
+          value='2021-10-01'
+        ></input>
         Время
         <input
           type='time'
@@ -24,9 +29,6 @@ const BookATable = () => {
           required
         ></input>
       </div>
-      <Button className='menu-btn' type='submit' variant='secondary'>
-        <span className='menu-text-main-page'>Забронировать</span>
-      </Button>
     </div>
   )
 }
