@@ -3,47 +3,38 @@
 .App {
   text-align: center;
 }
-
-.menu-text-main-page {
-  color: #ffc13b
+.menu-text-main-page{
+  color: #ff9e05
 }
-
-.OceanBarHeader {
+.OceanBarHeader{
   background-color: #eee;
   padding: 40px;
 }
-
-.menu-btn {
+.menu-btn{
   margin-top: 20px;
 }
-
-.HowItWorks {
+.HowItWorks{
   text-align: center;
   margin-top: 20px;
 }
-
-.howItWorks-info {
+.howItWorks-info{
   color: #979797;
 }
-
-.steps {
+.steps{
   display: flex;
-  list-style-type: none;
+  list-style-type:none;
   justify-content: space-evenly;
 }
-
-.step {
+.step{
   font-size: 40px;
-  gap: 5%;
-  color: #ffc13b
+  color: #ff9e05;
 }
-
-.hint {
+.hint{
   font-size: 13px;
 }
-
-.book-a-table {
-  color: #ffc13b;
+.book-a-table{
+  //display: flex;
+  border-color: #ff9e05;
   border-style: solid;
   padding: 10px;
   text-align: center;
@@ -51,7 +42,21 @@
   margin: 0 auto;
 }
 
-.time-date {
+ // ------temporary class ----------------------------
+.temporaryLayout{
+  border-color: #ff9e05;
+  border-style: solid;
+  padding: 1px 1px 1px 20px;
+  width: 1350px;
+  margin: 100px auto;
+}
+
+// -----end of temporary class -----------------------
+
+
+.time-date{
   display: flex;
   justify-content: space-around;
 }
+
+

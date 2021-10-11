@@ -16,6 +16,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faShoppingBasket, faUserCircle} from '@fortawesome/free-solid-svg-icons'
 // import logo from '../../../resources/img/seafood.png'
 
+
 const NavBarComponent = () => {
   return (
     <Router>
@@ -43,22 +44,50 @@ const NavBarComponent = () => {
               className='mr-auto m-3 my-lg-0'
               navbarScroll
             >
+              {/* --------------------------- */}
+              <Nav.Link as={Link} to={'/menu'}>MЕНЮ
+              </Nav.Link>
+               {/* --------------------------- */}
               <Nav.Link as={Link} to={'/booking-table'}>Забронировать стол
               </Nav.Link>
               <Nav.Link as={Link} to={'/order'}>Оформить заказ
-              </Nav.Link>
+              </Nav.Link>            
               <NavDropdown
                 title='Меню'
                 id='navbarScrollingDropdown'
               >
-                <NavDropdown.Item href='/breakfast-menu'>Завтраки
+
+{/* -------Так переход работает работает только первый раз------------ */}
+                {/* <NavDropdown.Item >
+                  <Nav.Link as={Link} to={'menu#/CatchWeeksMenu'}>Улов недели
+                  </Nav.Link>  
+                </NavDropdown.Item> 
+                <NavDropdown.Item >
+                  <Nav.Link as={Link} to={'menu#/BreakfastMenu'}>Завтраки
+                  </Nav.Link>  
+                </NavDropdown.Item> 
+                <NavDropdown.Item >
+                  <Nav.Link as={Link} to={'menu#/MainMenu'}>Основное меню
+                  </Nav.Link>  
+                </NavDropdown.Item> 
+                <NavDropdown.Item >
+                  <Nav.Link as={Link} to={'menu#/BarMenu'}>Меню бара
+                  </Nav.Link>  
+                </NavDropdown.Item>  */}
+  {/* ---------------------------------------------------------- */}
+
+
+{/* --------------Так работает только внутри самого меню--------------- */}
+                <NavDropdown.Item href='menu#/BreakfastMenu'>Улов недели
                 </NavDropdown.Item>
-                <NavDropdown.Item href='/main-menu'>Основное меню
+                <NavDropdown.Item href='menu#/BreakfastMenu'>Завтраки
                 </NavDropdown.Item>
-                <NavDropdown.Item href='/bar-menu'>Меню бара
+                <NavDropdown.Item href='menu#/MainMenu'>Основное меню
                 </NavDropdown.Item>
-                <NavDropdown.Item href='/hot-menu'>Улов недели
+                <NavDropdown.Item href='menu#/BarMenu'>Меню бара
                 </NavDropdown.Item>
+
+
               </NavDropdown>
             </Nav>
             <Nav.Link as={Link} to={'/order'}>
@@ -75,11 +104,10 @@ const NavBarComponent = () => {
                 size='2x'
                 color='white'/>
             </Nav.Link>
-
-          </Navbar.Collapse>
-        </Navbar>
+           </Navbar.Collapse>
+         </Navbar>
       </div>
-      <SwitchPager />
+    <SwitchPager />
     </Router>
   )
 }
