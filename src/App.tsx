@@ -3,8 +3,7 @@ import './App.scss'
 import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
 
 
-// eslint-disable-next-line require-jsdoc
-function App() {
+const App = () => {
   return (
     <div className='App'>
       <header className='App-header'>
