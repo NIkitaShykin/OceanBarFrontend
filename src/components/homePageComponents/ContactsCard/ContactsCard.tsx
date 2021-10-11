@@ -2,7 +2,7 @@
 import React from 'react'
 import {Container, Row, Col, Button} from 'react-bootstrap'
 
-import GoogleApiWrapper from './CustomMap'
+import GoogleApiWrapper from '../CustomMap/CustomMap'
 
 const ContactsCard = () => {
   return (
