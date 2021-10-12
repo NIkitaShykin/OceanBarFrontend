@@ -1,23 +1,25 @@
 import React from 'react';
 import foodData from "../DB/foodData";
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Col, Stack,Card} from 'react-bootstrap';
+import {Row, Col,Form} from 'react-bootstrap';
 
 
 function DishIngredients(props:any) {
 
   //@ts-ignore
-  const dish=props.ingredients.map(el=><div>{el}</div>)
+  const dish=props.ingredients.map(el=>{
+  return (
+    <Row>
+        <Col xs={3}><Form.Check type="checkbox" /></Col>
+        <Col xs={9}>{el}</Col>
+    </Row>
+)
+})
 
   return (
 
-    <div className="col">
-
+    <>
         {dish}
-
-
-</div>
+   </>
   )
 }
 
