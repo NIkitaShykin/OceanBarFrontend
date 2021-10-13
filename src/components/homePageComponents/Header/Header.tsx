@@ -10,7 +10,7 @@ const OceanBarHeader = () => {
       <h1>
         OceanBar
         <Image
-          src='seafood.png'
+          src='images/logo.png'
           alt='logo'
           className='mx-2'
           width={70}

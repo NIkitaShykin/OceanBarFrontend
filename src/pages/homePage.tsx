@@ -2,11 +2,12 @@ import React from 'react'
 import OceanBarHeader from '../components/homePageComponents/Header/Header'
 import HowItWorks from '../components/homePageComponents/HowItWorks/HowItWorks'
 import BookATable from '../components/homePageComponents/BookATable/BookATable'
+import CatchWeeksMenu from '../pages/Menu/Assortment/CatchWeeksList'
+// eslint-disable-next-line max-len
+import MobileAppAd from '../components/homePageComponents/MobileAppAd/MobileAppAd'
 // eslint-disable-next-line max-len
 import ContactsCard from '../components/homePageComponents/ContactsCard/ContactsCard'
 import Footer from '../components/homePageComponents/Footer/Footer'
-
-import CatchWeeksMenu from '../pages/Menu/Assortment/CatchWeeksList'
 
 const Home = () => {
   return (
@@ -21,6 +22,7 @@ const Home = () => {
         <CatchWeeksMenu />
       </div>
       {/* ------end of temporary layout--------------------- */}
+      <MobileAppAd />
       <ContactsCard />
       <Footer />
     </div>

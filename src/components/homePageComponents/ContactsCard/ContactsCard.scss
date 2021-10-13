@@ -1,0 +1,45 @@
+$mainColor: #ff9e05;
+
+.contacts-card {
+  background-color: #eee;
+
+  .container {
+    padding: 30px 0;
+    display: flex;
+
+    .col {
+      text-align: left;
+
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+        color: $mainColor;
+        margin-bottom: 25px;
+      }
+
+      .item:nth-child(2) {
+        margin: 7px 0;
+      }
+
+      .map {
+        position: relative;
+        width: 30em;
+        height: 12em;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 974px) {
+  .contacts-card {
+    .container {
+      flex-direction: column;
+    }
+    
+    .col:nth-child(2) {
+      margin-top: 45px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
