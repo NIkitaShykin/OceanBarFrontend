@@ -2,7 +2,7 @@ import React from 'react'
 import OceanBarHeader from '../components/homePageComponents/Header/Header'
 import HowItWorks from '../components/homePageComponents/HowItWorks/HowItWorks'
 import BookATable from '../components/homePageComponents/BookATable/BookATable'
-import CatchWeeksMenu from '../pages/Menu/Assortment/CatchWeeksList'
+import Slider from '../components/homePageComponents/Slider/Slider'
 // eslint-disable-next-line max-len
 import MobileAppAd from '../components/homePageComponents/MobileAppAd/MobileAppAd'
 // eslint-disable-next-line max-len
@@ -15,13 +15,7 @@ const Home = () => {
       <OceanBarHeader />
       <HowItWorks />
       <BookATable />
-      {/* -----temporaryLayout----------------------------- */}
-      <div className='temporaryLayout'>
-        <br/>
-        <h2> Меню </h2>
-        <CatchWeeksMenu />
-      </div>
-      {/* ------end of temporary layout--------------------- */}
+      <Slider />
       <MobileAppAd />
       <ContactsCard />
       <Footer />
