@@ -1,6 +1,8 @@
 import React from 'react'
-import {Button} from 'react-bootstrap'
+import { Button, Nav } from 'react-bootstrap'
 import Image from 'react-bootstrap/Image'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
+
 
 const OceanBarHeader = () => {
   return (
@@ -8,7 +10,7 @@ const OceanBarHeader = () => {
       <h1>
         OceanBar
         <Image
-          src='seafood.png'
+          src='images/logo.png'
           alt='logo'
           className='mx-2'
           width={70}
@@ -16,9 +18,11 @@ const OceanBarHeader = () => {
         />
       </h1>
       <h5>Вкусно. Быстро. Качественно</h5>
-      <Button className='menu-btn' variant='secondary'>
-        <span className='menu-text-main-page'>Меню</span>
-      </Button>
+      <Nav.Link as={Link} to={'/menu'}>
+        <Button className='menu-btn' variant='secondary'>
+          <span className='menu-text-main-page'>Меню</span>
+        </Button>
+      </Nav.Link>
     </div>
   )
 }

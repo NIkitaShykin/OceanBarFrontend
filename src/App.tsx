@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.scss'
-import NavBarComponent from './components/homePageComponents/navBarComp'
+import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
 
 
 // eslint-disable-next-line require-jsdoc

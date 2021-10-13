@@ -41,7 +41,22 @@
   width: 430px;
   margin: 0 auto;
 }
+
+ // ------temporary class ----------------------------
+.temporaryLayout{
+  border-color: #ff9e05;
+  border-style: solid;
+  padding: 1px 1px 1px 20px;
+  width: 1350px;
+  margin: 100px auto;
+}
+
+// -----end of temporary class -----------------------
+
+
 .time-date{
   display: flex;
   justify-content: space-around;
 }
+
+
