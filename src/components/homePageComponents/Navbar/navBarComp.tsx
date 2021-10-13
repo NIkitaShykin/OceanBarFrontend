@@ -22,7 +22,7 @@ const NavBarComponent = () => {
     <Router>
       <div>
         <Navbar bg='dark' variant={'dark'} expand='lg'>
-          <Image src='seafood.png' alt='logo'
+          <Image src='images/logo.png' alt='logo'
             className='mx-2'
             width={50}
             height={50}/>
