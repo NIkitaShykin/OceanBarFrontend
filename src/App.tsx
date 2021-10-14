@@ -1,17 +1,29 @@
 import React from 'react'
+import {BrowserRouter as Router} from 'react-router-dom'
 import './App.scss'
+// eslint-disable-next-line max-len
+import ContactsCard from './components/homePageComponents/ContactsCard/ContactsCard'
+import Footer from './components/homePageComponents/Footer/Footer'
 import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
+
+import SwitchPager from './utils/swich'
 
 
 // eslint-disable-next-line require-jsdoc
-function App() {
+const App = () => {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <NavBarComponent />
-      </header>
-      <main></main>
-    </div>
+    <Router>
+      <div className='App'>
+        <header className='App-header'>
+          <NavBarComponent />
+        </header>
+        <main>
+          <SwitchPager />
+        </main>
+        <ContactsCard />
+        <Footer />
+      </div>
+    </Router>
   )
 }
 
