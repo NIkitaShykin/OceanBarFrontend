@@ -45,6 +45,32 @@ const foodData = [
   [
     {
       id: 1,
+      name: 'Борщ',
+      prise: '100',
+      weight: '400г',
+      image: 'https://dellos-delivery.ru/upload/resize_cache/iblock/6db/1000_1000_0/6db539b51c19ae13921090e7040b8b81.jpg',
+      ingredients: ['капуста', 'лук', 'морковь', 'говядина']
+    },
+    {
+      id: 2,
+      name: 'Сибирский борщ',
+      prise: '550',
+      weight: '400г',
+      image: 'https://dellos-delivery.ru/upload/iblock/14f/14fd17c8c5c4458150f0ab47dfb8e42c.jpg',
+      ingredients: ['сметана', 'картовель', 'свекла', 'лук']
+    },
+    {
+      id: 3,
+      name: 'Щи',
+      prise: '90',
+      weight: '450г',
+      image: 'https://dellos-delivery.ru/upload/iblock/2d0/2d06783776310ea30c7e5a2562aab5a3.jpg',
+      ingredients: ['чеснок', 'морковь', 'чеснок', 'Капуста']
+    }
+  ],
+  [
+    {
+      id: 1,
       name: 'Кальмар гриль',
       prise: '180',
       weight: '160г',

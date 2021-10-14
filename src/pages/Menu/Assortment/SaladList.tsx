@@ -2,17 +2,17 @@ import foodData from '../DB/foodData';
 import {Row } from 'react-bootstrap';
 import ListItem from './ListItem';
 
-function MainList() {
+function SaladList() {
 
 
 
   return (
     <>
         <Row>
-          <ListItem data={foodData[1]} />
+          <ListItem data={foodData[2]} />
         </Row>
     </>
   );
 }
 
-export default MainList;
+export default SaladList;

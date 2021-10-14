@@ -19,20 +19,32 @@ function ControlledCarousel() {
       onSelect={handleSelect}>
 
       <Carousel.Item>
-        <NavLink to={PATH.BREAKFAST_MENU}>
+        <NavLink to={PATH.DESSERT}>
           <SliderGallertItem imgData={data[0]}/>
          </NavLink>
       </Carousel.Item>
  
       <Carousel.Item>
-        <NavLink to={PATH.BAR_MENU}>
+        <NavLink to={PATH.OYSTERS}>
            <SliderGallertItem imgData={data[1]}/>
         </NavLink>
       </Carousel.Item>
 
       <Carousel.Item>
-        <NavLink to={PATH.CATCHWEEK_MENU}>
+        <NavLink to={PATH.PLATO}>
           <SliderGallertItem imgData={data[2]}/>
+        </NavLink>
+      </Carousel.Item>
+      
+      <Carousel.Item>
+        <NavLink to={PATH.SALAD}>
+          <SliderGallertItem imgData={data[3]}/>
+        </NavLink>
+      </Carousel.Item>
+
+      <Carousel.Item>
+        <NavLink to={PATH.SOUP}>
+          <SliderGallertItem imgData={data[4]}/>
         </NavLink>
       </Carousel.Item>
 

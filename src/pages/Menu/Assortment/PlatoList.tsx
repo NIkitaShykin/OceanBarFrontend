@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 import foodData from '../DB/foodData';
 
 
-function BreakfastList() {
+function PlatoList() {
 
   return (
     <>
@@ -16,4 +16,4 @@ function BreakfastList() {
   );
 }
 
-export default BreakfastList;
+export default PlatoList;
