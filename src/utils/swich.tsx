@@ -11,6 +11,7 @@ import Login from '../pages/loginPage/loginPage'
 import Home from '../pages/homePage/homePage'
 import Page404 from '../pages/page404/page404'
 import Checkout from '../pages/orderPage/orderPage'
+import Cart from '../pages/cartPage/cartPage'
 
 
 const SwitchPager = () => {
@@ -25,6 +26,9 @@ const SwitchPager = () => {
         </Route>
         <Route exact path='/order'>
           <Checkout />
+        </Route>
+        <Route exact path='/cart'>
+          <Cart />
         </Route>
         <Route exact path='/booking-table'>
           <Booking />

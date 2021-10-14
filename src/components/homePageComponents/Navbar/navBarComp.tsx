@@ -45,7 +45,7 @@ const NavBarComponent = () => {
             <Button variant='outline-warning'
               className='mx-2'>Искать</Button>
           </Form>
-          <Nav.Link as={Link} to={'/order'}>
+          <Nav.Link as={Link} to={'/cart'}>
             <FontAwesomeIcon
               icon={faShoppingBasket}
               className='mr-auto m-3 my-lg-0'
