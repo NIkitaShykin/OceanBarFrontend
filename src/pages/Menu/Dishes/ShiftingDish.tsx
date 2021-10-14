@@ -10,7 +10,7 @@ function ShiftingDish(props:any) {
   const token = useParams<{ token: string }>()
 
   //@ts-ignore
-  const nesseryObject = foodData[0].find(el => el.id == token.token)
+  const dish = foodData[0].find(el => el.id == token.token)
 
   return (
 
@@ -25,17 +25,19 @@ function ShiftingDish(props:any) {
           >
             <Row>
               <Col xs lg="7">
-                <img style={{ width: "100%" }} src={nesseryObject?.image} />
+                <img style={{ width: "100%" }} src={dish?.image} />
               </Col>
               <Col xs lg="5">
-                <Card.Title><h2>{nesseryObject?.name}</h2></Card.Title>
+                <Card.Title><h2>{dish?.name}</h2></Card.Title>
                 <Row>
                   <Col xs lg="5"><h3>Состав</h3></Col>
                   <Col xs lg="7"></Col>
                 </Row>
                 <Row>
                   <Col xs={7}>
-                    <DishIngridients ingredients={nesseryObject?.ingredients} />
+                    <DishIngridients 
+                      ingredients={dish?.ingredients} 
+                      />
                   </Col>
                   <Col xs={5}>
                     <br />
@@ -46,11 +48,11 @@ function ShiftingDish(props:any) {
                   </Col>
                 </Row>
                 <Row>
-                  <Col sm={5}><h5>Вес: {nesseryObject?.weight}</h5></Col>
+                  <Col sm={5}><h5>Вес: {dish?.weight}</h5></Col>
                   <Col sm={7}></Col>
                 </Row>
                 <Row>
-                  <Col sm={7}><h5>Стоимость: {nesseryObject?.prise}</h5></Col>
+                  <Col sm={7}><h5>Стоимость: {dish?.prise}</h5></Col>
                   <Col sm={5}></Col>
                 </Row>
                 <Button onClick={() => console.log("заказать handler")}
