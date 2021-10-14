@@ -10,7 +10,7 @@ import {
   BrowserRouter as Router,
   Link
 } from 'react-router-dom'
-import SwitchPager from '../../utils/swich'
+import SwitchPager from '../../../utils/swich'
 import Image from 'react-bootstrap/Image'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faShoppingBasket, faUserCircle} from '@fortawesome/free-solid-svg-icons'
@@ -22,7 +22,7 @@ const NavBarComponent = () => {
     <Router>
       <div>
         <Navbar bg='dark' variant={'dark'} expand='lg'>
-          <Image src='seafood.png' alt='logo'
+          <Image src='images/logo.png' alt='logo'
             className='mx-2'
             width={50}
             height={50}/>
@@ -38,16 +38,13 @@ const NavBarComponent = () => {
                 className='mr-2'
                 aria-label='Search'
               />
-              <Button variant='outline-success'>Искать</Button>
+              <Button variant='outline-warning'
+                className='mx-2'>Искать</Button>
             </Form>
             <Nav
               className='mr-auto m-3 my-lg-0'
               navbarScroll
             >
-              {/* --------------------------- */}
-              <Nav.Link as={Link} to={'/menu'}>MЕНЮ
-              </Nav.Link>
-               {/* --------------------------- */}
               <Nav.Link as={Link} to={'/booking-table'}>Забронировать стол
               </Nav.Link>
               <Nav.Link as={Link} to={'/order'}>Оформить заказ

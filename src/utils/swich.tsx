@@ -9,24 +9,24 @@ import Booking from '../pages/bookingPage'
 import Login from '../pages/loginPage'
 import Home from '../pages/homePage'
 
+
 const SwitchPager = () => {
   return (
     <div>
       <Switch>
-
-      <Route path='/' exact render={() => <Home/>}/>
-        <Route path='/menu'>
+        <Route exact path='/menu'>
           <Menu/>
         </Route>
-        <Route path='/order'>
+        <Route exact path='/order'>
           <Checkout />
         </Route>
-        <Route path='/booking-table'>
+        <Route exact path='/booking-table'>
           <Booking />
         </Route>
-        <Route path='/login'>
+        <Route exact path='/login'>
           <Login />
         </Route>
+        <Route path='/' exact render={() => <Home/>}/>
       </Switch>
     </div>
   )
