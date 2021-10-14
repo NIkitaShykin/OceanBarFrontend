@@ -2,18 +2,23 @@ import React from 'react'
 import {
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom'
-import Checkout from '../pages/orderPage'
-import Menu from '../pages/menuPage'
-import Booking from '../pages/bookingPage'
-import Login from '../pages/loginPage'
-import Home from '../pages/homePage'
+import Checkout from '../pages/orderPage/orderPage'
+import Menu from '../pages/menuPage/menuPage'
+import Booking from '../pages/bookingPage/bookingPage'
+import Login from '../pages/loginPage/loginPage'
+import Home from '../pages/homePage/homePage'
+import Page404 from '../pages/page404/page404'
 
 
 const SwitchPager = () => {
   return (
     <div>
       <Switch>
+        <Route exact path='/'>
+          <Home/>
+        </Route>
         <Route exact path='/menu'>
           <Menu/>
         </Route>
@@ -26,8 +31,14 @@ const SwitchPager = () => {
         <Route exact path='/login'>
           <Login />
         </Route>
-        <Route path='/' exact render={() => <Home/>}/>
+        <Route path='*'>
+          <Page404 />
+        </Route>
+        <Redirect to='*' />
       </Switch>
+      {/* <Route path='*'>
+          <Page404 />
+        </Route> */}
     </div>
   )
 }

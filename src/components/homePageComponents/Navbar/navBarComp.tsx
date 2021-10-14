@@ -7,19 +7,18 @@ import {Navbar,
   FormControl,
   Button} from 'react-bootstrap'
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Link
 } from 'react-router-dom'
 import SwitchPager from '../../../utils/swich'
 import Image from 'react-bootstrap/Image'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faShoppingBasket, faUserCircle} from '@fortawesome/free-solid-svg-icons'
-// import logo from '../../../resources/img/seafood.png'
 
 
 const NavBarComponent = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <div>
         <Navbar bg='dark' variant={'dark'} expand='lg'>
           <Image src='images/logo.png' alt='logo'
@@ -101,11 +100,11 @@ const NavBarComponent = () => {
                 size='2x'
                 color='white'/>
             </Nav.Link>
-           </Navbar.Collapse>
-         </Navbar>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
-    <SwitchPager />
-    </Router>
+      <SwitchPager />
+    </BrowserRouter>
   )
 }
 
