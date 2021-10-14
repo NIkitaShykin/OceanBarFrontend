@@ -2,7 +2,7 @@ import foodData from '../DB/foodData';
 import {Row } from 'react-bootstrap';
 import ListItem from './ListItem';
 
-function CatchWeeksList() {
+function OystersList() {
 
 
 
@@ -15,4 +15,4 @@ function CatchWeeksList() {
   );
 }
 
-export default CatchWeeksList;
+export default OystersList;
