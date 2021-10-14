@@ -10,8 +10,6 @@ module.exports = {
   devServer: {
     port: 3000,
     static: path.resolve(__dirname, 'public'),
-    historyApiFallback: true,
-    contentBase: './',
     hot: true,
     open: true,
   },
