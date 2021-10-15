@@ -9,7 +9,6 @@ import Menu from '../pages/menuPage/menuPage'
 import Booking from '../pages/bookingPage/bookingPage'
 import Login from '../pages/loginPage/loginPage'
 import Page404 from '../pages/page404/page404'
-import Checkout from '../pages/orderPage/orderPage'
 import Cart from '../pages/cartPage/cartPage'
 import Home from '../pages/homePage/homePage'
 
@@ -21,29 +20,23 @@ const SwitchPager = () => {
         <Route exact path='/'>
           <Home/>
         </Route>
-        <Route exact path='/menu'>
+        <Route path='/menu'>
           <Menu/>
+          <Redirect to='/menu/soup' />
         </Route>
-        <Route exact path='/order'>
-          <Checkout />
-        </Route>
-        <Route exact path='/cart'>
+        <Route path='/cart'>
           <Cart />
         </Route>
-        <Route exact path='/booking-table'>
+        <Route path='/booking-table'>
           <Booking />
         </Route>
-        <Route exact path='/login'>
+        <Route path='/login'>
           <Login />
         </Route>
-        <Route path='/404'>
+        <Route path='*'>
           <Page404 />
         </Route>
-        <Redirect to='/404' />
       </Switch>
-      {/* <Route path='*'>
-          <Page404 />
-        </Route> */}
     </div>
   )
 }

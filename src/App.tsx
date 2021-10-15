@@ -5,8 +5,9 @@ import './App.scss'
 import ContactsCard from './components/homePageComponents/ContactsCard/ContactsCard'
 import Footer from './components/homePageComponents/Footer/Footer'
 import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
-
+import {Container} from 'react-bootstrap'
 import SwitchPager from './utils/swich'
+import MenuRoutes from './pages/Menu/MenuRoutes'
 
 
 // eslint-disable-next-line require-jsdoc
@@ -19,6 +20,9 @@ const App = () => {
         </header>
         <main>
           <SwitchPager />
+          <Container>
+            <MenuRoutes />
+          </Container>
         </main>
         <ContactsCard />
         <Footer />

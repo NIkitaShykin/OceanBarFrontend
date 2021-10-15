@@ -8,6 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, './public'),
   },
   devServer: {
+    historyApiFallback: true,
     port: 3000,
     static: path.resolve(__dirname, 'public'),
     hot: true,
