@@ -11,14 +11,15 @@ function DishIngredients(props:any) {
   const ingridientKey=Object.keys(renderIngredients)
   const ingridientValue:IngridientValueType=Object.values(renderIngredients)
 
-  const toggleIngridient=(el:any)=>{
+  const toggleIngridient=(el:any)=>{ 
     let newIngredients = {...renderIngredients}
     //@ts-ignore
     newIngredients[el]=!newIngredients[el]
     setRenderIng(newIngredients)
+    props.setIngridient(newIngredients) 
   }
   
-  const ingridientsItem=ingridientKey.map((el,i)=>{
+  const ingridientsItem=ingridientKey.map((ingridient,i)=>{
     
   return (
     <Row>
@@ -26,12 +27,13 @@ function DishIngredients(props:any) {
           <Form.Check 
            type="checkbox"
            checked={!!ingridientValue[i]}
-           onClick={()=>{toggleIngridient(el)}}/>
+           onChange={()=>{toggleIngridient(ingridient)}}
+           />
         </Col>
         <Col xs={9}>
-          {el}
+          {ingridient}
         </Col>
-    </Row>
+     </Row>
 )
 })
 

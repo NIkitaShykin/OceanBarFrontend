@@ -8,12 +8,11 @@ import CompletedDish from './CompletedDish';
 
 function Dish() {
 
-  const [ischanged, setIschanged] = useState<boolean>(false);
+  const [ischanged, setIsChanged] = useState<boolean>(false);
 
   const dishisChanged=()=>{
-    setIschanged(!ischanged)
-    alert("отправка данных")
-    }
+    setIsChanged(!ischanged)
+      }
 
   return (
     <div>

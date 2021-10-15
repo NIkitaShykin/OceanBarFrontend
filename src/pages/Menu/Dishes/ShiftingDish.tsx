@@ -9,6 +9,16 @@ function ShiftingDish(props:any) {
 
   const token = useParams<{ token: string }>()
 
+ const setIngridient=(newIngredients:any)=>{
+   console.log("ingridients resived" + newIngredients)
+ }
+
+ const finishSifting=()=>{
+    props.dishisChanged()
+    console.log("send Ingridients somewhere ");
+    
+ }
+
   //@ts-ignore
   const dish = foodData[0].find(el => el.id == token.token)
 
@@ -36,12 +46,13 @@ function ShiftingDish(props:any) {
                 <Row>
                   <Col xs={7}>
                     <DishIngridients 
+                      setIngridient={setIngridient}
                       ingredients={dish?.ingredients} 
                       />
                   </Col>
                   <Col xs={5}>
                     <br />
-                    <Button onClick={props.dishisChanged}
+                    <Button onClick={finishSifting}
                       variant="outline-secondary" size="sm">
                       готово
                     </Button>
@@ -55,11 +66,7 @@ function ShiftingDish(props:any) {
                   <Col sm={7}><h5>Стоимость: {dish?.prise}</h5></Col>
                   <Col sm={5}></Col>
                 </Row>
-                <Button onClick={() => console.log("заказать handler")}
-                  variant="outline-secondary" size="sm">
-                  Заказать
-                </Button>
-              </Col>
+                </Col>
             </Row>
           </Card>
         </Row>

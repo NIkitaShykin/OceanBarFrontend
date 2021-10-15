@@ -34,7 +34,9 @@ function CompletedDish(props:any) {
                   <Col xs lg="7"></Col>
                 </Row>
                 <Row>
-                  some some
+                  <p>лук</p>
+                  <p>чеснок</p>
+                  <p>томаты</p>
                   {/* <Col xs={7}>
                     <DishIngridients ingredients={nesseryObject?.ingredients} />
                   </Col> */}
