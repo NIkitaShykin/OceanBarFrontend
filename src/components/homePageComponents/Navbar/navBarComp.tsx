@@ -43,18 +43,18 @@ const NavBarComponent = () => {
           </Nav>
           <div
             className='d-flex justify-content-end'>
-            <Form className='d-flex mx-6'>
+            <Form className='d-flex mx-6 d-flex-pos '>
               <FormControl
                 type='search'
                 placeholder='Search...'
-                className='mx-2'
+                className='nav-input mx-2 form-control-pad'
                 aria-label='Search'
               />
               <Button variant='link'
-                className='mx-2'>
+                className='mx-2 btn-input'>
                 <FontAwesomeIcon
                   icon={faSearch}
-                  className='far fa-search svg-inline--fa 
+                  className='svg-inline--fa 
                    fa-w-18-24'
                   color='white'/>
               </Button>
@@ -63,7 +63,7 @@ const NavBarComponent = () => {
               className='nav-link-icon'>
               <FontAwesomeIcon
                 icon={faShoppingBasket}
-                className='fas fa-shopping-basket mr-auto
+                className='mr-auto
                  m-3 my-lg-0 icon-height
                svg-inline--fa fa-w-18-24'
                 color='white'/>
@@ -72,7 +72,8 @@ const NavBarComponent = () => {
               className='nav-link-icon'>
               <FontAwesomeIcon
                 icon={faUser}
-                className='far fa-user mr-auto m-3 my-lg-0 icon-height
+                data-prefix='far'
+                className=' mr-auto m-3 my-lg-0 icon-height
               svg-inline--fa fa-w-18-24'
                 color='white'/>
             </Nav.Link>
