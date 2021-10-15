@@ -23,3 +23,16 @@
 .nav-link-icon {
   padding: 0.5rem 0.5rem;
 }
+
+input:not(:placeholder-shown) {
+  background-color: #ffffff;
+  border: transparent;
+  border-bottom: 1px solid #fff;
+}
+
+input:placeholder-shown {
+  background-color: #212529;
+  border-radius: 0;
+  border: transparent;
+  border-bottom: 1px solid #fff;
+}

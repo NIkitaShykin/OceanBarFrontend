@@ -36,10 +36,10 @@ const SwitchPager = () => {
         <Route exact path='/login'>
           <Login />
         </Route>
-        <Route path='*'>
+        {/* <Route path='/404'>
           <Page404 />
         </Route>
-        <Redirect to='*' />
+        <Redirect to='/404' /> */}
       </Switch>
       {/* <Route path='*'>
           <Page404 />

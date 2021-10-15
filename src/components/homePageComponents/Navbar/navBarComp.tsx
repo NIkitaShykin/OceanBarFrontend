@@ -8,7 +8,8 @@ import {Navbar,
 import {Link} from 'react-router-dom'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faShoppingBasket,
-  faUser} from '@fortawesome/free-solid-svg-icons'
+  faUser,
+  faSearch} from '@fortawesome/free-solid-svg-icons'
 import './navBar.scss'
 
 
@@ -45,12 +46,18 @@ const NavBarComponent = () => {
             <Form className='d-flex mx-6'>
               <FormControl
                 type='search'
-                placeholder='Искать блюдо...'
-                className='mr-2'
+                placeholder='Search...'
+                className='mx-2'
                 aria-label='Search'
               />
-              <Button variant='outline-warning'
-                className='mx-2'>Искать</Button>
+              <Button variant='link'
+                className='mx-2'>
+                <FontAwesomeIcon
+                  icon={faSearch}
+                  className='far fa-search svg-inline--fa 
+                   fa-w-18-24'
+                  color='white'/>
+              </Button>
             </Form>
             <Nav.Link as={Link} to={'/cart'}
               className='nav-link-icon'>
