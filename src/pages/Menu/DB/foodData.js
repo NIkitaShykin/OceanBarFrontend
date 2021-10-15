@@ -7,7 +7,7 @@ const foodData = [
       prise: '120',
       weight: '500г',
       image: 'https://www.edimdoma.ru/system/images/contents/0000/6787/wide/AdobeStock_275611083_%D0%B8%D1%81%D0%BF%D1%80.jpg?1564142039',
-      ingredients: ['авокадо', 'зелень', 'лук-шалот', 'масло']
+      ingredients: {авокадо:true, зелень:false, лук:true, масло:false}
     },
     {
       id: 2,

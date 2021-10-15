@@ -12,11 +12,14 @@ function Dish() {
 
   const dishisChanged=()=>{
     setIschanged(!ischanged)
+    alert("отправка данных")
     }
 
   return (
     <div>
-         {ischanged ? <ShiftingDish dishisChanged={dishisChanged}/> : <CompletedDish dishisChanged={dishisChanged}/>} 
+         {ischanged ? 
+         <ShiftingDish dishisChanged={dishisChanged}/>
+         :<CompletedDish dishisChanged={dishisChanged}/>} 
     </div>
   )
 }
