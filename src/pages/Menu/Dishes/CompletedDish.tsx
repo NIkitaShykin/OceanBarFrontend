@@ -12,6 +12,15 @@ function CompletedDish(props:any) {
   //@ts-ignore
   const nesseryObject = foodData[0].find(el => el.id == token.token)
 
+  const orderDish=()=>{
+    // send dishID and Ingridients to..
+    // and redirect page to    
+    console.log("dishId=" + nesseryObject.id);
+    console.log("Ingridients" + "????");
+    
+  }
+
+
   return (
 
     <Row className="justify-content-md-center">
@@ -56,7 +65,7 @@ function CompletedDish(props:any) {
                   <Col sm={7}><h5>Стоимость: {nesseryObject?.prise}</h5></Col>
                   <Col sm={5}></Col>
                 </Row>
-                <Button onClick={() => console.log("заказать handler")}
+                <Button onClick={() =>{orderDish()}}
                   variant="outline-secondary" size="sm">
                   Заказать
                 </Button>

@@ -28,7 +28,7 @@ function ListItem(props: any) {
                 
                 <NavLink to={'/Menu/Dishes/Dish/'+dish.id}>
                     <Card.Img variant="top" src={dish.image} id={dish.id}
-                        onClick={() => console.log("открыть" + `${dish.id}`)}
+                        // onClick={() => console.log("открыть" + `${dish.id}`)}
                     />
                 </NavLink>
 
@@ -36,7 +36,7 @@ function ListItem(props: any) {
                     <Card.Title>{dish.name}</Card.Title>
                     <Card.Subtitle className="mb-3 text-muted">{dish.prise}руб</Card.Subtitle>
                     <Button variant="outline-secondary"
-                        onClick={() => console.log("открыть" + `${dish.id}`)} id={dish.id}
+                        // onClick={() => console.log("открыть" + `${dish.id}`)} id={dish.id}
                     >
                         Заказать
                     </Button>
