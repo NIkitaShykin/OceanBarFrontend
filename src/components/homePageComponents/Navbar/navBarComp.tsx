@@ -16,7 +16,7 @@ import './navBar.scss'
 const NavBarComponent: React.FC = () => {
   return (
     <div>
-      <Navbar bg='dark' variant={'dark'} expand='lg'>
+      <Navbar bg='dark' variant={'dark'} expand='lg' className='navbar-fixed'>
         <Navbar.Brand
           href='/'
           className='navbar-brand-mr'>Ocean Bar

@@ -1,38 +1,42 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 .App {
   text-align: center;
 }
-.menu-text-main-page{
-  color: #ff9e05
+
+.main {
+  padding-top: 80px;
 }
-.OceanBarHeader{
+.menu-text-main-page {
+  color: #ff9e05;
+}
+.OceanBarHeader {
   background-color: #eee;
   padding: 40px;
 }
-.menu-btn{
+.menu-btn {
   margin-top: 20px;
 }
-.HowItWorks{
+.HowItWorks {
   text-align: center;
   margin-top: 20px;
 }
-.howItWorks-info{
+.howItWorks-info {
   color: #979797;
 }
-.steps{
+.steps {
   display: flex;
-  list-style-type:none;
+  list-style-type: none;
   justify-content: space-evenly;
 }
-.step{
+.step {
   font-size: 40px;
   color: #ff9e05;
 }
-.hint{
+.hint {
   font-size: 13px;
 }
-.book-a-table{
+.book-a-table {
   //display: flex;
   border-color: #ff9e05;
   border-style: solid;
@@ -42,9 +46,7 @@
   margin: 0 auto;
 }
 
-.time-date{
+.time-date {
   display: flex;
   justify-content: space-around;
 }
-
-

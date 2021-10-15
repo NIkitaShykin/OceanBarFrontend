@@ -18,7 +18,7 @@ const App = () => {
         <header className='App-header'>
           <NavBarComponent />
         </header>
-        <main>
+        <main className='main'>
           <SwitchPager />
           <Container>
             <MenuRoutes />
