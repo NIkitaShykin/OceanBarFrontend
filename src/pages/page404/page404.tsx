@@ -33,7 +33,7 @@ const Page404 = () => {
         'textAlign': 'center',
         'fontWeight': 'bold',
         'fontSize': '24px',
-        'marginTop': '30px'}} to='/'>Back to main page
+        'margin': '30px'}} to='/'>Back to main page
       </Link>
     </div>
   )
