@@ -13,7 +13,7 @@ import {faShoppingBasket,
 import './navBar.scss'
 
 
-const NavBarComponent = () => {
+const NavBarComponent: React.FC = () => {
   return (
     <div>
       <Navbar bg='dark' variant={'dark'} expand='lg'>
