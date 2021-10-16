@@ -13,9 +13,6 @@ import Cart from '../pages/cartPage/cartPage'
 import Home from '../pages/homePage/homePage'
 
 
-import PlatoList from '../pages/Menu/Assortment/PlatoList'
-
-
 const SwitchPager = () => {
   return (
     <div>
