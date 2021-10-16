@@ -2,10 +2,12 @@ import React from 'react'
 import { Carousel, Row, Col, Card} from 'react-bootstrap'
 // import data from '../../../pages/Menu/DB/foodData'
 import SliderRouter from './SliderRoutes'
+import {HashRouter} from  'react-router-dom'
 // import SliderRouter from '../../../pages/Menu/MenuRoutes'
 import SliderGallery from './SliderGallery'
 
-import { HashRouter } from "react-router-dom";
+// import {BrowserRouter as Router} from 'react-router-dom'
+
 
 const Slider = () => {
   return (
@@ -27,8 +29,7 @@ const Slider = () => {
                 <SliderGallery/>
               </Col>
             <Col xs lg="1"></Col>
-          </Row>
-          
+          </Row>       
           <SliderRouter />
 
       </HashRouter>

@@ -3,7 +3,7 @@ import { Carousel, Row, Col } from 'react-bootstrap'
 import data from '../../../pages/Menu/DB/foodData'
 import { useState } from 'react';
 import SliderGallertItem from './SliderGalleryItem'
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 import {PATH} from '../../../pages/Menu/MenuRoutes'
 
 function ControlledCarousel() {
@@ -13,16 +13,26 @@ function ControlledCarousel() {
     setIndex(selectedIndex);
   };
 
+  const history = useHistory()
+
 
   return (
     <Carousel activeIndex={index}
       onSelect={handleSelect}>
 
       <Carousel.Item>
+        {/* <NavLink to={PATH.DESSERT}> */}
+        <div onClick={() => history.push(PATH.DESSERT)}>
+          <SliderGallertItem imgData={data[0]}/>
+        </div>
+         {/* </NavLink> */}
+      </Carousel.Item>
+
+      {/* <Carousel.Item>
         <NavLink to={PATH.DESSERT}>
           <SliderGallertItem imgData={data[0]}/>
          </NavLink>
-      </Carousel.Item>
+      </Carousel.Item> */}
  
       <Carousel.Item>
         <NavLink to={PATH.OYSTERS}>

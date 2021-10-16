@@ -1,11 +1,12 @@
 import React from 'react'
 import {Redirect, Switch, Route} from 'react-router-dom'
-// import BarMenu from '../../../pages/Menu/Assortment/SoupList'
-// import BreakfastMenu from '../../../pages/Menu/Assortment/PlatoList'
-// import CatchWeeksMenu from '../../../pages/Menu/Assortment/SaladList'
-// import MainMenu from '../../../pages/Menu/Assortment/OystersList'
 
-import { PATH } from 'src/pages/Menu/MenuRoutes'
+import PlatoList from '../../../pages/Menu/Assortment/PlatoList'
+import SoupList from '../../../pages/Menu/Assortment/SoupList'
+import SaladList from '../../../pages/Menu/Assortment/SaladList'
+import OystersList from '../../../pages/Menu/Assortment/OystersList'
+import DessertList from '../../../pages/Menu/Assortment/DessertList'
+import { PATH } from '../../../pages/Menu/MenuRoutes'
 
 
 
@@ -14,10 +15,12 @@ const  MenuRoutes : React.FC = ()  => {
     return (
         <div>
             <Switch>
-                {/* <Route path={PATH.BAR_MENU} exact render={() => <BarMenu/>}/>
-                <Route path={PATH.BREAKFAST_MENU} exact render={() => <BreakfastMenu/>}/>
-                <Route path={PATH.CATCHWEEK_MENU} exact render={() => <CatchWeeksMenu/>}/>
-                <Route path={PATH.MAIN_MENU} exact render={() => <MainMenu/>}/>                */}
+                <Route path={PATH.MENU} exact render={() => <Redirect to={PATH.SOUP}/>}/>
+                <Route path={PATH.PLATO} render={() => <PlatoList/>}/>
+                <Route path={PATH.SOUP} render={() => <SoupList/>}/>
+                <Route path={PATH.SALAD} render={() => <SaladList/>}/>
+                <Route path={PATH.OYSTERS} render={() => <OystersList/>}/>
+                <Route path={PATH.DESSERT} render={() => <DessertList/>}/>        
             </Switch>
         </div>
     )
