@@ -8,12 +8,14 @@ import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
 import {Container} from 'react-bootstrap'
 import SwitchPager from './utils/swich'
 import MenuRoutes from './pages/Menu/MenuRoutes'
-
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 
 // eslint-disable-next-line require-jsdoc
 const App = () => {
   return (
+
     <Router>
+    <ErrorBoundary>
       <div className='App'>
         <header className='App-header'>
           <NavBarComponent />
@@ -28,6 +30,9 @@ const App = () => {
         <Footer />
       </div>
     </Router>
+        <main></main>
+      </div>
+    </ErrorBoundary>
   )
 }
 
