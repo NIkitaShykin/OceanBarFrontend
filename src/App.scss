@@ -1,8 +1,21 @@
 @import "~bootstrap/scss/bootstrap";
 
+// div#root {
+//   height: 100vh;
+// }
+
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
+.App-header {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+}
+
 .menu-text-main-page{
   color: #ff9e05
 }
@@ -48,3 +61,15 @@
 }
 
 
+// common styles
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
+
+$fontFamilyMain: 'Ubuntu', sans-serif;
+$fontFamilyCustom: 'Ultra', serif;
+$fzMedium: 14px;
+
+body {
+  font-family: $fontFamilyMain;
+  font-size: $fzMedium;
+}

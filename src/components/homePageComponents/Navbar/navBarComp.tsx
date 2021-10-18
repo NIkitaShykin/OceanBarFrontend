@@ -48,7 +48,7 @@ const NavBarComponent = () => {
               <Nav.Link as={Link} to={'/booking-table'}>Забронировать стол
               </Nav.Link>
               <Nav.Link as={Link} to={'/order'}>Оформить заказ
-              </Nav.Link>            
+              </Nav.Link>
               <NavDropdown
                 title='Меню'
                 id='navbarScrollingDropdown'
@@ -57,21 +57,21 @@ const NavBarComponent = () => {
 {/* -------Так переход работает работает только первый раз------------ */}
                 {/* <NavDropdown.Item >
                   <Nav.Link as={Link} to={'menu#/CatchWeeksMenu'}>Улов недели
-                  </Nav.Link>  
-                </NavDropdown.Item> 
+                  </Nav.Link>
+                </NavDropdown.Item>
                 <NavDropdown.Item >
                   <Nav.Link as={Link} to={'menu#/BreakfastMenu'}>Завтраки
-                  </Nav.Link>  
-                </NavDropdown.Item> 
+                  </Nav.Link>
+                </NavDropdown.Item>
                 <NavDropdown.Item >
                   <Nav.Link as={Link} to={'menu#/MainMenu'}>Основное меню
-                  </Nav.Link>  
-                </NavDropdown.Item> 
+                  </Nav.Link>
+                </NavDropdown.Item>
                 <NavDropdown.Item >
                   <Nav.Link as={Link} to={'menu#/BarMenu'}>Меню бара
-                  </Nav.Link>  
+                  </Nav.Link>
                 </NavDropdown.Item>  */}
-  {/* ---------------------------------------------------------- */}
+{/* ---------------------------------------------------------- */}
 
 
 {/* --------------Так работает только внутри самого меню--------------- */}
@@ -94,15 +94,15 @@ const NavBarComponent = () => {
                 size='2x'
                 color='white'/>
             </Nav.Link>
-            <Nav.Link as={Link} to={'/login'}>
+            <Nav.Link as={Link} to={'/signup'}>
               <FontAwesomeIcon
                 icon={faUserCircle}
                 className='mr-auto m-3 my-lg-0'
                 size='2x'
                 color='white'/>
             </Nav.Link>
-           </Navbar.Collapse>
-         </Navbar>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
     <SwitchPager />
     </Router>

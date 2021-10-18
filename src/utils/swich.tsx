@@ -3,32 +3,36 @@ import {
   Switch,
   Route,
 } from 'react-router-dom'
-import Checkout from '../pages/orderPage'
-import Menu from '../pages/menuPage'
-import Booking from '../pages/bookingPage'
-import Login from '../pages/loginPage'
-import Home from '../pages/homePage'
+import CheckoutPage from '../pages/orderPage'
+import MenuPage from '../pages/menuPage'
+import BookingPage from '../pages/bookingPage'
+// import LoginPage from '../pages/loginPage'
+import SignUpPage from '../pages/signUpPage'
+import HomePage from '../pages/homePage'
 
 
 const SwitchPager = () => {
   return (
-    <div>
+    <>
       <Switch>
         <Route exact path='/menu'>
-          <Menu/>
+          <MenuPage/>
         </Route>
         <Route exact path='/order'>
-          <Checkout />
+          <CheckoutPage />
         </Route>
         <Route exact path='/booking-table'>
-          <Booking />
+          <BookingPage />
         </Route>
-        <Route exact path='/login'>
-          <Login />
+        <Route exact path='/signup'>
+          <SignUpPage />
         </Route>
-        <Route path='/' exact render={() => <Home/>}/>
+        {/* <Route exact path='/login'>
+          <LoginPage />
+        </Route> */}
+        <Route path='/' exact render={() => <HomePage/>}/>
       </Switch>
-    </div>
+    </>
   )
 }
 

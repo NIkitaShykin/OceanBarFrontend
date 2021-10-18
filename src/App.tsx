@@ -2,6 +2,7 @@ import React from 'react'
 import './App.scss'
 import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
+import Footer from './components/homePageComponents/Footer/Footer'
 
 // eslint-disable-next-line require-jsdoc
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <NavBarComponent />
         </header>
         <main></main>
+        <Footer />
       </div>
     </ErrorBoundary>
   )
