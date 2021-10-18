@@ -47,4 +47,19 @@
   justify-content: space-around;
 }
 
+.time-date{
+  display: flex;
+  justify-content: space-around;
+}
+
+.linkStyle{
+  text-decoration: none;
+  color: #8b908c;
+} 
+
+ .activeLink{
+  color: #ff9e05;
+  text-decoration: none;
+}
+
 
