@@ -11,6 +11,7 @@ import Login from '../pages/loginPage/loginPage'
 import Page404 from '../pages/page404/page404'
 import Cart from '../pages/cartPage/cartPage'
 import Home from '../pages/homePage/homePage'
+import SignUp from '../pages/registrationPage/registrationPage'
 
 
 const SwitchPager = () => {
@@ -22,7 +23,7 @@ const SwitchPager = () => {
         </Route>
         <Route path='/menu'>
           <Menu/>
-          {/* <Redirect to='/menu/soup' /> */}
+          <Redirect to='/menu/soup' />
         </Route>
         <Route path='/cart'>
           <Cart />
@@ -32,6 +33,9 @@ const SwitchPager = () => {
         </Route>
         <Route path='/login'>
           <Login />
+        </Route>
+        <Route path='/signup'>
+          <SignUp />
         </Route>
         <Route path='*'>
           <Page404 />
