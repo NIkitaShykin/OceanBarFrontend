@@ -11,12 +11,12 @@ import Login from '../pages/loginPage/loginPage'
 import Page404 from '../pages/page404/page404'
 import Cart from '../pages/cartPage/cartPage'
 import Home from '../pages/homePage/homePage'
-import SignUp from '../pages/registrationPage/registrationPage'
+import SignUp from '../pages/signupPage/signupPage'
 
 
 const SwitchPager = () => {
   return (
-    <div>
+    <>
       <Switch>
         <Route exact path='/'>
           <Home/>
@@ -41,7 +41,7 @@ const SwitchPager = () => {
           <Page404 />
         </Route>
       </Switch>
-    </div>
+    </>
   )
 }
 

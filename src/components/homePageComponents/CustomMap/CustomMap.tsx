@@ -1,40 +1,36 @@
-import {
-  Map,
-  Marker,
-  GoogleApiWrapper,
-  IProvidedProps,
-  GoogleAPI
-} from 'google-maps-react'
 import React from 'react'
+import {YMaps, Map, Placemark, ZoomControl} from 'react-yandex-maps'
 
-interface ICustomMapProps extends IProvidedProps {
-  google: GoogleAPI
-  loaded?: boolean
-  lat: number
-  lng: number
-  width: string
-  height: string
+interface IMapState {
+  center: number[],
+  zoom: number
+}
+
+interface ICustomMapProps {
+  mapState: IMapState
 };
 
-export const CustomMap: React.FunctionComponent<ICustomMapProps> =
-({google, lat, lng, width, height}) => {
+const CustomMap: React.FunctionComponent<ICustomMapProps> = (props) => {
   return (
-    <Map
-      google={google}
-      style={{
-        width: width,
-        height: height
-      }}
-      initialCenter={{
-        lat: lat,
-        lng: lng
-      }}>
-      <Marker />
-    </Map>
+    <div className='custom-map'>
+      <YMaps>
+        <Map state={props.mapState} width='100%'>
+          <Placemark
+            geometry={[53.901573, 27.549749]}
+            properties={{
+              hintContent: 'ул. Революционная, 17',
+              iconContent: 'Ocean bar'
+            }}
+            modules={['geoObject.addon.hint']}
+            options={{
+              preset: 'islands#redStretchyIcon',
+            }}
+          />
+          <ZoomControl />
+        </Map>
+      </YMaps>
+    </div>
   )
 }
 
-// eslint-disable-next-line new-cap
-export default GoogleApiWrapper({
-  apiKey: ('AIzaSyC3VTk40g8Zdk2z0PDP_q4TiVGKjMzJGUw')
-})(CustomMap)
+export default CustomMap
