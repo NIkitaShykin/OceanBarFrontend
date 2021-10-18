@@ -13,21 +13,28 @@ export const PATH = {
   SOUP: '/menu/soup',
   SALAD: '/menu/salad',
   OYSTERS: '/menu/oysters',
-  DESSERT: '/menu/dessert'
+  DESSERT: '/menu/dessert',
 }
 
-const MenuRoutes : React.FC = () => {
+const MenuRoutes: React.FC = () => {
   return (
     <div>
       <Switch>
-        <Route path={PATH.MENU} exact render={() => <Redirect to={PATH.SOUP}/>}/>
-        <Route path={PATH.PLATO} render={() => <PlatoList/>}/>
-        <Route path={PATH.SOUP} render={() => <SoupList/>}/>
-        <Route path={PATH.SALAD} render={() => <SaladList/>}/>
-        <Route path={PATH.OYSTERS} render={() => <OystersList/>}/>
-        <Route path={PATH.DESSERT} render={() => <DessertList/>}/>
-        <Route path={'/Menu/Dishes/Dish'+'/:token/:id1?'}
-          exact render={() => <Dish/>}/>
+        <Route
+          path={PATH.MENU}
+          exact
+          render={() => <Redirect to={PATH.SOUP} />}
+        />
+        <Route path={PATH.PLATO} render={() => <PlatoList />} />
+        <Route path={PATH.SOUP} render={() => <SoupList />} />
+        <Route path={PATH.SALAD} render={() => <SaladList />} />
+        <Route path={PATH.OYSTERS} render={() => <OystersList />} />
+        <Route path={PATH.DESSERT} render={() => <DessertList />} />
+        <Route
+          path={'/menu/dishes/dish' + '/:token/:id1?'}
+          exact
+          render={() => <Dish />}
+        />
       </Switch>
     </div>
   )
