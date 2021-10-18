@@ -26,7 +26,7 @@ const MenuRoutes : React.FC = () => {
         <Route path={PATH.SALAD} render={() => <SaladList/>}/>
         <Route path={PATH.OYSTERS} render={() => <OystersList/>}/>
         <Route path={PATH.DESSERT} render={() => <DessertList/>}/>
-        <Route path={'/Menu/Dishes/Dish'+'/:token/:id1?'}
+        <Route path={'/menu/dishes/dish'+'/:token/:id1?'}
           exact render={() => <Dish/>}/>
       </Switch>
     </div>
