@@ -1,38 +1,48 @@
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
-.menu-text-main-page{
-  color: #ff9e05
+.App-header {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
 }
-.OceanBarHeader{
+
+.menu-text-main-page {
+  color: #ff9e05;
+}
+
+.OceanBarHeader {
   background-color: #eee;
   padding: 40px;
 }
-.menu-btn{
+.menu-btn {
   margin-top: 20px;
 }
-.HowItWorks{
+.HowItWorks {
   text-align: center;
   margin-top: 20px;
 }
-.howItWorks-info{
+.howItWorks-info {
   color: #979797;
 }
-.steps{
+.steps {
   display: flex;
-  list-style-type:none;
+  list-style-type: none;
   justify-content: space-evenly;
 }
-.step{
+.step {
   font-size: 40px;
   color: #ff9e05;
 }
-.hint{
+.hint {
   font-size: 13px;
 }
-.book-a-table{
+.book-a-table {
   //display: flex;
   border-color: #ff9e05;
   border-style: solid;
@@ -42,24 +52,21 @@
   margin: 0 auto;
 }
 
-.time-date{
+.time-date {
   display: flex;
   justify-content: space-around;
 }
 
-.time-date{
-  display: flex;
-  justify-content: space-around;
+
+// common styles
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
+
+$fontFamilyMain: 'Ubuntu', sans-serif;
+$fontFamilyCustom: 'Ultra', serif;
+$fzMedium: 14px;
+
+body {
+  font-family: $fontFamilyMain;
+  font-size: $fzMedium;
 }
-
-.linkStyle{
-  text-decoration: none;
-  color: #8b908c;
-}
-
- .activeLink{
-  color: #ff9e05;
-  text-decoration: none;
-}
-
-

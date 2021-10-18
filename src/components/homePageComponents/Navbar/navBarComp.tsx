@@ -37,7 +37,7 @@ const NavBarComponent: React.FC = () => {
               to={'/booking-table'}
               className='nav-link-mr'>Забронировать стол
             </Nav.Link>
-            
+
           </Nav>
           <div
             className='d-flex justify-content-end'>
