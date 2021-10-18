@@ -2,110 +2,78 @@ import React from 'react'
 
 import {Navbar,
   Nav,
-  NavDropdown,
   Form,
   FormControl,
-  Button} from 'react-bootstrap'
-import {
-  BrowserRouter as Router,
-  Link
-} from 'react-router-dom'
-import SwitchPager from '../../../utils/swich'
-import Image from 'react-bootstrap/Image'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faShoppingBasket, faUserCircle} from '@fortawesome/free-solid-svg-icons'
-// import logo from '../../../resources/img/seafood.png'
+  Button,
+  NavDropdown} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
+import './navBar.scss'
 
 
-const NavBarComponent = () => {
+const NavBarComponent: React.FC = () => {
   return (
-    <Router>
-      <div>
-        <Navbar bg='dark' variant={'dark'} expand='lg'>
-          <Image src='images/logo.png' alt='logo'
-            className='mx-2'
-            width={50}
-            height={50}/>
-          <Navbar.Brand href='/'>Ocean Bar</Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbarScroll' />
-          <Navbar.Collapse
-            id='navbarScroll'
-            className='justify-content-end mr-2'>
-            <Form className='d-flex mx-5'>
+    <div>
+      <Navbar bg='dark' variant={'dark'} expand='lg' className='navbar-fixed'>
+        <Navbar.Brand
+          href='/'
+          className='navbar-brand-mr'>Ocean Bar
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='navbarScroll' />
+        <Navbar.Collapse
+
+          id='navbarScroll'
+          className='justify-content-between mr-2'>
+          <Nav
+            className='mr-auto m-3 my-lg-0'
+            navbarScroll
+          >
+            <Nav.Link
+              as={Link}
+              to={'/menu'}
+              className='nav-link-mr'>Меню
+            </Nav.Link>
+            <Nav.Link
+              as={Link}
+              to={'/booking-table'}
+              className='nav-link-mr'>Забронировать стол
+            </Nav.Link>
+            
+          </Nav>
+          <div
+            className='d-flex justify-content-end'>
+            <Form className='d-flex mx-6 d-flex-pos '>
               <FormControl
                 type='search'
-                placeholder='Искать блюдо...'
-                className='mr-2'
+                placeholder='Search...'
+                className='nav-input form-control-pad'
                 aria-label='Search'
               />
-              <Button variant='outline-warning'
-                className='mx-2'>Искать</Button>
+              <Button variant='link'
+                className=' btn-input'>
+                <i className='fas fa-search icon-height search-icon'></i>
+              </Button>
             </Form>
-            <Nav
-              className='mr-auto m-3 my-lg-0'
-              navbarScroll
+            <Nav.Link as={Link} to={'/cart'}
+              className='nav-link-icon'>
+              <i className='fas fa-shopping-basket icon-height'></i>
+            </Nav.Link>
+            <NavDropdown
+              align={{lg: 'end'}}
+              title={<i className='fas fa-user icon-height'></i>}
+              id='navbarScrollingDropdown'
             >
-              <Nav.Link as={Link} to={'/booking-table'}>Забронировать стол
-              </Nav.Link>
-              <Nav.Link as={Link} to={'/order'}>Оформить заказ
-              </Nav.Link>            
-              <NavDropdown
-                title='Меню'
-                id='navbarScrollingDropdown'
-              >
+              <NavDropdown.Item
+                href='/login'>Войти
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                href='/signup'>Зарегистрироваться
+              </NavDropdown.Item>
+            </NavDropdown>
+          </div>
 
-{/* -------Так переход работает работает только первый раз------------ */}
-                {/* <NavDropdown.Item >
-                  <Nav.Link as={Link} to={'menu#/CatchWeeksMenu'}>Улов недели
-                  </Nav.Link>  
-                </NavDropdown.Item> 
-                <NavDropdown.Item >
-                  <Nav.Link as={Link} to={'menu#/BreakfastMenu'}>Завтраки
-                  </Nav.Link>  
-                </NavDropdown.Item> 
-                <NavDropdown.Item >
-                  <Nav.Link as={Link} to={'menu#/MainMenu'}>Основное меню
-                  </Nav.Link>  
-                </NavDropdown.Item> 
-                <NavDropdown.Item >
-                  <Nav.Link as={Link} to={'menu#/BarMenu'}>Меню бара
-                  </Nav.Link>  
-                </NavDropdown.Item>  */}
-  {/* ---------------------------------------------------------- */}
-
-
-{/* --------------Так работает только внутри самого меню--------------- */}
-                <NavDropdown.Item href='menu#/BreakfastMenu'>Улов недели
-                </NavDropdown.Item>
-                <NavDropdown.Item href='menu#/BreakfastMenu'>Завтраки
-                </NavDropdown.Item>
-                <NavDropdown.Item href='menu#/MainMenu'>Основное меню
-                </NavDropdown.Item>
-                <NavDropdown.Item href='menu#/BarMenu'>Меню бара
-                </NavDropdown.Item>
-
-
-              </NavDropdown>
-            </Nav>
-            <Nav.Link as={Link} to={'/order'}>
-              <FontAwesomeIcon
-                icon={faShoppingBasket}
-                className='mr-auto m-3 my-lg-0'
-                size='2x'
-                color='white'/>
-            </Nav.Link>
-            <Nav.Link as={Link} to={'/login'}>
-              <FontAwesomeIcon
-                icon={faUserCircle}
-                className='mr-auto m-3 my-lg-0'
-                size='2x'
-                color='white'/>
-            </Nav.Link>
-           </Navbar.Collapse>
-         </Navbar>
-      </div>
-    <SwitchPager />
-    </Router>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
   )
 }
 

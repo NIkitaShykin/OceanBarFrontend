@@ -5,12 +5,13 @@ import SliderRouter from './SliderRoutes'
 // import SliderRouter from '../../../pages/Menu/MenuRoutes'
 import SliderGallery from './SliderGallery'
 
-import { HashRouter } from "react-router-dom";
+import {BrowserRouter as Router} from 'react-router-dom'
+
 
 const Slider = () => {
   return (
     <>
-      <HashRouter>
+      <Router>
         {/* <div 
          style={{width: '65%', borderColor: '#ff9e05',
          borderStyle: "solid", padding: "1px 5px 20px 25px",
@@ -31,7 +32,7 @@ const Slider = () => {
           
           <SliderRouter />
 
-      </HashRouter>
+      </Router>
     </>
 
   )
