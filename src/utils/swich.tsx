@@ -2,35 +2,44 @@ import React from 'react'
 import {
   Switch,
   Route,
+  Redirect,
 } from 'react-router-dom'
-import CheckoutPage from '../pages/orderPage'
-import MenuPage from '../pages/menuPage'
-import BookingPage from '../pages/bookingPage'
-// import LoginPage from '../pages/loginPage'
-import SignUpPage from '../pages/signUpPage'
-import HomePage from '../pages/homePage'
+
+import Menu from '../pages/menuPage/menuPage'
+import Booking from '../pages/bookingPage/bookingPage'
+import Login from '../pages/loginPage/loginPage'
+import Page404 from '../pages/page404/page404'
+import Cart from '../pages/cartPage/cartPage'
+import Home from '../pages/homePage/homePage'
+import SignUp from '../pages/registrationPage/registrationPage'
 
 
 const SwitchPager = () => {
   return (
     <>
       <Switch>
-        <Route exact path='/menu'>
-          <MenuPage/>
+        <Route exact path='/'>
+          <Home/>
         </Route>
-        <Route exact path='/order'>
-          <CheckoutPage />
+        <Route path='/menu'>
+          <Menu/>
+          <Redirect to='/menu/soup' />
         </Route>
-        <Route exact path='/booking-table'>
-          <BookingPage />
+        <Route path='/cart'>
+          <Cart />
         </Route>
-        <Route exact path='/signup'>
-          <SignUpPage />
+        <Route path='/booking-table'>
+          <Booking />
         </Route>
-        {/* <Route exact path='/login'>
-          <LoginPage />
-        </Route> */}
-        <Route path='/' exact render={() => <HomePage/>}/>
+        <Route path='/login'>
+          <Login />
+        </Route>
+        <Route path='/signup'>
+          <SignUp />
+        </Route>
+        <Route path='*'>
+          <Page404 />
+        </Route>
       </Switch>
     </>
   )
