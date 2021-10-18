@@ -13,26 +13,24 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 // eslint-disable-next-line require-jsdoc
 const App = () => {
   return (
-
     <Router>
-    <ErrorBoundary>
-      <div className='App'>
-        <header className='App-header'>
-          <NavBarComponent />
-        </header>
-        <main className='main'>
-          <SwitchPager />
-          <Container>
-            <MenuRoutes />
-          </Container>
-        </main>
-        <ContactsCard />
-        <Footer />
-      </div>
-    </Router>
+      <ErrorBoundary >
+        <div className='App'>
+          <header className='App-header'>
+            <NavBarComponent />
+          </header>
+          <main className='main'>
+            <SwitchPager />
+            <Container>
+              <MenuRoutes />
+            </Container>
+          </main>
+          <ContactsCard />
+          <Footer />
+        </div>
         <main></main>
-      </div>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </Router>
   )
 }
 
