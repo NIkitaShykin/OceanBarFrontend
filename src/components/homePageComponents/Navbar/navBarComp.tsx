@@ -26,8 +26,7 @@ const NavBarComponent: React.FC = () => {
           className='justify-content-between mr-2'>
           <Nav
             className='mr-auto m-3 my-lg-0'
-            navbarScroll
-          >
+            navbarScroll>
             <Nav.Link
               as={Link}
               to={'/menu'}
@@ -40,8 +39,8 @@ const NavBarComponent: React.FC = () => {
             </Nav.Link>
 
           </Nav>
-          <div
-            className='d-flex justify-content-end'>
+          <Nav
+            className='d-flex justify-content-end '>
             <Form className='d-flex mx-6 d-flex-pos '>
               <FormControl
                 type='search'
@@ -70,7 +69,7 @@ const NavBarComponent: React.FC = () => {
                 href='/signup'>Зарегистрироваться
               </NavDropdown.Item>
             </NavDropdown>
-          </div>
+          </Nav>
 
         </Navbar.Collapse>
       </Navbar>
