@@ -3,9 +3,9 @@ import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
 import {useValidation} from '../../utils/validation'
 
-import './SignUpForm.scss'
+import './LoginForm.scss'
 
-const SignUp = () => {
+const LogInForm = () => {
   const useInput = (initialValue: string, validations: any) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
@@ -28,30 +28,11 @@ const SignUp = () => {
     }
   }
 
-  const firstName = useInput('', {
-    isEmpty: true,
-    minLengthError: 2,
-    maxLengthError: 30,
-    firstNameError: true,
-  })
-
-  const lastName = useInput('', {
-    isEmpty: true,
-    minLengthError: 3,
-    maxLengthError: 30,
-    lastNameError: true,
-  })
-
   const email = useInput('', {
     isEmpty: true,
     minLengthError: 8,
     maxLengthError: 325,
     emailError: true,
-  })
-
-  const phoneNumber = useInput('', {
-    isEmpty: true,
-    phoneNumberError: true,
   })
 
   const password = useInput('', {
@@ -62,13 +43,7 @@ const SignUp = () => {
   })
 
   // eslint-disable-next-line max-len
-  const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)
-  // eslint-disable-next-line max-len
-  const isLastNameInvalid = lastName.isDirty && (lastName.isEmpty || lastName.minLengthError || lastName.maxLengthError || lastName.lastNameError)
-  // eslint-disable-next-line max-len
   const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
-  // eslint-disable-next-line max-len
-  const isPhoneNumberInvalid = phoneNumber.isDirty && (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
   // eslint-disable-next-line max-len
   const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
 
@@ -77,56 +52,16 @@ const SignUp = () => {
   }
 
   return (
-    <div className='registration-form'>
+    <div className='login-form'>
       <div className='container'>
         <Modal.Dialog className='shadow p-3 mb-5 bg-body rounded'>
           <Modal.Header className='border-0'>
-            <Modal.Title className='form-title'>Регистрация</Modal.Title>
+            <Modal.Title className='form-title'>Вход</Modal.Title>
             <CloseButton onClick={() => handleClose()}/>
           </Modal.Header>
 
           <Modal.Body>
             <Form className='my-3'>
-              <Form.Floating className='mb-3 mx-3'>
-                <Form.Control
-                  id='userFirstName'
-                  type='firstName'
-                  placeholder='Иван'
-                  value={firstName.value}
-                  onChange={(e) => firstName.onChange(e)}
-                  onBlur={(e) => firstName.onBlur(e)}
-                />
-                <label htmlFor='userFirstName'>Имя</label>
-                {
-                  isFirstNameInvalid &&
-                  <div className='error'>
-                    Это поле должно содержать 2-30 знаков,
-                    без специальных символов (#, %, &, !, $, etc.) и
-                    чисел (0-9). Обязательно к заполнению.
-                  </div>
-                }
-              </Form.Floating>
-
-              <Form.Floating className='mb-3 mx-3'>
-                <Form.Control
-                  id='userLastName'
-                  type='lastName'
-                  placeholder='Иванов'
-                  value={lastName.value}
-                  onChange={(e) => lastName.onChange(e)}
-                  onBlur={(e) => lastName.onBlur(e)}
-                />
-                <label htmlFor='userLastName'>Фамилия</label>
-                {
-                  isLastNameInvalid &&
-                  <div className='error'>
-                    Это поле должно содержать 3-30 знаков,
-                    без специальных символов (#, %, &, !, $, etc.) и
-                    чисел (0-9). Обязательно к заполнению.
-                  </div>
-                }
-              </Form.Floating>
-
               <Form.Floating className='mb-3 mx-3'>
                 <Form.Control
                   id='userEmail'
@@ -142,26 +77,6 @@ const SignUp = () => {
                   <div className='error'>
                     Электронная почта должна быть в формате xxx@yyy.zzz,
                     без специальных символов (#, %, &, !, $, etc.).
-                    Обязательно к заполнению.
-                  </div>
-                }
-              </Form.Floating>
-
-              <Form.Floating className='mb-3 mx-3'>
-                <Form.Control
-                  id='userPhoneNumber'
-                  type='phoneNumber'
-                  placeholder='+375-XX-XXX-XX-XX'
-                  value={phoneNumber.value}
-                  onChange={(e) => phoneNumber.onChange(e)}
-                  onBlur={(e) => phoneNumber.onBlur(e)}
-                />
-                <label htmlFor='userPhoneNumber'>Телефон</label>
-                {
-                  isPhoneNumberInvalid &&
-                  <div className='error'>
-                    Телефон должен содержать код в формате
-                    +375 (+ опционально) либо 80 и 9 цифр основного номера.
                     Обязательно к заполнению.
                   </div>
                 }
@@ -199,11 +114,7 @@ const SignUp = () => {
               Отменить
             </Button>
             <Button
-              disabled={!firstName.inputValid ||
-                !lastName.inputValid ||
-                !email.inputValid ||
-                !phoneNumber.inputValid ||
-                !password.inputValid}
+              disabled={!email.inputValid || !password.inputValid}
               variant='outline-warning'
               type='submit'
             >
@@ -216,4 +127,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default LogInForm

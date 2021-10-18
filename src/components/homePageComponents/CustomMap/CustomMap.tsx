@@ -1,17 +1,20 @@
 import React from 'react'
 import {YMaps, Map, Placemark, ZoomControl} from 'react-yandex-maps'
 
-// interface ICustomMapProps extends CommonProps {
-//   mapState: MapState
-// };
+interface IMapState {
+  center: number[],
+  zoom: number
+}
 
-const CustomMap: React.FunctionComponent<any> = () => {
-  const mapState = {center: [53.901573, 27.549749], zoom: 16}
+interface ICustomMapProps {
+  mapState: IMapState
+};
 
+const CustomMap: React.FunctionComponent<ICustomMapProps> = (props) => {
   return (
     <div className='custom-map'>
       <YMaps>
-        <Map state={mapState} width='100%'>
+        <Map state={props.mapState} width='100%'>
           <Placemark
             geometry={[53.901573, 27.549749]}
             properties={{

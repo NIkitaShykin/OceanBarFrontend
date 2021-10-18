@@ -30,14 +30,14 @@ export const useValidation = (value: string, validations: any) => {
         break
       case 'firstNameError':
         // eslint-disable-next-line max-len
-        const regExpFirstName = /^[a-zA-Zа-яА-Я]{2,15}-?[a-zA-Zа-яА-Я]{2,15}([a-zA-Zа-яА-Я]+[-.]?[a-zA-Zа-яА-Я]+)$/
+        const regExpFirstName = /^[a-zA-Zа-яА-Я-]{2,30}$/
         regExpFirstName.test(value) ?
           setFirstNameError(false) :
           setFirstNameError(true)
         break
       case 'lastNameError':
         // eslint-disable-next-line max-len
-        const regExpLastName = /^[a-zA-Zа-яА-Я]{3,15}-?[a-zA-Zа-яА-Я]{3,15}([a-zA-Zа-яА-Я]+[-.]?[a-zA-Zа-яА-Я]+)$/
+        const regExpLastName = /^[a-zA-Zа-яА-Я-]{3,30}$/
         regExpLastName.test(value) ?
           setLastNameError(false) :
           setLastNameError(true)

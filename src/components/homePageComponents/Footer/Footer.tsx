@@ -3,30 +3,6 @@ import React from 'react'
 
 import './Footer.scss'
 
-// const Footer = () => {
-//   return (
-//     <div className='footer'>
-//       <div className='container'>
-//         <div className='footer-row'>
-//           <span className='title'>Ocean bar</span>
-//           <span>Меню</span>
-//           <span>Оформить заказ</span>
-//           <span>Забронировать стол</span>
-//           <span>Корзина</span>
-//           <span>Профиль</span>
-//           <span>Условия пользования</span>
-//           <span>Политика конфиденциальности</span>
-//           <span>Политика cookies</span>
-//         </div>
-
-//         <div className='footer-row'>
-//           <span>© All rights reserved</span>
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
 const Footer = () => {
   return (
     <div className='footer'>
