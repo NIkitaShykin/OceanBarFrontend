@@ -3,7 +3,7 @@ import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
 import {useValidation} from '../../utils/validation'
 
-import './SignUp.scss'
+import './SignUpForm.scss'
 
 const SignUp = () => {
   const useInput = (initialValue: string, validations: any) => {
@@ -67,9 +67,9 @@ const SignUp = () => {
 
   return (
     <div className='registration-form'>
-      <div className='container shadow-md'>
-        <Modal.Dialog>
-          <Modal.Header>
+      <div className='container'>
+        <Modal.Dialog className='shadow p-3 mb-5 bg-body rounded'>
+          <Modal.Header className='border-0'>
             <Modal.Title className='form-title'>Регистрация</Modal.Title>
             <CloseButton onClick={() => handleClose()}/>
           </Modal.Header>
@@ -236,7 +236,9 @@ const SignUp = () => {
                   (password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)) &&
                   // eslint-disable-next-line max-len
                   <div className='error'>
-                    Пароль должен содержать 8-15 символов,
+                    Пароль должен содержать 8-15 символов
+                    (включая 1 символ в верхнем регистре,
+                    1 символ в нижнем регистре и 1 цифру)
                     без пробелов и специальных знаков (#, %, &, !, $, etc.).
                     Обязательно к заполнению.
                   </div>
@@ -245,7 +247,7 @@ const SignUp = () => {
             </Form>
           </Modal.Body>
 
-          <Modal.Footer className='justify-content-center'>
+          <Modal.Footer className='justify-content-center border-0'>
             <Button
               variant='outline-secondary'
               onClick={() => handleClose()}

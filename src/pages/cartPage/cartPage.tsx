@@ -4,8 +4,6 @@ import HowItWorks from '../../components/homePageComponents/HowItWorks/HowItWork
 import BookATable from '../../components/homePageComponents/BookATable/BookATable'
 import Slider from '../../components/homePageComponents/Slider/Slider'
 // eslint-disable-next-line max-len
-import MobileAppAd from '../../components/homePageComponents/MobileAppAd/MobileAppAd'
-// eslint-disable-next-line max-len
 import ContactsCard from '../../components/homePageComponents/ContactsCard/ContactsCard'
 import Footer from '../../components/homePageComponents/Footer/Footer'
 
