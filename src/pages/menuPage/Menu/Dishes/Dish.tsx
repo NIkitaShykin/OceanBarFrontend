@@ -1,7 +1,4 @@
 import React, {useState} from "react";
-import foodData from "../DB/foodData";
-import DishIngridients from "./DishIngridients";
-import { Button, Col, Row, Card, Form } from 'react-bootstrap';
 import ShiftingDish from './ShiftingDish';
 import CompletedDish from './CompletedDish';
 

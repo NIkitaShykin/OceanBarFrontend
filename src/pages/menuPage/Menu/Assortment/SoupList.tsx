@@ -1,5 +1,5 @@
 import foodData from '../DB/foodData';
-import {Row, CardGroup } from 'react-bootstrap';
+import {Row} from 'react-bootstrap';
 import ListItem from './ListItem';
 
 

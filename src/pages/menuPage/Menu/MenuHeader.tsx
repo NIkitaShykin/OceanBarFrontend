@@ -2,12 +2,7 @@ import React from 'react'
 import {Col, Container, Row} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
 import {PATH} from './MenuRoutes'
-
-// import style from './NavStyle.module.css';
-// const linkStyle = {
-//   color: '#adb3ad',
-//   textDecoration:"none"
-//   };
+import './Menu.scss'  
 
  
 const MenuHeader = () => {

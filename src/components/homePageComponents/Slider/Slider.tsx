@@ -21,7 +21,8 @@ const Slider = () => {
                 <SliderGallery/>
               </Col>
             <Col xs lg="1"></Col>
-          </Row>       
+          </Row> 
+          <br/><br/><br/><br/>      
     </>
 
   )

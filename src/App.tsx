@@ -6,7 +6,8 @@ import ContactsCard from './components/homePageComponents/ContactsCard/ContactsC
 import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
 import {Container} from 'react-bootstrap'
 import SwitchPager from './utils/swich'
-import MenuRoutes from './pages/Menu/MenuRoutes'
+// import MenuRoutes from './pages/Menu/MenuRoutes'
+import MenuRoutes from './pages/menuPage/Menu/MenuRoutes'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Footer from './components/homePageComponents/Footer/Footer'
 

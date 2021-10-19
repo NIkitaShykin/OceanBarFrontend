@@ -1,20 +1,23 @@
 import React from 'react'
 import {Carousel} from 'react-bootstrap'
-import data from '../../../pages/Menu/DB/foodData'
+// import data from '../../../pages/Menu/DB/foodData'
+import data from '../../../pages/menuPage/Menu/DB/foodData'
 import {useState} from 'react'
 import SliderGallertItem from './SliderGalleryItem'
-import { NavLink } from 'react-router-dom'
-import { PATH } from '../../../pages/Menu/MenuRoutes'
+import {NavLink} from 'react-router-dom'
+// import {PATH} from '../../../pages/Menu/MenuRoutes'
+import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(1)
   const handleSelect = (selectedIndex: any) => {
     setIndex(selectedIndex);
   };
- 
   return (
     <Carousel activeIndex={index}
-      onSelect={handleSelect}>
+      onSelect={handleSelect}
+      variant="dark"
+      >
        <Carousel.Item>
         <NavLink to={PATH.DESSERT}>
           <SliderGallertItem imgData={data[0]}/>

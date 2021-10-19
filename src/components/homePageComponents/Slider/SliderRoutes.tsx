@@ -5,7 +5,7 @@ import {Redirect, Switch, Route} from 'react-router-dom'
 // import CatchWeeksMenu from '../../../pages/Menu/Assortment/SaladList'
 // import MainMenu from '../../../pages/Menu/Assortment/OystersList'
 
-import { PATH } from 'src/pages/Menu/MenuRoutes'
+// import { PATH } from 'src/pages/Menu/MenuRoutes'
 
 
 
