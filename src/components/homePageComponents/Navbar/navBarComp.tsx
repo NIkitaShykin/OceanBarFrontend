@@ -13,7 +13,8 @@ import './navBar.scss'
 const NavBarComponent: React.FC = () => {
   return (
     <div>
-      <Navbar bg='dark' variant={'dark'} expand='lg' className='navbar-fixed'>
+      <Navbar bg='dark' variant={'dark'}
+        expand='xl' fixed='top' className='navbar-fixed'>
         <Navbar.Brand
           href='/'
           className='navbar-brand-mr'>Ocean Bar
@@ -39,7 +40,7 @@ const NavBarComponent: React.FC = () => {
             </Nav.Link>
 
           </Nav>
-          <div
+          <Nav
             className='d-flex justify-content-end'>
             <Form className='d-flex mx-6 d-flex-pos '>
               <FormControl
@@ -69,7 +70,7 @@ const NavBarComponent: React.FC = () => {
                 href='/signup'>Зарегистрироваться
               </NavDropdown.Item>
             </NavDropdown>
-          </div>
+          </Nav>
 
         </Navbar.Collapse>
       </Navbar>
