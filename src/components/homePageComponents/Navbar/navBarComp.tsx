@@ -60,7 +60,7 @@ const NavBarComponent: React.FC = () => {
             </Nav.Link>
             <NavDropdown
               align={{lg: 'end'}}
-              title={<i className='fas fa-user icon-height'></i>}
+              title={<i className='far fa-user icon-height'></i>}
               id='navbarScrollingDropdown'
             >
               <NavDropdown.Item
