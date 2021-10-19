@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-
+import './ErrorBoundary.scss'
 interface IState {
   hasError: boolean
 }
@@ -22,7 +22,7 @@ export default class ErrorBoundary extends Component<any, IState> {
     if (this.state.hasError) {
       return (
         <div className='App'>
-          <p>Ой! Произошла ошибка :(</p>
+          <p className={'errorBound'}>Ой! Произошла ошибка :(</p>
         </div>
       )
     } else {
