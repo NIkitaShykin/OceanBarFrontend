@@ -1,7 +1,7 @@
-import React from 'react'
-import { Carousel } from 'react-bootstrap'
+
 import data from '../../../pages/Menu/DB/foodData'
-import { useState } from 'react';
+import {useState} from 'react'
+
 
 
 type ImgData = any
@@ -12,8 +12,6 @@ function SliderGallertItem(props: ImgData) {
   const imgPadding = "10px"
 
   return (
-
-
     <div style={{
       display: "flex", flexWrap: "wrap",
       justifyContent: "center"
@@ -33,11 +31,9 @@ function SliderGallertItem(props: ImgData) {
         src={props.imgData[2].image}
         alt="Second slide"
       />
-
     </div>
 
   );
 }
 
-export default SliderGallertItem;
-
+export default SliderGallertItem

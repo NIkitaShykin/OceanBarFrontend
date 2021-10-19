@@ -14,29 +14,27 @@ const MenuHeader = () => {
   return (
     <Container>
       <Row className='justify-content-md-center'>
-      
         <Col xs={2}>
           <NavLink
-            className={"linkStyle"}
-            activeClassName={"activeLink"}
+            className={'linkStyle2'}
+            activeClassName={'activeLink2'}
             to={PATH.PLATO}>
             <h4 >Плато</h4>
           </NavLink>
         </Col>
-      
         <Col xs={2}>
           <NavLink
-            className={"linkStyle"}
-            activeClassName={"activeLink"}
+            className={'linkStyle2'}
+            activeClassName={'activeLink2'}
+
             to={PATH.SOUP}>
             <h4>Супы</h4>
           </NavLink>
         </Col>
-      
         <Col xs={2}>
           <NavLink
-            className={"linkStyle"}
-            activeClassName={"activeLink"}
+            className={'linkStyle2'}
+            activeClassName={'activeLink2'}
             to={PATH.SALAD}>
             <h4>Салаты</h4>
           </NavLink>
@@ -44,18 +42,20 @@ const MenuHeader = () => {
 
         <Col xs={3}>
           <NavLink
-            className={"linkStyle"}
-            activeClassName={"activeLink"}
-             to={PATH.OYSTERS}>
+            className={'linkStyle2'}
+            activeClassName={'activeLink2'}
+            to={PATH.OYSTERS}>
+
             <h4 >Запеченные устрицы</h4>
           </NavLink>
         </Col>
 
         <Col xs={2}>
           <NavLink 
-             className={"linkStyle"}
-             activeClassName={"activeLink"}
-             to={PATH.DESSERT}>
+            className={'linkStyle2'}
+            activeClassName={'activeLink2'}
+            to={PATH.DESSERT}>
+
             <h4 >Дессерты</h4>
           </NavLink>
         </Col>

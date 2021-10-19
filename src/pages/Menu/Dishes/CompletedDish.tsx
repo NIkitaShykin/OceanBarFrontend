@@ -11,11 +11,6 @@ function CompletedDish(props: any) {
   // @ts-ignore
   const dish = foodData[0].find((el) => el.id == token.token)
 
-  // const orderDish = () => {
-  //   // send dishID and Ingridients to..
-  //   // and redirect page to
-  // }
-
   return (
     <div className={'main-dish'}>
       <div className={'title-dish'}>
@@ -28,7 +23,9 @@ function CompletedDish(props: any) {
         <div className={'ingredients'}>
           <div className={'changing'}>
             <span className={'composition'}>Состав</span>
-            <span className={'change-ingr'}>Изменить</span>
+            <span className={'change-ingr'}
+             onClick={()=>{props.dishisChanged()}} //Added temporaly 
+              >Изменить</span>
           </div>
           <DishIngredients ingredients={dish?.ingredients} isShifting={false} />
           <button className={'order-btn'}>Заказать</button>

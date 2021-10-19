@@ -7,6 +7,7 @@ import OystersList from './Assortment/OystersList'
 import DessertList from './Assortment/DessertList'
 import Dish from '../Menu/Dishes/Dish'
 
+
 export const PATH = {
   MENU: '/menu',
   PLATO: '/menu/plato',
