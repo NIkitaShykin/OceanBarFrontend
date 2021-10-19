@@ -1,0 +1,78 @@
+.img-title {
+  margin: 20px;
+}
+.main-dish{
+  margin-bottom:  40px;
+  margin-left: 120px;
+  margin-top: 40px;
+}
+.title-dish {
+  //background-color: #ff9e05;
+  display: flex;
+
+}
+
+.image-dish {
+  display: flex;
+  margin-top: 10px;
+  height: 500px;
+  width: 800px;
+  margin-left: -30px;
+}
+
+.image {
+  height: 500px;
+  width: 800px;
+}
+
+i {
+  position: relative;
+  top: 45%;
+
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+.arrow {
+  font-size: 2rem;
+}
+
+.ingredients {
+  display: flex;
+  text-align: left;
+  margin-left: 40px;
+  flex-direction: column;
+  line-height: 0.5;
+
+}
+.changing{
+  margin-bottom: 30px;
+}
+.composition {
+  font-size: 30px;
+  font-weight: 480;
+}
+
+.change-ingr {
+  margin-left: 10px;
+  color: #ff9e05;
+  cursor: pointer;
+}
+.order-btn{
+  margin-top: 60%;
+  margin-left: 10px;
+  height: 60px;
+  width:400px;
+  background-color: #ff9e05;
+  color: white;
+  font-size: 30px;
+  border:none;
+}
+.may-be-intresting{
+  margin-top: 150px;
+  text-align: left;
+}
+
+

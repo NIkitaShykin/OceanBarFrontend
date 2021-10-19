@@ -1,26 +1,48 @@
-import React from 'react';
-import foodData from "../DB/foodData";
-import {Row, Col,Form} from 'react-bootstrap';
+import React, {useState} from 'react'
+import {Col, Form, Row} from 'react-bootstrap'
 
+type IngridientValueType = Boolean[]
 
-function DishIngredients(props:any) {
+function DishIngredients(props: any) {
+  const [renderIngredients, setRenderIng] = useState<Object>(props.ingredients)
 
-  //@ts-ignore
-  const dish=props.ingredients.map(el=>{
-  return (
-    <Row>
-        <Col xs={3}><Form.Check type="checkbox" /></Col>
-        <Col xs={9}>{el}</Col>
-    </Row>
-)
-})
+  const ingridientKey = Object.keys(renderIngredients)
+  const ingridientValue: IngridientValueType = Object.values(renderIngredients)
 
-  return (
+  const toggleIngridient = (el: any) => {
+    const newIngredients = {...renderIngredients}
+    // @ts-ignore
+    newIngredients[el] = !newIngredients[el]
+    setRenderIng(newIngredients)
+    props.setIngridient(newIngredients)
+  }
 
-    <>
-        {dish}
-   </>
-  )
+  const ingridientsItem = ingridientKey.map((ingridient, i) => {
+    return (
+      <>
+        {props.isShifting ? (
+          <Row>
+            <Col xs={3}>
+              <Form.Check
+                type='checkbox'
+                checked={!!ingridientValue[i]}
+                onChange={() => {
+                  toggleIngridient(ingridient)
+                }}
+              />
+            </Col>
+            <Col xs={9}>{ingridient}</Col>
+          </Row>
+        ) : (
+          <ul>
+            <li>{ingridient}</li>
+          </ul>
+        )}
+      </>
+    )
+  })
+
+  return <>{ingridientsItem}</>
 }
 
-export default DishIngredients;
+export default DishIngredients
