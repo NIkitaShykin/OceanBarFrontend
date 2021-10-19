@@ -14,7 +14,7 @@ export const PATH = {
   SOUP: '/menu/soup',
   SALAD: '/menu/salad',
   OYSTERS: '/menu/oysters',
-  DESSERT: '/menu/dessert'
+  DESSERT: '/menu/dessert',
 }
 
 const MenuRoutes: React.FC = () => {
@@ -32,7 +32,7 @@ const MenuRoutes: React.FC = () => {
         <Route path={PATH.OYSTERS} render={() => <OystersList />} />
         <Route path={PATH.DESSERT} render={() => <DessertList />} />
         <Route
-          path={'/Menu/Dishes/Dish' + '/:token/:id1?'}
+          path={'/menu/dishes/dish' + '/:token/:id1?'}
           exact
           render={() => <Dish />}
         />

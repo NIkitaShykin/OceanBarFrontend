@@ -9,7 +9,7 @@ import {PATH} from './MenuRoutes'
 //   textDecoration:"none"
 //   };
 
-
+ 
 const MenuHeader = () => {
   return (
     <Container>
@@ -26,6 +26,7 @@ const MenuHeader = () => {
           <NavLink
             className={'linkStyle'}
             activeClassName={'activeLink'}
+
             to={PATH.SOUP}>
             <h4>Супы</h4>
           </NavLink>
@@ -44,6 +45,7 @@ const MenuHeader = () => {
             className={'linkStyle'}
             activeClassName={'activeLink'}
             to={PATH.OYSTERS}>
+
             <h4 >Запеченные устрицы</h4>
           </NavLink>
         </Col>
@@ -53,6 +55,7 @@ const MenuHeader = () => {
             className={'linkStyle'}
             activeClassName={'activeLink'}
             to={PATH.DESSERT}>
+
             <h4 >Дессерты</h4>
           </NavLink>
         </Col>

@@ -3,6 +3,7 @@ import data from '../../../pages/Menu/DB/foodData'
 import {useState} from 'react'
 
 
+
 type ImgData = any
 
 function SliderGallertItem(props: ImgData) {
@@ -31,6 +32,7 @@ function SliderGallertItem(props: ImgData) {
         alt="Second slide"
       />
     </div>
+
   );
 }
 
