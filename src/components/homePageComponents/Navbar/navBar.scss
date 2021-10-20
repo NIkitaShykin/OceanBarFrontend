@@ -97,3 +97,10 @@ $fontFamilyCustom: 'Ultra', serif;
   background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
   text-align: start;
 }
+
+@media all and (max-width: 550px) {
+  .navbar-brand-mr {
+    margin-left: 20px;
+    margin-right: 60px !important;
+  }
+}
