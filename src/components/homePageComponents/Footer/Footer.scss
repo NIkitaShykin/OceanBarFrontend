@@ -1,55 +1,49 @@
-$mainColor: #ff9e05;
+@import '../../../App.scss';
+
+$bkgColor: #212529;
 $fontColor: #fff;
+$fontWeight: 300;
+$fzMedium: 14px;
+$fzLarge: 32px;
 
 .footer {
-  background-color: #000;
+  font-family: $fontFamilyMain;
+  font-weight: $fontWeight;
+  font-size: $fzMedium;
+  background-color: $bkgColor;
   color: $fontColor;
+  text-align: left;
 
   .container {
-    padding: 30px 0;
+    padding: 50px 0;
 
-    .row {
-      display: flex;
-
-      .col {
-        text-align: left;
-  
-        .title {
-          font-weight: bold;
-          font-size: 18px;
-          color: $mainColor;
-          margin-bottom: 25px;
-        }
-  
-        .links {
-          display: flex;
-
-          .items {
-            display: flex;
-            flex-direction: column;
-          }
-          .items:nth-child(1) {
-            margin-right: 45px;
-          }
+    .footer-row {
+      .title {
+        font-size: $fzLarge;
+        font-family: $fontFamilyCustom;
+      }
+      .links {
+        margin: 25px 0;
+        display: flex;
+        span {
+          margin-right: 25px;
         }
       }
     }
-
-    .info-block {
-      font-size: 10px;
-      margin-top: 25px;
-      text-align: left;
+    
+    .footer-row:nth-child(1) {
+      margin-bottom: 25px;
     }
   }
 }
 
-@media screen and (max-width: 974px) {
-  .footer {
-    .row {
-      flex-direction: column;
-
-      .col:nth-child(2) {
-        margin-top: 45px;
+@media screen and (max-width: 1194px) {
+  .footer-row {
+    .links {
+      .links-col {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
       }
     }
   }
