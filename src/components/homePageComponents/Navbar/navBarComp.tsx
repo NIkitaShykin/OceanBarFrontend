@@ -41,7 +41,8 @@ const NavBarComponent: React.FC = () => {
 
           </Nav>
           <Nav
-            className='d-flex justify-content-end'>
+            className='d-flex justify-content-end
+            mr-auto m-3 my-lg-0 navbar-nav-scroll'>
             <Form className='d-flex mx-6 d-flex-pos '>
               <FormControl
                 type='search'

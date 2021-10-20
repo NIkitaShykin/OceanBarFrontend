@@ -32,6 +32,10 @@ $fontFamilyCustom: 'Ultra', serif;
   padding-bottom: 10px;
 }
 
+.user-signedin {
+  color: orange;
+}
+
 .search-icon {
   font-size: 26px;
   margin-right: -8px;
@@ -76,7 +80,7 @@ $fontFamilyCustom: 'Ultra', serif;
 
 .btn-input {
   position: absolute;
-  right: 50px;
+  left: 225px;
   font-size: 24px;
 }
 
@@ -87,4 +91,9 @@ $fontFamilyCustom: 'Ultra', serif;
 .form-control-pad {
   padding: 0.25rem;
   margin-right: 45px;
+}
+
+.show {
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  text-align: start;
 }
