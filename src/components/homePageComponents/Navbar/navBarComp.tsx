@@ -71,6 +71,21 @@ const NavBarComponent: React.FC = () => {
                 href='/signup'>Зарегистрироваться
               </NavDropdown.Item>
             </NavDropdown>
+           {/* for authorised user */}
+            <NavDropdown
+              align={{lg: 'end'}}
+              title={<i className='far fa-user icon-height user-signedin'></i>}
+              id='navbarScrollingDropdown'
+              className='authorized'
+            >
+              <NavDropdown.Item
+                href='/profile'>Профиль
+              </NavDropdown.Item>
+              <NavDropdown.Item
+                href='/login'>Выйти из профиля
+              </NavDropdown.Item>
+            </NavDropdown>
+
           </Nav>
 
         </Navbar.Collapse>

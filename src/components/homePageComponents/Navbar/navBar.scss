@@ -48,6 +48,7 @@ $fontFamilyCustom: 'Ultra', serif;
 
 .dropdown-menu.show {
   right: 24px !important;
+  background-color: #fff !important;
 }
 
 .dropdown-toggle::after {
@@ -96,6 +97,14 @@ $fontFamilyCustom: 'Ultra', serif;
 .show {
   background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
   text-align: start;
+}
+
+.authorized {
+  display: none;
+}
+
+.authorized.change {
+  display: block;
 }
 
 @media all and (max-width: 550px) {
