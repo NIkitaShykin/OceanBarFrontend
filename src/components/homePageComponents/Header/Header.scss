@@ -1,11 +1,7 @@
-
-.OceanBarHeader {
-  padding: 100px;
-  color: #252525;
-}
-.menu-text-main-page{
+.menu-text-main-page {
   font-size: 28px
 }
+
 .tasty-quick-quality {
   color: white;
   font-family: 'Ubuntu', sans-serif;
@@ -17,11 +13,12 @@
   width: 15rem;
   color: white;
   height: 3.5rem;
-  border:  3px solid #ffffff;
+  border: 3px solid #ffffff;
   background-color: rgba(255, 255, 255, 0.3);
   transition: all .4s;
 }
-.menu-btn:hover{
+
+.menu-btn:hover {
   background-color: rgba(255, 255, 255, 0.4);
   box-shadow: inset 0 0 0 4px #ffffff;
 

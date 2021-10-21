@@ -7,7 +7,9 @@ const OceanBarHeader = () => {
     return (
         <div style={{
             background:  "linear-gradient(to top, transparent, #252525), " + "url(/header.png)",
-            backgroundPosition:'left'
+            backgroundPosition:'left',
+            padding: '100px',
+            color: '#252525'
         }}
          className='OceanBarHeader'>
             <Logo />

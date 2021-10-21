@@ -6,3 +6,10 @@ $fontFamilyCustom: 'Ultra', serif;
   margin-left: 106px;
   margin-right: 60px !important;
 }
+
+@media all and (max-width: 550px) {
+  .OceanBarText {
+    margin: 0 auto;
+  }
+}
+
