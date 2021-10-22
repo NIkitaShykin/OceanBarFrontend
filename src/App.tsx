@@ -11,6 +11,7 @@ import MenuRoutes from './pages/menuPage/Menu/MenuRoutes'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Footer from './components/homePageComponents/Footer/Footer'
 
+
 // eslint-disable-next-line require-jsdoc
 const App = () => {
   return (
