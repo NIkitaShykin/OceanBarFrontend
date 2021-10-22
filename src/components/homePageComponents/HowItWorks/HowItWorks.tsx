@@ -1,9 +1,9 @@
 import React from 'react'
-
+import './HowItWorks.scss'
 const HowItWorks = () => {
   return (
     <div className='HowItWorks'>
-      <h5>Как это работает</h5>
+      <h5 className='HowItWorks-text'>Как это работает</h5>
       <p className='howItWorks-info'>
         4 простых шага для экономии вашего времени
       </p>
