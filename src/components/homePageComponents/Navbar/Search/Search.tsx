@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
-import axios from 'axios'
+import axios, {AxiosResponse} from 'axios'
 import React, {useEffect, useState} from 'react'
 import {Form, Button, FormControl} from 'react-bootstrap'
 import './search.scss'
@@ -10,7 +10,7 @@ const SearchField = () => {
 
   useEffect(() => {
     const getMenu = async () => {
-      const response = await axios.get(' http://localhost:3001/api/menu/')
+      const response: AxiosResponse = await axios.get(' http://localhost:3001/api/menu/')
       // @ts-ignore
       console.log(response.data.data.dishes)
       // @ts-ignore
@@ -58,7 +58,7 @@ const SearchField = () => {
 
         <ul className='autocomplete'>
 
-          {dishes.map((val, index) => {
+          {dishes.map((val: string, index: number) => {
             // @ ts-ignore
             return <li
               key={index}
