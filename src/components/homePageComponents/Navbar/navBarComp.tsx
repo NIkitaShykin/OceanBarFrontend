@@ -3,8 +3,8 @@ import {
   Navbar,
   Nav} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-import DropDownNavBar from '../DropDownNavBar/DropDown'
-import SearchField from '../Search/Search'
+import DropDownNavBar from './DropDownNavBar/DropDown'
+import SearchField from './Search/Search'
 
 import './navBar.scss'
 
@@ -18,15 +18,15 @@ const NavBarComponent: React.FC = () => {
           href='/'
           className='navbar-brand-mr'>Ocean Bar
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls='navbarScroll' />
         <Navbar.Collapse
-
           id='navbarScroll'
           className='justify-content-between mr-2'>
+
           <Nav
             className='mr-auto m-3 my-lg-0'
-            navbarScroll
-          >
+            navbarScroll>
             <Nav.Link
               as={Link}
               to={'/menu'}
@@ -39,6 +39,7 @@ const NavBarComponent: React.FC = () => {
             </Nav.Link>
 
           </Nav>
+
           <Nav
             className='d-flex justify-content-end
             mr-auto m-3 my-lg-0 navbar-nav-scroll'>

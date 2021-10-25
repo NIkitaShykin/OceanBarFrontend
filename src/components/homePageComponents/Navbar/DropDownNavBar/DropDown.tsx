@@ -2,7 +2,7 @@
 import React from 'react'
 import {NavDropdown} from 'react-bootstrap'
 
-import '../Navbar/navBar.scss'
+import './dropDown.scss'
 
 class DropDownNavBar extends React.Component {
   state = {
@@ -17,7 +17,7 @@ class DropDownNavBar extends React.Component {
 
   render(): JSX.Element {
     const {isAuthorized} = this.state
-
+    
     return (
       <>
         <NavDropdown
