@@ -1,11 +1,21 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
+import {useAppDispatch} from '../../redux/hooks'
+import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
+import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
 
 import './SignUpForm.scss'
+import {signUp} from '../../redux/actions'
 
 const SignUp = () => {
+  const history = useHistory()
+  const dispatch = useAppDispatch()
+
+  const [authFailed, setAuthFailed] = useState(false)
+
   const useInput = (initialValue: string, validations: any) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
@@ -61,6 +71,15 @@ const SignUp = () => {
     passwordError: true,
   })
 
+  const user = {
+    name: firstName.value,
+    secondname: lastName.value,
+    email: email.value,
+    password: password.value,
+    phone: phoneNumber.value,
+    id: null,
+  }
+
   // eslint-disable-next-line max-len
   const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)
   // eslint-disable-next-line max-len
@@ -73,7 +92,26 @@ const SignUp = () => {
   const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
 
   const handleClose = () => {
-    window.history.go(-1)
+    history.push('/')
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+
+    axios
+      .post(`${url}/users/register`, user)
+      .then((response: any) => {
+        if (response.status >= 200 && response.status < 300) {
+          dispatch(signUp(response.data.data.user.id))
+        } else {
+          throw new Error(response.statusText)
+        }
+      })
+      .then(() => history.push('/signup-sucess'))
+      .catch((error) => {
+        console.log(error.response)
+        setAuthFailed(true)
+      })
   }
 
   return (
@@ -84,6 +122,13 @@ const SignUp = () => {
             <Modal.Title className='form-title'>Регистрация</Modal.Title>
             <CloseButton onClick={() => handleClose()}/>
           </Modal.Header>
+
+          {
+            authFailed &&
+            <div className='error validation'>
+              Пользователь с таким адресом электронной почты уже существует.
+            </div>
+          }
 
           <Modal.Body>
             <Form className='my-3'>
@@ -172,7 +217,7 @@ const SignUp = () => {
                   id='userPassword'
                   type='password'
                   placeholder='password'
-                  value={password.value}
+                  value={!authFailed ? password.value : ''}
                   onChange={(e) => password.onChange(e)}
                   onBlur={(e) => password.onBlur(e)}
                 />
@@ -194,6 +239,7 @@ const SignUp = () => {
           <Modal.Footer className='justify-content-center border-0'>
             <Button
               variant='outline-secondary'
+              type='button'
               onClick={() => handleClose()}
             >
               Отменить
@@ -206,6 +252,7 @@ const SignUp = () => {
                 !password.inputValid}
               variant='outline-warning'
               type='submit'
+              onClick={(e) => handleSubmit(e)}
             >
               Зарегистрироваться
             </Button>
