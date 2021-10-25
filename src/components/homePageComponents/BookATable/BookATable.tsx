@@ -1,33 +1,45 @@
 import React from 'react'
-import {Button, Form} from 'react-bootstrap'
+import {Button, Dropdown, Form} from 'react-bootstrap'
+import './BookATable.scss'
 
 const BookATable = () => {
-  return (
-    <div className='book-a-table'>
-      <h2>Забронируйте стол</h2>
-      <Form>
-        <Form.Control size='sm' type='text' placeholder='Имя Фамилия' />
-        <br />
-        <Form.Control size='sm' type='tel' placeholder='Номер телефона' />
-      </Form>
-      <br />
-      <div className='time-date'>
-        Дата
-        <input type='date' id='start' name='trip-start'></input>
-        Время
-        <input
-          type='time'
-          id='appt'
-          name='appt'
-          min='09:00'
-          max='18:00'
-          required
-        ></input>
-      </div>
-      <Button className='menu-btn' type='submit' variant='secondary'>
-        <span className='menu-text-main-page'>Забронировать</span>
-      </Button>
-    </div>
-  )
+    return (
+        <div className='book-a-table'>
+            <h2 className='bookTable'>Забронируйте стол</h2>
+            <div className='order-form'>
+                <Form>
+                    <Form.Control className={'form-item'} size='sm' type='text' placeholder='Имя Фамилия'/>
+                    <br/>
+                    <Form.Control className={'form-item'} size='sm' type='tel' placeholder='Номер телефона'/>
+                </Form>
+            </div>
+            <br/>
+            <div className='time-date'>
+                    <Dropdown className={'dropdown-cont' } >
+                        <Dropdown.Toggle  style={{backgroundColor:"white",color:"black",border:"1px solid #989898FF",width:"200px"}} variant="info" className="dropdown-basic">
+                            Дата
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                    <Dropdown>
+                        <Dropdown.Toggle style={{backgroundColor:"white",color:"black",border:"1px solid #989898FF",width:"200px"}} variant="info" className="dropdown-basic">
+                            Время
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+
+            </div>
+            <div className={'order-button-container'}>
+                <button className={'order-button'}>
+                    <span className='menu-text-main-page'>Забронировать</span>
+                </button>
+            </div>
+
+        </div>
+    )
 }
 export default BookATable
