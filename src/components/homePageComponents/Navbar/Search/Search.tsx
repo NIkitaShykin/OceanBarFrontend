@@ -20,7 +20,6 @@ const SearchField = () => {
     getMenu()
   }, [])
 
-  // const [value, setValue] = useState('')
 
   // const filteredDishes = dishes.filter((dish) => {
   //   return dish.includes(value.toLowerCase())
