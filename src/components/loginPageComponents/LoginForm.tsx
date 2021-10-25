@@ -1,16 +1,21 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import {useDispatch} from 'react-redux'
+import axios from 'axios'
+import Cookies from 'js-cookie'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
+import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
-import {logIn} from '../../redux/actions/authActions'
+import {logIn} from '../../redux/actions'
 
 import './LoginForm.scss'
 
 const LogInForm = () => {
   const history = useHistory()
   const dispatch = useDispatch()
+
+  const [authFailed, setAuthFailed] = useState(false)
 
   const useInput = (initialValue: string, validations: any) => {
     const [value, setValue] = useState(initialValue)
@@ -51,7 +56,7 @@ const LogInForm = () => {
   const user = {
     email: email.value,
     password: password.value,
-  } //
+  }
 
   // eslint-disable-next-line max-len
   const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
@@ -64,7 +69,22 @@ const LogInForm = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    dispatch(logIn(user)).then(() => history.push('/'))
+
+    axios
+      .post(`${url}/users/auth`, user)
+      .then((response: any) => {
+        if (response.status >= 200 && response.status < 300) {
+          Cookies.set('token', response.data.token, {expires: 30})
+          dispatch(logIn(response.data.data))
+        } else {
+          throw new Error(response.statusText)
+        }
+      })
+      .then(() => history.push('/'))
+      .catch((error) => {
+        console.log(error.response)
+        setAuthFailed(true)
+      })
   }
 
   return (
@@ -75,6 +95,14 @@ const LogInForm = () => {
             <Modal.Title className='form-title'>Вход</Modal.Title>
             <CloseButton onClick={() => handleClose()}/>
           </Modal.Header>
+
+          {
+            authFailed &&
+            <div className='error validation'>
+              Адрес электронной почты или пароль введен с ошибкой.
+              Пожалуйста, попробуйте еще раз.
+            </div>
+          }
 
           <Modal.Body>
             <Form className='my-3'>
@@ -103,7 +131,7 @@ const LogInForm = () => {
                   id='userPassword'
                   type='password'
                   placeholder='password'
-                  value={password.value}
+                  value={!authFailed ? password.value : ''}
                   onChange={(e) => password.onChange(e)}
                   onBlur={(e) => password.onBlur(e)}
                 />

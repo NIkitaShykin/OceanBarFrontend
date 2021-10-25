@@ -1,13 +1,11 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
+import {useAppSelector} from '../../redux/hooks'
 import {Card, Button} from 'react-bootstrap'
-
-// import {useSelector} from 'react-redux'
 
 const SignUpSuccess = () => {
   const history = useHistory()
-  // const tempAuthUlr = useSelector((state) => state.tempAuthUrl) //
-  // console.log(`temp ${tempAuthUlr}`) //
+  const tempAuthUlr = useAppSelector((state) => state.auth.tempAuthUrl)
 
   const handleClick = () => {
     history.push('/')
@@ -22,7 +20,8 @@ const SignUpSuccess = () => {
               {/* На Вашу почту было отправлено письмо с информацией о том,
               как активировать аккаунт. */}
               Перейдите по этой ссылке, чтобы активировать свой аккаунт:
-              {/* {tempAuthUlr} */}
+              <span> </span>
+              {tempAuthUlr} (тут будет ссылка :))
             </Card.Text>
             <Button
               variant='outline-warning'
