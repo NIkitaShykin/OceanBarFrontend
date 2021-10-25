@@ -55,8 +55,7 @@ const SearchField = () => {
         />
 
 
-        <ul className='autocomplete'>
-
+        {/* <ul className='autocomplete'>
           {dishes.map((val: string, index: number) => {
             // @ ts-ignore
             return <li
@@ -67,8 +66,8 @@ const SearchField = () => {
               {val.name}
             </li>
           })}
-        </ul>
-        
+        </ul> */}
+
         <Button variant='link'
           className=' btn-input'>
           <i className='fas fa-search icon-height search-icon'></i>

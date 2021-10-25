@@ -105,7 +105,7 @@ const LogInForm = () => {
           }
 
           <Modal.Body>
-            <Form className='my-3'>
+            <Form className='my-3' style={{width: '100%'}}>
               <Form.Floating className='mb-3 mx-3'>
                 <Form.Control
                   id='userEmail'
@@ -159,7 +159,7 @@ const LogInForm = () => {
               Отменить
             </Button>
             <Button
-              disabled={!email.inputValid || !password.inputValid}
+              disabled={!email.inputValid || !password.inputValid || authFailed}
               variant='outline-warning'
               type='submit'
               onClick={(e) => handleSubmit(e)}

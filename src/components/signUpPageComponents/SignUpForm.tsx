@@ -131,7 +131,7 @@ const SignUp = () => {
           }
 
           <Modal.Body>
-            <Form className='my-3'>
+            <Form className='my-3' style={{width: '100%'}}>
               <Form.Floating className='mb-3 mx-3'>
                 <Form.Control
                   id='userFirstName'
@@ -249,7 +249,8 @@ const SignUp = () => {
                 !lastName.inputValid ||
                 !email.inputValid ||
                 !phoneNumber.inputValid ||
-                !password.inputValid}
+                !password.inputValid ||
+                authFailed}
               variant='outline-warning'
               type='submit'
               onClick={(e) => handleSubmit(e)}
