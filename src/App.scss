@@ -6,6 +6,7 @@
   flex-direction: column;
   height: 100vh;
 }
+
 .App-header {
   display: flex;
   flex-direction: column;
@@ -16,25 +17,7 @@
   margin-top: 80px;
 }
 
-.HowItWorks {
-  text-align: center;
-  margin-top: 20px;
-}
-.howItWorks-info {
-  color: #979797;
-}
-.steps {
-  display: flex;
-  list-style-type: none;
-  justify-content: space-evenly;
-}
-.step {
-  font-size: 40px;
-  color: #ff9e05;
-}
-.hint {
-  font-size: 13px;
-}
+
 .book-a-table {
   //display: flex;
   border-color: #ff9e05;
@@ -62,4 +45,5 @@ $fzMedium: 14px;
 body {
   font-family: $fontFamilyMain;
   font-size: $fzMedium;
+
 }
