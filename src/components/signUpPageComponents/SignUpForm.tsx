@@ -6,9 +6,9 @@ import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
+import {signUp} from '../../redux/actions'
 
 import './SignUpForm.scss'
-import {signUp} from '../../redux/actions'
 
 const SignUp = () => {
   const history = useHistory()
@@ -23,6 +23,7 @@ const SignUp = () => {
 
     const onChange = (e: any) => {
       setValue(e.target.value)
+      setAuthFailed(false)
     }
 
     const onBlur = (e: any) => {

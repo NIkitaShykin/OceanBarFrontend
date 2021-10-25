@@ -1,13 +1,22 @@
 /* eslint-disable require-jsdoc */
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 import {NavDropdown} from 'react-bootstrap'
 
-import {useAppSelector} from '../../../../redux/hooks'
+import {logOut} from '../../../../redux/actions'
+import {useAppSelector, useAppDispatch} from '../../../../redux/hooks'
 
 import './dropDown.scss'
 
 const DropDownNavBar = () => {
+  const history = useHistory()
+  const dispatch = useAppDispatch()
   const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
+
+  const handleClose = () => {
+    dispatch(logOut())
+    history.push('/')
+  }
 
   return (
     <>
@@ -37,8 +46,8 @@ const DropDownNavBar = () => {
         <NavDropdown.Item
           href='/profile'>Профиль
         </NavDropdown.Item>
-        <NavDropdown.Item
-          href='/'>Выйти из профиля
+        <NavDropdown.Item href='/' onClick={() => handleClose()}>
+          Выйти из профиля
         </NavDropdown.Item>
       </NavDropdown>
     </>

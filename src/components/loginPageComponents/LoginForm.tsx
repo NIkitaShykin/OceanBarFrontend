@@ -24,6 +24,7 @@ const LogInForm = () => {
 
     const onChange = (e: any) => {
       setValue(e.target.value)
+      setAuthFailed(false)
     }
 
     const onBlur = (e: any) => {
