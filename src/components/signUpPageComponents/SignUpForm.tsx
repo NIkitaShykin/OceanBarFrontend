@@ -1,11 +1,17 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
+// import {Switch, Route, Redirect} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
 import {useValidation} from '../../utils/validation'
+import {signUp} from '../../redux/actions/signupActions'
 
 import './SignUpForm.scss'
 
 const SignUp = () => {
+  const history = useHistory()
+
   const useInput = (initialValue: string, validations: any) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
@@ -61,6 +67,19 @@ const SignUp = () => {
     passwordError: true,
   })
 
+  const dispatch = useDispatch() //
+  // const state = useSelector((state) => state) //
+  // console.log(state) //
+
+  const user = {
+    name: firstName.value,
+    secondname: lastName.value,
+    email: email.value,
+    password: password.value,
+    phone: phoneNumber.value,
+    id: null,
+  }
+
   // eslint-disable-next-line max-len
   const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)
   // eslint-disable-next-line max-len
@@ -73,7 +92,12 @@ const SignUp = () => {
   const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
 
   const handleClose = () => {
-    window.history.go(-1)
+    history.push('/')
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    dispatch(signUp(user)).then(() => history.push('/signup-sucess'))
   }
 
   return (
@@ -194,6 +218,7 @@ const SignUp = () => {
           <Modal.Footer className='justify-content-center border-0'>
             <Button
               variant='outline-secondary'
+              type='button'
               onClick={() => handleClose()}
             >
               Отменить
@@ -206,6 +231,7 @@ const SignUp = () => {
                 !password.inputValid}
               variant='outline-warning'
               type='submit'
+              onClick={(e) => handleSubmit(e)}
             >
               Зарегистрироваться
             </Button>

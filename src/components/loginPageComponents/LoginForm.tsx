@@ -1,11 +1,17 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
 import {useValidation} from '../../utils/validation'
+import {logIn} from '../../redux/actions/authActions'
 
 import './LoginForm.scss'
 
 const LogInForm = () => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+
   const useInput = (initialValue: string, validations: any) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
@@ -42,13 +48,23 @@ const LogInForm = () => {
     passwordError: true,
   })
 
+  const user = {
+    email: email.value,
+    password: password.value,
+  } //
+
   // eslint-disable-next-line max-len
   const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
   // eslint-disable-next-line max-len
   const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
 
   const handleClose = () => {
-    window.history.go(-1)
+    history.push('/')
+  }
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault()
+    dispatch(logIn(user)).then(() => history.push('/'))
   }
 
   return (
@@ -109,6 +125,7 @@ const LogInForm = () => {
           <Modal.Footer className='justify-content-center border-0'>
             <Button
               variant='outline-secondary'
+              type='button'
               onClick={() => handleClose()}
             >
               Отменить
@@ -117,8 +134,9 @@ const LogInForm = () => {
               disabled={!email.inputValid || !password.inputValid}
               variant='outline-warning'
               type='submit'
+              onClick={(e) => handleSubmit(e)}
             >
-              Зарегистрироваться
+              Войти
             </Button>
           </Modal.Footer>
         </Modal.Dialog>
