@@ -9,7 +9,7 @@ class DropDownNavBar extends React.Component {
     isAuthorized: true
   };
 
-  // handleClick = () => {
+  // authHandler = () => {
   //   this.setState(({}) => ({
   //     isAuthorized: !isAuthorized
   //   }))
@@ -47,7 +47,7 @@ class DropDownNavBar extends React.Component {
             href='/profile'>Профиль
           </NavDropdown.Item>
           <NavDropdown.Item
-            href='/login'>Выйти из профиля
+            href='/'>Выйти из профиля
           </NavDropdown.Item>
         </NavDropdown>
       </>

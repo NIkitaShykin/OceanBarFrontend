@@ -15,7 +15,7 @@ const UserProfile = () => {
           <h1 className='profile-title'>
             Профиль
           </h1>
-          <div className='line'></div>
+          <div className='profile-line'></div>
           <button className='btn-exit btn '>Выйти</button>
         </div>
 
