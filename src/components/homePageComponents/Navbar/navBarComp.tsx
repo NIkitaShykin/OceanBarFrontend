@@ -1,12 +1,11 @@
 import React from 'react'
-
-import {Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-  NavDropdown} from 'react-bootstrap'
+import {
+  Navbar,
+  Nav} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import DropDownNavBar from './DropDownNavBar/DropDown'
+import SearchField from './Search/Search'
+
 import './navBar.scss'
 
 
@@ -19,15 +18,15 @@ const NavBarComponent: React.FC = () => {
           href='/'
           className='navbar-brand-mr'>Ocean Bar
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls='navbarScroll' />
         <Navbar.Collapse
-
           id='navbarScroll'
           className='justify-content-between mr-2'>
+
           <Nav
             className='mr-auto m-3 my-lg-0'
-            navbarScroll
-          >
+            navbarScroll>
             <Nav.Link
               as={Link}
               to={'/menu'}
@@ -40,37 +39,20 @@ const NavBarComponent: React.FC = () => {
             </Nav.Link>
 
           </Nav>
+
           <Nav
             className='d-flex justify-content-end
             mr-auto m-3 my-lg-0 navbar-nav-scroll'>
-            <Form className='d-flex mx-6 d-flex-pos '>
-              <FormControl
-                type='search'
-                placeholder='Search...'
-                className='nav-input form-control-pad'
-                aria-label='Search'
-              />
-              <Button variant='link'
-                className=' btn-input'>
-                <i className='fas fa-search icon-height search-icon'></i>
-              </Button>
-            </Form>
+
+            <SearchField />
+
             <Nav.Link as={Link} to={'/cart'}
               className='nav-link-icon'>
               <i className='fas fa-shopping-basket icon-height'></i>
             </Nav.Link>
-            <NavDropdown
-              align={{lg: 'end'}}
-              title={<i className='far fa-user icon-height'></i>}
-              id='navbarScrollingDropdown'
-            >
-              <NavDropdown.Item
-                href='/login'>Войти
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                href='/signup'>Зарегистрироваться
-              </NavDropdown.Item>
-            </NavDropdown>
+
+            <DropDownNavBar/>
+
           </Nav>
 
         </Navbar.Collapse>

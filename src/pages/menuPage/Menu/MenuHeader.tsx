@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Container, Row} from 'react-bootstrap'
+import {Col, Container, Row, Nav} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
 import {PATH} from './MenuRoutes'
 import './Menu.scss'  
@@ -8,54 +8,57 @@ import './Menu.scss'
 const MenuHeader = () => {
   return (
     <Container>
-      <Row className='justify-content-md-center'>
-        <Col xs={2}>
+      <Nav className="justify-content-start" activeKey="/home">
+      <Row 
+      // className='justify-content-md-start'
+      >
+        <Col xs={"auto"}>
           <NavLink
-            className={'linkStyle2'}
-            activeClassName={'activeLink2'}
+            className={'menuLinkStyle'}
+            activeClassName={'menuActiveLink'}
             to={PATH.PLATO}>
-            <h4 >Плато</h4>
+            <h5>Плато</h5>
           </NavLink>
         </Col>
-        <Col xs={2}>
+        <Col xs={"auto"}>
           <NavLink
-            className={'linkStyle2'}
-            activeClassName={'activeLink2'}
+            className={'menuLinkStyle'}
+            activeClassName={'menuActiveLink'}
 
             to={PATH.SOUP}>
-            <h4>Супы</h4>
+            <h5>Супы</h5>
           </NavLink>
         </Col>
-        <Col xs={2}>
+        <Col xs={"auto"}>
           <NavLink
-            className={'linkStyle2'}
-            activeClassName={'activeLink2'}
+            className={'menuLinkStyle'}
+            activeClassName={'menuActiveLink'}
             to={PATH.SALAD}>
-            <h4>Салаты</h4>
+            <h5>Салаты</h5>
           </NavLink>
         </Col>
 
-        <Col xs={3}>
+        <Col xs={"auto"}>
           <NavLink
-            className={'linkStyle2'}
-            activeClassName={'activeLink2'}
+            className={'menuLinkStyle'}
+            activeClassName={'menuActiveLink'}
             to={PATH.OYSTERS}>
-
-            <h4 >Запеченные устрицы</h4>
+            <h5>Запеченные устрицы</h5>
           </NavLink>
         </Col>
 
-        <Col xs={2}>
+        <Col xs={"auto"}>
           <NavLink 
-            className={'linkStyle2'}
-            activeClassName={'activeLink2'}
+            className={'menuLinkStyle'}
+            activeClassName={'menuActiveLink'}
             to={PATH.DESSERT}>
-
-            <h4 >Дессерты</h4>
+            <h5>Дессерты</h5>
           </NavLink>
         </Col>
 
       </Row>
+      </Nav>
+      <hr style={{height: "2px", borderWidth:"0", color: "gray", backgroundColor:"gray"}}  />
     </Container>
   )
 }
