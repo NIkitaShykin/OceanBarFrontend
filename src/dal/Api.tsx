@@ -6,8 +6,7 @@ const instance = axios.create({
 
 
 export const API = {
-    getAllDish(data:string) {
-        alert("api start to work")
+    getAllDish() {
         const promise = instance.get('')
         return promise;
     }

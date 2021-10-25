@@ -73,7 +73,7 @@ function CompletedDish(props: any) {
             <span>
               <h5>Калории: {props.currentDish?.calories}</h5>
             </span>
-            <div className='line'></div>
+            <div className='line-dish'></div>
             <br />
             <span>
               <h5>Стоимость: {props.currentDish?.prise}BYN</h5>
