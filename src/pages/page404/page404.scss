@@ -1,9 +1,10 @@
 .error-img {
   display: block;
-  width: 450px;
   height: 450px;
   object-fit: contain;
   margin: 0 auto;
+  margin-top: 40px;
+  padding-left: 120px;
 }
 
 .error-title {
@@ -16,7 +17,7 @@
 .error-text {
   text-align: center;
   font-size: 16px;
-  margin: 30px;
+  margin: 30px 100px;
 }
 
 .home-link {

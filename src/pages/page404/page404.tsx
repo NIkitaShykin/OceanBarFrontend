@@ -9,8 +9,8 @@ const Page404: React.FC = () => {
     <div>
       <img
         className='error-img'
-        src='images/BalloonLost-big.png' alt='Error'/>
-      <p className='error-title'>This Page is Lost in the Wind</p>
+        src='images/BurntToast-big.png' alt='Error'/>
+      <p className='error-title'>Sorry, there is nothing here</p>
       <p className='error-text'>
       The child had looked so excited when the clown had presented a large red balloon. You had seen this, but in the throes of your morning commute you didn’t register it until it was too late. Who asked the government to support a fair right through Main Street during a week day anyway? Your bike barrelled right between the child and the clown and sent the balloon on its merry way. You didn’t turn back to see the damage you had done. Later you saw the balloon floating outside your office window.
       </p>

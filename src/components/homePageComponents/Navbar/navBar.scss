@@ -1,4 +1,6 @@
 $fontFamilyCustom: 'Ultra', serif;
+$mainColor: #ff9e05;
+$bkgColor: #eee;
 
 .navbar-fixed {
   width: 100vw;
@@ -28,12 +30,19 @@ $fontFamilyCustom: 'Ultra', serif;
   top: 0;
   margin-right: 1.3em;
   font-size: 1.8em;
-  color: #fff;
+  color: $bkgColor;
   padding-bottom: 10px;
+  :hover {
+    color: $mainColor;
+  }
+}
+
+.fa-user:hover {
+  color: $mainColor;
 }
 
 .user-signedin {
-  color: orange;
+  color: $mainColor;
 }
 
 .search-icon {
@@ -48,6 +57,7 @@ $fontFamilyCustom: 'Ultra', serif;
 
 .dropdown-menu.show {
   right: 24px !important;
+  background-color: #fff !important;
 }
 
 .dropdown-toggle::after {
@@ -55,9 +65,9 @@ $fontFamilyCustom: 'Ultra', serif;
 }
 
 .nav-input:not(:placeholder-shown) {
-  background-color: #ffffff;
+  background-color: $bkgColor;
   border: transparent;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid $bkgColor;
   border-color: transparent;
 }
 
@@ -66,13 +76,13 @@ $fontFamilyCustom: 'Ultra', serif;
   background-color: #212529;
   border-radius: 0;
   border: transparent;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid $bkgColor;
   margin-bottom: 10px;
 }
 
 .form-control:focus {
   color: #212529;
-  background-color: #fff;
+  background-color: $bkgColor;
   border-color: #fff;
   outline: 0;
   box-shadow: 0;

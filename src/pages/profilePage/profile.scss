@@ -1,0 +1,49 @@
+$mainColor: #ff9e05;
+
+.title-group {
+  display: flex;
+  gap: 1rem;
+  font-size: 48px;
+  line-height: 55px;
+  justify-content: start;
+  margin-top: 80px;
+  color: $mainColor;
+}
+
+.profile-title {
+  color: $mainColor;
+  text-align: left;
+}
+
+.profile-subtitle {
+  text-align: left;
+}
+
+.btn-exit {
+  color: $mainColor !important;
+}
+
+.line {
+  height: 55px;
+  width: 3px;
+  background-color: $mainColor;
+}
+
+.profile-block {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: #ffffff;
+  box-shadow: 0px 12px 40px rgba(96, 96, 96, 0.16);
+  padding: 25px;
+  text-align: left;
+}
+
+.info-block {
+  padding-left: 15px;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.history {
+  height: 100vh;
+}
