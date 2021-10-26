@@ -1,7 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit'
 import {logIn, logOut, signUp} from '../actions'
 
-
 interface IUserState {
   tempAuthUrl: number,
   user: any,
