@@ -1,72 +1,94 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import axios, {AxiosResponse} from 'axios'
 import React, {useEffect, useState} from 'react'
+import {useHistory} from 'react-router-dom'
+import {url} from '../../../../api'
 import {Form, Button, FormControl} from 'react-bootstrap'
 import './search.scss'
 
+type Dish = {
+  id: string,
+  name: string,
+  price: number,
+  weight: string
+  calories: string
+  imageURL: string
+  ingredients: string,
+  dishCategory: string
+}
+
 /* tslint:disable */
 const SearchField = () => {
-  const [dishes, setMenu] = useState([])
+  const history = useHistory()
+
+  const [dishes, setMenu] = useState<Dish[]>([])
+  const [isOpen, setIsOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
 
   useEffect(() => {
     const getMenu = async () => {
-      const response: AxiosResponse = await axios.get(' http://localhost:3001/api/menu/')
+      const response: AxiosResponse = await axios.get(`${url}/menu/`)
       // @ts-ignore
-      console.log(response.data.data.dishes)
+      // console.log(response.data.data.dishes)
       // @ts-ignore
       setMenu(response.data.data.dishes)
     }
-
     getMenu()
   }, [])
 
 
-  // const filteredDishes = dishes.filter((dish) => {
-  //   return dish.includes(value.toLowerCase())
-  // })
+  useEffect(() => {
+    if (searchTerm) {
+      setIsOpen(true)
 
-  // const [isOpen, setIsOpen] = useState(true)
+      const filteredDishes = dishes.filter((dish: Dish) => {
+        // eslint-disable-next-line max-len
+        return dish.name.toLowerCase().includes(searchTerm.toLowerCase())
+      })
 
-  // const itemClickHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setSearchTerm(e.target.value)
-  //   setIsOpen(!isOpen)
-  // }
+      setMenu(filteredDishes)
+    } else {
+      setIsOpen(false)
+    }
+  }, [searchTerm])
 
-  // const itemClickHandler = () => {
-  //   setIsOpen(true)
-  // }
 
-  // const [searchTerm, setSearchTerm] = useState['']
+  const itemClickHandler = (id: string) => {
+    const newDish = dishes.find((dish: Dish) => dish.id === id)
+    setSearchTerm('')
+    setIsOpen(!isOpen)
+    history.push(`/menu/dishes/id `)
+    // history.push(`/${newDish.name}`)
+  }
 
   return (
     <>
       <Form className='d-flex mx-6 d-flex-pos '>
         <FormControl
-          // {...dishes, name}
           type='text'
           placeholder='Search...'
           className='form-control-pad nav-input '
           aria-label='Search'
-          // value={searchTerm}
-          // onChange={(event) => {
-          //   setSearchTerm(event.target.value)
-          // }}
+          value={searchTerm}
+          onChange={(event) => {
+            setSearchTerm(event.target.value)
+          }}
           // onClick={inputClickHandler}
         />
 
-
-        {/* <ul className='autocomplete'>
-          {dishes.map((val: string, index: number) => {
-            // @ ts-ignore
-            return <li
-              key={index}
-              className='autocomplete__item'
-              // onClick={() => itemClickHandler}
-            >
-              {val.name}
-            </li>
-          })}
-        </ul> */}
+        {isOpen && (
+          <ul className='autocomplete'>
+            {dishes.map((val: Dish, index: number) => {
+              return <li
+                key={index}
+                className='autocomplete__item'
+                onClick={() => itemClickHandler(val.id)}
+              >
+                {val.name}
+              </li>
+            })}
+          </ul>
+        )}
 
         <Button variant='link'
           className=' btn-input'>
@@ -78,6 +100,86 @@ const SearchField = () => {
 }
 
 export default SearchField
+
+
+
+
+
+// /* tslint:disable */
+// const SearchField = () => {
+//   const [dishes, setMenu] = useState([])
+
+//   useEffect(() => {
+//     const getMenu = async () => {
+//       const response: AxiosResponse = await axios.get(`${url}/menu/`)
+//       // @ts-ignore
+//       console.log(response.data.data.dishes)
+//       // @ts-ignore
+//       setMenu(response.data.data.dishes)
+//     }
+
+//     getMenu()
+//   }, [])
+
+
+//   // const filteredDishes = dishes.filter((dish) => {
+//   //   return dish.includes(value.toLowerCase())
+//   // })
+
+//   // const [isOpen, setIsOpen] = useState(true)
+
+//   // const itemClickHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+//   //   setSearchTerm(e.target.value)
+//   //   setIsOpen(!isOpen)
+//   // }
+
+//   // const itemClickHandler = () => {
+//   //   setIsOpen(true)
+//   // }
+
+//   const [searchTerm, setSearchTerm] = useState('')
+
+//   return (
+//     <>
+//       <Form className='d-flex mx-6 d-flex-pos '>
+//         <FormControl
+//           {...dishes, name}
+//           type='text'
+//           placeholder='Search...'
+//           className='form-control-pad nav-input '
+//           aria-label='Search'
+//           value={searchTerm}
+//           onChange={(event) => {
+//             setSearchTerm(event.target.value)
+//           }}
+//           // onClick={inputClickHandler}
+//         />
+
+
+//         <ul className='autocomplete'>
+//         // @ ts-ignore
+//           {dishes.map((val: {}, index: number) => {
+//             // @ ts-ignore
+//             return <li
+//               key={index}
+//               className='autocomplete__item'
+//               // onClick={() => itemClickHandler}
+//             >
+//               {val.name}
+//             </li>
+//           })}
+//         </ul>
+
+//         <Button variant='link'
+//           className=' btn-input'>
+//           <i className='fas fa-search icon-height search-icon'></i>
+//         </Button>
+//       </Form>
+//     </>
+//   )
+// }
+
+// export default SearchField
 
 
 
