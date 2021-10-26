@@ -26,6 +26,7 @@ $bkgColor: #eee;
 .svg-inline--fa.fa-w-18-24 {
   width: 24px;
 }
+
 .icon-height {
   top: 0;
   margin-right: 1.3em;
@@ -65,6 +66,7 @@ $bkgColor: #eee;
 }
 
 .nav-input:not(:placeholder-shown) {
+  width: 280px;
   background-color: $bkgColor;
   border: transparent;
   border-bottom: 1px solid $bkgColor;

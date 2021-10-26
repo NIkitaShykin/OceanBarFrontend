@@ -12,6 +12,7 @@ import Footer from './components/homePageComponents/Footer/Footer'
 import {getDishesFromApiTC} from './bll/dishesReducer'
 import {useDispatch} from "react-redux";
 
+
 // eslint-disable-next-line require-jsdoc
 
 const App = () => {
