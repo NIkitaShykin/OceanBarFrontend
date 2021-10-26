@@ -12,6 +12,7 @@ import Page404 from '../pages/page404/page404'
 import Cart from '../pages/cartPage/cartPage'
 import Home from '../pages/homePage/homePage'
 import SignUp from '../pages/signupPage/signupPage'
+import SignUpSucess from '../pages/signupSucessPage/signupSucessPage'
 import UserProfile from '../pages/profilePage/profile'
 
 
@@ -37,6 +38,9 @@ const SwitchPager = () => {
         </Route>
         <Route path='/signup'>
           <SignUp />
+        </Route>
+        <Route path='/signup-sucess'>
+          <SignUpSucess />
         </Route>
         <Route path='/profile'>
           <UserProfile />
