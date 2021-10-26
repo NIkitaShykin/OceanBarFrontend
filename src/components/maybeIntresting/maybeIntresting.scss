@@ -13,22 +13,22 @@
 }
 
 .image-dish {
-  // display: flex; !!!!!!
+  display: flex;
   margin-top: 10px;
   height: 500px;
   width: 800px;
   margin-left: -30px;
-  // flex-wrap: wrap;
 }
 
-// .image {
-//   height: 500px;
-//   width: 800px;
-// }
+.image {
+  height: 500px;
+  width: 800px;
+}
 
 i {
   position: relative;
   top: 45%;
+
 }
 
 i:hover {
@@ -45,8 +45,8 @@ i:hover {
   margin-left: 40px;
   flex-direction: column;
   line-height: 0.5;
-}
 
+}
 .changing{
   margin-bottom: 30px;
 }
@@ -60,25 +60,19 @@ i:hover {
   color: #ff9e05;
   cursor: pointer;
 }
-.order-btn-dish{
-  margin-top: 15%;
+.order-btn{
+  margin-top: 60%;
   margin-left: 10px;
   height: 60px;
-  width:300px;
+  width:400px;
   background-color: #ff9e05;
   color: white;
   font-size: 30px;
   border:none;
 }
-
 .may-be-intresting{
   margin-top: 150px;
   text-align: left;
 }
-
-  .line-dish {
-  margin-top: 70px; 
-  border-bottom: 1px solid gray; 
- }
 
 
