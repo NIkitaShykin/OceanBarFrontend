@@ -30,31 +30,3 @@ body {
   margin-top: 80px;
   background-color: #f9fafb;
 }
-
-// .book-a-table {
-//   //display: flex;
-//   border-color: #ff9e05;
-//   border-style: solid;
-//   padding: 10px;
-//   text-align: center;
-//   width: 430px;
-//   margin: 0 auto;
-// }
-
-// .time-date {
-//   display: flex;
-//   justify-content: space-around;
-// }
-
-// common styles
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ultra&display=swap');
-
-$fontFamilyMain: 'Ubuntu', sans-serif;
-$fontFamilyCustom: 'Ultra', serif;
-$fzMedium: 14px;
-
-body {
-  font-family: $fontFamilyMain;
-  font-size: $fzMedium;
-}
