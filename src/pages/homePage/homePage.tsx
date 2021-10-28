@@ -8,12 +8,12 @@ import Slider from '../../components/homePageComponents/Slider/Slider'
 
 const Home = () => {
   return (
-    <div>
+    <>
       <OceanBarHeader />
       <HowItWorks />
       <BookATable />
       <Slider />
-    </div>
+    </>
   )
 }
 
