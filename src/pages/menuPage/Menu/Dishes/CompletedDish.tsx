@@ -1,46 +1,58 @@
-import './ComletedDish.scss'
-import {useDispatch} from 'react-redux'
-import {updateIngridientsAC} from '../../../../bll/cartReducer'
+import './Dish.scss'
+import { useDispatch } from 'react-redux'
+import { Row, Col, Modal, CloseButton } from 'react-bootstrap'
+import { DishType } from '../../../../redux/reducers/dishesReducer'
 
-import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
+type PropsType = {
+  changeStatus?: () => void
+  currentDish: DishType
+}
 
-function CompletedDish(props: any) {
+function CompletedDish(props: PropsType) {
   const dispatch = useDispatch()
 
-            //@ts-ignore
-            const newIngred = props.currentDish.ingredients.map( el => { 
-              if (el.isAdded) return (
-                 <li><p>{el.name}</p></li>
-                    )
-            })
+  const ingredientList = props.currentDish.ingredients.map(el => {
+    if (el.isAdded) return (
+      <li><p>{el.name}</p></li>
+    )
+  })
 
   const orderDish = () => {
-    dispatch(
-      updateIngridientsAC(
-                                [
-                                  {user:"email"},
-                                  {dishId:`${props.currentDish.id}`},
-                                  {ingredients:[`${props.currentDish?.ingredients}`]} 
-                               ]
-                         ))  }
+    // dispatch(
+    // actionCreaterName(
+    // [
+    //   { user: "email" },
+    //   { dishId: `${props.currentDish.id}` },
+    //   { ingredients: [`${props.currentDish?.ingredients}`] }
+    // ]
+    // ))
+    // ------------------------------------------------------------------------------
+    // 1) или целиком обект отправлять на бэк, чтобы потом там по id заново это блюдо
+    //  не искать и не перепаршивать в него новые ингридиенты с новой структурой?
+    // 2) В каком виде отправлять ингридиенты, если стрингой потом для корзины из
+    // заново парсить нужно будет в объект? 
+    // -------------------------------------------------------------------------------
+  }
 
 
-   const handleClose = () => {
+  const handleClose = () => {
     window.history.go(-1)
   }
 
   return (
-    <div className={'main-dish'}>
+    <>
+      {/* <div className={'main-dish'}> */}
       <div className={'title-dish'}>
-        <h1>{props.currentDish.name}</h1>
+          <h1>{props.currentDish.name}</h1>
       </div>
       <Row>
         <Col md={8} lg={8}>
           <img
             className={'image'}
-            style={{width: '100%', height:'auto'}}
-            src={props.currentDish.image}
-            alt='food'
+            style={{ width: '100%', height: 'auto' }}
+            // src={props.currentDish.image}
+            src={"https://img.poehalisnami.by/static/countries/c84/small/84_637145235972434334.jpg"}
+            alt='dish image'
           />
         </Col>
         <Col md={4} lg={4}>
@@ -55,15 +67,15 @@ function CompletedDish(props: any) {
               <span
                 className={'change-ingr'}
                 onClick={() => {
-                  props.dishisChanged()
+                  props.changeStatus()
                 }}
               >
                 Изменить
               </span>
             </div>
 
-             <ul>
-               {newIngred}
+            <ul>
+              {ingredientList}
             </ul>
 
             <br />
@@ -75,9 +87,11 @@ function CompletedDish(props: any) {
             </span>
             <div className='line-dish'></div>
             <br />
-            <span>
-              <h5>Стоимость: {props.currentDish?.prise}BYN</h5>
-            </span>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
+              <span style={{ fontSize: "15px" }}><h5>Стоимость:</h5></span>
+              <span style={{ fontSize: "20px", marginLeft: "3px" }}>{props.currentDish?.price}</span>
+              <span style={{ fontSize: "18px", marginLeft: "2px" }}>BYN</span>
+            </div>
             <button
               className={'order-btn-dish'}
               onClick={() => {
@@ -89,7 +103,8 @@ function CompletedDish(props: any) {
           </div>
         </Col>
       </Row>
-    </div>
+      {/* </div> */}
+    </>
   )
 }
 

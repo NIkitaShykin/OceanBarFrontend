@@ -1,90 +1,75 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import ShiftingDish from './ShiftingDish'
 import CompletedDish from './CompletedDish'
 import { useParams } from 'react-router-dom'
-import foodData from '../DB/foodData'
-import { useSelector } from 'react-redux'
-// import { AppStoreType } from "../../../../bll/store";
+import { useAppSelector } from '../../../../redux/hooks'
 import MaybeIntresting from '../../../../components/maybeIntresting/maybeIntresting'
-
-import {AppStoreType} from "../../../../bll/store";
+import { IngredientType } from '../../../../redux/reducers/dishesReducer'
+import { IngredientsType } from '../../../../redux/reducers/dishesReducer'
+import { DishType } from '../../../../redux/reducers/dishesReducer'
 
 
 function Dish() {
 
   const token = useParams<{ token: string }>()
+  const allDishes = useAppSelector<any>(state => state.dish)
 
-  // @ts-ignore
-  const currentDish = foodData[3].find((el) => el.id == token.token)
-
-// -------------new structur ingridients-----------------------------------
-// const allDishes=useSelector<AppStoreType>(state=>state.dishes)
-
-//@ts-ignore
-// const currentDish = allDishes.find((el) => el.id == token.token)
-
-console.log(currentDish);
-
-//@ts-ignore
-const [ingredients, setIngredients] = useState<Object>(currentDish.ingredients);
-
-
-const updatedDish = { ...currentDish, ingredients }
-
-const updateIngredients = (updIngridients: any) => {
-  setIngredients(updIngridients)
-}
+  const currentDish = allDishes.find((el) => el.id == token.token)
   
-// -----------------------------------------------------------------------
+ 
 
-  
-  
-  // const [ingredients, setIngredients] = useState<Object>(currentDish.ingredients);
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false);
+  const [ingredients, setIngredients] = useState<IngredientsType>(currentDish.ingredients);
+  
 
-  // @ts-ignore
-  // const updatedDish = { ...currentDish, ingredients }
-     
-  // const updateIngredients = (updIngridients: any) => {
-  //   setIngredients(updIngridients)
-  // }
+  useEffect(() => {
+    console.log("работает эффект");
+    console.log("работает эффект");
+    console.log("работает эффект");
+    console.log("работает эффект");
+    console.log("работает эффект");
+    console.log("работает эффект");
+     }, [currentDish])
+
+   // console.log("currentDish обновился");
+  // console.log(currentDish);
+  // console.log(ingredients);
+
+  const updatedDish = { ...currentDish, ingredients }
+
+  const updateIngredients = (updIngridients: IngredientsType) => {
+    setIngredients(updIngridients)
+   }
 
   const changeStatus = () => {
     setDishСhangeStatus(!dishСhangeStatus)
   }
 
-    return (
+  return (
     <div>
 
       {dishСhangeStatus
-         ? 
+        ?
         <ShiftingDish
-          dishisChanged={changeStatus}
-          // currentDish={updatedDish}
-          updateIngredients={updateIngredients}
-        //   // --------------new structur ingridients-----------------------------
-          currentDish ={updatedDish} 
-        //   // updateIngredients2={updateIngredients2}
-        //   // --------------new structur ingridients-----------------------------
+          changeStatus={changeStatus}
+          currentDish={updatedDish}
+          updIngredients={updateIngredients}
         />
         :
         <CompletedDish
-          dishisChanged={changeStatus}
+          changeStatus={changeStatus}
           currentDish={updatedDish}
-           // --------------new structur ingridients-----------------------------
-          //  currentDish2 ={updatedDish2} 
-           // --------------new structur ingridients-----------------------------
-          />
-        }
+        />
+      }
 
       {!dishСhangeStatus
         ?
         <div>
-            <MaybeIntresting/>         
+          <MaybeIntresting />
         </div>
-        : <div style={{marginTop:"100px"}}></div>
+        : <div style={{ marginTop: "100px" }}></div>
       }
-      </div>
+    </div>
   )
 }
 

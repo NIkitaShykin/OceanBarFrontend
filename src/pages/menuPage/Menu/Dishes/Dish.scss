@@ -1,24 +1,22 @@
 .img-title {
   margin: 20px;
 }
-.main-dish{
-  margin-bottom:  40px;
-  margin-left: 120px;
-  margin-top: 40px;
-}
-.title-dish {
-  //background-color: #ff9e05;
-  display: flex;
+// .main-dish{
+//   margin-bottom: 140px;
+//   margin-left: 120px;
+//   margin-top: 40px;
+// }
 
+.title-dish {
+  // background-color: #ff9e05;
+  display: flex;
 }
 
 .image-dish {
-  // display: flex; !!!!!!
   margin-top: 10px;
   height: 500px;
   width: 800px;
   margin-left: -30px;
-  // flex-wrap: wrap;
 }
 
 // .image {
@@ -50,16 +48,28 @@ i:hover {
 .changing{
   margin-bottom: 30px;
 }
+
+.changing-shifting{
+  margin-top: 47px;
+}
+
 .composition {
   font-size: 30px;
   font-weight: 480;
 }
+
+// .compositionshifting {
+//   font-size: 30px;
+//   font-weight: 480;
+//   padding-top: 100px;
+// }
 
 .change-ingr {
   margin-left: 10px;
   color: #ff9e05;
   cursor: pointer;
 }
+
 .order-btn-dish{
   margin-top: 15%;
   margin-left: 10px;
@@ -71,13 +81,24 @@ i:hover {
   border:none;
 }
 
-.may-be-intresting{
-  margin-top: 150px;
-  text-align: left;
+.order-btn-ingredients{
+  margin-top: 9%;
+  margin-left: 20%;
+  height: 30px;
+  width:100px;
+  background-color: #ff9e05;
+  color: white;
+  font-size: 20px;
+  border:none;
 }
 
+// .may-be-intresting{
+//   margin-top: 150px;
+//   text-align: left;
+// }
+
   .line-dish {
-  margin-top: 70px; 
+  margin-top: 50px; 
   border-bottom: 1px solid gray; 
  }
 
