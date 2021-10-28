@@ -16,24 +16,13 @@ function Dish() {
 
   const currentDish = allDishes.find((el) => el.id == token.token)
   
- 
-
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false);
   const [ingredients, setIngredients] = useState<IngredientsType>(currentDish.ingredients);
   
 
   useEffect(() => {
-    console.log("работает эффект");
-    console.log("работает эффект");
-    console.log("работает эффект");
-    console.log("работает эффект");
-    console.log("работает эффект");
-    console.log("работает эффект");
-     }, [currentDish])
-
-   // console.log("currentDish обновился");
-  // console.log(currentDish);
-  // console.log(ingredients);
+     setIngredients(currentDish.ingredients)
+       }, [currentDish])
 
   const updatedDish = { ...currentDish, ingredients }
 
@@ -47,7 +36,6 @@ function Dish() {
 
   return (
     <div>
-
       {dishСhangeStatus
         ?
         <ShiftingDish
