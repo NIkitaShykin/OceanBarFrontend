@@ -5,6 +5,8 @@ import {useHistory} from 'react-router-dom'
 import {url} from '../../../../api'
 import {Form, Button, FormControl} from 'react-bootstrap'
 import './search.scss'
+import Dish from 'src/pages/menuPage/Menu/Dishes/Dish'
+
 
 
 type Dish = {
@@ -23,54 +25,44 @@ const SearchField = () => {
   const history = useHistory()
 
   const [dishes, setMenu] = useState<Dish[]>([])
-  const [isOpen, setIsOpen] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
-  const wasSearched = useRef(null)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [searchQuery, setSearchQuery] = useState<string>('')
 
-  useEffect(() => {
-    
-    if (searchTerm) {
-      const getMenu = async (key: string) => {
-        const response: AxiosResponse = await axios.get(`${url}?name={key}`)
-        // @ts-ignore
-        console.log(response.data)
-        // @ts-ignore
-        setMenu(response.data)
-      }
-      getMenu(searchTerm)
-    } else return null
-  }, [wasSearched])
+  const prepareSearchQuery = (query: string) => {
+    const urlQuery = `${url}/menu?name=${query}`
 
-
-  useEffect(() => {
-    if (!wasSearched.current) {
-      wasSearched.current.value = searchTerm
-    }
-    
-    if (searchTerm) {
-      setIsOpen(true)
-
-      // const filteredDishes = dishes.filter((dish: Dish) => {
-      //   // eslint-disable-next-line max-len
-      //   return dish.name.toLowerCase().includes(searchTerm.toLowerCase())
-      // })
-
-      // setMenu(filteredDishes)
-    } else {
-      setIsOpen(false)
-    }
-  }, [wasSearched])
-
-
-  const itemClickHandler = (id: string) => {
-    const newDish = dishes.find((dish: Dish) => dish.id === id)
-    setSearchTerm('')
-    setIsOpen(!isOpen)
-    history.push(`/menu/dishes/id `)
-    // eslint-disable-next-line max-len
-    // history.push(`/${newDish.name}`)  // оставить, пока не будет работающего пути к блюду
+    return encodeURI(urlQuery)
   }
 
+  const searchDishName = async (query: string) => {
+    setSearchQuery(query)
+    if (!query || query.trim() === '') return
+
+    setIsOpen(true)
+    const URL = prepareSearchQuery(searchQuery)
+
+    await axios.get<Dish[]>(URL).catch((err) => {
+      throw new Error(err)
+    })
+
+      .then((response: any) => {
+        console.log('Response:', response.data)
+      
+        setMenu(response.data)
+      })
+    
+    setIsOpen(false)
+  }
+
+  // const itemClickHandler = (id: string) => {
+  //   const newDish = dishes.find((dish: Dish) => dish.id === id)
+  //   setSearchQuery('')
+  //   setIsOpen(!isOpen)
+  //   history.push(`/menu/dishes/id `)
+  //   // eslint-disable-next-line max-len
+  //   // history.push(`/${newDish.name}`)  // оставить, пока не будет работающего пути к блюду
+  // }
+// @ts-ignore
   return (
     <>
       <Form className='d-flex mx-6 d-flex-pos '>
@@ -79,21 +71,21 @@ const SearchField = () => {
           placeholder='Search...'
           className='form-control-pad nav-input '
           aria-label='Search'
-          key={searchTerm}
-          value={searchTerm}
-          ref={wasSearched}
+          // key={searchQuery}
+          value={searchQuery}
           onChange={(event) => {
-            setSearchTerm(event.target.value)
+            searchDishName(event.target.value)
           }}
         />
 
         {isOpen && (
           <ul className='autocomplete'>
+            
             {dishes.map((val: Dish, index: number) => {
               return <li
                 key={index}
                 className='autocomplete__item'
-                onClick={() => itemClickHandler(val.id)}
+                // onClick={() => itemClickHandler(val.id)}
               >
                 {val.name}
               </li>
@@ -113,3 +105,21 @@ const SearchField = () => {
 export default SearchField
 
 
+// useEffect(() => {
+  //   if (!wasSearched.current) {
+  //     wasSearched.current.value = searchTerm
+  //   }
+    
+  //   if (searchTerm) {
+  //     setIsOpen(true)
+
+  //     // const filteredDishes = dishes.filter((dish: Dish) => {
+  //     //   // eslint-disable-next-line max-len
+  //     //   return dish.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //     // })
+
+  //     // setMenu(filteredDishes)
+  //   } else {
+  //     setIsOpen(false)
+  //   }
+  // }, [wasSearched])
