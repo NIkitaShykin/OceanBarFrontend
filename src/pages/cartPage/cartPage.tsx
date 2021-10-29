@@ -1,10 +1,11 @@
 import React from 'react'
 
+import UserCart from '../../components/cartPageComponents/Cart'
+// import Test from '../../components/cartPageComponents/test'
+
 const Cart = () => {
   return (
-    <h1>
-      Cart
-    </h1>
+    <UserCart />
   )
 }
 
