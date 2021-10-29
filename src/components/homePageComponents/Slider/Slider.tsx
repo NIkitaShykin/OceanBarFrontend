@@ -13,7 +13,7 @@ const Slider = () => {
          > */}
           <br/><br/>
           <Row  >
-            <Col> <h2> Блюдо дня </h2> </Col>
+            <Col> <h2> Предложение недели </h2> </Col>
           </Row>
           <Row className="justify-content-md-center">
             <Col xs lg="1"></Col>

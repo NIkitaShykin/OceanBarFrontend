@@ -25,7 +25,6 @@ const SwitchPager = () => {
         </Route>
         <Route path='/menu'>
           <Menu/>
-          <Redirect to='/menu/soup'/>
         </Route>
         <Route path='/cart'>
           <Cart />

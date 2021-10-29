@@ -13,7 +13,7 @@ function CompletedDish(props: PropsType) {
 
   const ingredientList = props.currentDish.ingredients.map(el => {
     if (el.isAdded) return (
-      <li><p>{el.name}</p></li>
+      <li style={{lineHeight:"15px"}}><p>{el.name}</p></li>
     )
   })
 

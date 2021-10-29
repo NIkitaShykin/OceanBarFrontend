@@ -19,8 +19,8 @@ function ListItem(props: PropsType) {
           text='dark'
           className='mb-3 mx-2 my-2'
           style={props.isIntresting
-            ? { width: '12rem', height: '25rem' }
-            : { width: '18rem', height: '26rem' }}
+            ? { width: '17rem', height: '17rem' }
+            : { width: '15rem', height: '22rem' }}
         //  ? { width: '12rem' } 
         //  : { width: '18rem'}}
         >
@@ -39,26 +39,20 @@ function ListItem(props: PropsType) {
               <Col sm={9}></Col>
             </Row>
             <br />
-
-          {/* ------------------------------------ */}
             <div
-            
-            style={{
-              // paddingBottom: "5%", 
-              position: 'absolute',
-              bottom: '5%',
-              width: "100%",
-              // backgroundColor: "green",
-              // marginBottom:"10%"
-            }}>
+              style={{
+                position: 'absolute',
+                bottom: '5%',
+                width: "100%",
+              }}>
               <Row>
-                <Col xs={5} sm={5} md={5} lg={5}>
+                <Col xs={5} sm={5} md={5} lg={4}>
                   <div style={{ display: "flex", alignItems: "baseline" }}>
                     <span style={{ fontSize: "15px" }}><strong>{dish.price}</strong></span>
                     <span style={{ fontSize: "14px", marginLeft: "2px" }}>BYN</span>
                   </div>
                 </Col>
-                <Col xs={2} sm={2} md={2} lg={2}></Col>
+                <Col xs={2} sm={2} md={2} lg={3}></Col>
                 <Col xs={5} sm={5} md={5} lg={5}>
                   {dish.weight}
                 </Col>
@@ -74,10 +68,7 @@ function ListItem(props: PropsType) {
                   Заказать
                 </Button>
               </NavLink>
-              {/* ------------------------- */}
             </div>
-
-
             <br />
           </Card.Body>
         </Card>

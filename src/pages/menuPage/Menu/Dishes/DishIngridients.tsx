@@ -8,7 +8,7 @@ type PropsType = {
 }
 
 function DishIngredients(props: PropsType) {
-   
+
   const [ingredients, setIngredients] = useState<Array<IngredientType>>(
     props.ingredients
   )
@@ -42,7 +42,9 @@ function DishIngredients(props: PropsType) {
                   toggleIngredient(ingredient, i)
                 }}
               />
-              {ingredient.name}
+              <span style={{ lineHeight: "15px" }}>
+                {ingredient.name}
+              </span>
             </label>
           </Col>
           <Col xs={1}>

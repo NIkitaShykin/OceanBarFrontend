@@ -1,18 +1,35 @@
-import React from 'react'
 import {Carousel} from 'react-bootstrap'
-// import data from '../../../pages/Menu/DB/foodData'
-import data from '../../../pages/menuPage/Menu/DB/foodData'
 import {useState} from 'react'
 import SliderGallertItem from './SliderGalleryItem'
 import {NavLink} from 'react-router-dom'
-// import {PATH} from '../../../pages/Menu/MenuRoutes'
 import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
+import { useAppSelector } from '../../../redux/hooks'
 
 function ControlledCarousel() {
-  const [index, setIndex] = useState(1)
+
+  const allDishes = useAppSelector<any>(state => state.dish)
+  
+  const desertDishes = allDishes.filter(dish => {
+    return dish.dishCategory=="Десерты"
+  })
+  const oystersDishes = allDishes.filter(dish => {
+  return dish.dishCategory=="Запеченные устрицы"
+})
+const platoDishes = allDishes.filter(dish => {
+  return dish.dishCategory=="Плато"
+})
+const saladDishes = allDishes.filter(dish => {
+  return dish.dishCategory=="Салаты"
+})
+const soupDishes = allDishes.filter(dish => {
+  return dish.dishCategory=="Супы"
+})
+
+const [index, setIndex] = useState(1)
   const handleSelect = (selectedIndex: any) => {
     setIndex(selectedIndex);
   };
+ 
   return (
     <Carousel activeIndex={index}
       onSelect={handleSelect}
@@ -20,27 +37,27 @@ function ControlledCarousel() {
       >
        <Carousel.Item>
         <NavLink to={PATH.DESSERT}>
-          <SliderGallertItem imgData={data[0]}/>
+          <SliderGallertItem categoryDish={allDishes}/>
          </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.SOUP}>
-          <SliderGallertItem imgData={data[1]} />
+          <SliderGallertItem categoryDish={allDishes} />
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.SALAD}>
-          <SliderGallertItem imgData={data[2]} />
+          <SliderGallertItem categoryDish={allDishes} />
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.OYSTERS}>
-           <SliderGallertItem imgData={data[3]} />
+           <SliderGallertItem categoryDish={allDishes} />
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.PLATO}>
-          <SliderGallertItem imgData={data[4]} />
+          <SliderGallertItem categoryDish={allDishes} />
         </NavLink>
       </Carousel.Item>
     </Carousel>
