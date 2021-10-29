@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import axios, {AxiosResponse} from 'axios'
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {url} from '../../../../api'
 import {Form, Button, FormControl} from 'react-bootstrap'
 import './search.scss'
+
 
 type Dish = {
   id: string,
@@ -24,31 +25,41 @@ const SearchField = () => {
   const [dishes, setMenu] = useState<Dish[]>([])
   const [isOpen, setIsOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
+  const wasSearched = useRef(null)
 
   useEffect(() => {
-    const getMenu = async () => {
-      const response: AxiosResponse = await axios.get(`${url}/menu/`)
-      // @ts-ignore
-      setMenu(response.data.data.dishes)
+    
+    if (searchTerm) {
+      const getMenu = async (key: string) => {
+        const response: AxiosResponse = await axios.get(`${url}?name={key}`)
+        // @ts-ignore
+        console.log(response.data)
+        // @ts-ignore
+        setMenu(response.data)
+      }
+      getMenu(searchTerm)
+    } else return null
+  }, [wasSearched])
+
+
+  useEffect(() => {
+    if (!wasSearched.current) {
+      wasSearched.current.value = searchTerm
     }
-    getMenu()
-  }, [])
-
-
-  useEffect(() => {
+    
     if (searchTerm) {
       setIsOpen(true)
 
-      const filteredDishes = dishes.filter((dish: Dish) => {
-        // eslint-disable-next-line max-len
-        return dish.name.toLowerCase().includes(searchTerm.toLowerCase())
-      })
+      // const filteredDishes = dishes.filter((dish: Dish) => {
+      //   // eslint-disable-next-line max-len
+      //   return dish.name.toLowerCase().includes(searchTerm.toLowerCase())
+      // })
 
-      setMenu(filteredDishes)
+      // setMenu(filteredDishes)
     } else {
       setIsOpen(false)
     }
-  }, [searchTerm])
+  }, [wasSearched])
 
 
   const itemClickHandler = (id: string) => {
@@ -68,7 +79,9 @@ const SearchField = () => {
           placeholder='Search...'
           className='form-control-pad nav-input '
           aria-label='Search'
+          key={searchTerm}
           value={searchTerm}
+          ref={wasSearched}
           onChange={(event) => {
             setSearchTerm(event.target.value)
           }}
