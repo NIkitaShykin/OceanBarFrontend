@@ -1,10 +1,10 @@
 .autocomplete {
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: 78%;
+  left: 105px;
   margin-top: 0.125rem;
   background-color: #fff;
-  min-width: 18rem;
+  width: 350px;
   padding: 0.5rem 0;
   font-size: 1rem;
   color: #212529;
@@ -16,6 +16,12 @@
   z-index: 10;
   max-height: 240px;
   overflow: auto;
+}
+
+.autocomplete-warn {
+  padding: 5px 10px;
+  font-size: 1rem;
+  color: gray;
 }
 
 .autocomplete__item {
