@@ -104,7 +104,7 @@ const SearchField = () => {
 
         {isOpen && isEmpty && (
           <ul className='autocomplete autocomplete-warn'>
-              Совпадений не найдено
+              Совпадений не найдено для &quot;{debouncedSearchQuery}&quot;
           </ul>)}
 
         {isOpen && !isEmpty &&(
