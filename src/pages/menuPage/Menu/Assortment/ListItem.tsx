@@ -14,6 +14,7 @@ function ListItem(props: any) {
         name: dish.name,
         prise: dish.prise,
         image: dish.image,
+        numberOfDishes: 1,
       })
     )
     alert(` блюдо : '${dish.name}'  добавлено в корзину `)

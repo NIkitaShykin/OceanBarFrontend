@@ -1,5 +1,5 @@
 export type TOrderItem = {
-  key?: number,
+  // key?: number,
   id: number,
   name: string,
   price: string,

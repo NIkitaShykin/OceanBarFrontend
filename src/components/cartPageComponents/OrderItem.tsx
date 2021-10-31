@@ -4,23 +4,23 @@ import {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {Image} from 'react-bootstrap'
 
-import {removeDishFromCart} from '../../redux/actions'
+import {removeDishFromCart, plusOneDish, minusOneDish} from '../../redux/actions'
 
 // import {TOrderItem} from './common'
 
 import './Cart.scss'
 
 interface IOrderItemProps {
-  key?: number,
   id: number,
   name: string,
-  price: string,
+  prise: string,
   image: string,
+  numberOfDishes: number
 }
 
-const OrderItem: React.FunctionComponent<IOrderItemProps> = ({key, id, name, price, image}) => {
+const OrderItem: React.FunctionComponent<IOrderItemProps> = ({id, name, prise, image, numberOfDishes}) => {
   const dispatch = useDispatch()
-  const [counter, setCounter] = useState(1)
+  let [counter, setCounter] = useState(1)
 
   const onDeleteHandler = () => {
     dispatch(removeDishFromCart(id))
@@ -39,18 +39,33 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({key, id, name, pri
 
       <div className='order-block order-details'>
         <span className='order-title bold'>{name}</span>
-        <span>{Number(price) * counter} BYN</span>
+        <span>{Number(prise) * numberOfDishes} BYN</span>
         <a>Изменить состав</a>
       </div>
 
       <div className='order-block order-counter'>
-        <button className='control' onClick={() =>setCounter(counter-1)}>
+        <button
+          className='control'
+          onClick={() => {
+            if (counter > 1) {
+              setCounter(counter-1)
+              dispatch(minusOneDish({id: id, numberOfDishes: --numberOfDishes}))
+            } else {
+              onDeleteHandler()
+            }
+          }}
+        >
           -
         </button>
         <span className='counter'>
           {counter < 0 ? 0 : counter}
         </span>
-        <button className='control' onClick={() => setCounter(counter+1)}>
+        <button className='control'
+          onClick={() => {
+            setCounter(++counter)
+            dispatch(plusOneDish({id: id, numberOfDishes: ++numberOfDishes}))
+          }}
+        >
           +
         </button>
       </div>

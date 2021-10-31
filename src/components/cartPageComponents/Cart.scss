@@ -17,6 +17,13 @@ $mainColor: #ff9e05;
       color: $mainColor;
       align-self: center;
     }
+
+    .cart-empty {
+      align-self: center;
+      margin: 10rem 0 14rem;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
   
     .cart-section {
       display: flex;
@@ -36,6 +43,9 @@ $mainColor: #ff9e05;
           text-decoration: underline;
           color: #ccc;
           background-color: transparent;
+          &:hover {
+            color: $mainColor;
+          }
         }
       }
       .section-data {
@@ -53,6 +63,7 @@ $mainColor: #ff9e05;
             flex-direction: column;
             align-items: flex-start;
             margin-left: 1rem;
+            width: 10rem;
             .order-title {
               font-size: larger;
             }
@@ -92,6 +103,9 @@ $mainColor: #ff9e05;
           }
         }
       }
+      .cart-total {
+        font-size: 1.2rem;
+      }
     }
   
     .uppercase {
@@ -99,6 +113,9 @@ $mainColor: #ff9e05;
     }
     .bold {
       font-weight: bold;
+    }
+    .hidden {
+      display: none;
     }
   }
 }

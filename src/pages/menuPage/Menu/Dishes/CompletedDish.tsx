@@ -26,6 +26,7 @@ function CompletedDish(props: any) {
         name: props.currentDish.name,
         prise: props.currentDish.prise,
         image: props.currentDish.image,
+        numberOfDishes: 1,
       })
     )
   }
