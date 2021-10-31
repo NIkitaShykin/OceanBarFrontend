@@ -10,16 +10,16 @@ import MenuRoutes from './pages/menuPage/Menu/MenuRoutes'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Footer from './components/homePageComponents/Footer/Footer'
 import {getDishesFromApiTC} from './bll/dishesReducer'
-import {useDispatch} from "react-redux";
+import {useDispatch} from 'react-redux'
 
 
 // eslint-disable-next-line require-jsdoc
 
 const App = () => {
- const dispatch = useDispatch()
+  const dispatch = useDispatch()
   useEffect(() => {
-       dispatch(getDishesFromApiTC())
-}, [])
+    dispatch(getDishesFromApiTC())
+  }, [])
 
   return (
     <Router>
