@@ -166,6 +166,7 @@ export const getDishesFromApiTC =
     async dispatch => {
       try {
         const asyncResp = await API.getAllDish()
+        // const asyncResp = await API.addDishToCart("1",["соус; лук"])
         // @ts-ignore       
         const restructDishes = asyncResp.data.data.dishes.map(dish => {
           let myObj: Array<IngredientType> = []
