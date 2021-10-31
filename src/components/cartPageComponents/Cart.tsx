@@ -2,18 +2,14 @@
 import React from 'react'
 // import {useState} from 'react'
 
-import {TOrderItem} from './common'
-
 import OrderItem from './OrderItem'
 import Toggler from './ToggleButton'
-
 import './Cart.scss'
 
-const UserCart: React.FunctionComponent = () => {
+const UserCart: React.FunctionComponent = (props: any) => {
   // const [orders, setOrders] = useState([])
-
   type radioBtnParams = {
-    name: string,
+    name: string
     value: string
   }[]
 
@@ -23,59 +19,15 @@ const UserCart: React.FunctionComponent = () => {
     {name: 'Навынос', value: '3'},
   ]
 
-  // setOrders(
-  //   [
-  //     {
-  //       id: 1,
-  //       name: 'Тартар',
-  //       price: '120',
-  //       image: 'https://www.edimdoma.ru/system/images/contents/0000/6787/wide/AdobeStock_275611083_%D0%B8%D1%81%D0%BF%D1%80.jpg?1564142039',
-  //     },
-  //     {
-  //       id: 2,
-  //       name: 'Тунец',
-  //       price: '150',
-  //       image: 'https://www.edimdoma.ru/system/images/contents/0000/6788/wide/AdobeStock_166014726_result.jpeg?1564134468',
-  //     },
-  //     {
-  //       id: 3,
-  //       name: 'Мидии',
-  //       price: '90',
-  //       image: 'https://www.edimdoma.ru/system/images/contents/0000/6789/wide/AdobeStock_196463507_result.jpeg?1564134469',
-  //     }
-  //   ]
-  // )
-
-  const orders: TOrderItem[] = [
-    {
-      id: 1,
-      name: 'Тартар',
-      price: '120',
-      image: 'https://www.edimdoma.ru/system/images/contents/0000/6787/wide/AdobeStock_275611083_%D0%B8%D1%81%D0%BF%D1%80.jpg?1564142039',
-    },
-    {
-      id: 2,
-      name: 'Тунец',
-      price: '150',
-      image: 'https://www.edimdoma.ru/system/images/contents/0000/6788/wide/AdobeStock_166014726_result.jpeg?1564134468',
-    },
-    {
-      id: 3,
-      name: 'Мидии',
-      price: '90',
-      image: 'https://www.edimdoma.ru/system/images/contents/0000/6789/wide/AdobeStock_196463507_result.jpeg?1564134469',
-    }
-  ]
-
-  const orderCodes: JSX.Element[] = orders.map((order) =>
+  const orderCodes: JSX.Element[] = props.dishes.map((order) => (
     <OrderItem
       key={order.id}
       id={order.id}
       name={order.name}
-      price={order.price}
+      price={order.prise}
       image={order.image}
     />
-  )
+  ))
 
   return (
     <div className='cart'>
