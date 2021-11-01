@@ -25,7 +25,7 @@ const initialState: dishesType = [
     "price": 50,
     "weight": "1000 гр",
     "calories": "1000 ккал",
-    "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg",
+    "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%97%D0%B0%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5+%D1%83%D1%81%D1%82%D1%80%D0%B8%D1%86%D1%8B/%D0%97%D0%B0%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%B0%D1%8F%D0%A3%D1%81%D1%82%D1%80%D0%B8%D1%86%D0%B0%D0%A1%D0%91%D0%B5%D0%BB%D1%8B%D0%BC%D0%B8%D0%93%D1%80%D0%B8%D0%B1%D0%B0%D0%BC%D0%B8.jpg",
     "ingredients": [{ name: "морской гребешок с трюфельным маслом", isAdded: true }, { name: "осьминог с глазировкой из черного перца", isAdded: true }, { name: "королевские креветки в панцире", isAdded: true }, { name: "чеснок", isAdded: true }],
     "dishCategory": "Плато"
   },
@@ -35,7 +35,7 @@ const initialState: dishesType = [
     "price": 60,
     "weight": "1500 гр",
     "calories": "1000 ккал",
-    "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg",
+    "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%A3%D1%81%D1%82%D1%80%D0%B8%D1%86.jpg",
     "ingredients": [{ name: "морской гребешок с трюфельным маслом", isAdded: true }, { name: "осьминог с глазировкой из черного перца", isAdded: true }, { name: "королевские креветки в панцире", isAdded: true }, { name: "чеснок", isAdded: true }],
     "dishCategory": "Плато"
   },
@@ -55,7 +55,7 @@ const initialState: dishesType = [
     "price": 20,
     "weight": "600 гр",
     "calories": "300 ккал",
-    "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg",
+    "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%93%D0%BE%D1%80%D1%8F%D1%87%D0%B5%D0%B5%D0%9F%D0%BB%D0%B0%D1%82%D0%BE.jpg",
     "ingredients": [{ name: "морской гребешок с трюфельным маслом", isAdded: true }, { name: "осьминог с глазировкой из черного перца", isAdded: true }, { name: "королевские креветки в панцире", isAdded: true }, { name: "чеснок", isAdded: true }],
     "dishCategory": "Супы"
   },
@@ -161,7 +161,9 @@ export const getDishesFromApiTC =
   (): ThunkAction<void, RootState, unknown, AnyAction> =>
     async dispatch => {
       try {
-        // const asyncResp = await API.getAllDish()
+        const asyncResp = await API.getAllDish()
+        console.log(asyncResp);
+        
         // const asyncResp = await API.addDishToCart("1",["соус; лук"])
         // @ts-ignore       
         const restructDishes = asyncResp.data.data.dishes.map(dish => {

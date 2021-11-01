@@ -33,13 +33,30 @@ function CompletedDish(props: PropsType) {
       </div>
       <Row>
         <Col md={8} lg={8}>
-          <img
-            className={'image'}
-            style={{ width: '50%', height: 'auto' }}
-            // src={props.currentDish.imageURL}
-            src={"https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg"}
-            alt='dish image'
+          <div
+            key={props.currentDish.id}
+            style={{
+                height: '100%', width: '100%',
+                backgroundImage: `url(${props.currentDish.imageURL})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              } }
           />
+          {/* <img
+            className={'image'}
+            style={
+              {         
+                  // height: '150px', width: '100%',
+                  // backgroundImage: `url(${props.currentDish.imageURL})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  //  width: '50%', height: 'auto'
+                }
+            }
+            src={props.currentDish.imageURL}
+            // src={"https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg"}
+            alt='dish image'
+          /> */}
         </Col>
         <Col md={4} lg={4}>
           <div className={'ingredients'}>
