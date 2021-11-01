@@ -1,6 +1,5 @@
 import { NavLink, useParams } from 'react-router-dom'
 import { Button, Card, Col, Row } from 'react-bootstrap'
-import React from 'react'
 import { DishType } from '../../../../redux/reducers/dishesReducer'
 
 type PropsType = {
@@ -13,22 +12,26 @@ function ListItem(props: PropsType) {
 
   const arrayDishes = props.data.map((dish) => {
     return (
-      <Col style={{ position: "relative" }}>
+      <Col 
+      style={{ position: "relative" }}
+      key={dish.id}
+      >
         <Card
           key={`${dish.id}`}
           text='dark'
           className='mb-3 mx-2 my-2'
           style={props.isIntresting
-            ? { width: '17rem', height: '17rem' }
+            ? { width: '15rem', height: '17rem' }
             : { width: '15rem', height: '22rem' }}
-        //  ? { width: '12rem' } 
-        //  : { width: '18rem'}}
-        >
+         >
           <NavLink to={'/dish/' + dish.id}>
             <Card.Img
               variant='top'
-              // src={dish.image}
-              src={"https://img.poehalisnami.by/static/countries/c84/small/84_637145235972434334.jpg"}
+              style={props.isIntresting
+                ? { height:'150px', width:'100%' }
+                : {height:'200px', width:'100%'}}
+              // src={dish.imageURL}
+              src={"https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg"}
               key={dish.id}
             />
           </NavLink>
