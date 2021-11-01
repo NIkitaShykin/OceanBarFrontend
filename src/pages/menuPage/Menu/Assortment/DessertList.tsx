@@ -8,6 +8,7 @@ import { useAppSelector } from '../../../../redux/hooks'
 function DessertList(): JSX.Element {
 
   const allDishes = useAppSelector<any>(state => state.dish)
+  //@ts-ignores
   const desertDishes = allDishes.filter(dish => {
     return dish.dishCategory=="Десерты"
   })

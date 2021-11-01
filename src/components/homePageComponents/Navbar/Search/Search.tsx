@@ -1,4 +1,4 @@
-// / eslint-disable react/jsx-no-comment-textnodes /
+/* eslint-disable react/jsx-no-comment-textnodes */
 import axios, {AxiosResponse} from 'axios'
 import React, {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
@@ -17,9 +17,7 @@ type Dish = {
   dishCategory: string
 }
 
-type ResponseType = {data:{data:{dishes:Array<Dish>}}}
-
-/ tslint:disable /
+/* tslint:disable */
 const SearchField = () => {
   const history = useHistory()
 
@@ -29,11 +27,12 @@ const SearchField = () => {
 
   useEffect(() => {
     const getMenu = async () => {
-      const response: ResponseType = await axios.get(`${url}/menu/?name=${searchTerm}`)
-      setMenu(response.data.data.dishes)     
+      const response: AxiosResponse = await axios.get(`${url}/menu/`)
+      // @ts-ignore
+      setMenu(response.data.data.dishes)
     }
     getMenu()
-  }, [searchTerm])
+  }, [])
 
 
   useEffect(() => {
@@ -59,8 +58,6 @@ const SearchField = () => {
     history.push(`/menu/dishes/id `)
     // eslint-disable-next-line max-len
     // history.push(`/${newDish.name}`)  // оставить, пока не будет работающего пути к блюду
-  console.log(newDish);
-  
   }
 
   return (
@@ -101,3 +98,5 @@ const SearchField = () => {
 }
 
 export default SearchField
+
+

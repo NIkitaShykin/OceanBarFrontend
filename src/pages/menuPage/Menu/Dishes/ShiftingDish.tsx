@@ -7,9 +7,9 @@ import { IngredientsType } from '../../../../redux/reducers/dishesReducer'
 import { DishType } from '../../../../redux/reducers/dishesReducer'
 
 type PropsType = {
-  changeStatus?: () => void
+  changeStatus: () => void
   currentDish: DishType
-  updIngredients?: (any) => void
+  updIngredients: (arg0: any) => void
 }
 
 

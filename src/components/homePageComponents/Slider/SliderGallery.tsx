@@ -3,66 +3,62 @@ import {useState} from 'react'
 import SliderGallertItem from './SliderGalleryItem'
 import {NavLink} from 'react-router-dom'
 import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
-import { useAppSelector } from '../../../redux/hooks'
+import {useAppSelector} from '../../../redux/hooks'
+import {DishType} from '../../../redux/reducers/dishesReducer'
 
 function ControlledCarousel() {
+  const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
 
-  const allDishes = useAppSelector<any>(state => state.dish)
-  
-  const desertDishes = allDishes.filter(dish => {
-    return dish.dishCategory=="Десерты"
+  const desertDishes = allDishes.filter((dish) => {
+    return dish.dishCategory == 'Десерты'
   })
-  const oystersDishes = allDishes.filter(dish => {
-  return dish.dishCategory=="Запеченные устрицы"
-})
-const platoDishes = allDishes.filter(dish => {
-  return dish.dishCategory=="Плато"
-})
-const saladDishes = allDishes.filter(dish => {
-  return dish.dishCategory=="Салаты"
-})
-const soupDishes = allDishes.filter(dish => {
-  return dish.dishCategory=="Супы"
-})
+    const oystersDishes = allDishes.filter((dish) => {
+    return dish.dishCategory == 'Запеченные устрицы'
+  })
+  const platoDishes = allDishes.filter((dish) => {
+    return dish.dishCategory == 'Плато'
+  })
+  const saladDishes = allDishes.filter((dish) => {
+    return dish.dishCategory == 'Салаты'
+  })
+  const soupDishes = allDishes.filter((dish) => {
+    return dish.dishCategory == 'Супы'
+  })
 
-const [index, setIndex] = useState(1)
+  const [index, setIndex] = useState(1)
   const handleSelect = (selectedIndex: any) => {
-    setIndex(selectedIndex);
-  };
- 
+    setIndex(selectedIndex)
+  }
+
   return (
-    <Carousel activeIndex={index}
-      onSelect={handleSelect}
-      variant="dark"
-      >
-       <Carousel.Item>
+    <Carousel activeIndex={index} onSelect={handleSelect} variant='dark'>
+      <Carousel.Item>
         <NavLink to={PATH.DESSERT}>
-          <SliderGallertItem categoryDish={allDishes}/>
-         </NavLink>
+          <SliderGallertItem categoryDish={desertDishes} />
+        </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.SOUP}>
-          <SliderGallertItem categoryDish={allDishes} />
+          <SliderGallertItem categoryDish={soupDishes} />
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.SALAD}>
-          <SliderGallertItem categoryDish={allDishes} />
+          <SliderGallertItem categoryDish={saladDishes} />
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.OYSTERS}>
-           <SliderGallertItem categoryDish={allDishes} />
+          <SliderGallertItem categoryDish={oystersDishes} />
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.PLATO}>
-          <SliderGallertItem categoryDish={allDishes} />
+          <SliderGallertItem categoryDish={platoDishes} />
         </NavLink>
       </Carousel.Item>
     </Carousel>
-  );
+  )
 }
 
-export default ControlledCarousel;
-
+export default ControlledCarousel

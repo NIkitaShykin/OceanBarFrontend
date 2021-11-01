@@ -13,7 +13,7 @@ function Dish() {
 
   const token = useParams<{ token: string }>()
   const allDishes = useAppSelector<any>(state => state.dish)
-
+  //@ts-ignore
   const currentDish = allDishes.find((el) => el.id == token.token)
   
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false);

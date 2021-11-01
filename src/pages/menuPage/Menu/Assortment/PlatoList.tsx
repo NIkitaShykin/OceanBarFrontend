@@ -6,6 +6,7 @@ import { useAppSelector } from '../../../../redux/hooks'
 function PlatoList() {
 
   const allDishes = useAppSelector<any>(state => state.dish)
+  //@ts-ignores
   const platoDishes = allDishes.filter(dish => {
     return dish.dishCategory=="Плато"
   })

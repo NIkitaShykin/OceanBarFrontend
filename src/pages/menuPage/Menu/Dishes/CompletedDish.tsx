@@ -2,9 +2,13 @@ import './Dish.scss'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Modal, CloseButton } from 'react-bootstrap'
 import { DishType } from '../../../../redux/reducers/dishesReducer'
+import {addDishToCart} from '../../../../redux/actions'
+import {OrderedToast} from '../../../../components/OrderToast/OrderedToast'
+
+import {TDish} from '../common'
 
 type PropsType = {
-  changeStatus?: () => void
+  changeStatus: () => void
   currentDish: DishType
 }
 
@@ -17,7 +21,23 @@ function CompletedDish(props: PropsType) {
     )
   })
 
-  const orderDish = () => {
+
+  const orderDish = (name: string) => {
+    // if (props.dishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
+    //   OrderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+    // }
+    //  else {
+      dispatch(
+        addDishToCart({
+          id: props.currentDish.id,
+          name: props.currentDish.name,
+          prise: props.currentDish.price,
+          image: props.currentDish.imageURL,
+          numberOfDishes: 1,
+        })
+      )
+      OrderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+    // }
   }
 
 
@@ -27,7 +47,6 @@ function CompletedDish(props: PropsType) {
 
   return (
     <>
-      {/* <div className={'main-dish'}> */}
       <div className={'title-dish'}>
         <h1>{props.currentDish.name}</h1>
       </div>
@@ -42,21 +61,6 @@ function CompletedDish(props: PropsType) {
                 backgroundPosition: "center",
               } }
           />
-          {/* <img
-            className={'image'}
-            style={
-              {         
-                  // height: '150px', width: '100%',
-                  // backgroundImage: `url(${props.currentDish.imageURL})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  //  width: '50%', height: 'auto'
-                }
-            }
-            src={props.currentDish.imageURL}
-            // src={"https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg"}
-            alt='dish image'
-          /> */}
         </Col>
         <Col md={4} lg={4}>
           <div className={'ingredients'}>
@@ -98,7 +102,7 @@ function CompletedDish(props: PropsType) {
             <button
               className={'order-btn-dish'}
               onClick={() => {
-                orderDish()
+                orderDish(props.currentDish.name)
               }}
             >
               Заказать
@@ -106,7 +110,6 @@ function CompletedDish(props: PropsType) {
           </div>
         </Col>
       </Row>
-      {/* </div> */}
     </>
   )
 }

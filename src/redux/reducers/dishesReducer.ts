@@ -3,7 +3,7 @@ import { addDishesAC } from '../actions'
 import { AnyAction } from 'redux'
 import { RootState } from '../store'
 import { ThunkAction } from 'redux-thunk'
-import { API } from '../../dal/Api'
+import { API } from '../../api/Api'
 
 export type IngredientType = { name: string; isAdded: boolean }
 export type IngredientsType = Array<IngredientType>
@@ -161,13 +161,11 @@ export const getDishesFromApiTC =
   (): ThunkAction<void, RootState, unknown, AnyAction> =>
     async dispatch => {
       try {
-        const asyncResp = await API.getAllDish()
-        console.log(asyncResp);
-        
-        // const asyncResp = await API.addDishToCart("1",["соус; лук"])
+        const asyncResp = await API.getAllDish()    
         // @ts-ignore       
         const restructDishes = asyncResp.data.data.dishes.map(dish => {
           let myObj: Array<IngredientType> = []
+          // @ts-ignore  
           dish.ingredients.split(';').forEach(ingr => {
             myObj.push({name: ingr, isAdded: true})
           })

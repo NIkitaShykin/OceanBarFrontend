@@ -3,7 +3,7 @@ import { Col, Form, Row } from 'react-bootstrap'
 import { IngredientType } from '../../../../redux/reducers/dishesReducer'
 
 type PropsType = {
-  setIngredient?: (any) => void
+  setIngredient: (arg0: any) => void
   ingredients: Array<IngredientType>
 }
 
@@ -27,13 +27,6 @@ function DishIngredients(props: PropsType) {
       <div>
         <Row key={`${i}`}>
           <Col xs={11}>
-            {/* <Form.Check
-              type='checkbox'
-              checked={!!ingredient.isAdded}
-              onChange={() => {
-                toggleIngredient(ingredient, i)
-              }}
-            /> */}
             <label style={{ marginTop: "10px" }}>
               <input style={{ marginRight: "10px" }}
                 checked={!!ingredient.isAdded}

@@ -6,6 +6,7 @@ function OystersList() {
 
   
 const allDishes = useAppSelector<any>(state => state.dish)
+//@ts-ignores
 const oystersDishes = allDishes.filter(dish => {
   return dish.dishCategory=="Запеченные устрицы"
 })

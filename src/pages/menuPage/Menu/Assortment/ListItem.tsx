@@ -1,15 +1,38 @@
 import { NavLink, useParams } from 'react-router-dom'
 import { Button, Card, Col, Row, Image } from 'react-bootstrap'
 import { DishType } from '../../../../redux/reducers/dishesReducer'
-// import './Listitem.scss'
+import {useDispatch, useSelector} from 'react-redux'
+import {OrderedToast} from '../../../../components/OrderToast/OrderedToast'
+import {addDishToCart} from '../../../../redux/actions'
+
+// import {TDish} from '../common'  ??????
 
 type PropsType = {
   data: Array<DishType>
   isIntresting?: any
 }
 
-
 function ListItem(props: PropsType) {
+  const token = useParams<{ token: string }>()
+  const dispatch = useDispatch()
+  const dishes = useSelector((state: any) => state.cart.dishes)
+  const orderDish = (Dish: any) => {
+    if (dishes.find((dish: any) => dish.id === Dish.id)) {
+      OrderedToast(`Блюдо "${Dish.name}" уже в корзине!`)
+    } else {
+      dispatch(
+        addDishToCart({
+          id: Dish.id,
+          name: Dish.name,
+          prise: Dish.prise,
+          image: Dish.image,
+          numberOfDishes: 1,
+        })
+      )
+      // eslint-disable-next-line new-cap
+      OrderedToast(`Блюдо "${Dish.name}" добавлено в корзину`)
+    }
+  }
 
   const arrayDishes = props.data.map((dish) => {
 
@@ -44,17 +67,6 @@ function ListItem(props: PropsType) {
                 }
               }
             />
-            {/* <Card.Img
-              variant='top'
-              style={{ background: "url(https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg" }}
-              // style={props.isIntresting
-              //   ? { height:'150px', width:'100%' }
-              //   : {height:'200px', width:'100%'}}
-              // style={props.isIntresting
-              src={dish.imageURL}
-              // src={"https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg"}
-              key={dish.id}
-             /> */}
           </NavLink>
           <Card.Body>
             <Row>
@@ -83,7 +95,7 @@ function ListItem(props: PropsType) {
               <NavLink to={'/dish/' + dish.id}>
                 <Button
                   variant="outline-warning"
-                  onClick={() => console.log('открыть' + `${dish.id}`)}
+                  onClick={() => orderDish(dish)}
                   key={dish.id}
                   style={props.isIntresting ? { display: 'none' } : {}}
                 >
