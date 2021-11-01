@@ -13,7 +13,7 @@ const NavBarComponent: React.FC = () => {
   return (
     <div>
       <Navbar bg='dark' variant={'dark'}
-        expand='xl' fixed='top' className='navbar-fixed'>
+        expand='xxl' fixed='top' className='navbar-fixed'>
         <Navbar.Brand
           href='/'
           className='navbar-brand-mr'>Ocean Bar

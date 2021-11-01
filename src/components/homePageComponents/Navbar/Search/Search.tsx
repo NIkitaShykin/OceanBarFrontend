@@ -6,6 +6,8 @@ import {url} from '../../../../api'
 import {Form, FormControl} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
 import useDebounce from '../../../../utils/useDebounce'
+import {useAppDispatch, useAppSelector} from '../../../../redux/hooks'
+import Spinner from '../../../Spinner/Spinner'
 
 import './search.scss'
 
@@ -24,7 +26,7 @@ type ResponseType = {data:{data:{dishes:Array<Dish>}}}
 
 const SearchField = () => {
   const history = useHistory()
-
+  
   const [dishes, setMenu] = useState<Dish[]>([])
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
@@ -32,14 +34,14 @@ const SearchField = () => {
   const isEmpty = !dishes || dishes.length === 0
   const [ref, isClickedOutside] = useClickOutside()
   const debouncedSearchQuery = useDebounce(searchQuery, 500)
-  // const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const getMenu = async (query: string) => {
       setSearchQuery(query)
       setIsOpen(true)
+      setIsLoading(true)
       if (!query || query.trim() === '') return
-      // setIsLoading(true)
 
       // eslint-disable-next-line max-len
       const response: ResponseType = await axios.get(`${url}/menu/?name=${searchQuery}`)
@@ -47,13 +49,13 @@ const SearchField = () => {
     }
     getMenu(debouncedSearchQuery)
     setIsOpen(false)
-    // setIsLoading(false)
+    setIsLoading(false)
   }, [debouncedSearchQuery])
 
   useEffect(() => {
     if (searchQuery) {
       setIsOpen(true)
-      // setIsLoading(true)
+      setIsLoading(false)
       const filteredDishes = dishes.filter((dish: Dish) => {
         // eslint-disable-next-line max-len
         return dish.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -62,7 +64,7 @@ const SearchField = () => {
       setMenu(filteredDishes)
     } else {
       setIsOpen(false)
-      // setIsLoading(false)
+      setIsLoading(false)
     }
   }, [debouncedSearchQuery])
 
@@ -70,6 +72,7 @@ const SearchField = () => {
     if (isClickedOutside) {
       setIsOpen(false)
       setSearchQuery('')
+      setIsLoading(false)
     }
   }, [isClickedOutside])
 
@@ -97,17 +100,18 @@ const SearchField = () => {
             setSearchQuery(event.target.value)
           }}
         />
-        {noQuery && (
+        {isLoading ? <Spinner/> : null}
+        {noQuery && isEmpty && isOpen &&(
           <ul className='autocomplete autocomplete-warn'>
               Начните вводить название блюда
           </ul>)}
 
-        {isOpen && isEmpty && (
+        {isOpen && isEmpty && !isLoading && (
           <ul className='autocomplete autocomplete-warn'>
               Совпадений не найдено для &quot;{debouncedSearchQuery}&quot;
           </ul>)}
 
-        {isOpen && !isEmpty &&(
+        {isOpen && !isEmpty && !isLoading &&(
           <ul className='autocomplete'>
             {dishes.map((val: Dish, index: number) => {
               return <li
