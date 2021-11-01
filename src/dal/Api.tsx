@@ -12,23 +12,23 @@ export const API = {
   },
 
 
-  getAllDishFromCart(userId: string) {
+  getAllDishesFromCart(userId: string) {
     const promise = instance.get(`api/cart/get/${userId}`)
     return promise
   },
   addDishToCart(userId: string, dishId: string, ingredients: any) {
-    const promise = instance.post(`api/cart/addDish/${userId}`, { dishId: "dishId", ingredients: ingredients })
+    const promise = instance.post(`api/cart/addDish/${userId}`, {"dishId": dishId, "ingredients": ingredients })
     return promise
   },
   updateDishInCart(userId: string, dishId: string, ingredients: any) {
- const promise = instance.put(`api/cart/updateDish/${userId}`, { dishId: "dishId", ingredients: ingredients })
+ const promise = instance.patch(`api/cart/updateDish/${userId}`, {"dishId": dishId, "ingredients": ingredients })
     return promise
   },
-  deleteDihsFromCart(userId: string, dishId: string) {
- const promise = instance.put(`api/cart/deleteDish/${userId}`, { userId: "dishId" })
+ deleteDihsFromCart(userId: string, dishId: string) {
+ const promise = instance.put(`api/cart/deleteDish/${userId}`, {"dishId": dishId})
     return promise
   },
-  clearCart(userId: string) {
+ clearUserCart(userId: string) {
     const promise = instance.delete(`api/cart/deleteAllDihs/${userId}`)
     return promise
   }
