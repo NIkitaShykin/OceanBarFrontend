@@ -3,7 +3,7 @@ import {Button, Card, Col, Row} from 'react-bootstrap'
 import React from 'react'
 import {addDishToCart} from '../../../../redux/actions'
 import {useDispatch} from 'react-redux'
-
+import {OrderedToast} from "../../../../components/OrderToast/OrderedToast";
 function ListItem(props: any) {
   const token = useParams<{token: string}>()
   const dispatch = useDispatch()
@@ -17,7 +17,7 @@ function ListItem(props: any) {
         numberOfDishes: 1,
       })
     )
-    alert(` блюдо : '${dish.name}'  добавлено в корзину `)
+      OrderedToast(dish.name)
   }
 
   // @ts-ignore

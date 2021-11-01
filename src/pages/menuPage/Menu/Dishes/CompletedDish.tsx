@@ -4,7 +4,7 @@ import {updateIngridientsAC} from '../../../../bll/cartReducer'
 import {toast} from 'react-toastify'
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
 import {addDishToCart} from '../../../../redux/actions'
-
+import {OrderedToast} from "../../../../components/OrderToast/OrderedToast";
 function CompletedDish(props: any) {
   const dispatch = useDispatch()
 
@@ -19,7 +19,8 @@ function CompletedDish(props: any) {
     }
   })
 
-  const orderDish = () => {
+
+  const orderDish = (name) => {
     dispatch(
       addDishToCart({
         id: props.currentDish.id,
@@ -29,6 +30,7 @@ function CompletedDish(props: any) {
         numberOfDishes: 1,
       })
     )
+    OrderedToast(name)
   }
 
   const handleClose = () => {
@@ -85,9 +87,7 @@ function CompletedDish(props: any) {
             <button
               className={'order-btn-dish'}
               onClick={() => {
-                toast.success('Success Notification !', {
-                  position: toast.POSITION.TOP_CENTER,
-                })
+               orderDish(props.currentDish.name)
               }}
             >
               Заказать

@@ -6,10 +6,12 @@ $mainColor: #ff9e05;
   flex: 1 0 auto;
   font-size: 14px;
 
+
   .container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
 
     .cart-title {
       font-size: 2.5rem;
@@ -24,7 +26,7 @@ $mainColor: #ff9e05;
       font-size: 1.2rem;
       color: #ccc;
     }
-  
+
     .cart-section {
       display: flex;
       flex-direction: column;
@@ -58,16 +60,22 @@ $mainColor: #ff9e05;
             justify-content: center;
             align-items: center;
           }
+          .order-img > img{
+            width: 160px;
+            height: 140px;
+          }
           .order-details {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            margin-left: 1rem;
-            width: 10rem;
+            padding-left: 3rem;
+            width: 15rem;
+            height: 9rem;
             .order-title {
               font-size: larger;
             }
             a {
+              padding-top: 20px;
               color: $mainColor;
               text-decoration: underline;
             }
@@ -107,7 +115,7 @@ $mainColor: #ff9e05;
         font-size: 1.2rem;
       }
     }
-  
+
     .uppercase {
       text-transform: uppercase;
     }
