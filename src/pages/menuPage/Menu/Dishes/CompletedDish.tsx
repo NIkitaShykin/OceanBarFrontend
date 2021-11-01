@@ -1,31 +1,45 @@
 import './ComletedDish.scss'
+// import {React, useState} from 'react'
 import {useDispatch} from 'react-redux'
-import {updateIngridientsAC} from '../../../../bll/cartReducer'
-
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
+import {addDishToCart} from '../../../../redux/actions'
+import {OrderedToast} from '../../../../components/OrderToast/OrderedToast'
+
+import {TDish} from '../common'
 
 function CompletedDish(props: any) {
   const dispatch = useDispatch()
 
-            //@ts-ignore
-            const newIngred = props.currentDish.ingredients.map( el => { 
-              if (el.isAdded) return (
-                 <li><p>{el.name}</p></li>
-                    )
-            })
-
-  const orderDish = () => {
-    dispatch(
-      updateIngridientsAC(
-                                [
-                                  {user:"email"},
-                                  {dishId:`${props.currentDish.id}`},
-                                  {ingredients:[`${props.currentDish?.ingredients}`]} 
-                               ]
-                         ))  }
+  // @ts-ignore
+  const newIngred = props.currentDish.ingredients.map((el) => {
+    if (el.isAdded) {
+      return (
+        <li>
+          <p>{el.name}</p>
+        </li>
+      )
+    }
+  })
 
 
-   const handleClose = () => {
+  const orderDish = (name: string) => {
+    if (props.dishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
+      OrderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+    } else {
+      dispatch(
+        addDishToCart({
+          id: props.currentDish.id,
+          name: props.currentDish.name,
+          prise: props.currentDish.prise,
+          image: props.currentDish.image,
+          numberOfDishes: 1,
+        })
+      )
+      OrderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+    }
+  }
+
+  const handleClose = () => {
     window.history.go(-1)
   }
 
@@ -38,7 +52,7 @@ function CompletedDish(props: any) {
         <Col md={8} lg={8}>
           <img
             className={'image'}
-            style={{width: '100%', height:'auto'}}
+            style={{width: '100%', height: 'auto'}}
             src={props.currentDish.image}
             alt='food'
           />
@@ -47,7 +61,7 @@ function CompletedDish(props: any) {
           <div className={'ingredients'}>
             <span>
               <Modal.Header className='border-0'>
-                <CloseButton onClick={() => handleClose()} />
+                <CloseButton onClick={() => handleClose()}/>
               </Modal.Header>
             </span>
             <div className={'changing'}>
@@ -62,11 +76,9 @@ function CompletedDish(props: any) {
               </span>
             </div>
 
-             <ul>
-               {newIngred}
-            </ul>
+            <ul>{newIngred}</ul>
 
-            <br />
+            <br/>
             <span>
               <h5>Вес: {props.currentDish?.weight}</h5>
             </span>
@@ -74,14 +86,14 @@ function CompletedDish(props: any) {
               <h5>Калории: {props.currentDish?.calories}</h5>
             </span>
             <div className='line-dish'></div>
-            <br />
+            <br/>
             <span>
               <h5>Стоимость: {props.currentDish?.prise}BYN</h5>
             </span>
             <button
               className={'order-btn-dish'}
               onClick={() => {
-                orderDish()
+                orderDish(props.currentDish.name)
               }}
             >
               Заказать

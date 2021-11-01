@@ -1,0 +1,128 @@
+$bkgColor: #eee;
+$mainColor: #ff9e05;
+
+.cart {
+  padding: 30px 0;
+  flex: 1 0 auto;
+  font-size: 14px;
+
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+
+    .cart-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: $mainColor;
+      align-self: center;
+    }
+
+    .cart-empty {
+      align-self: center;
+      margin: 10rem 0 14rem;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    .cart-section {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 50px 0;
+      .section-title {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        text-align: left;
+        font-size: 1.5rem;
+        button.clear-button {
+          font-size: 14px;
+          border: none;
+          text-decoration: underline;
+          color: #ccc;
+          background-color: transparent;
+          &:hover {
+            color: $mainColor;
+          }
+        }
+      }
+      .section-data {
+        .order-item {
+          display: flex;
+          margin-bottom: 10px;
+          padding: 15px 35px;
+          .order-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          .order-img > img{
+            width: 160px;
+            height: 140px;
+          }
+          .order-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 3rem;
+            width: 18rem;
+            height: 9rem;
+            .order-title {
+              font-size: larger;
+            }
+            a {
+              padding-top: 20px;
+              color: $mainColor;
+              text-decoration: underline;
+            }
+          }
+          .order-counter {
+            margin: 0 6rem;
+            font-size: 16px;
+            .counter {
+              color: $mainColor;
+              font-weight: bold;
+              font-size: larger;
+              margin: 0 10px;
+            }
+            .control {
+              padding: 3px;
+              border: none;
+              background-color: #fff;
+              box-shadow: 0 0 10px #ccc;
+              border-radius: 50%;
+              height: 2rem;
+              width: 2rem;
+            }
+          }
+          .order-deletion {
+            i.delete-button {
+              margin: 0;
+              padding: 0;
+              &:hover {
+                color: $mainColor;
+              }
+            }
+          }
+        }
+      }
+      .cart-total {
+        font-size: 1.2rem;
+      }
+    }
+
+    .uppercase {
+      text-transform: uppercase;
+    }
+    .bold {
+      font-weight: bold;
+    }
+    .hidden {
+      display: none;
+    }
+  }
+}
