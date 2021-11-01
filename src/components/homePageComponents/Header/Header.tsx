@@ -1,6 +1,6 @@
 import React from 'react'
-import {BrowserRouter as Router, Link} from 'react-router-dom'
-import {Button, Nav} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
+import {Nav} from 'react-bootstrap'
 import './Header.scss'
 import Logo from '../Logo/Logo'
 const OceanBarHeader = () => {

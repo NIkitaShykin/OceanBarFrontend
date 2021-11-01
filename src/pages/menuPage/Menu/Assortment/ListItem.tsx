@@ -1,13 +1,10 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable max-len */
-import {NavLink, useParams} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import {Button, Card, Col, Row} from 'react-bootstrap'
 import React from 'react'
 
 const ListItem = (props: any) => {
-  const token = useParams<{ token: string }>()
-
-
   // @ts-ignore
   const arrayDishes = props.data.map((dish) => {
     return (

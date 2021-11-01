@@ -2,9 +2,7 @@
 import React, {useState} from 'react'
 import {Col, Form, Row} from 'react-bootstrap'
 
-type IngridientValueType = Boolean[]
-
-function DishIngredients(props: any) {
+const DishIngredients = (props: any) => {
   // const [ingredients, setIngredients] = useState<Object>(props.ingredients)
 
   // const toggleIngredient = (el: any) => {

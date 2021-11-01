@@ -117,7 +117,7 @@ export const dishesReducer = (state = initialState, action: actionType): dishTyp
   }
 }
 
-type addDishesACType = {};
+// type addDishesACType = {};
 
 export const addDishesAC = (dishesData: initStateType): any => {
   return {type: 'addDishes', dishesData}

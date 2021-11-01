@@ -4,12 +4,8 @@ import ShiftingDish from './ShiftingDish'
 import CompletedDish from './CompletedDish'
 import {useParams} from 'react-router-dom'
 import foodData from '../DB/foodData'
-import {useSelector} from 'react-redux'
-// import { AppStoreType } from "../../../../bll/store";
 // eslint-disable-next-line max-len
 import MaybeIntresting from '../../../../components/maybeIntresting/maybeIntresting'
-
-import {AppStoreType} from '../../../../bll/store'
 
 
 function Dish() {

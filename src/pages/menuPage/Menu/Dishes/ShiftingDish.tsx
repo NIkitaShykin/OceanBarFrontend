@@ -5,8 +5,6 @@ import DishIngridients from './DishIngridients'
 import {Button, Card, Col, Row} from 'react-bootstrap'
 
 
-type IngridientValueType = Boolean[]
-
 function ShiftingDish(props: any) {
   const [ingredients, setIngredients] = useState<Object>(props.currentDish?.ingredients)
 

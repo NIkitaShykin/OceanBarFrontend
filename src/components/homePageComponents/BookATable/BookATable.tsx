@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Dropdown, Form} from 'react-bootstrap'
+import {Dropdown, Form} from 'react-bootstrap'
 import './BookATable.scss'
 
 const BookATable = () => {

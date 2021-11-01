@@ -1,10 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable require-jsdoc */
 
-import {useSelector} from 'react-redux'
-import {AppStoreType} from '../../../../bll/store'
+// import {useSelector} from 'react-redux'
+// import {AppStoreType} from "../../../../bll/store";
 import {Row} from 'react-bootstrap'
-import ListItem from './ListItem'
+// import ListItem from './ListItem'
 
 const DessertList2 = () => {
   // const foodData=useSelector<AppStoreType>(state=>state.dishes)
