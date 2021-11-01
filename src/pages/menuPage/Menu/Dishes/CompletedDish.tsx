@@ -1,31 +1,35 @@
+import React from 'react'
 import './ComletedDish.scss'
 import {useDispatch} from 'react-redux'
 import {updateIngridientsAC} from '../../../../bll/cartReducer'
 
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
 
-function CompletedDish(props: any) {
+const CompletedDish = (props: any) => {
   const dispatch = useDispatch()
 
-            //@ts-ignore
-            const newIngred = props.currentDish.ingredients.map( el => { 
-              if (el.isAdded) return (
-                 <li><p>{el.name}</p></li>
-                    )
-            })
+  // @ts-ignore
+  const newIngred = props.currentDish.ingredients.map( (el) => {
+    if (el.isAdded) {
+      return (
+        <li><p>{el.name}</p></li>
+      )
+    }
+  })
 
   const orderDish = () => {
     dispatch(
       updateIngridientsAC(
-                                [
-                                  {user:"email"},
-                                  {dishId:`${props.currentDish.id}`},
-                                  {ingredients:[`${props.currentDish?.ingredients}`]} 
-                               ]
-                         ))  }
+        [
+          {user: 'email'},
+          {dishId: `${props.currentDish.id}`},
+          {ingredients: [`${props.currentDish?.ingredients}`]}
+        ]
+      ))
+  }
 
 
-   const handleClose = () => {
+  const handleClose = () => {
     window.history.go(-1)
   }
 
@@ -38,7 +42,7 @@ function CompletedDish(props: any) {
         <Col md={8} lg={8}>
           <img
             className={'image'}
-            style={{width: '100%', height:'auto'}}
+            style={{width: '100%', height: 'auto'}}
             src={props.currentDish.image}
             alt='food'
           />
@@ -62,8 +66,8 @@ function CompletedDish(props: any) {
               </span>
             </div>
 
-             <ul>
-               {newIngred}
+            <ul>
+              {newIngred}
             </ul>
 
             <br />

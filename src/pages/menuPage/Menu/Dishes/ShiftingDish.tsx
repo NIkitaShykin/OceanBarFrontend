@@ -1,38 +1,39 @@
-import { useState } from 'react'
+/* eslint-disable require-jsdoc */
+/* eslint-disable max-len */
+import React, {useState} from 'react'
 import DishIngridients from './DishIngridients'
-import { Button, Card, Col, Row } from 'react-bootstrap'
-
+import {Button, Card, Col, Row} from 'react-bootstrap'
 
 
 type IngridientValueType = Boolean[]
 
 function ShiftingDish(props: any) {
+  const [ingredients, setIngredients] = useState<Object>(props.currentDish?.ingredients)
 
-  const [ingredients, setIngredients] = useState<Object>(props.currentDish?.ingredients);
-
-            let disableIngredientAccept = false
-            let minAmountIngredient = 1
-
-    
-                //@ts-ignore
-                const newIngred = ingredients.filter( el => { 
-                  return el.isAdded == true
-                })
-    
-          //@ts-ignore
-            if (newIngred.length > minAmountIngredient) {
-              disableIngredientAccept = false }
-            else  { disableIngredientAccept = true }
-  
+  let disableIngredientAccept = false
+  const minAmountIngredient = 1
 
 
-            const updateIngridient = (updIngredients: any) => {
-               setIngredients(updIngredients)
-            }
+  // @ts-ignore
+  const newIngred = ingredients.filter( (el) => {
+    return el.isAdded == true
+  })
+
+  // @ts-ignore
+  if (newIngred.length > minAmountIngredient) {
+    disableIngredientAccept = false
+  } else {
+    disableIngredientAccept = true
+  }
+
+
+  const updateIngridient = (updIngredients: any) => {
+    setIngredients(updIngredients)
+  }
 
   const finishSifting = () => {
     props.dishisChanged()
-            props.updateIngredients2(ingredients)
+    props.updateIngredients2(ingredients)
   }
 
   return (
@@ -43,11 +44,11 @@ function ShiftingDish(props: any) {
             border='warning'
             key={`${props.currentDish.id}`}
             className='mb-3 mx-2 my-5'
-            style={{ width: '48rem' }}
+            style={{width: '48rem'}}
           >
             <Row>
               <Col xs lg='7'>
-                <img style={{ width: '100%' }} src={props.currentDish?.image} />
+                <img style={{width: '100%'}} src={props.currentDish?.image} />
               </Col>
               <Col xs lg='5'>
                 <Card.Title>
@@ -62,10 +63,10 @@ function ShiftingDish(props: any) {
                 <Row>
                   <Col xs={7}>
 
-                      <DishIngridients
-                             setIngredient={updateIngridient}              
-                             ingredients={ingredients}
-                      />
+                    <DishIngridients
+                      setIngredient={updateIngridient}
+                      ingredients={ingredients}
+                    />
                   </Col>
                   <Col xs={5}>
                     <br />

@@ -7,7 +7,7 @@ const Menu: React.FC = () => {
   return (
     <Container>
       <Row>
-        <Col xs={3} className="justify-content-md-start">
+        <Col xs={3} className='justify-content-md-start'>
           <h2 style={{padding: '20px', color: 'black'}}>
              Меню
           </h2>

@@ -8,20 +8,20 @@ import {NavLink} from 'react-router-dom'
 // import {PATH} from '../../../pages/Menu/MenuRoutes'
 import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
 
-function ControlledCarousel() {
+const ControlledCarousel = () => {
   const [index, setIndex] = useState(1)
   const handleSelect = (selectedIndex: any) => {
-    setIndex(selectedIndex);
-  };
+    setIndex(selectedIndex)
+  }
   return (
     <Carousel activeIndex={index}
       onSelect={handleSelect}
-      variant="dark"
-      >
-       <Carousel.Item>
+      variant='dark'
+    >
+      <Carousel.Item>
         <NavLink to={PATH.DESSERT}>
           <SliderGallertItem imgData={data[0]}/>
-         </NavLink>
+        </NavLink>
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.SOUP}>
@@ -35,7 +35,7 @@ function ControlledCarousel() {
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.OYSTERS}>
-           <SliderGallertItem imgData={data[3]} />
+          <SliderGallertItem imgData={data[3]} />
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
@@ -44,8 +44,8 @@ function ControlledCarousel() {
         </NavLink>
       </Carousel.Item>
     </Carousel>
-  );
+  )
 }
 
-export default ControlledCarousel;
+export default ControlledCarousel
 

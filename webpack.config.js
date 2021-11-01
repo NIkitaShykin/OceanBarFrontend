@@ -13,17 +13,6 @@ module.exports = {
     static: path.resolve(__dirname, 'public'),
     hot: true,
     open: true,
-
-
-    // proxy: {
-    //   '*': {
-    //     target: 'http://localhost:3000',
-    //     changeOrigin: true,
-    //     secure: false,
-    //   },
-    // },
-
-
   },
   module: {
     rules: [

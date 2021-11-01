@@ -1,10 +1,10 @@
+/* eslint-disable max-len */
 import React, {useState} from 'react'
 import {Col, Form, Row} from 'react-bootstrap'
 
 type IngridientValueType = Boolean[]
 
 function DishIngredients(props: any) {
-
   // const [ingredients, setIngredients] = useState<Object>(props.ingredients)
 
   // const toggleIngredient = (el: any) => {
@@ -17,39 +17,39 @@ function DishIngredients(props: any) {
 
   // --------------new structur ingridients-----------------------------
 
-       const [ingredients, setIngredients] = useState<Array<Object>>(props.ingredients)
+  const [ingredients, setIngredients] = useState<Array<Object>>(props.ingredients)
 
 
-        const toggleIngredient = (el: any, i:number) => {
-          const copyIngredients = [...ingredients]
-          
-          // @ts-ignore
-          copyIngredients[i].isAdded = !copyIngredients[i].isAdded
-          // @ts-ignore
-        
-          setIngredients(copyIngredients)
-          props.setIngredient(copyIngredients)
-        }
-         
+  const toggleIngredient = (el: any, i:number) => {
+    const copyIngredients = [...ingredients]
+
+    // @ts-ignore
+    copyIngredients[i].isAdded = !copyIngredients[i].isAdded
+    // @ts-ignore
+
+    setIngredients(copyIngredients)
+    props.setIngredient(copyIngredients)
+  }
+
 
   // @ts-ignore
   const ingridientsItem = props.ingredients.map((ingredient, i) => {
     return (
       <>
-               
-          <Row>
-            <Col xs={3}>
-              <Form.Check
-                type='checkbox'
-                checked={!!ingredient.isAdded}
-                onChange={() => {
-                  toggleIngredient(ingredient,i)
-                }}
-              />
-            </Col>
-            <Col xs={9}>{ingredient.name}</Col>
-          </Row>
-      
+
+        <Row>
+          <Col xs={3}>
+            <Form.Check
+              type='checkbox'
+              checked={!!ingredient.isAdded}
+              onChange={() => {
+                toggleIngredient(ingredient, i)
+              }}
+            />
+          </Col>
+          <Col xs={9}>{ingredient.name}</Col>
+        </Row>
+
       </>
     )
   })

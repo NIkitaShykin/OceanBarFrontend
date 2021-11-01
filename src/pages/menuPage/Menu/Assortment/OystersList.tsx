@@ -1,18 +1,16 @@
-import foodData from '../DB/foodData';
-import {Row } from 'react-bootstrap';
-import ListItem from './ListItem';
+import React from 'react'
+import foodData from '../DB/foodData'
+import {Row} from 'react-bootstrap'
+import ListItem from './ListItem'
 
-function OystersList() {
-
-
-
+const OystersList = () => {
   return (
     <>
-        <Row>
-          <ListItem data={foodData[3]} />
-        </Row>
+      <Row>
+        <ListItem data={foodData[3]} />
+      </Row>
     </>
-  );
+  )
 }
 
-export default OystersList;
+export default OystersList
