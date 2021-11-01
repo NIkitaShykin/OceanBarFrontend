@@ -1,6 +1,5 @@
 import {createAction} from '@reduxjs/toolkit'
 
-// export const signUp = createAction<number>('SET_SIGN_UP')
 export const logIn = createAction<any>('SET_LOG_IN')
 export const logOut = createAction('SET_LOG_OUT')
 
@@ -10,4 +9,3 @@ export const clearCart = createAction('CLEAR_CART')
 
 export const plusOneDish = createAction<any>('PLUS_ONE_DISH')
 export const minusOneDish = createAction<any>('MINUS_ONE_DISH')
-

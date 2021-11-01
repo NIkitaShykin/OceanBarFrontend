@@ -6,8 +6,6 @@ import {Image} from 'react-bootstrap'
 
 import {removeDishFromCart, plusOneDish, minusOneDish} from '../../redux/actions'
 
-// import {TOrderItem} from './common'
-
 import './Cart.scss'
 
 interface IOrderItemProps {
