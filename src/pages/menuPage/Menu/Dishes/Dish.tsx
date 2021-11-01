@@ -29,14 +29,14 @@ function Dish() {
 
   const updatedDish = {...currentDish, ingredients}
 
-  const updateIngredients = (updIngridients: any) => {
-    setIngredients(updIngridients)
-  }
+const updateIngredients = (updIngridients: any) => {
+  setIngredients(updIngridients)
+}
 
-  // -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 
 
-  // eslint-disable-next-line max-len
+
   // const [ingredients, setIngredients] = useState<Object>(currentDish.ingredients);
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
 
@@ -46,6 +46,7 @@ function Dish() {
   // const updateIngredients = (updIngridients: any) => {
   //   setIngredients(updIngridients)
   // }
+  const dishes = useSelector((state: any) => state.cart.dishes)
 
   const changeStatus = () => {
     setDishСhangeStatus(!dishСhangeStatus)
@@ -54,12 +55,13 @@ function Dish() {
   return (
     <div>
 
-      {dishСhangeStatus ?
+      {dishСhangeStatus
+         ?
         <ShiftingDish
           dishisChanged={changeStatus}
           // currentDish={updatedDish}
           updateIngredients={updateIngredients}
-          //   // --------------new structur ingridients------------------------
+        //   // --------------new structur ingridients-----------------------------
           currentDish ={updatedDish}
         //   // updateIngredients2={updateIngredients2}
         //   // --------------new structur ingridients-------------------------
@@ -67,17 +69,18 @@ function Dish() {
         <CompletedDish
           dishisChanged={changeStatus}
           currentDish={updatedDish}
-          // --------------new structur ingridients-----------------------------
+          dishes={dishes}
+           // --------------new structur ingridients-----------------------------
           //  currentDish2 ={updatedDish2}
-          // --------------new structur ingridients-----------------------------
-        />
-      }
+           // --------------new structur ingridients-----------------------------
+          />
+        }
 
       {!dishСhangeStatus ?
         <div>
-          <MaybeIntresting/>
-        </div> :
-        <div style={{marginTop: '100px'}}></div>
+            <MaybeIntresting/>
+        </div>
+        : <div style={{marginTop:"100px"}}></div>
       }
     </div>
   )
