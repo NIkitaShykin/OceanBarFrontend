@@ -5,98 +5,103 @@ import {toast} from 'react-toastify'
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
 import {addDishToCart} from '../../../../redux/actions'
 import {OrderedToast} from "../../../../components/OrderToast/OrderedToast";
+
 function CompletedDish(props: any) {
-  const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
-  // @ts-ignore
-  const newIngred = props.currentDish.ingredients.map((el) => {
-    if (el.isAdded) {
-      return (
-        <li>
-          <p>{el.name}</p>
-        </li>
-      )
+    // @ts-ignore
+    const newIngred = props.currentDish.ingredients.map((el) => {
+        if (el.isAdded) {
+            return (
+                <li>
+                    <p>{el.name}</p>
+                </li>
+            )
+        }
+    })
+
+
+    const orderDish = (name) => {
+        if (props.dishes.find((dish) => dish.id === props.currentDish.id)) {
+            OrderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+        } else {
+            dispatch(
+                addDishToCart({
+                    id: props.currentDish.id,
+                    name: props.currentDish.name,
+                    prise: props.currentDish.prise,
+                    image: props.currentDish.image,
+                    numberOfDishes: 1,
+                })
+            )
+            OrderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+        }
     }
-  })
 
+    const handleClose = () => {
+        window.history.go(-1)
+    }
 
-  const orderDish = (name) => {
-    dispatch(
-      addDishToCart({
-        id: props.currentDish.id,
-        name: props.currentDish.name,
-        prise: props.currentDish.prise,
-        image: props.currentDish.image,
-        numberOfDishes: 1,
-      })
-    )
-    OrderedToast(name)
-  }
-
-  const handleClose = () => {
-    window.history.go(-1)
-  }
-
-  return (
-    <div className={'main-dish'}>
-      <div className={'title-dish'}>
-        <h1>{props.currentDish.name}</h1>
-      </div>
-      <Row>
-        <Col md={8} lg={8}>
-          <img
-            className={'image'}
-            style={{width: '100%', height: 'auto'}}
-            src={props.currentDish.image}
-            alt='food'
-          />
-        </Col>
-        <Col md={4} lg={4}>
-          <div className={'ingredients'}>
+    return (
+        <div className={'main-dish'}>
+            <div className={'title-dish'}>
+                <h1>{props.currentDish.name}</h1>
+            </div>
+            <Row>
+                <Col md={8} lg={8}>
+                    <img
+                        className={'image'}
+                        style={{width: '100%', height: 'auto'}}
+                        src={props.currentDish.image}
+                        alt='food'
+                    />
+                </Col>
+                <Col md={4} lg={4}>
+                    <div className={'ingredients'}>
             <span>
               <Modal.Header className='border-0'>
-                <CloseButton onClick={() => handleClose()} />
+                <CloseButton onClick={() => handleClose()}/>
               </Modal.Header>
             </span>
-            <div className={'changing'}>
-              <span className={'composition'}>Состав</span>
-              <span
-                className={'change-ingr'}
-                onClick={() => {
-                  props.dishisChanged()
-                }}
-              >
+                        <div className={'changing'}>
+                            <span className={'composition'}>Состав</span>
+                            <span
+                                className={'change-ingr'}
+                                onClick={() => {
+                                    props.dishisChanged()
+                                }}
+                            >
                 Изменить
               </span>
-            </div>
+                        </div>
 
-            <ul>{newIngred}</ul>
+                        <ul>{newIngred}</ul>
 
-            <br />
-            <span>
+                        <br/>
+                        <span>
               <h5>Вес: {props.currentDish?.weight}</h5>
             </span>
-            <span>
+                        <span>
               <h5>Калории: {props.currentDish?.calories}</h5>
             </span>
-            <div className='line-dish'></div>
-            <br />
-            <span>
+                        <div className='line-dish'></div>
+                        <br/>
+                        <span>
               <h5>Стоимость: {props.currentDish?.prise}BYN</h5>
             </span>
-            <button
-              className={'order-btn-dish'}
-              onClick={() => {
-               orderDish(props.currentDish.name)
-              }}
-            >
-              Заказать
-            </button>
-          </div>
-        </Col>
-      </Row>
-    </div>
-  )
+                        <button
+                            className={'order-btn-dish'}
+                            onClick={() => {
+                                orderDish(props.currentDish.name)
+                            }}
+                        >
+                            Заказать
+                        </button>
+                    </div>
+                </Col>
+            </Row>
+        </div>
+    )
 }
 
 export default CompletedDish

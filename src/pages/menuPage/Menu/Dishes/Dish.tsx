@@ -34,20 +34,21 @@ const updatedDish = { ...currentDish, ingredients }
 const updateIngredients = (updIngridients: any) => {
   setIngredients(updIngridients)
 }
-  
+
 // -----------------------------------------------------------------------
 
-  
-  
+
+
   // const [ingredients, setIngredients] = useState<Object>(currentDish.ingredients);
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false);
 
   // @ts-ignore
   // const updatedDish = { ...currentDish, ingredients }
-     
+
   // const updateIngredients = (updIngridients: any) => {
   //   setIngredients(updIngridients)
   // }
+  const dishes = useSelector((state: any) => state.cart.dishes)
 
   const changeStatus = () => {
     setDishСhangeStatus(!dishСhangeStatus)
@@ -57,13 +58,13 @@ const updateIngredients = (updIngridients: any) => {
     <div>
 
       {dishСhangeStatus
-         ? 
+         ?
         <ShiftingDish
           dishisChanged={changeStatus}
           // currentDish={updatedDish}
           updateIngredients={updateIngredients}
         //   // --------------new structur ingridients-----------------------------
-          currentDish ={updatedDish} 
+          currentDish ={updatedDish}
         //   // updateIngredients2={updateIngredients2}
         //   // --------------new structur ingridients-----------------------------
         />
@@ -71,8 +72,9 @@ const updateIngredients = (updIngridients: any) => {
         <CompletedDish
           dishisChanged={changeStatus}
           currentDish={updatedDish}
+          dishes={dishes}
            // --------------new structur ingridients-----------------------------
-          //  currentDish2 ={updatedDish2} 
+          //  currentDish2 ={updatedDish2}
            // --------------new structur ingridients-----------------------------
           />
         }
@@ -80,7 +82,7 @@ const updateIngredients = (updIngridients: any) => {
       {!dishСhangeStatus
         ?
         <div>
-            <MaybeIntresting/>         
+            <MaybeIntresting/>
         </div>
         : <div style={{marginTop:"100px"}}></div>
       }
