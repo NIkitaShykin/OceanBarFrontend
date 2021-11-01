@@ -22,7 +22,13 @@ type Dish = {
   dishCategory: string
 }
 
-type ResponseType = {data:{data:{dishes:Array<Dish>}}}
+type ResponseType = {
+  data:{
+    data:{
+      dishes:Array<Dish>
+    }
+  }
+}
 
 const SearchField = () => {
   const history = useHistory()
@@ -46,7 +52,9 @@ const SearchField = () => {
       if (!query || query.trim() === '') return
 
       // eslint-disable-next-line max-len
-      const response: ResponseType = await axios.get(`${url}/menu/?name=${searchQuery}`)
+      const response: ResponseType = await axios.get(
+        `${url}/menu/?name=${searchQuery}`
+      )
       setMenu(response.data.data.dishes)
     }
     getMenu(debouncedSearchQuery)
@@ -59,7 +67,9 @@ const SearchField = () => {
       setIsOpen(true)
       setIsLoading(false)
       // eslint-disable-next-line max-len
-      const filteredDishes = dishes.filter((dish: Dish) => (dish.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      const filteredDishes = dishes.filter((dish: Dish) => (
+        dish.name.toLowerCase().includes(searchQuery.toLowerCase()
+        ))
       )
 
       setMenu(filteredDishes)
@@ -100,18 +110,19 @@ const SearchField = () => {
             setSearchQuery(event.target.value)
           }}
         />
+
         {isLoading && <Spinner/>}
         {noQuery && isEmpty && isOpen && (
           <ul className='autocomplete autocomplete-warn'>
             Начните вводить название блюда
-          </ul>)
-        }
+          </ul>
+        )}
 
         {isOpen && isEmpty && !isLoading && (
           <ul className='autocomplete autocomplete-warn'>
             Совпадений не найдено для &quot;{debouncedSearchQuery}&quot;
-          </ul>)
-        }
+          </ul>
+        )}
 
         {isOpen && !isEmpty && !isLoading &&(
           <ul className='autocomplete'>
