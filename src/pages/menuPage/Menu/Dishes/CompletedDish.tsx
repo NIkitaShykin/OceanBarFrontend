@@ -1,36 +1,31 @@
 import './ComletedDish.scss'
 import {useDispatch} from 'react-redux'
 import {updateIngridientsAC} from '../../../../bll/cartReducer'
-import {toast} from 'react-toastify'
+
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
-import {addDishToCart} from '../../../../redux/actions'
 
 function CompletedDish(props: any) {
   const dispatch = useDispatch()
 
-  // @ts-ignore
-  const newIngred = props.currentDish.ingredients.map((el) => {
-    if (el.isAdded) {
-      return (
-        <li>
-          <p>{el.name}</p>
-        </li>
-      )
-    }
-  })
+            //@ts-ignore
+            const newIngred = props.currentDish.ingredients.map( el => { 
+              if (el.isAdded) return (
+                 <li><p>{el.name}</p></li>
+                    )
+            })
 
   const orderDish = () => {
     dispatch(
-      addDishToCart({
-        id: props.currentDish.id,
-        name: props.currentDish.name,
-        prise: props.currentDish.prise,
-        image: props.currentDish.image,
-      })
-    )
-  }
+      updateIngridientsAC(
+                                [
+                                  {user:"email"},
+                                  {dishId:`${props.currentDish.id}`},
+                                  {ingredients:[`${props.currentDish?.ingredients}`]} 
+                               ]
+                         ))  }
 
-  const handleClose = () => {
+
+   const handleClose = () => {
     window.history.go(-1)
   }
 
@@ -43,7 +38,7 @@ function CompletedDish(props: any) {
         <Col md={8} lg={8}>
           <img
             className={'image'}
-            style={{width: '100%', height: 'auto'}}
+            style={{width: '100%', height:'auto'}}
             src={props.currentDish.image}
             alt='food'
           />
@@ -67,7 +62,9 @@ function CompletedDish(props: any) {
               </span>
             </div>
 
-            <ul>{newIngred}</ul>
+             <ul>
+               {newIngred}
+            </ul>
 
             <br />
             <span>
@@ -84,9 +81,7 @@ function CompletedDish(props: any) {
             <button
               className={'order-btn-dish'}
               onClick={() => {
-                toast.success('Success Notification !', {
-                  position: toast.POSITION.TOP_CENTER,
-                })
+                orderDish()
               }}
             >
               Заказать
