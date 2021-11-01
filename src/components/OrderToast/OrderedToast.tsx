@@ -3,9 +3,9 @@ import {toast} from 'react-toastify'
 
 import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 // minified version is also included
-// import 'react-toastify/dist/ReactToastify.min.css';
+// import 'react-toastify/dist/ReactToastify.min.css'
 
-export const OrderedToast = (message) => {
+export const OrderedToast = (message: string) => {
   toast.warn(message, {
     position: 'top-center',
     autoClose: 2000,

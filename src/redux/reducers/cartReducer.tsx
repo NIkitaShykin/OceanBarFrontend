@@ -10,12 +10,10 @@ import {
 
 interface IUserState {
   dishes: Array<any>
-  totalSum: number
 }
 
 export const initialState: IUserState = {
   dishes: [],
-  totalSum: null
 }
 
 const cartReducer = createReducer(initialState, (builder) => {
@@ -46,13 +44,10 @@ const cartReducer = createReducer(initialState, (builder) => {
     // ************************************************************************************
     // v2 with immutable data
     // .addCase(plusOneDish, (state, action) => {
-    //   debugger //
-    //   const id = action.payload.id
-    //   const updState = {...state}
-    //   updState.dishes = [...state.dishes]
+    //   const index = state.dishes.findIndex(
+    //     (dish) => dish.id === action.payload.id)
 
-    //   const index = updState.dishes.findIndex(
-    //     (dish) => dish.id === id)
+    //   const updState = {...state}
 
     //   updState.dishes[index].numberOfDishes = action.payload.numberOfDishes
     //   return updState

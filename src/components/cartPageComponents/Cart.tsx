@@ -21,10 +21,10 @@ const UserCart: React.FunctionComponent = (props: any) => {
     {name: 'Навынос', value: '3'},
   ]
 
-  const totalSum: number = props.dishes.reduce((sum, current) => sum + (Number(current.prise) * current.numberOfDishes), 0)
+  const totalSum: any = props.dishes.reduce((sum: any, current: any) => sum + (Number(current.prise) * current.numberOfDishes), 0)
   const cartSectionsClassName: string = props.dishes.length < 1 ? 'cart-sections hidden' : 'cart-sections'
 
-  const orderCodes: JSX.Element[] = props.dishes.map((order) => (
+  const orderCodes: JSX.Element[] = props.dishes.map((order: any) => (
     <OrderItem
       key={order.id}
       id={order.id}

@@ -1,7 +1,7 @@
-export type TOrderItem = {
+export type TDish = {
   id: number,
   name: string,
   prise: string,
   image: string,
-  numberOfDishes?: number,
+  numberOfDishes: number,
 }

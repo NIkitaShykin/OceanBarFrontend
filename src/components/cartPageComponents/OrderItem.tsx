@@ -19,7 +19,7 @@ interface IOrderItemProps {
 
 const OrderItem: React.FunctionComponent<IOrderItemProps> = ({id, name, prise, image, numberOfDishes}) => {
   const dispatch = useDispatch()
-  let [counter, setCounter] = useState(1)
+  const [counter, setCounter] = useState(numberOfDishes)
 
   const onDeleteHandler = () => {
     dispatch(removeDishFromCart(id))
@@ -63,7 +63,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({id, name, prise, i
         </span>
         <button className='control'
           onClick={() => {
-            setCounter(++counter)
+            setCounter(counter+1)
             dispatch(plusOneDish({id: id, numberOfDishes: ++numberOfDishes}))
           }}
         >

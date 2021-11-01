@@ -11,6 +11,14 @@ import {logIn} from '../../redux/actions'
 
 import './LoginForm.scss'
 
+// interface FormEventTarget extends EventTarget {
+//   value: string
+// }
+
+// interface FormChangeEvent extends React.ChangeEvent<HTMLElement> {
+//   target: FormEventTarget
+// }
+
 const LogInForm = () => {
   const history = useHistory()
   const dispatch = useDispatch()
