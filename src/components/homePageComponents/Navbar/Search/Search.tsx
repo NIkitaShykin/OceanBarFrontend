@@ -2,9 +2,10 @@
 import axios from 'axios'
 import React, {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
-import {url} from '../../../../api'
 import {Form, FormControl} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
+
+import {url} from '../../../../api'
 import useDebounce from '../../../../utils/useDebounce'
 import Spinner from '../../../Spinner/Spinner'
 
@@ -25,15 +26,17 @@ type ResponseType = {data:{data:{dishes:Array<Dish>}}}
 
 const SearchField = () => {
   const history = useHistory()
+  const [ref, isClickedOutside] = useClickOutside()
 
   const [dishes, setMenu] = useState<Dish[]>([])
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !dishes || dishes.length === 0
-  const [ref, isClickedOutside] = useClickOutside()
+
   const debouncedSearchQuery = useDebounce(searchQuery, 500)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
     const getMenu = async (query: string) => {
@@ -55,10 +58,9 @@ const SearchField = () => {
     if (searchQuery) {
       setIsOpen(true)
       setIsLoading(false)
-      const filteredDishes = dishes.filter((dish: Dish) => {
-        // eslint-disable-next-line max-len
-        return dish.name.toLowerCase().includes(searchQuery.toLowerCase())
-      })
+      // eslint-disable-next-line max-len
+      const filteredDishes = dishes.filter((dish: Dish) => (dish.name.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
 
       setMenu(filteredDishes)
     } else {
@@ -87,8 +89,7 @@ const SearchField = () => {
 
   return (
     <>
-      <Form className='d-flex mx-6 d-flex-pos justify-content-end'
-        ref={ref}>
+      <Form className='d-flex mx-6 d-flex-pos justify-content-end' ref={ref}>
         <FormControl
           type='text'
           placeholder='Search...'
@@ -99,16 +100,18 @@ const SearchField = () => {
             setSearchQuery(event.target.value)
           }}
         />
-        {isLoading ? <Spinner/> : null}
-        {noQuery && isEmpty && isOpen &&(
+        {isLoading && <Spinner/>}
+        {noQuery && isEmpty && isOpen && (
           <ul className='autocomplete autocomplete-warn'>
-              Начните вводить название блюда
-          </ul>)}
+            Начните вводить название блюда
+          </ul>)
+        }
 
         {isOpen && isEmpty && !isLoading && (
           <ul className='autocomplete autocomplete-warn'>
-              Совпадений не найдено для &quot;{debouncedSearchQuery}&quot;
-          </ul>)}
+            Совпадений не найдено для &quot;{debouncedSearchQuery}&quot;
+          </ul>)
+        }
 
         {isOpen && !isEmpty && !isLoading &&(
           <ul className='autocomplete'>

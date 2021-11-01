@@ -1,7 +1,7 @@
 /* eslint-disable require-jsdoc */
 import {useEffect, useState} from 'react'
 
-function useDebounce(value: string, delay: number) {
+const useDebounce = (value: string, delay: number) => {
   const [debouncedValue, setDebouncedValue] = useState(value)
 
   useEffect(

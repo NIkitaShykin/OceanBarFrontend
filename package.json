@@ -42,7 +42,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "webpack serve",
-    "lint": "eslint --ignore-pattern 'src/resources' --ignore-pattern '*.scss' --ignore-pattern '*.svg' 'src/**'"
+    "lintWindows": "eslint --ignore-pattern src/resources --ignore-pattern *.scss --ignore-pattern *.svg src/**",
+    "lintMacOS": "eslint --ignore-pattern 'src/resources' --ignore-pattern '*.scss' --ignore-pattern '*.svg' 'src/**'"
+
   },
   "eslintConfig": {
     "extends": [

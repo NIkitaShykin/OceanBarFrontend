@@ -126,7 +126,7 @@ const SignUp = () => {
 
   return (
     <>
-      {isLoading ? <Spinner/> : null}
+      {isLoading && <Spinner/>}
       <div className='registration-form'>
         <div className='container'>
           <Modal.Dialog className='shadow p-3 mb-5 bg-body rounded'>
