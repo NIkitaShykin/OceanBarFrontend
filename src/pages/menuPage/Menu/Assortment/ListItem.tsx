@@ -1,8 +1,9 @@
-import {NavLink, useParams} from 'react-router-dom'
-import {Button, Card, Col, Row} from 'react-bootstrap'
 import React from 'react'
-import {addDishToCart} from '../../../../redux/actions'
+import {NavLink, useParams} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
+import {Button, Card, Col, Row} from 'react-bootstrap'
+
+import {addDishToCart} from '../../../../redux/actions'
 
 function ListItem(props: any) {
   const token = useParams<{token: string}>()
@@ -17,7 +18,7 @@ function ListItem(props: any) {
         numberOfDishes: 1,
       })
     )
-    alert(` блюдо : '${dish.name}'  добавлено в корзину `)
+    alert(` блюдо : '${dish.name}' добавлено в корзину `)
   }
 
   // @ts-ignore

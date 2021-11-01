@@ -12,7 +12,6 @@ interface ITogglerProps {
 }
 
 const Toggler: React.FunctionComponent<ITogglerProps> = ({radios}) => {
-  // const [checked, setChecked] = useState(false)
   const [radioValue, setRadioValue] = useState('1')
 
   return (

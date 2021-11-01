@@ -1,18 +1,15 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
-// import {useAppDispatch} from '../../redux/hooks'
 import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
-// import {signUp} from '../../redux/actions'
 
 import './SignUpForm.scss'
 
 const SignUp = () => {
   const history = useHistory()
-  // const dispatch = useAppDispatch()
 
   const [authFailed, setAuthFailed] = useState(false)
 

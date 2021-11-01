@@ -1,11 +1,9 @@
 import React from 'react'
 import {useHistory} from 'react-router-dom'
-// import {useAppSelector} from '../../redux/hooks'
 import {Card, Button} from 'react-bootstrap'
 
 const SignUpSuccess = () => {
   const history = useHistory()
-  // const tempAuthUlr = useAppSelector((state) => state.auth.tempAuthUrl)
 
   const handleClick = () => {
     history.push('/')
