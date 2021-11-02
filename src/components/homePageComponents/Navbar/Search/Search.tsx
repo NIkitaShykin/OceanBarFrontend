@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom'
 import {Form, FormControl} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
 
-import {url} from '../../../../api'
+// import {url} from '../../../../api/index'
 import useDebounce from '../../../../utils/useDebounce'
 import Spinner from '../../../Spinner/Spinner'
 
@@ -42,7 +42,9 @@ const SearchField = () => {
   const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !dishes || dishes.length === 0
 
-  const debouncedSearchQuery = useDebounce(searchQuery, 500)
+  const debouncedSearchQuery = useDebounce(searchQuery, 2000)
+
+  const url = 'http://13.49.241.158:3000/api'
 
   useEffect(() => {
     const getMenu = async (query: string) => {
@@ -54,17 +56,17 @@ const SearchField = () => {
       const response: ResponseType = await axios.get(
         `${url}/menu/?name=${searchQuery}`
       )
+      setIsLoading(false)
       setMenu(response.data.data.dishes)
     }
     getMenu(debouncedSearchQuery)
     setIsOpen(false)
-    setIsLoading(false)
   }, [debouncedSearchQuery])
 
   useEffect(() => {
     if (searchQuery) {
       setIsOpen(true)
-      setIsLoading(false)
+      setIsLoading(true)
       const filteredDishes = dishes.filter((dish: Dish) => (
         dish.name.toLowerCase().includes(searchQuery.toLowerCase()
         ))
@@ -109,7 +111,7 @@ const SearchField = () => {
           }}
         />
 
-        {isLoading && <Spinner/>}
+        {isLoading && <Spinner />}
         {noQuery && isEmpty && isOpen && (
           <ul className='autocomplete autocomplete-warn'>
             Начните вводить название блюда

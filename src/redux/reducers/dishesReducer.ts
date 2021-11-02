@@ -3,7 +3,7 @@ import { addDishesAC } from '../actions'
 import { AnyAction } from 'redux'
 import { RootState } from '../store'
 import { ThunkAction } from 'redux-thunk'
-import { API } from '../../api/Api'
+import { API } from '../../api/index'
 
 export type IngredientType = { name: string; isAdded: boolean }
 export type IngredientsType = Array<IngredientType>

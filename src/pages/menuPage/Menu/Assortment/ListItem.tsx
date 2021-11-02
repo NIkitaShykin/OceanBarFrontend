@@ -25,7 +25,7 @@ function ListItem(props: PropsType) {
           id: Dish.id,
           name: Dish.name,
           price: Dish.price,
-          image: Dish.imageURL,
+          imageURL: Dish.imageURL,
           numberOfDishes: 1,
         })
       )
@@ -46,7 +46,7 @@ function ListItem(props: PropsType) {
           text='dark'
           className='mb-3 mx-2 my-2'
           style={props.isIntresting
-            ? { width: '12rem', height: '17rem' }
+            ? { width: '12rem', height: '19rem' }
             : { width: '18rem', height: '22rem' }}
         >
           <NavLink to={'/dish/' + dish.id}>

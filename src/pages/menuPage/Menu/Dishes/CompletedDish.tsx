@@ -1,18 +1,10 @@
-<<<<<<< HEAD
-import React from 'react'
-import './ComletedDish.scss'
-// import {React, useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
-=======
 import './Dish.scss'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Modal, CloseButton } from 'react-bootstrap'
 import { DishType } from '../../../../redux/reducers/dishesReducer'
->>>>>>> sprint_4
 import {addDishToCart} from '../../../../redux/actions'
 import {OrderedToast} from '../../../../components/OrderToast/OrderedToast'
-import {useAppSelector} from '../../../../redux/hooks'
+import { useSelector } from 'react-redux'
 
 import {TDish} from '../common'
 
@@ -22,9 +14,8 @@ type PropsType = {
 }
 
 function CompletedDish(props: PropsType) {
+  const dishes = useSelector((state: any) => state.cart.dishes)
   const dispatch = useDispatch()
-
- const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
 
   const ingredientList = props.currentDish.ingredients.map(el => {
     if (el.isAdded) return (
@@ -33,29 +24,22 @@ function CompletedDish(props: PropsType) {
   })
 
 
-  // ---------------------------------------------
-  // const orderDish = (name: string) => {
-  //   if (allDishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
-  //     OrderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
-  //   }
-  // ---------------------------------------------
-
   const orderDish = (name: string) => {
-    // if (props.dishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
-    //   OrderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
-    // }
-    //  else {
+    if (dishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
+      OrderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+    }
+     else {
       dispatch(
         addDishToCart({
           id: props.currentDish.id,
           name: props.currentDish.name,
           price: props.currentDish.price,
-          image: props.currentDish.imageURL,
+          imageURL: props.currentDish.imageURL,
           numberOfDishes: 1,
         })
       )
       OrderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
-    // }
+    }
   }
 
 

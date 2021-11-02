@@ -19,13 +19,11 @@ export const initialState: IUserState = {
 const cartReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addDishToCart, (state, action) => {
-      console.log(action);
-      
       const newDish = {
         id: action.payload.id,
         name: action.payload.name,
         prise: action.payload.price,
-        image: action.payload.image,
+        image: action.payload.imageURL,
         numberOfDishes: action.payload.numberOfDishes,
       }
       const updState = {...state}
@@ -43,18 +41,18 @@ const cartReducer = createReducer(initialState, (builder) => {
       return initialState
     })
 
-  // ************************************************************
-  // v2 with immutable data
-  // .addCase(plusOneDish, (state, action) => {
-  //   const index = state.dishes.findIndex(
-  //     (dish) => dish.id === action.payload.id)
+    // ************************************************************************************
+    // v2 with immutable data
+    // .addCase(plusOneDish, (state, action) => {
+    //   const index = state.dishes.findIndex(
+    //     (dish) => dish.id === action.payload.id)
 
-  //   const updState = {...state}
+    //   const updState = {...state}
 
-  //   updState.dishes[index].numberOfDishes = action.payload.numberOfDishes
-  //   return updState
-  // })
-  // *************************************************************
+    //   updState.dishes[index].numberOfDishes = action.payload.numberOfDishes
+    //   return updState
+    // })
+    // ************************************************************************************
 
     .addCase(plusOneDish, (state, action) => {
       const index = state.dishes.findIndex(
