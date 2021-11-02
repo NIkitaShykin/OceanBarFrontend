@@ -6,6 +6,9 @@ import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
 import {useAppSelector} from '../../../redux/hooks'
 import {DishType} from '../../../redux/reducers/dishesReducer'
 
+<<<<<<< HEAD
+const ControlledCarousel = () => {
+=======
 function ControlledCarousel() {
   const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
 
@@ -25,16 +28,28 @@ function ControlledCarousel() {
     return dish.dishCategory == 'Супы'
   })
 
+>>>>>>> sprint_4
   const [index, setIndex] = useState(1)
   const handleSelect = (selectedIndex: any) => {
     setIndex(selectedIndex)
   }
+<<<<<<< HEAD
+  return (
+    <Carousel activeIndex={index}
+      onSelect={handleSelect}
+      variant='dark'
+    >
+      <Carousel.Item>
+        <NavLink to={PATH.DESSERT}>
+          <SliderGallertItem imgData={data[0]}/>
+=======
 
   return (
     <Carousel activeIndex={index} onSelect={handleSelect} variant='dark'>
       <Carousel.Item>
         <NavLink to={PATH.DESSERT}>
           <SliderGallertItem categoryDish={desertDishes} />
+>>>>>>> sprint_4
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
@@ -49,7 +64,11 @@ function ControlledCarousel() {
       </Carousel.Item>
       <Carousel.Item>
         <NavLink to={PATH.OYSTERS}>
+<<<<<<< HEAD
+          <SliderGallertItem imgData={data[3]} />
+=======
           <SliderGallertItem categoryDish={oystersDishes} />
+>>>>>>> sprint_4
         </NavLink>
       </Carousel.Item>
       <Carousel.Item>
@@ -62,3 +81,7 @@ function ControlledCarousel() {
 }
 
 export default ControlledCarousel
+<<<<<<< HEAD
+
+=======
+>>>>>>> sprint_4

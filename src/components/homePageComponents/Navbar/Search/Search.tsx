@@ -1,9 +1,14 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
-import axios, {AxiosResponse} from 'axios'
+/* eslint-disable require-jsdoc */
+import axios from 'axios'
 import React, {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
+import {Form, FormControl} from 'react-bootstrap'
+import {useClickOutside} from 'react-click-outside-hook'
+
 import {url} from '../../../../api'
-import {Form, Button, FormControl} from 'react-bootstrap'
+import useDebounce from '../../../../utils/useDebounce'
+import Spinner from '../../../Spinner/Spinner'
+
 import './search.scss'
 
 type Dish = {
@@ -17,64 +22,107 @@ type Dish = {
   dishCategory: string
 }
 
-/* tslint:disable */
+type ResponseType = {
+  data:{
+    data:{
+      dishes:Array<Dish>
+    }
+  }
+}
+
 const SearchField = () => {
   const history = useHistory()
+  const [ref, isClickedOutside] = useClickOutside()
 
   const [dishes, setMenu] = useState<Dish[]>([])
-  const [isOpen, setIsOpen] = useState(false)
-  const [searchTerm, setSearchTerm] = useState('')
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [searchQuery, setSearchQuery] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const noQuery = searchQuery && searchQuery.length === 0
+  const isEmpty = !dishes || dishes.length === 0
+
+  const debouncedSearchQuery = useDebounce(searchQuery, 500)
 
   useEffect(() => {
-    const getMenu = async () => {
-      const response: AxiosResponse = await axios.get(`${url}/menu/`)
-      // @ts-ignore
+    const getMenu = async (query: string) => {
+      setSearchQuery(query)
+      setIsOpen(true)
+      setIsLoading(true)
+      if (!query || query.trim() === '') return
+
+      const response: ResponseType = await axios.get(
+        `${url}/menu/?name=${searchQuery}`
+      )
       setMenu(response.data.data.dishes)
     }
-    getMenu()
-  }, [])
-
+    getMenu(debouncedSearchQuery)
+    setIsOpen(false)
+    setIsLoading(false)
+  }, [debouncedSearchQuery])
 
   useEffect(() => {
-    if (searchTerm) {
+    if (searchQuery) {
       setIsOpen(true)
-
-      const filteredDishes = dishes.filter((dish: Dish) => {
-        // eslint-disable-next-line max-len
-        return dish.name.toLowerCase().includes(searchTerm.toLowerCase())
-      })
+      setIsLoading(false)
+      const filteredDishes = dishes.filter((dish: Dish) => (
+        dish.name.toLowerCase().includes(searchQuery.toLowerCase()
+        ))
+      )
 
       setMenu(filteredDishes)
     } else {
       setIsOpen(false)
+      setIsLoading(false)
     }
-  }, [searchTerm])
+  }, [debouncedSearchQuery])
 
+  useEffect(() => {
+    if (isClickedOutside) {
+      setIsOpen(false)
+      setSearchQuery('')
+      setIsLoading(false)
+    }
+  }, [isClickedOutside])
 
   const itemClickHandler = (id: string) => {
     const newDish = dishes.find((dish: Dish) => dish.id === id)
-    setSearchTerm('')
+    setSearchQuery('')
     setIsOpen(!isOpen)
     history.push(`/menu/dishes/id `)
     // eslint-disable-next-line max-len
-    // history.push(`/${newDish.name}`)  // оставить, пока не будет работающего пути к блюду
+    // history.push(`/${newDish.name}`)  // оставить, пока не будут подгружены блюда с бэка
+    console.log(newDish)
   }
 
   return (
     <>
-      <Form className='d-flex mx-6 d-flex-pos '>
+      <Form className='d-flex mx-6 d-flex-pos justify-content-end' ref={ref}>
         <FormControl
           type='text'
           placeholder='Search...'
           className='form-control-pad nav-input '
           aria-label='Search'
-          value={searchTerm}
+          value={searchQuery}
           onChange={(event) => {
-            setSearchTerm(event.target.value)
+            setSearchQuery(event.target.value)
           }}
         />
 
-        {isOpen && (
+        {isLoading && <Spinner/>}
+        {noQuery && isEmpty && isOpen && (
+          <ul className='autocomplete autocomplete-warn'>
+            Начните вводить название блюда
+          </ul>
+        )}
+
+        {isOpen && isEmpty && !isLoading && (
+          <ul className='autocomplete autocomplete-warn'>
+            Совпадений не найдено для &quot;{debouncedSearchQuery}&quot;
+          </ul>
+        )}
+
+        {isOpen && !isEmpty && !isLoading &&(
           <ul className='autocomplete'>
             {dishes.map((val: Dish, index: number) => {
               return <li
@@ -88,10 +136,7 @@ const SearchField = () => {
           </ul>
         )}
 
-        <Button variant='link'
-          className=' btn-input'>
-          <i className='fas fa-search icon-height search-icon'></i>
-        </Button>
+        <i className='fas fa-search icon-height search-icon'></i>
       </Form>
     </>
   )

@@ -11,9 +11,14 @@ import './navBar.scss'
 
 const NavBarComponent: React.FC = () => {
   return (
-    <div>
-      <Navbar bg='dark' variant={'dark'}
-        expand='xl' fixed='top' className='navbar-fixed'>
+    <>
+      <Navbar
+        bg='dark'
+        variant={'dark'}
+        expand='xxl'
+        fixed='top'
+        className='navbar-fixed'
+      >
         <Navbar.Brand
           href='/'
           className='navbar-brand-mr'>Ocean Bar
@@ -22,32 +27,35 @@ const NavBarComponent: React.FC = () => {
         <Navbar.Toggle aria-controls='navbarScroll' />
         <Navbar.Collapse
           id='navbarScroll'
-          className='justify-content-between mr-2'>
-
+          className='justify-content-between mr-2'
+        >
           <Nav
             className='mr-auto m-3 my-lg-0'
-            navbarScroll>
+            navbarScroll
+          >
             <Nav.Link
               as={Link}
               to={'/menu'}
-              className='nav-link-mr'>Меню
+              className='nav-link-mr'
+            >Меню
             </Nav.Link>
             <Nav.Link
               as={Link}
               to={'/booking-table'}
-              className='nav-link-mr'>Забронировать стол
+              className='nav-link-mr'
+            >Забронировать стол
             </Nav.Link>
-
           </Nav>
 
           <Nav
             className='d-flex justify-content-end
-            mr-auto m-3 my-lg-0 navbar-nav-scroll'>
-
+            mr-auto m-3 my-lg-0 navbar-nav-scroll'
+          >
             <SearchField />
 
             <Nav.Link as={Link} to={'/cart'}
-              className='nav-link-icon'>
+              className='nav-link-icon'
+            >
               <i className='fas fa-shopping-basket icon-height'></i>
             </Nav.Link>
 
@@ -57,7 +65,7 @@ const NavBarComponent: React.FC = () => {
 
         </Navbar.Collapse>
       </Navbar>
-    </div>
+    </>
   )
 }
 
