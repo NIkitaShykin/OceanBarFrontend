@@ -51,7 +51,6 @@ const SearchField = () => {
       setIsLoading(true)
       if (!query || query.trim() === '') return
 
-      // eslint-disable-next-line max-len
       const response: ResponseType = await axios.get(
         `${url}/menu/?name=${searchQuery}`
       )
@@ -66,7 +65,6 @@ const SearchField = () => {
     if (searchQuery) {
       setIsOpen(true)
       setIsLoading(false)
-      // eslint-disable-next-line max-len
       const filteredDishes = dishes.filter((dish: Dish) => (
         dish.name.toLowerCase().includes(searchQuery.toLowerCase()
         ))
