@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable max-len */
 import React, {useState} from 'react'
 import {Col, Form, Row} from 'react-bootstrap'
@@ -29,10 +30,35 @@ const DishIngredients = (props: any) => {
     props.setIngredient(copyIngredients)
   }
 
+=======
+import React, { useState } from 'react'
+import { Col, Form, Row } from 'react-bootstrap'
+import { IngredientType } from '../../../../redux/reducers/dishesReducer'
 
-  // @ts-ignore
-  const ingridientsItem = props.ingredients.map((ingredient, i) => {
+type PropsType = {
+  setIngredient: (arg0: any) => void
+  ingredients: Array<IngredientType>
+}
+
+function DishIngredients(props: PropsType) {
+
+  const [ingredients, setIngredients] = useState<Array<IngredientType>>(
+    props.ingredients
+  )
+
+  const toggleIngredient = (el: IngredientType, i: number) => {
+    const elCopy = { ...el }
+    elCopy.isAdded = !el.isAdded
+    const copyIngredients = [...ingredients]
+    copyIngredients[i] = elCopy
+    setIngredients(copyIngredients)
+    props.setIngredient(copyIngredients)
+  }
+>>>>>>> sprint_4
+
+  const ingridientsItem = ingredients.map((ingredient, i) => {
     return (
+<<<<<<< HEAD
       <>
 
         <Row>
@@ -49,46 +75,34 @@ const DishIngredients = (props: any) => {
         </Row>
 
       </>
+=======
+      <div>
+        <Row key={`${i}`}>
+          <Col xs={11}>
+            <label style={{ marginTop: "10px" }}>
+              <input style={{ marginRight: "10px" }}
+                checked={!!ingredient.isAdded}
+                type="checkbox" name="name"
+                onChange={() => {
+                  toggleIngredient(ingredient, i)
+                }}
+              />
+              <span style={{ lineHeight: "15px" }}>
+                {ingredient.name}
+              </span>
+            </label>
+          </Col>
+          <Col xs={1}>
+          </Col>
+        </Row>
+      </div>
+>>>>>>> sprint_4
     )
   })
 
-  // --------------new structur ingridients-----------------------------
-
-  // const ingredientKey = Object.keys(ingredients)
-  // const ingredientValue: IngridientValueType = Object.values(ingredients)
-
-  // const ingridientsItem = ingredientKey.map((ingredient, i) => {
-  //   return (
-  //     <>
-  //       {props.isShifting ? (
-  //         <Row>
-  //           <Col xs={3}>
-  //             <Form.Check
-  //               type='checkbox'
-  //               checked={!!ingredientValue[i]}
-  //               onChange={() => {
-  //                 toggleIngredient(ingredient)
-  //               }}
-  //             />
-  //           </Col>
-  //           <Col xs={9}>{ingredient}</Col>
-  //         </Row>
-  //       ) : (
-  //         <ul>{ingredientValue[i] ? <li>{ingredient}</li> : null}</ul>
-  //       )}
-  //     </>
-  //   )
-  // })
-
-  return (
-    <>
-      {/* ----------new structur ingridients-------------- */}
-      {ingridientsItem}
-      {/* ---------new structur ingridients----- */}
-
-      {/* {ingridientsItem} */}
-    </>
-  )
+  return <>
+    {ingridientsItem}
+  </>
 }
 
 export default DishIngredients

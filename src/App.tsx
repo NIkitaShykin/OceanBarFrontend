@@ -9,9 +9,9 @@ import SwitchPager from './utils/swich'
 import MenuRoutes from './pages/menuPage/Menu/MenuRoutes'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Footer from './components/homePageComponents/Footer/Footer'
-import {getDishesFromApiTC} from './bll/dishesReducer'
+import {getDishesFromApiTC} from '../src/redux/reducers/dishesReducer'
 import {useDispatch} from 'react-redux'
-import {ToastContainer, toast} from 'react-toastify';
+import {ToastContainer, toast} from 'react-toastify'
 
 import "!style-loader!css-loader!react-toastify/dist/ReactToastify.css"
 

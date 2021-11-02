@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable require-jsdoc */
 import React, {useState} from 'react'
 import ShiftingDish from './ShiftingDish'
@@ -6,10 +7,22 @@ import {useParams} from 'react-router-dom'
 import foodData from '../DB/foodData'
 // eslint-disable-next-line max-len
 import MaybeIntresting from '../../../../components/maybeIntresting/maybeIntresting'
+=======
+import { useState, useEffect } from "react"
+import ShiftingDish from './ShiftingDish'
+import CompletedDish from './CompletedDish'
+import { useParams } from 'react-router-dom'
+import { useAppSelector } from '../../../../redux/hooks'
+import MaybeIntresting from '../../../../components/maybeIntresting/maybeIntresting'
+import { IngredientType } from '../../../../redux/reducers/dishesReducer'
+import { IngredientsType } from '../../../../redux/reducers/dishesReducer'
+import { DishType } from '../../../../redux/reducers/dishesReducer'
+>>>>>>> sprint_4
 
 
 function Dish() {
   const token = useParams<{ token: string }>()
+<<<<<<< HEAD
 
   // @ts-ignore
   const currentDish = foodData[3].find((el) => el.id == token.token)
@@ -39,14 +52,25 @@ const updateIngredients = (updIngridients: any) => {
 
   // const [ingredients, setIngredients] = useState<Object>(currentDish.ingredients);
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
+=======
+  const allDishes = useAppSelector<any>(state => state.dish)
+  //@ts-ignore
+  const currentDish = allDishes.find((el) => el.id == token.token)
+  
+  const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false);
+  const [ingredients, setIngredients] = useState<IngredientsType>(currentDish.ingredients);
+  
 
-  // @ts-ignore
-  // const updatedDish = { ...currentDish, ingredients }
+  useEffect(() => {
+     setIngredients(currentDish.ingredients)
+       }, [currentDish])
+>>>>>>> sprint_4
 
-  // const updateIngredients = (updIngridients: any) => {
-  //   setIngredients(updIngridients)
-  // }
-  const dishes = useSelector((state: any) => state.cart.dishes)
+  const updatedDish = { ...currentDish, ingredients }
+
+  const updateIngredients = (updIngridients: IngredientsType) => {
+    setIngredients(updIngridients)
+   }
 
   const changeStatus = () => {
     setDishСhangeStatus(!dishСhangeStatus)
@@ -54,10 +78,10 @@ const updateIngredients = (updIngridients: any) => {
 
   return (
     <div>
-
       {dishСhangeStatus
-         ?
+        ?
         <ShiftingDish
+<<<<<<< HEAD
           dishisChanged={changeStatus}
           // currentDish={updatedDish}
           updateIngredients={updateIngredients}
@@ -66,21 +90,24 @@ const updateIngredients = (updIngridients: any) => {
         //   // updateIngredients2={updateIngredients2}
         //   // --------------new structur ingridients-------------------------
         /> :
-        <CompletedDish
-          dishisChanged={changeStatus}
+=======
+          changeStatus={changeStatus}
           currentDish={updatedDish}
-          dishes={dishes}
-           // --------------new structur ingridients-----------------------------
-          //  currentDish2 ={updatedDish2}
-           // --------------new structur ingridients-----------------------------
-          />
-        }
+          updIngredients={updateIngredients}
+        />
+        :
+>>>>>>> sprint_4
+        <CompletedDish
+          changeStatus={changeStatus}
+          currentDish={updatedDish}
+        />
+      }
 
       {!dishСhangeStatus ?
         <div>
-            <MaybeIntresting/>
+          <MaybeIntresting />
         </div>
-        : <div style={{marginTop:"100px"}}></div>
+        : <div style={{ marginTop: "100px" }}></div>
       }
     </div>
   )

@@ -10,3 +10,5 @@ export const clearCart = createAction('CLEAR_CART')
 export const plusOneDish = createAction<any>('PLUS_ONE_DISH')
 export const minusOneDish = createAction<any>('MINUS_ONE_DISH')
 
+export const getDishesFromApiTC = createAction<any>('GET_DISHES')
+export const addDishesAC = createAction<any>('SET_DISHES')
