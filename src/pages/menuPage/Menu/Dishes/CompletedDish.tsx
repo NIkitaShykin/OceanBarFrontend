@@ -4,6 +4,7 @@ import { Row, Col, Modal, CloseButton } from 'react-bootstrap'
 import { DishType } from '../../../../redux/reducers/dishesReducer'
 import {addDishToCart} from '../../../../redux/actions'
 import {OrderedToast} from '../../../../components/OrderToast/OrderedToast'
+import {useAppSelector} from '../../../../redux/hooks'
 
 import {TDish} from '../common'
 
@@ -15,12 +16,21 @@ type PropsType = {
 function CompletedDish(props: PropsType) {
   const dispatch = useDispatch()
 
+ const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
+
   const ingredientList = props.currentDish.ingredients.map(el => {
     if (el.isAdded) return (
       <li style={{ lineHeight: "15px" }}><p>{el.name}</p></li>
     )
   })
 
+
+  // ---------------------------------------------
+  // const orderDish = (name: string) => {
+  //   if (allDishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
+  //     OrderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+  //   }
+  // ---------------------------------------------
 
   const orderDish = (name: string) => {
     // if (props.dishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
@@ -31,7 +41,7 @@ function CompletedDish(props: PropsType) {
         addDishToCart({
           id: props.currentDish.id,
           name: props.currentDish.name,
-          prise: props.currentDish.price,
+          price: props.currentDish.price,
           image: props.currentDish.imageURL,
           numberOfDishes: 1,
         })

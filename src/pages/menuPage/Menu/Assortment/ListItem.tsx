@@ -24,8 +24,8 @@ function ListItem(props: PropsType) {
         addDishToCart({
           id: Dish.id,
           name: Dish.name,
-          prise: Dish.prise,
-          image: Dish.image,
+          price: Dish.price,
+          image: Dish.imageURL,
           numberOfDishes: 1,
         })
       )
