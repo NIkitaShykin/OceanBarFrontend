@@ -1,15 +1,7 @@
-<<<<<<< HEAD
-import React from 'react'
-import './ComletedDish.scss'
-// import {React, useState} from 'react'
-import {useDispatch} from 'react-redux'
-import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
-=======
 import './Dish.scss'
 import { useDispatch } from 'react-redux'
 import { Row, Col, Modal, CloseButton } from 'react-bootstrap'
 import { DishType } from '../../../../redux/reducers/dishesReducer'
->>>>>>> sprint_4
 import {addDishToCart} from '../../../../redux/actions'
 import {OrderedToast} from '../../../../components/OrderToast/OrderedToast'
 import {useAppSelector} from '../../../../redux/hooks'

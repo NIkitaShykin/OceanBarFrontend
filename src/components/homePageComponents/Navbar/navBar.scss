@@ -48,9 +48,8 @@ $bkgColor: #eee;
 
 .search-icon {
   font-size: 26px;
-  position: absolute;
-  top: 9px;
-  right: 25px;
+  margin-right: -8px;
+  padding-right: 0;
 }
 
 .nav-link-icon {
@@ -67,8 +66,7 @@ $bkgColor: #eee;
 }
 
 .nav-input:not(:placeholder-shown) {
-  width: 350px;
-  height: 40px;
+  width: 280px;
   background-color: $bkgColor;
   border: transparent;
   border-bottom: 1px solid $bkgColor;
@@ -76,7 +74,7 @@ $bkgColor: #eee;
 }
 
 .nav-input:placeholder-shown {
-  width: 350px;
+  width: 280px;
   background-color: #212529;
   border-radius: 0;
   border: transparent;
@@ -90,6 +88,12 @@ $bkgColor: #eee;
   border-color: #fff;
   outline: 0;
   box-shadow: 0;
+}
+
+.btn-input {
+  position: absolute;
+  left: 225px;
+  font-size: 24px;
 }
 
 .d-flex-pos {

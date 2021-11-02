@@ -1,36 +1,3 @@
-<<<<<<< HEAD
-/* eslint-disable max-len */
-import React, {useState} from 'react'
-import {Col, Form, Row} from 'react-bootstrap'
-
-const DishIngredients = (props: any) => {
-  // const [ingredients, setIngredients] = useState<Object>(props.ingredients)
-
-  // const toggleIngredient = (el: any) => {
-  //   const copyIngredients = {...ingredients}
-  //   // @ts-ignore
-  //   copyIngredients[el] = !copyIngredients[el]
-  //   setIngredients(copyIngredients)
-  //   props.setIngridient(copyIngredients)
-  // }
-
-  // --------------new structur ingridients-----------------------------
-
-  const [ingredients, setIngredients] = useState<Array<Object>>(props.ingredients)
-
-
-  const toggleIngredient = (el: any, i:number) => {
-    const copyIngredients = [...ingredients]
-
-    // @ts-ignore
-    copyIngredients[i].isAdded = !copyIngredients[i].isAdded
-    // @ts-ignore
-
-    setIngredients(copyIngredients)
-    props.setIngredient(copyIngredients)
-  }
-
-=======
 import React, { useState } from 'react'
 import { Col, Form, Row } from 'react-bootstrap'
 import { IngredientType } from '../../../../redux/reducers/dishesReducer'
@@ -54,28 +21,9 @@ function DishIngredients(props: PropsType) {
     setIngredients(copyIngredients)
     props.setIngredient(copyIngredients)
   }
->>>>>>> sprint_4
 
   const ingridientsItem = ingredients.map((ingredient, i) => {
     return (
-<<<<<<< HEAD
-      <>
-
-        <Row>
-          <Col xs={3}>
-            <Form.Check
-              type='checkbox'
-              checked={!!ingredient.isAdded}
-              onChange={() => {
-                toggleIngredient(ingredient, i)
-              }}
-            />
-          </Col>
-          <Col xs={9}>{ingredient.name}</Col>
-        </Row>
-
-      </>
-=======
       <div>
         <Row key={`${i}`}>
           <Col xs={11}>
@@ -96,7 +44,6 @@ function DishIngredients(props: PropsType) {
           </Col>
         </Row>
       </div>
->>>>>>> sprint_4
     )
   })
 
