@@ -1,4 +1,4 @@
-import React from 'react'
+
 import OrderHistory from '../../components/userProfile/orderHistory'
 import DeliveryAdress from '../../components/userProfile/deliveryAdress'
 import MyCreditCards from '../../components/userProfile/myCards'

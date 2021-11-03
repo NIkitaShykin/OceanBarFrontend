@@ -1,26 +1,18 @@
 import {createReducer} from '@reduxjs/toolkit'
-import {logIn, logOut, signUp} from '../actions'
+import {logIn, logOut} from '../actions'
 
 interface IUserState {
-  tempAuthUrl: number,
-  user: any,
+  user: any | null,
   isAuthorized: boolean
 }
 
 const initialState: IUserState = {
-  tempAuthUrl: 0,
   user: null,
   isAuthorized: false
 }
 
 const authReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(signUp, (state, action) => {
-      return {
-        ...state,
-        tempAuthUrl: action.payload
-      }
-    })
     .addCase(logIn, (state, action) => {
       return {
         ...state,

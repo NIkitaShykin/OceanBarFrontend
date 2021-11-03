@@ -1,18 +1,15 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
-import {useAppDispatch} from '../../redux/hooks'
 import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
-import {signUp} from '../../redux/actions'
 
 import './SignUpForm.scss'
 
 const SignUp = () => {
   const history = useHistory()
-  const dispatch = useAppDispatch()
 
   const [authFailed, setAuthFailed] = useState(false)
 
@@ -102,13 +99,12 @@ const SignUp = () => {
     axios
       .post(`${url}/users/register`, user)
       .then((response: any) => {
-        if (response.status >= 200 && response.status < 300) {
-          dispatch(signUp(response.data.data.user.id))
-        } else {
+        if (response.status > 400) {
           throw new Error(response.statusText)
         }
       })
-      .then(() => history.push('/signup-sucess'))
+
+      .then(() => history.push('/signup-success'))
       .catch((error) => {
         console.log(error.response)
         setAuthFailed(true)

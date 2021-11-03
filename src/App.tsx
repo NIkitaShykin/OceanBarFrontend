@@ -9,21 +9,34 @@ import SwitchPager from './utils/swich'
 import MenuRoutes from './pages/menuPage/Menu/MenuRoutes'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Footer from './components/homePageComponents/Footer/Footer'
-import {getDishesFromApiTC} from './bll/dishesReducer'
-import {useDispatch} from "react-redux";
+import {getDishesFromApiTC} from '../src/redux/reducers/dishesReducer'
+import {useDispatch} from 'react-redux'
+import {ToastContainer} from 'react-toastify'
 
-
-// eslint-disable-next-line require-jsdoc
+import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 
 const App = () => {
- const dispatch = useDispatch()
+  const dispatch = useDispatch()
   useEffect(() => {
-       dispatch(getDishesFromApiTC())
-}, [])
+    dispatch(getDishesFromApiTC())
+  }, [])
 
   return (
     <Router>
       <ErrorBoundary >
+        <div>
+          <ToastContainer
+            position='top-right'
+            autoClose={2500}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+          />
+        </div>
         <div className='App'>
           <header className='App-header'>
             <NavBarComponent />

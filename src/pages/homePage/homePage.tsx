@@ -1,4 +1,4 @@
-import React from 'react'
+
 import OceanBarHeader from '../../components/homePageComponents/Header/Header'
 // eslint-disable-next-line max-len
 import HowItWorks from '../../components/homePageComponents/HowItWorks/HowItWorks'

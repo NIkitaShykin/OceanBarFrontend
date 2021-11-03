@@ -1,46 +1,69 @@
-import './ComletedDish.scss'
-import {useDispatch} from 'react-redux'
-import {updateIngridientsAC} from '../../../../bll/cartReducer'
 
+import {useDispatch, useSelector} from 'react-redux'
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
 
-function CompletedDish(props: any) {
+import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {addDishToCart} from '../../../../redux/actions'
+import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
+import {TDish} from '../common'
+
+import './Dish.scss'
+
+type PropsType = {
+  changeStatus: () => void
+  currentDish: DishType
+}
+
+const CompletedDish = (props: PropsType) => {
+  const dishes = useSelector((state: any) => state.cart.dishes)
   const dispatch = useDispatch()
 
-            //@ts-ignore
-            const newIngred = props.currentDish.ingredients.map( el => { 
-              if (el.isAdded) return (
-                 <li><p>{el.name}</p></li>
-                    )
-            })
-
-  const orderDish = () => {
-    dispatch(
-      updateIngridientsAC(
-                                [
-                                  {user:"email"},
-                                  {dishId:`${props.currentDish.id}`},
-                                  {ingredients:[`${props.currentDish?.ingredients}`]} 
-                               ]
-                         ))  }
+  const ingredientList = props.currentDish.ingredients.map((el) => {
+    if (el.isAdded) {
+      return (
+        <li style={{lineHeight: '15px'}}><p>{el.name}</p></li>
+      )
+    }
+  })
 
 
-   const handleClose = () => {
+  const orderDish = (name: string) => {
+    if (dishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
+      orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+    } else {
+      dispatch(
+        addDishToCart({
+          id: props.currentDish.id,
+          name: props.currentDish.name,
+          price: props.currentDish.price,
+          imageURL: props.currentDish.imageURL,
+          numberOfDishes: 1,
+        })
+      )
+      orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+    }
+  }
+
+
+  const handleClose = () => {
     window.history.go(-1)
   }
 
   return (
-    <div className={'main-dish'}>
+    <>
       <div className={'title-dish'}>
         <h1>{props.currentDish.name}</h1>
       </div>
       <Row>
         <Col md={8} lg={8}>
-          <img
-            className={'image'}
-            style={{width: '100%', height:'auto'}}
-            src={props.currentDish.image}
-            alt='food'
+          <div
+            key={props.currentDish.id}
+            style={{
+              height: '100%', width: '100%',
+              backgroundImage: `url(${props.currentDish.imageURL})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            } }
           />
         </Col>
         <Col md={4} lg={4}>
@@ -55,15 +78,15 @@ function CompletedDish(props: any) {
               <span
                 className={'change-ingr'}
                 onClick={() => {
-                  props.dishisChanged()
+                  props.changeStatus()
                 }}
               >
                 Изменить
               </span>
             </div>
 
-             <ul>
-               {newIngred}
+            <ul>
+              {ingredientList}
             </ul>
 
             <br />
@@ -75,13 +98,17 @@ function CompletedDish(props: any) {
             </span>
             <div className='line-dish'></div>
             <br />
-            <span>
-              <h5>Стоимость: {props.currentDish?.prise}BYN</h5>
-            </span>
+            <div style={{display: 'flex', alignItems: 'baseline'}}>
+              <span style={{fontSize: '15px'}}><h5>Стоимость:</h5></span>
+              <span style={{fontSize: '20px', marginLeft: '3px'}}>
+                {props.currentDish?.price}
+              </span>
+              <span style={{fontSize: '18px', marginLeft: '2px'}}>BYN</span>
+            </div>
             <button
               className={'order-btn-dish'}
               onClick={() => {
-                orderDish()
+                orderDish(props.currentDish.name)
               }}
             >
               Заказать
@@ -89,7 +116,7 @@ function CompletedDish(props: any) {
           </div>
         </Col>
       </Row>
-    </div>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
@@ -10,6 +10,14 @@ import {useValidation} from '../../utils/validation'
 import {logIn} from '../../redux/actions'
 
 import './LoginForm.scss'
+
+// interface FormEventTarget extends EventTarget {
+//   value: string
+// }
+
+// interface FormChangeEvent extends React.ChangeEvent<HTMLElement> {
+//   target: FormEventTarget
+// }
 
 const LogInForm = () => {
   const history = useHistory()
