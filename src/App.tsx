@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import {useEffect} from 'react'
 import {BrowserRouter as Router} from 'react-router-dom'
 import './App.scss'
 // eslint-disable-next-line max-len
@@ -14,8 +14,6 @@ import {useDispatch} from 'react-redux'
 import {ToastContainer} from 'react-toastify'
 
 import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css'
-
-// eslint-disable-next-line require-jsdoc
 
 const App = () => {
   const dispatch = useDispatch()

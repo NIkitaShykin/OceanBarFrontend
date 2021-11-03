@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {Dropdown, Form} from 'react-bootstrap'
 import './BookATable.scss'
 

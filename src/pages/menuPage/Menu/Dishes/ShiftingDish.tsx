@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import './Dish.scss'
 import DishIngridients from './DishIngridients'
 import {Row, Col} from 'react-bootstrap'

@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {DishType} from '../../../redux/reducers/dishesReducer'
 
 type PropsType = {
