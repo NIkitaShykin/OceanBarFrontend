@@ -4,11 +4,12 @@ import {useHistory} from 'react-router-dom'
 import {Form, FormControl} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
 
-// import {url} from '../../../../api/index'
+import {url} from '../../../../api/index'
 import useDebounce from '../../../../utils/useDebounce'
 import Spinner from '../../../Spinner/Spinner'
 
 import './search.scss'
+import Dish from 'src/pages/menuPage/Menu/Dishes/Dish'
 
 type Dish = {
   id: string,
@@ -42,8 +43,6 @@ const SearchField = () => {
   const isEmpty = !dishes || dishes.length === 0
 
   const debouncedSearchQuery = useDebounce(searchQuery, 500)
-
-  const url = 'http://13.49.241.158:3000/api'
 
   useEffect(() => {
     const getMenu = async (query: string) => {
@@ -87,13 +86,10 @@ const SearchField = () => {
   }, [isClickedOutside])
 
   const itemClickHandler = (id: string) => {
-    const newDish = dishes.find((dish: Dish) => dish.id === id)
+    dishes.find((dish: Dish) => dish.id === id)
     setSearchQuery('')
-    setIsOpen(!isOpen)
-    history.push(`/menu/dishes/id `)
-    // eslint-disable-next-line max-len
-    // history.push(`/${newDish.name}`)  // оставить, пока не будут подгружены блюда с бэка
-    console.log(newDish)
+    setIsOpen(false)
+    history.push(`/dish/${id} `)
   }
 
   return (
