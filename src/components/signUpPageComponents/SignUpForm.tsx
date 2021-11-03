@@ -2,6 +2,8 @@ import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
+import {ValidationType} from '../../common/types/validationTypes'
+
 
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
@@ -13,7 +15,7 @@ const SignUp = () => {
 
   const [authFailed, setAuthFailed] = useState(false)
 
-  const useInput = (initialValue: string, validations: any) => {
+  const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)

@@ -7,15 +7,12 @@ import {DishType} from '../../../../redux/reducers/dishesReducer'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 import {addDishToCart} from '../../../../redux/actions'
 
-// import {TDish} from '../common'  ??????
-
 type PropsType = {
   data: Array<DishType>
   isIntresting?: any
 }
 
 const ListItem = (props: PropsType) => {
-  // const token = useParams<{ token: string }>()
   const dispatch = useDispatch()
   const dishes = useSelector((state: any) => state.cart.dishes)
   const orderDish = (Dish: any) => {
@@ -96,16 +93,16 @@ const ListItem = (props: PropsType) => {
                   {dish.weight}
                 </Col>
               </Row>
-              <NavLink to={'/dish/' + dish.id}>
-                <Button
-                  variant='outline-warning'
-                  onClick={() => orderDish(dish)}
-                  key={dish.id}
-                  style={props.isIntresting ? {display: 'none'} : {}}
-                >
+              {/* <NavLink to={'/dish/' + dish.id}> */}
+              <Button
+                variant='outline-warning'
+                onClick={() => orderDish(dish)}
+                key={dish.id}
+                style={props.isIntresting ? {display: 'none'} : {}}
+              >
                   Заказать
-                </Button>
-              </NavLink>
+              </Button>
+              {/* </NavLink> */}
             </div>
             <br />
           </Card.Body>
