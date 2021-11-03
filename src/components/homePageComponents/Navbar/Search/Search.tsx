@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
@@ -42,7 +41,7 @@ const SearchField = () => {
   const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !dishes || dishes.length === 0
 
-  const debouncedSearchQuery = useDebounce(searchQuery, 2000)
+  const debouncedSearchQuery = useDebounce(searchQuery, 500)
 
   const url = 'http://13.49.241.158:3000/api'
 

@@ -11,13 +11,6 @@ import {logIn} from '../../redux/actions'
 
 import './LoginForm.scss'
 
-// interface FormEventTarget extends EventTarget {
-//   value: string
-// }
-
-// interface FormChangeEvent extends React.ChangeEvent<HTMLElement> {
-//   target: FormEventTarget
-// }
 
 const LogInForm = () => {
   const history = useHistory()
@@ -67,10 +60,19 @@ const LogInForm = () => {
     password: password.value,
   }
 
-  // eslint-disable-next-line max-len
-  const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
-  // eslint-disable-next-line max-len
-  const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
+  const isEmailInvalid = email.isDirty &&
+  (email.isEmpty ||
+    email.minLengthError ||
+    email.maxLengthError ||
+    email.emailError
+  )
+
+  const isPasswordInvalid = password.isDirty &&
+  (password.isEmpty ||
+    password.minLengthError ||
+    password.maxLengthError ||
+    password.passwordError
+  )
 
   const handleClose = () => {
     history.push('/')

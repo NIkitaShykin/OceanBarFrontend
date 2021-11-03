@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react'
 import {useDispatch} from 'react-redux'
 
@@ -21,8 +20,12 @@ const UserCart: React.FunctionComponent = (props: any) => {
     {name: 'Навынос', value: '3'},
   ]
 
-  const totalSum: any = props.dishes.reduce((sum: any, current: any) => sum + (Number(current.prise) * current.numberOfDishes), 0)
-  const cartSectionsClassName: string = props.dishes.length < 1 ? 'cart-sections hidden' : 'cart-sections'
+  const totalSum: any = props.dishes.reduce(
+    (sum: any, current: any) =>
+      sum + (Number(current.prise) * current.numberOfDishes), 0)
+  const cartSectionsClassName: string = props.dishes.length < 1 ?
+    'cart-sections hidden' :
+    'cart-sections'
 
   const orderCodes: JSX.Element[] = props.dishes.map((order: any) => (
     <OrderItem
@@ -60,7 +63,9 @@ const UserCart: React.FunctionComponent = (props: any) => {
                 <span className='uppercase'>Ваш заказ</span>
               </div>
               <div>
-                <button className='clear-button' type='button' onClick={(e) => handleClearCart(e)}>
+                <button className='clear-button'
+                  type='button'
+                  onClick={(e) => handleClearCart(e)}>
                   Очистить корзину
                 </button>
               </div>
