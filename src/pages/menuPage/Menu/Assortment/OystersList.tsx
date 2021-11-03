@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {Row} from 'react-bootstrap'
 import ListItem from './ListItem'
 import {useAppSelector} from '../../../../redux/hooks'

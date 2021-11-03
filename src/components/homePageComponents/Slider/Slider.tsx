@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {Row, Col} from 'react-bootstrap'
 import SliderGallery from './SliderGallery'
 import {useAppSelector} from '../../../redux/hooks'

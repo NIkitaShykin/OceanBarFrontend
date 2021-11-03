@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {Image, Nav} from 'react-bootstrap'
 
 import CustomMap from '../CustomMap/CustomMap'

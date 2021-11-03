@@ -1,6 +1,6 @@
-/* eslint-disable require-jsdoc */
+
 import axios from 'axios'
-import React, {useEffect, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {Form, FormControl} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'

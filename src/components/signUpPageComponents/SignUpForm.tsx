@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'

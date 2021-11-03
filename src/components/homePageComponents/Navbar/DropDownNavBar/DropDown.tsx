@@ -1,5 +1,4 @@
-/* eslint-disable require-jsdoc */
-import React from 'react'
+
 import {useHistory} from 'react-router-dom'
 import {NavDropdown} from 'react-bootstrap'
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 
 import ListItem from '../../pages/menuPage/Menu/Assortment/ListItem'
 import {DishType} from '../../redux/reducers/dishesReducer'

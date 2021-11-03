@@ -1,5 +1,5 @@
 import {Carousel} from 'react-bootstrap'
-import React, {useState} from 'react'
+import {useState} from 'react'
 import {NavLink} from 'react-router-dom'
 
 import SliderGallertItem from './SliderGalleryItem'
