@@ -122,12 +122,11 @@ const SignUp = () => {
     axios
       .post(`${url}/users/register`, user)
       .then((response: any) => {
-        if (response.status >= 200 && response.status < 300) {
-          dispatch(signUp(response.data.data.user.id))
-        } else {
+        if (response.status > 400) {
           throw new Error(response.statusText)
         }
       })
+
       .then(() => history.push('/signup-sucess'))
       .catch((error) => {
         console.log(error.response)
