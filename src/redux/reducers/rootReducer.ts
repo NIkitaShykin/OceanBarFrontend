@@ -10,4 +10,5 @@ const rootReducer = combineReducers({
   dish: dishesReducer,
 })
 
+export type AppStoreType = ReturnType<typeof rootReducer>
 export default rootReducer

@@ -97,7 +97,6 @@ const ListItem = (props: PropsType) => {
                   {dish.weight}
                 </Col>
               </Row>
-              {/* <NavLink to={'/dish/' + dish.id}> */}
               <Button
                 variant='outline-warning'
                 onClick={() => orderDish(dish)}
@@ -106,7 +105,6 @@ const ListItem = (props: PropsType) => {
               >
                 Заказать
               </Button>
-              {/* </NavLink> */}
             </div>
             <br />
           </Card.Body>
