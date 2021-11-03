@@ -2,17 +2,15 @@ import React from 'react'
 import {Col, Container, Row, Nav} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
 import {PATH} from './MenuRoutes'
-import './Menu.scss'  
+import './Menu.scss'
 
- 
-const MenuHeader = () => {
-  return (
-    <Container>
-      <Nav className="justify-content-start" activeKey="/home">
-      <Row 
-      // className='justify-content-md-start'
+
+const MenuHeader = () => (
+  <Container>
+    <Nav className='justify-content-start' activeKey='/home'>
+      <Row
       >
-        <Col xs={"auto"}>
+        <Col xs={'auto'}>
           <NavLink
             className={'menuLinkStyle'}
             activeClassName={'menuActiveLink'}
@@ -20,7 +18,7 @@ const MenuHeader = () => {
             <h5>Плато</h5>
           </NavLink>
         </Col>
-        <Col xs={"auto"}>
+        <Col xs={'auto'}>
           <NavLink
             className={'menuLinkStyle'}
             activeClassName={'menuActiveLink'}
@@ -29,7 +27,7 @@ const MenuHeader = () => {
             <h5>Супы</h5>
           </NavLink>
         </Col>
-        <Col xs={"auto"}>
+        <Col xs={'auto'}>
           <NavLink
             className={'menuLinkStyle'}
             activeClassName={'menuActiveLink'}
@@ -38,7 +36,7 @@ const MenuHeader = () => {
           </NavLink>
         </Col>
 
-        <Col xs={"auto"}>
+        <Col xs={'auto'}>
           <NavLink
             className={'menuLinkStyle'}
             activeClassName={'menuActiveLink'}
@@ -47,8 +45,8 @@ const MenuHeader = () => {
           </NavLink>
         </Col>
 
-        <Col xs={"auto"}>
-          <NavLink 
+        <Col xs={'auto'}>
+          <NavLink
             className={'menuLinkStyle'}
             activeClassName={'menuActiveLink'}
             to={PATH.DESSERT}>
@@ -57,10 +55,17 @@ const MenuHeader = () => {
         </Col>
 
       </Row>
-      </Nav>
-      <hr style={{height: "2px", borderWidth:"0", color: "gray", backgroundColor:"gray"}}  />
-    </Container>
-  )
-}
+    </Nav>
+    <hr style=
+      {{
+        height: '2px',
+        borderWidth: '0',
+        color: 'gray',
+        backgroundColor: 'gray'
+      }}
+    />
+  </Container>
+)
+
 
 export default MenuHeader

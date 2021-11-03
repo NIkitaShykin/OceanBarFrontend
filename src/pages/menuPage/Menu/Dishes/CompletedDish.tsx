@@ -1,34 +1,36 @@
-import './Dish.scss'
-import { useDispatch } from 'react-redux'
-import { Row, Col, Modal, CloseButton } from 'react-bootstrap'
-import { DishType } from '../../../../redux/reducers/dishesReducer'
-import {addDishToCart} from '../../../../redux/actions'
-import {OrderedToast} from '../../../../components/OrderToast/OrderedToast'
-import { useSelector } from 'react-redux'
+import React from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
 
+import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {addDishToCart} from '../../../../redux/actions'
+import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 import {TDish} from '../common'
+
+import './Dish.scss'
 
 type PropsType = {
   changeStatus: () => void
   currentDish: DishType
 }
 
-function CompletedDish(props: PropsType) {
+const CompletedDish = (props: PropsType) => {
   const dishes = useSelector((state: any) => state.cart.dishes)
   const dispatch = useDispatch()
 
-  const ingredientList = props.currentDish.ingredients.map(el => {
-    if (el.isAdded) return (
-      <li style={{ lineHeight: "15px" }}><p>{el.name}</p></li>
-    )
+  const ingredientList = props.currentDish.ingredients.map((el) => {
+    if (el.isAdded) {
+      return (
+        <li style={{lineHeight: '15px'}}><p>{el.name}</p></li>
+      )
+    }
   })
 
 
   const orderDish = (name: string) => {
     if (dishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
-      OrderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
-    }
-     else {
+      orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+    } else {
       dispatch(
         addDishToCart({
           id: props.currentDish.id,
@@ -38,7 +40,7 @@ function CompletedDish(props: PropsType) {
           numberOfDishes: 1,
         })
       )
-      OrderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+      orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
     }
   }
 
@@ -57,11 +59,11 @@ function CompletedDish(props: PropsType) {
           <div
             key={props.currentDish.id}
             style={{
-                height: '100%', width: '100%',
-                backgroundImage: `url(${props.currentDish.imageURL})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              } }
+              height: '100%', width: '100%',
+              backgroundImage: `url(${props.currentDish.imageURL})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            } }
           />
         </Col>
         <Col md={4} lg={4}>
@@ -96,10 +98,12 @@ function CompletedDish(props: PropsType) {
             </span>
             <div className='line-dish'></div>
             <br />
-            <div style={{ display: "flex", alignItems: "baseline" }}>
-              <span style={{ fontSize: "15px" }}><h5>Стоимость:</h5></span>
-              <span style={{ fontSize: "20px", marginLeft: "3px" }}>{props.currentDish?.price}</span>
-              <span style={{ fontSize: "18px", marginLeft: "2px" }}>BYN</span>
+            <div style={{display: 'flex', alignItems: 'baseline'}}>
+              <span style={{fontSize: '15px'}}><h5>Стоимость:</h5></span>
+              <span style={{fontSize: '20px', marginLeft: '3px'}}>
+                {props.currentDish?.price}
+              </span>
+              <span style={{fontSize: '18px', marginLeft: '2px'}}>BYN</span>
             </div>
             <button
               className={'order-btn-dish'}

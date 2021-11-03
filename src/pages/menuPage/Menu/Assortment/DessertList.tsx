@@ -1,16 +1,15 @@
-/* eslint-disable react/react-in-jsx-scope */
-/* eslint-disable require-jsdoc */
+import React from 'react'
 import {Row} from 'react-bootstrap'
+
 import ListItem from './ListItem'
-import { useAppSelector } from '../../../../redux/hooks'
+import {useAppSelector} from '../../../../redux/hooks'
 
 
-function DessertList(): JSX.Element {
-
-  const allDishes = useAppSelector<any>(state => state.dish)
-  //@ts-ignores
-  const desertDishes = allDishes.filter(dish => {
-    return dish.dishCategory=="Десерты"
+const DessertList = () => {
+  const allDishes = useAppSelector<any>((state) => state.dish)
+  // @ts-ignores
+  const desertDishes = allDishes.filter((dish) => {
+    return dish.dishCategory=='Десерты'
   })
 
   return (
@@ -23,6 +22,5 @@ function DessertList(): JSX.Element {
 }
 
 export default DessertList
-
 
 

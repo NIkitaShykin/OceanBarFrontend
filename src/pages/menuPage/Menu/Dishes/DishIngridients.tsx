@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
-import { Col, Form, Row } from 'react-bootstrap'
-import { IngredientType } from '../../../../redux/reducers/dishesReducer'
+import React, {useState} from 'react'
+import {Col, Row} from 'react-bootstrap'
+
+import {IngredientType} from '../../../../redux/reducers/dishesReducer'
 
 type PropsType = {
   setIngredient: (arg0: any) => void
   ingredients: Array<IngredientType>
 }
 
-function DishIngredients(props: PropsType) {
-
+const DishIngredients = (props: PropsType) => {
   const [ingredients, setIngredients] = useState<Array<IngredientType>>(
     props.ingredients
   )
 
   const toggleIngredient = (el: IngredientType, i: number) => {
-    const elCopy = { ...el }
+    const elCopy = {...el}
     elCopy.isAdded = !el.isAdded
     const copyIngredients = [...ingredients]
     copyIngredients[i] = elCopy
@@ -24,18 +24,18 @@ function DishIngredients(props: PropsType) {
 
   const ingridientsItem = ingredients.map((ingredient, i) => {
     return (
-      <div>
+      <>
         <Row key={`${i}`}>
           <Col xs={11}>
-            <label style={{ marginTop: "10px" }}>
-              <input style={{ marginRight: "10px" }}
+            <label style={{marginTop: '10px'}}>
+              <input style={{marginRight: '10px'}}
                 checked={!!ingredient.isAdded}
-                type="checkbox" name="name"
+                type='checkbox' name='name'
                 onChange={() => {
                   toggleIngredient(ingredient, i)
                 }}
               />
-              <span style={{ lineHeight: "15px" }}>
+              <span style={{lineHeight: '15px'}}>
                 {ingredient.name}
               </span>
             </label>
@@ -43,7 +43,7 @@ function DishIngredients(props: PropsType) {
           <Col xs={1}>
           </Col>
         </Row>
-      </div>
+      </>
     )
   })
 

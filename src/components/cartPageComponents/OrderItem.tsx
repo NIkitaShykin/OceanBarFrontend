@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux'
 import {Image} from 'react-bootstrap'
 
 import {removeDishFromCart, plusOneDish, minusOneDish} from '../../redux/actions'
-import {OrderedToast} from '../OrderToast/OrderedToast'
+import {orderedToast} from '../OrderToast/OrderedToast'
 
 import './Cart.scss'
 
@@ -24,7 +24,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({id, name, prise, i
   const onDeleteHandler = () => {
     dispatch(removeDishFromCart(id))
     // eslint-disable-next-line new-cap
-    OrderedToast(`Блюдо "${name}" удалено из корзины`)
+    orderedToast(`Блюдо "${name}" удалено из корзины`)
   }
 
   return (

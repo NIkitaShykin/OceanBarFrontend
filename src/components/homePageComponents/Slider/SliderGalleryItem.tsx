@@ -1,10 +1,11 @@
+import React from 'react'
 import {DishType} from '../../../redux/reducers/dishesReducer'
 
 type PropsType = {
   categoryDish: Array<DishType>
 }
 
-function SliderGallertItem(props: PropsType) {
+const SliderGallertItem = (props: PropsType) => {
   const imgWidth = '400px'
   const imgHeight = '300px'
   const imgMargin = '20px'

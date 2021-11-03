@@ -1,8 +1,10 @@
 import React from 'react'
-import {BrowserRouter as Router, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {Nav} from 'react-bootstrap'
-import './Header.scss'
+
 import Logo from '../Logo/Logo'
+import './Header.scss'
+
 const OceanBarHeader = () => {
   return (
     <div
