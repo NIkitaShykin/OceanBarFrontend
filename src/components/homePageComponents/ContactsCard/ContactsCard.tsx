@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {Image, Nav} from 'react-bootstrap'
 
 import CustomMap from '../CustomMap/CustomMap'
@@ -44,7 +44,11 @@ const ContactsCard = () => {
             <div className='socials'>
               <Nav>
                 <Nav.Item>
-                  <Nav.Link href='https://www.instagram.com/' target='_blank' style={{padding: 0, marginRight: '7px'}}>
+                  <Nav.Link
+                    href='https://www.instagram.com/'
+                    target='_blank'
+                    style={{padding: 0, marginRight: '7px'}}
+                  >
                     <Image
                       src='images/socials/instagram.png'
                       alt='instagram'
@@ -54,7 +58,11 @@ const ContactsCard = () => {
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href='https://www.facebook.com/' target='_blank' style={{padding: 0}}>
+                  <Nav.Link
+                    href='https://www.facebook.com/'
+                    target='_blank'
+                    style={{padding: 0}}
+                  >
                     <Image
                       src='images/socials/facebook.png'
                       alt='facebook'
@@ -71,14 +79,18 @@ const ContactsCard = () => {
             <div className='title'>Наше приложение Ocean bar</div>
             <div className='description'>
               <span>
-                позволяет забронировать стол,
-                выбрать еду и оформить заказ в несколько касаний
+                позволяет забронировать стол, выбрать еду и оформить заказ в
+                несколько касаний
               </span>
             </div>
             <div className='socials'>
               <Nav className='justify-content-flex-start'>
                 <Nav.Item>
-                  <Nav.Link href='https://play.google.com/store' target='_blank' style={{padding: 0}}>
+                  <Nav.Link
+                    href='https://play.google.com/store'
+                    target='_blank'
+                    style={{padding: 0}}
+                  >
                     <Image
                       src='images/socials/google-play.png'
                       alt='google-play'
@@ -88,7 +100,11 @@ const ContactsCard = () => {
                   </Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link href='https://www.apple.com/app-store/' target='_blank' style={{padding: 0}}>
+                  <Nav.Link
+                    href='https://www.apple.com/app-store/'
+                    target='_blank'
+                    style={{padding: 0}}
+                  >
                     <Image
                       src='images/socials/app-store.png'
                       alt='app-store'
