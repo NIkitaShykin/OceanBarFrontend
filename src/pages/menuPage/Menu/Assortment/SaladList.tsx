@@ -14,7 +14,7 @@ const SaladList = () => {
   return (
     <>
       <Row>
-        <ListItem data={saladDishes} />
+        <ListItem data={saladDishes} isIntresting={false} />
       </Row>
     </>
   )

@@ -14,7 +14,7 @@ const PlatoList = () => {
   return (
     <>
       <Row>
-        <ListItem data={platoDishes} />
+        <ListItem data={platoDishes} isIntresting={false} />
       </Row>
     </>
   )

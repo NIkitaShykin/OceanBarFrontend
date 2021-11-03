@@ -13,7 +13,7 @@ const OystersList = () => {
   return (
     <>
       <Row>
-        <ListItem data={oystersDishes} />
+        <ListItem data={oystersDishes} isIntresting={false} />
       </Row>
     </>
   )

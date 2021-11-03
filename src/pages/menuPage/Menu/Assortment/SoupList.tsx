@@ -14,7 +14,7 @@ const SoupList = () => {
   return (
     <>
       <Row>
-        <ListItem data={soupDishes} />
+        <ListItem data={soupDishes} isIntresting={false} />
       </Row>
     </>
   )

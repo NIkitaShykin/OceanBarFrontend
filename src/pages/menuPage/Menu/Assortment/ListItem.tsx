@@ -9,7 +9,7 @@ import {DishInCart} from '../../../../common/types/dishesType'
 
 type PropsType = {
   data: Array<DishType>
-  isIntresting: any
+  isIntresting: boolean
 }
 
 const ListItem = (props: PropsType) => {
@@ -51,19 +51,19 @@ const ListItem = (props: PropsType) => {
               style={
                 props.isIntresting
                   ? {
-                      height: '150px',
-                      width: '100%',
-                      backgroundImage: `url(${dish.imageURL})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                    }
+                    height: '150px',
+                    width: '100%',
+                    backgroundImage: `url(${dish.imageURL})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }
                   : {
-                      height: '200px',
-                      width: '100%',
-                      backgroundImage: `url(${dish.imageURL})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                    }
+                    height: '200px',
+                    width: '100%',
+                    backgroundImage: `url(${dish.imageURL})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }
               }
             />
           </NavLink>

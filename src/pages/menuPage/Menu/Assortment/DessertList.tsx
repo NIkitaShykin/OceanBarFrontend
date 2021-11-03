@@ -14,7 +14,7 @@ const DessertList = () => {
   return (
     <>
       <Row>
-        <ListItem data={desertDishes} />
+        <ListItem data={desertDishes} isIntresting={false} />
       </Row>
     </>
   )
