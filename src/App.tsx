@@ -17,10 +17,10 @@ import './App.scss'
 import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 
 const App = () => {
- const dispatch = useDispatch()
+  const dispatch = useDispatch()
   useEffect(() => {
-       dispatch(getDishesFromApiTC())
-}, [])
+    dispatch(getDishesFromApiTC())
+  }, [])
 
   return (
     <Router>

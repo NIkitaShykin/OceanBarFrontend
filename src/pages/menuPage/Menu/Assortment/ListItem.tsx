@@ -36,7 +36,6 @@ const ListItem = (props: PropsType) => {
   }
 
   const arrayDishes = props.data.map((dish) => {
-
     return (
       <Col
         style={{position: 'relative'}}
