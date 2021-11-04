@@ -1,18 +1,19 @@
 import {useEffect} from 'react'
 import {BrowserRouter as Router} from 'react-router-dom'
-import './App.scss'
-// eslint-disable-next-line max-len
-import ContactsCard from './components/homePageComponents/ContactsCard/ContactsCard'
-import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
 import {Container} from 'react-bootstrap'
+import {useDispatch} from 'react-redux'
+import {ToastContainer} from 'react-toastify'
+
+import ContactsCard from
+  './components/homePageComponents/ContactsCard/ContactsCard'
+import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
 import SwitchPager from './utils/swich'
 import MenuRoutes from './pages/menuPage/Menu/MenuRoutes'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Footer from './components/homePageComponents/Footer/Footer'
 import {getDishesFromApiTC} from '../src/redux/reducers/dishesReducer'
-import {useDispatch} from 'react-redux'
-import {ToastContainer} from 'react-toastify'
 
+import './App.scss'
 import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 
 const App = () => {

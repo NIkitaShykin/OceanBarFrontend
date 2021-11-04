@@ -6,7 +6,7 @@ import './page404.scss'
 
 const Page404: React.FC = () => {
   return (
-    <div>
+    <>
       <img
         className='error-img'
         src='images/BurntToast-big.png' alt='Error'/>
@@ -16,7 +16,7 @@ const Page404: React.FC = () => {
       </p>
       <Link className='home-link' to='/'>Back to main page
       </Link>
-    </div>
+    </>
   )
 }
 

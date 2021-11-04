@@ -7,8 +7,14 @@ import {useAppSelector} from '../../redux/hooks'
 import './maybeIntresting.scss'
 
 const CompletedDish = () => {
+
   const intrestingDishes =
    useAppSelector<Array<DishType>>((state) => state.dish)
+
+  const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
+  const intrestingDishes = allDishes.filter((dish) => {
+    return dish.dishCategory !== 'только для вип клиентов'
+  })
 
   let [index, setIndex] = useState(0)
   const handleSelect = (selectedIndex: string) => {
