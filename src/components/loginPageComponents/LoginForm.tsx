@@ -8,6 +8,8 @@ import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
 import {logIn} from '../../redux/actions'
+import {ValidationType} from '../../common/types/validationTypes'
+
 
 import './LoginForm.scss'
 
@@ -25,7 +27,7 @@ const LogInForm = () => {
 
   const [authFailed, setAuthFailed] = useState(false)
 
-  const useInput = (initialValue: string, validations: any) => {
+  const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)
