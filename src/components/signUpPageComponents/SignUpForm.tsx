@@ -127,7 +127,7 @@ const SignUp = () => {
         }
       })
 
-      .then(() => history.push('/signup-sucess'))
+      .then(() => history.push('/signup-success'))
       .catch((error) => {
         console.log(error.response)
         setAuthFailed(true)
