@@ -15,21 +15,9 @@ const DessertList = () => {
     <>
       <Row>
         <ListItem data={desertDishes} isIntresting={false} />
-const DessertList = () => {
-  const allDishes = useAppSelector<any>((state) => state.dish)
-  // @ts-ignores
-  const desertDishes = allDishes.filter((dish) => {
-    return dish.dishCategory=='Десерты'
-  })
-
-  return (
-    <>
-      <Row >
-        <ListItem data={desertDishes} />
       </Row>
     </>
   )
 }
 
 export default DessertList
-

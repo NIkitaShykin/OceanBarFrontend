@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react'
 import {useDispatch} from 'react-redux'
 
@@ -28,11 +29,6 @@ const UserCart: React.FunctionComponent = (props: any) => {
   const cartSectionsClassName: string =
     props.dishes.length < 1 ? 'cart-sections hidden' : 'cart-sections'
 
-      sum + (Number(current.prise) * current.numberOfDishes), 0)
-  const cartSectionsClassName: string = props.dishes.length < 1 ?
-    'cart-sections hidden' :
-    'cart-sections'
-
   const orderCodes: JSX.Element[] = props.dishes.map((order: any) => (
     <OrderItem
       key={order.id}
@@ -40,8 +36,6 @@ const UserCart: React.FunctionComponent = (props: any) => {
       name={order.name}
       price={order.price}
       image={order.imageURL}
-      prise={order.prise}
-      image={order.image}
       numberOfDishes={order.numberOfDishes}
     />
   ))
@@ -63,13 +57,6 @@ const UserCart: React.FunctionComponent = (props: any) => {
           </div>
         )}
 
-        {
-          props.dishes.length < 1 &&
-          <div className='cart-empty'>
-            <span>В корзине пока нет товаров</span>
-          </div>
-        }
-
         <div className={cartSectionsClassName}>
           <div className='cart-section'>
             <div className='section-block section-title'>
@@ -82,11 +69,6 @@ const UserCart: React.FunctionComponent = (props: any) => {
                   type='button'
                   onClick={(e) => handleClearCart(e)}
                 >
-
-                <button className='clear-button'
-                  type='button'
-                  onClick={(e) => handleClearCart(e)}
-                  >
                   Очистить корзину
                 </button>
               </div>
@@ -96,11 +78,6 @@ const UserCart: React.FunctionComponent = (props: any) => {
             </div>
             <div className='section-block cart-total mt-3'>
               <span className='uppercase'>Итого: {totalSum} BYN</span>
-
-              <span className='uppercase'>
-                Итого: {totalSum} BYN
-              </span>
-
             </div>
           </div>
 
