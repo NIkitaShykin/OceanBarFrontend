@@ -88,13 +88,10 @@ const SearchField = () => {
   }, [isClickedOutside])
 
   const itemClickHandler = (id: string) => {
-    const newDish = dishes.find((dish: Dish) => dish.id === id)
+    dishes.find((dish: Dish) => dish.id === id)
     setSearchQuery('')
-    setIsOpen(!isOpen)
-    history.push(`/menu/dishes/id `)
-    // eslint-disable-next-line max-len
-    // history.push(`/${newDish.name}`)  // оставить, пока не будут подгружены блюда с бэка
-    console.log(newDish)
+    setIsOpen(false)
+    history.push(`/dish/${id} `)
   }
 
   return (

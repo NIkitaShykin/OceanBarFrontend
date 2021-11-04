@@ -6,7 +6,7 @@ import {useSelector} from 'react-redux'
 const PersonalData = () => {
   const user =
     useSelector<AppStoreType, UserType>((state) => state.user)
-   console.log(user.user)
+  console.log(user.user)
 
 
   return (
