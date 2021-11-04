@@ -23,7 +23,7 @@ const UserCart: React.FunctionComponent = (props: any) => {
 
   const totalSum: any = props.dishes.reduce(
     (sum: any, current: any) =>
-      sum + Number(current.prise) * current.numberOfDishes,
+      sum + Number(current.price) * current.numberOfDishes,
     0
   )
   const cartSectionsClassName: string =
@@ -34,8 +34,8 @@ const UserCart: React.FunctionComponent = (props: any) => {
       key={order.id}
       id={order.id}
       name={order.name}
-      prise={order.prise}
-      image={order.image}
+      price={order.price}
+      image={order.imageURL}
       numberOfDishes={order.numberOfDishes}
     />
   ))
