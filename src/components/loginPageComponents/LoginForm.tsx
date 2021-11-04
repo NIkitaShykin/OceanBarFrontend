@@ -8,7 +8,7 @@ import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
 import {logIn} from '../../redux/actions'
-import {ValidationType} from '../../common/types/validationTypes'
+import {ValidationType} from '../../common/types/userTypes'
 
 
 import './LoginForm.scss'

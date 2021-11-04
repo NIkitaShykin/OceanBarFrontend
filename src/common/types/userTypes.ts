@@ -8,3 +8,8 @@ emailError?: boolean,
 phoneNumberError?: boolean,
 passwordError?: boolean
 }
+
+export type UserType={
+email: string,
+password: string
+}

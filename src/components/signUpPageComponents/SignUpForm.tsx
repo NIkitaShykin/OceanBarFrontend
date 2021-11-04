@@ -2,7 +2,7 @@ import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
-import {ValidationType} from '../../common/types/validationTypes'
+import {ValidationType} from '../../common/types/userTypes'
 
 
 import {url} from '../../api'
