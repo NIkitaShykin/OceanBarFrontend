@@ -10,6 +10,7 @@
 .title-dish {
   // background-color: #ff9e05;
   display: flex;
+  margin-top: 35px;
 }
 
 .image-dish {
@@ -74,7 +75,7 @@ i:hover {
   margin-top: 15%;
   margin-left: 10px;
   height: 60px;
-  width:300px;
+  width: 100%;
   background-color: #ff9e05;
   color: white;
   font-size: 30px;

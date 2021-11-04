@@ -46,7 +46,7 @@ const ShiftingDish = (props: PropsType) => {
         <h1>{props.currentDish.name}</h1>
       </div>
       <Row>
-        <Col md={8} lg={8}>
+        <Col xs={'auto'} sm={6} md={8} lg={8}>
           <div
             key={props.currentDish.id}
             style={{
@@ -64,7 +64,7 @@ const ShiftingDish = (props: PropsType) => {
             alt='dish image'
           /> */}
         </Col>
-        <Col md={4} lg={4}>
+        <Col xs={'auto'} sm={6} md={4} lg={4}>
           <div className={'ingredients'}>
             <div className={'changing-shifting'}>
               <span className={'composition'}>Состав</span>

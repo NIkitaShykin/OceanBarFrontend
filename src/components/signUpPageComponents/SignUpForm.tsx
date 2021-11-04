@@ -2,6 +2,8 @@ import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
+import {ValidationType} from '../../common/types/userTypes'
+
 
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
@@ -13,7 +15,7 @@ const SignUp = () => {
 
   const [authFailed, setAuthFailed] = useState(false)
 
-  const useInput = (initialValue: string, validations: any) => {
+  const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)
@@ -78,39 +80,16 @@ const SignUp = () => {
     id: null,
   }
 
-
-  const isFirstNameInvalid = firstName.isDirty &&
-    (firstName.isEmpty ||
-      firstName.minLengthError ||
-      firstName.maxLengthError ||
-      firstName.firstNameError
-    )
-
-  const isLastNameInvalid = lastName.isDirty &&
-  (lastName.isEmpty ||
-    lastName.minLengthError ||
-    lastName.maxLengthError ||
-    lastName.lastNameError
-  )
-
-  const isEmailInvalid = email.isDirty &&
-  (email.isEmpty ||
-    email.minLengthError ||
-    email.maxLengthError ||
-    email.emailError
-  )
-
-  const isPhoneNumberInvalid = phoneNumber.isDirty &&
-    (phoneNumber.isEmpty ||
-      phoneNumber.phoneNumberError
-    )
-
-  const isPasswordInvalid = password.isDirty &&
-  (password.isEmpty ||
-    password.minLengthError ||
-    password.maxLengthError ||
-    password.passwordError
-  )
+  // eslint-disable-next-line max-len
+  const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)
+  // eslint-disable-next-line max-len
+  const isLastNameInvalid = lastName.isDirty && (lastName.isEmpty || lastName.minLengthError || lastName.maxLengthError || lastName.lastNameError)
+  // eslint-disable-next-line max-len
+  const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
+  // eslint-disable-next-line max-len
+  const isPhoneNumberInvalid = phoneNumber.isDirty && (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
+  // eslint-disable-next-line max-len
+  const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
 
   const handleClose = () => {
     history.push('/')

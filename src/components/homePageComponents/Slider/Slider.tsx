@@ -1,11 +1,13 @@
 
 import {Row, Col} from 'react-bootstrap'
 import SliderGallery from './SliderGallery'
-import {useAppSelector} from '../../../redux/hooks'
-
+import {AppStoreType} from '../../../redux/reducers/rootReducer'
+import {useSelector} from 'react-redux'
+import {DishType} from 'src/common/types/dishesType'
 
 const Slider = () => {
-  const allDishes = useAppSelector<any>((state) => state.dish)
+  const allDishes =
+   useSelector<AppStoreType, Array<DishType>>((state) => state.dish)
 
   return (
     <>

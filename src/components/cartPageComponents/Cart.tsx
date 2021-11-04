@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react'
 import {useDispatch} from 'react-redux'
 
@@ -22,18 +23,19 @@ const UserCart: React.FunctionComponent = (props: any) => {
 
   const totalSum: any = props.dishes.reduce(
     (sum: any, current: any) =>
-      sum + (Number(current.prise) * current.numberOfDishes), 0)
-  const cartSectionsClassName: string = props.dishes.length < 1 ?
-    'cart-sections hidden' :
-    'cart-sections'
+      sum + Number(current.price) * current.numberOfDishes,
+    0
+  )
+  const cartSectionsClassName: string =
+    props.dishes.length < 1 ? 'cart-sections hidden' : 'cart-sections'
 
   const orderCodes: JSX.Element[] = props.dishes.map((order: any) => (
     <OrderItem
       key={order.id}
       id={order.id}
       name={order.name}
-      prise={order.prise}
-      image={order.image}
+      price={order.price}
+      image={order.imageURL}
       numberOfDishes={order.numberOfDishes}
     />
   ))
@@ -49,12 +51,11 @@ const UserCart: React.FunctionComponent = (props: any) => {
       <div className='container'>
         <div className='cart-title'>Корзина</div>
 
-        {
-          props.dishes.length < 1 &&
+        {props.dishes.length < 1 && (
           <div className='cart-empty'>
             <span>В корзине пока нет товаров</span>
           </div>
-        }
+        )}
 
         <div className={cartSectionsClassName}>
           <div className='cart-section'>
@@ -63,9 +64,11 @@ const UserCart: React.FunctionComponent = (props: any) => {
                 <span className='uppercase'>Ваш заказ</span>
               </div>
               <div>
-                <button className='clear-button'
+                <button
+                  className='clear-button'
                   type='button'
-                  onClick={(e) => handleClearCart(e)}>
+                  onClick={(e) => handleClearCart(e)}
+                >
                   Очистить корзину
                 </button>
               </div>
@@ -74,9 +77,7 @@ const UserCart: React.FunctionComponent = (props: any) => {
               {orderCodes}
             </div>
             <div className='section-block cart-total mt-3'>
-              <span className='uppercase'>
-                Итого: {totalSum} BYN
-              </span>
+              <span className='uppercase'>Итого: {totalSum} BYN</span>
             </div>
           </div>
 

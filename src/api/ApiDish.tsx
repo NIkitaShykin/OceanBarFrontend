@@ -6,7 +6,7 @@ const instance = axios.create({
   baseURL: 'http://13.49.241.158:3000/'
 })
 
-export const API = {
+export const ApiDish = {
   getAllDish() {
     return instance.get('api/menu/')
   },

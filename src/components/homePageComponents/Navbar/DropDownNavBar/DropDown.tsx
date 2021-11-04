@@ -38,7 +38,7 @@ const DropDownNavBar = () => {
         align={{lg: 'end'}}
         title={<i className='far fa-user icon-height user-signedin'></i>}
         id='navbarScrollingDropdown'
-        className={isAuthorized ? 'authorized change' : 'authorized'}
+        className={true ? 'authorized change' : 'authorized'}
       >
         <NavDropdown.Item
           href='/profile'>Профиль

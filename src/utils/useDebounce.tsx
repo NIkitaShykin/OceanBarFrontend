@@ -1,4 +1,4 @@
-
+/* eslint-disable require-jsdoc */
 import {useEffect, useState} from 'react'
 
 const useDebounce = (value: string, delay: number) => {

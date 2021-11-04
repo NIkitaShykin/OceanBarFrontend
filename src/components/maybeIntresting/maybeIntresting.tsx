@@ -1,16 +1,14 @@
 import {useState} from 'react'
 
 import ListItem from '../../pages/menuPage/Menu/Assortment/ListItem'
-import {DishType} from '../../redux/reducers/dishesReducer'
+import {DishType} from '../../common/types/dishesType'
 import {useAppSelector} from '../../redux/hooks'
 
 import './maybeIntresting.scss'
 
 const CompletedDish = () => {
-  const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
-  const intrestingDishes = allDishes.filter((dish) => {
-    return dish.dishCategory !== 'только для вип клиентов'
-  })
+  const intrestingDishes =
+   useAppSelector<Array<DishType>>((state) => state.dish)
 
   let [index, setIndex] = useState(0)
   const handleSelect = (selectedIndex: string) => {

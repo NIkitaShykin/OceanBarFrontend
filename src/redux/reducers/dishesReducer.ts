@@ -140,57 +140,7 @@ const initialState: dishesType = [
       {name: 'чеснок', isAdded: true}
     ],
     'dishCategory': 'Салаты'
-  },
-  // {
-  //   "id": 9,
-  //   "name": "ЗАПЕЧЕНАЯ УСТРИЦА КИЛПАТРИК",
-  //   "price": 50,
-  //   "weight": "300 гр",
-  //   "calories": "270 ккал",
-  //    "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg",
-  //   "ingredients": [{ name: "морской гребешок с трюфельным маслом", isAdded: true }, { name: "осьминог с глазировкой из черного перца", isAdded: true }, { name: "королевские креветки в панцире", isAdded: true }, { name: "чеснок", isAdded: true }],
-  //   "dishCategory": "Запеченные устрицы"
-  // },
-  // {
-  //   "id": 10,
-  //   "name": "ЗАПЕЧЕНАЯ УСТРИЦА С БЕЛЫМИ ГРИБАМИ",
-  //   "price": 35,
-  //   "weight": "200 гр",
-  //   "calories": "400 ккал",
-  //   "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg",
-  //   "ingredients": [{ name: "морской гребешок с трюфельным маслом", isAdded: true }, { name: "осьминог с глазировкой из черного перца", isAdded: true }, { name: "королевские креветки в панцире", isAdded: true }, { name: "чеснок", isAdded: true }],
-  //   "dishCategory": "Запеченные устрицы"
-  // },
-  // {
-  //   "id": 11,
-  //   "name": "ЗАПЕЧЕНАЯ УСТРИЦА С ТРЮФЕЛЬНЫМ МАСЛОМ",
-  //   "price": 35,
-  //   "weight": "400 гр",
-  //   "calories": "520 ккал",
-  //   "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg",
-  //   "ingredients": [{ name: "морской гребешок с трюфельным маслом", isAdded: true }, { name: "осьминог с глазировкой из черного перца", isAdded: true }, { name: "королевские креветки в панцире", isAdded: true }, { name: "чеснок", isAdded: true }],
-  //   "dishCategory": "Запеченные устрицы"
-  // },
-  // {
-  //   "id": 12,
-  //   "name": "ЧИЗКЕЙК С КЛУБНИЧНЫМ СОУСОМ",
-  //   "price": 15,
-  //   "weight": "200 гр",
-  //   "calories": "250 ккал",
-  //   "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg",
-  //   "ingredients": [{ name: "морской гребешок с трюфельным маслом", isAdded: true }, { name: "осьминог с глазировкой из черного перца", isAdded: true }, { name: "королевские креветки в панцире", isAdded: true }, { name: "чеснок", isAdded: true }],
-  //   "dishCategory": "Десерты"
-  // },
-  // {
-  //   "id": 13,
-  //   "name": "ЛИМОННЫЙ ТАРТ",
-  //   "price": 12,
-  //   "weight": "105 гр",
-  //   "calories": "295 ккал",
-  //   "imageURL": "https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%9A%D1%80%D0%B0%D0%B1%D1%8B%D0%9C%D0%BE%D0%BB%D0%BB%D1%8E%D1%81%D0%BA%D0%B8.jpg",
-  //   "ingredients": [{ name: "морской гребешок с трюфельным маслом", isAdded: true }, { name: "осьминог с глазировкой из черного перца", isAdded: true }, { name: "королевские креветки в панцире", isAdded: true }, { name: "чеснок", isAdded: true }],
-  //   "dishCategory": "Десерты"
-  // }
+  }
 ]
 
 const dishesReducer = createReducer(initialState, (builder) => {
