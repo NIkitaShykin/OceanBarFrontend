@@ -9,7 +9,18 @@ phoneNumberError?: boolean,
 passwordError?: boolean
 }
 
-export type UserType={
+export type UserAuthType={
 email: string,
 password: string
+}
+
+export type UserType={
+    'user': {
+        'id': number,
+        'name': string,
+        'secondname': string,
+        'email': string,
+        'password': string,
+        'phone': string
+    }
 }

@@ -1,13 +1,24 @@
-
+import {useEffect} from 'react'
 import OrderHistory from '../../components/userProfile/orderHistory'
 import DeliveryAdress from '../../components/userProfile/deliveryAdress'
 import MyCreditCards from '../../components/userProfile/myCards'
 import PasswordReset from '../../components/userProfile/passwordReset'
 import PersonalData from '../../components/userProfile/personalData'
+import {getUserTC} from '../../redux/reducers/userReducer'
+import {useDispatch} from 'react-redux'
+
 
 import './profile.scss'
 
+
 const UserProfile = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserTC())
+  }, [])
+
+
   return (
     <div>
       <div className='container'>

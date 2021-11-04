@@ -10,13 +10,6 @@ import {IngredientsType} from '../../../../redux/reducers/dishesReducer'
 import {DishType} from '../../../../common/types/dishesType'
 
 
-// --------------------------------
-// import {useSelector} from 'react-redux'
-// const allDishes =
-//  useSelector<AppStoreType, Array<DishType>>((state) => state.dish)
-// --------------------------------
-
-
 const Dish = () => {
   const token = useParams<{token: string}>()
   const allDishes: DishType = useAppSelector<any>((state) => state.dish)
