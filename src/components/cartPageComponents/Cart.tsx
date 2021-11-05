@@ -1,9 +1,10 @@
-/* eslint-disable max-len */
-import React from 'react'
+import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 
 import OrderItem from './OrderItem'
 import Toggler from './ToggleButton'
+import DeliveryForm from './DeliveryForm/DeliveryForm'
+import TakeawayForm from './TakeawayForm/TakeawayForm'
 
 import {clearCart} from '../../redux/actions'
 
@@ -15,10 +16,12 @@ const UserCart: React.FunctionComponent = (props: any) => {
     value: string
   }[]
 
+  const [orderType, setOrderType] = useState<string>('')
+
   const radios: radioBtnParams = [
-    {name: 'Забронировать стол', value: '1'},
-    {name: 'Доставка', value: '2'},
-    {name: 'Навынос', value: '3'},
+    {name: 'Забронировать стол', value: 'book-a-table'},
+    {name: 'Доставка', value: 'delivery'},
+    {name: 'Навынос', value: 'takeaway'},
   ]
 
   const totalSum: any = props.dishes.reduce(
@@ -46,6 +49,10 @@ const UserCart: React.FunctionComponent = (props: any) => {
     dispatch(clearCart())
   }
 
+  const handleRadioValueChange = (value: string) => {
+    setOrderType(value)
+  }
+
   return (
     <div className='cart'>
       <div className='container'>
@@ -61,7 +68,9 @@ const UserCart: React.FunctionComponent = (props: any) => {
           <div className='cart-section'>
             <div className='section-block section-title'>
               <div>
-                <span className='uppercase'>Ваш заказ</span>
+                <span className='uppercase'>
+                  Ваш заказ
+                </span>
               </div>
               <div>
                 <button
@@ -76,18 +85,29 @@ const UserCart: React.FunctionComponent = (props: any) => {
             <div className='section-block section-data orders'>
               {orderCodes}
             </div>
-            <div className='section-block cart-total mt-3'>
-              <span className='uppercase'>Итого: {totalSum} BYN</span>
+            <div className='section-block cart-total'>
+              <span className='uppercase'>
+                Итого: {totalSum} BYN
+              </span>
             </div>
           </div>
 
           <div className='cart-section'>
             <div className='section-block section-title'>
-              <span className='uppercase'>Тип заказа</span>
+              <span className='uppercase'>
+                Тип заказа
+              </span>
             </div>
             <div className='section-block section-data options'>
-              <Toggler radios={radios} />
+              <Toggler
+                radios={radios}
+                size='lg'
+                handleRadioValueChange =
+                  {(value: string) => handleRadioValueChange(value)}
+              />
             </div>
+            {orderType === 'delivery' && <DeliveryForm />}
+            {orderType === 'takeaway' && <TakeawayForm />}
           </div>
         </div>
       </div>
