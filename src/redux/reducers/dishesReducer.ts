@@ -51,7 +51,7 @@ export default dishesReducer
 export const getDishesFromApiTC =
   (): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
-      toggleLoading(true)
+      dispatch(toggleLoading(true))
       try {
         const asyncResp = await API.getAllDish()
         // @ts-ignore
@@ -64,9 +64,9 @@ export const getDishesFromApiTC =
           return ({...dish, ingredients: myObj})
         })
         dispatch(addDishesAC(restructDishes))
-        dispatch(toggleLoading(true))
+        dispatch(toggleLoading(false))
       } catch (err) {
-        toggleLoading(false)
+        dispatch(toggleLoading(false))
         console.log(err)
       }
     }

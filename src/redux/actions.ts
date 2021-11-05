@@ -1,4 +1,5 @@
 import {createAction} from '@reduxjs/toolkit'
+import {DishType} from 'src/common/types/dishesType'
 
 export const logIn = createAction<any>('SET_LOG_IN')
 export const logOut = createAction('SET_LOG_OUT')
@@ -10,9 +11,10 @@ export const clearCart = createAction('CLEAR_CART')
 export const plusOneDish = createAction<any>('PLUS_ONE_DISH')
 export const minusOneDish = createAction<any>('MINUS_ONE_DISH')
 
-export const getDishesFromApiTC = createAction<any>('GET_DISHES')
+export const getDishesFromApiTC = createAction<DishType[]>('GET_DISHES')
 export const addDishesAC = createAction<any>('SET_DISHES')
-export const toggleLoading = createAction<boolean, string>('TOGGLE_LOADING')
+export const toggleLoading = createAction
+  <boolean, 'TOGGLE_LOADING'>('TOGGLE_LOADING')
 
 export const getUserTC = createAction<any>('GET_USER')
 export const getUserAC = createAction<any>('SET_USER')

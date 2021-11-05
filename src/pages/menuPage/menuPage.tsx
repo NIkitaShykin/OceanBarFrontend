@@ -8,7 +8,7 @@ const MenuPage = () => {
 
   return (
     <>
-      {/* {isLoading && <Spinner />} */}
+      {isLoading && <Spinner />}
       <Menu/>
     </>
   )
