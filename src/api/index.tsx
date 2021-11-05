@@ -1,9 +1,9 @@
-export const url: string = 'http://13.49.241.158:3000/api'
+export const url: string = 'http://localhost:3001/api'
 
 import axios from 'axios'
 
 const instance = axios.create({
-  baseURL: 'http://13.49.241.158:3000/'
+  baseURL: 'http://localhost:3001/'
 })
 
 export const API = {
