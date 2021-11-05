@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+
 import {createReducer} from '@reduxjs/toolkit'
 import {AnyAction} from 'redux'
 import {RootState} from '../store'
