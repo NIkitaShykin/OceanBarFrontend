@@ -3,6 +3,7 @@ import {
   Navbar,
   Nav} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+
 import DropDownNavBar from './DropDownNavBar/DropDown'
 import SearchField from './Search/Search'
 
@@ -13,9 +14,10 @@ const NavBarComponent: React.FC = () => {
   return (
     <>
       <Navbar
-        bg='dark'
-        variant={'dark'}
+        collapseOnSelect
         expand='xxl'
+        bg='dark'
+        variant='dark'
         fixed='top'
         className='navbar-fixed'
       >
@@ -24,9 +26,9 @@ const NavBarComponent: React.FC = () => {
           className='navbar-brand-mr'>Ocean Bar
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls='navbarScroll' />
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
         <Navbar.Collapse
-          id='navbarScroll'
+          id='responsive-navbar-nav'
           className='justify-content-between mr-2'
         >
           <Nav

@@ -20,7 +20,7 @@ const UserProfile = () => {
 
 
   return (
-    <div>
+    <>
       <div className='container'>
         <div className='title-group'>
           <h1 className='profile-title'>
@@ -42,7 +42,7 @@ const UserProfile = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

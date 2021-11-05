@@ -1,11 +1,12 @@
-/* eslint-disable max-len */
+
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
 
 import ShiftingDish from './ShiftingDish'
 import CompletedDish from './CompletedDish'
 import {useAppSelector} from '../../../../redux/hooks'
-import MaybeIntresting from '../../../../components/maybeIntresting/maybeIntresting'
+import MaybeIntresting from
+  '../../../../components/maybeIntresting/maybeIntresting'
 import {IngredientsType} from '../../../../redux/reducers/dishesReducer'
 import {DishType} from '../../../../common/types/dishesType'
 
