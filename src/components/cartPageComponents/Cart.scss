@@ -5,32 +5,22 @@ $mainColor: #ff9e05;
   padding: 30px 0;
   flex: 1 0 auto;
   font-size: 14px;
-
-
   .container {
-    display: flex;
-    flex-direction: column;
     align-items: flex-start;
-
-
     .cart-title {
       font-size: 2.5rem;
       font-weight: bold;
       color: $mainColor;
       align-self: center;
     }
-
     .cart-empty {
       align-self: center;
       margin: 10rem 0 14rem;
       font-size: 1.2rem;
       color: #ccc;
     }
-
     .cart-section {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      width: 60%;
       margin: 60px 0;
       .section-title {
         width: 100%;
@@ -52,6 +42,9 @@ $mainColor: #ff9e05;
       }
       .section-data {
         margin: 20px 0;
+        &.options {
+          text-align: left;
+        }
         .order-item {
           display: flex;
           margin: 1rem 0;
@@ -117,6 +110,7 @@ $mainColor: #ff9e05;
       }
       .cart-total {
         font-size: 1.2rem;
+        text-align: left;
       }
     }
 

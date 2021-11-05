@@ -3,16 +3,19 @@ import DatePicker from 'react-date-picker'
 // import TimePicker from 'react-time-picker'
 import {
   Form,
+  Row,
+  Col,
   FloatingLabel,
   Button,
   ToggleButton,
   ToggleButtonGroup
 } from 'react-bootstrap'
 
-import './TakeawayForm.scss'
+import './OrderForms.scss'
 
 const DeliveryForm: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
+  // if timepicker is used instead of dropdown w/ time slots
   // const [selectedTime, setSelectedTime] = useState('10:30')
 
   const timeSlots: Array<string> = [
@@ -104,6 +107,41 @@ const DeliveryForm: React.FC = () => {
         <div className='form-data'>
           <div className='section-numeration'>
             <span>3</span>
+          </div>
+
+          <div className='section-header'>
+            <span>Укажите адрес</span>
+          </div>
+
+          <div className='section-content'>
+            <Form>
+              <Row className='mb-3'>
+                <Col>
+                  <Form.Control placeholder='Улица' required />
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Control placeholder='Дом' required />
+                </Col>
+                <Col>
+                  <Form.Control placeholder='Корпус' />
+                </Col>
+                <Col>
+                  <Form.Control placeholder='Квартира' />
+                </Col>
+              </Row>
+            </Form>
+          </div>
+        </div>
+
+        <div className='form-separation'></div>
+      </div>
+
+      <div className='form-section'>
+        <div className='form-data'>
+          <div className='section-numeration'>
+            <span>4</span>
           </div>
 
           <div className='section-header'>

@@ -3,8 +3,10 @@ import {useDispatch} from 'react-redux'
 
 import OrderItem from './OrderItem'
 import Toggler from './ToggleButton'
-import DeliveryForm from './DeliveryForm/DeliveryForm'
-import TakeawayForm from './TakeawayForm/TakeawayForm'
+
+import ReserveATableForm from './OrderForms/ReserveATableForm'
+import DeliveryForm from './OrderForms/DeliveryForm'
+import TakeawayForm from './OrderForms/TakeawayForm'
 
 import {clearCart} from '../../redux/actions'
 
@@ -19,7 +21,7 @@ const UserCart: React.FunctionComponent = (props: any) => {
   const [orderType, setOrderType] = useState<string>('')
 
   const radios: radioBtnParams = [
-    {name: 'Забронировать стол', value: 'book-a-table'},
+    {name: 'Забронировать стол', value: 'reserve-a-table'},
     {name: 'Доставка', value: 'delivery'},
     {name: 'Навынос', value: 'takeaway'},
   ]
@@ -106,6 +108,7 @@ const UserCart: React.FunctionComponent = (props: any) => {
                   {(value: string) => handleRadioValueChange(value)}
               />
             </div>
+            {orderType === 'reserve-a-table' && <ReserveATableForm />}
             {orderType === 'delivery' && <DeliveryForm />}
             {orderType === 'takeaway' && <TakeawayForm />}
           </div>
