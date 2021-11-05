@@ -2,11 +2,10 @@ import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
-import {ValidationType} from '../../common/types/userTypes'
-
 
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
+import Spinner from '../../components/Spinner/Spinner'
 
 import './SignUpForm.scss'
 
@@ -14,8 +13,9 @@ const SignUp = () => {
   const history = useHistory()
 
   const [authFailed, setAuthFailed] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const useInput = (initialValue: string, validations: ValidationType) => {
+  const useInput = (initialValue: string, validations: any) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)
@@ -80,16 +80,39 @@ const SignUp = () => {
     id: null,
   }
 
-  // eslint-disable-next-line max-len
-  const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)
-  // eslint-disable-next-line max-len
-  const isLastNameInvalid = lastName.isDirty && (lastName.isEmpty || lastName.minLengthError || lastName.maxLengthError || lastName.lastNameError)
-  // eslint-disable-next-line max-len
-  const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
-  // eslint-disable-next-line max-len
-  const isPhoneNumberInvalid = phoneNumber.isDirty && (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
-  // eslint-disable-next-line max-len
-  const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
+
+  const isFirstNameInvalid = firstName.isDirty &&
+    (firstName.isEmpty ||
+      firstName.minLengthError ||
+      firstName.maxLengthError ||
+      firstName.firstNameError
+    )
+
+  const isLastNameInvalid = lastName.isDirty &&
+  (lastName.isEmpty ||
+    lastName.minLengthError ||
+    lastName.maxLengthError ||
+    lastName.lastNameError
+  )
+
+  const isEmailInvalid = email.isDirty &&
+  (email.isEmpty ||
+    email.minLengthError ||
+    email.maxLengthError ||
+    email.emailError
+  )
+
+  const isPhoneNumberInvalid = phoneNumber.isDirty &&
+    (phoneNumber.isEmpty ||
+      phoneNumber.phoneNumberError
+    )
+
+  const isPasswordInvalid = password.isDirty &&
+  (password.isEmpty ||
+    password.minLengthError ||
+    password.maxLengthError ||
+    password.passwordError
+  )
 
   const handleClose = () => {
     history.push('/')
@@ -97,18 +120,20 @@ const SignUp = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
+    setIsLoading(true)
     axios
       .post(`${url}/users/register`, user)
       .then((response: any) => {
         if (response.status > 400) {
+          setIsLoading(false)
           throw new Error(response.statusText)
-        }
+        } else setIsLoading(false)
       })
 
       .then(() => history.push('/signup-success'))
       .catch((error) => {
         console.log(error.response)
+        setIsLoading(false)
         setAuthFailed(true)
       })
   }
@@ -122,8 +147,9 @@ const SignUp = () => {
             <CloseButton onClick={() => handleClose()}/>
           </Modal.Header>
 
+          {isLoading && <Spinner />}
           {
-            authFailed &&
+            !isLoading && authFailed &&
             <div className='error validation'>
               Пользователь с таким адресом электронной почты уже существует.
             </div>

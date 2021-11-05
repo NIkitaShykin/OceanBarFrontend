@@ -9,23 +9,18 @@ import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
 import {logIn} from '../../redux/actions'
 import {ValidationType} from '../../common/types/userTypes'
+import Spinner from '../../components/Spinner/Spinner'
 
 
 import './LoginForm.scss'
 
-// interface FormEventTarget extends EventTarget {
-//   value: string
-// }
-
-// interface FormChangeEvent extends React.ChangeEvent<HTMLElement> {
-//   target: FormEventTarget
-// }
 
 const LogInForm = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
   const [authFailed, setAuthFailed] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
@@ -69,10 +64,19 @@ const LogInForm = () => {
     password: password.value,
   }
 
-  // eslint-disable-next-line max-len
-  const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
-  // eslint-disable-next-line max-len
-  const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
+  const isEmailInvalid = email.isDirty &&
+  (email.isEmpty ||
+    email.minLengthError ||
+    email.maxLengthError ||
+    email.emailError
+  )
+
+  const isPasswordInvalid = password.isDirty &&
+  (password.isEmpty ||
+    password.minLengthError ||
+    password.maxLengthError ||
+    password.passwordError
+  )
 
   const handleClose = () => {
     history.push('/')
@@ -80,20 +84,23 @@ const LogInForm = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
+    setIsLoading(true)
     axios
       .post(`${url}/users/auth`, user)
       .then((response: any) => {
         if (response.status >= 200 && response.status < 300) {
           Cookies.set('token', response.data.token, {expires: 30})
+          setIsLoading(false)
           dispatch(logIn(response.data.data))
         } else {
+          setIsLoading(false)
           throw new Error(response.statusText)
         }
       })
       .then(() => history.push('/'))
       .catch((error) => {
         console.log(error.response)
+        setIsLoading(false)
         setAuthFailed(true)
       })
   }
@@ -107,8 +114,9 @@ const LogInForm = () => {
             <CloseButton onClick={() => handleClose()}/>
           </Modal.Header>
 
+          {isLoading && <Spinner />}
           {
-            authFailed &&
+            !isLoading && authFailed &&
             <div className='error validation'>
               Адрес электронной почты или пароль введен с ошибкой.
               Пожалуйста, попробуйте еще раз.
