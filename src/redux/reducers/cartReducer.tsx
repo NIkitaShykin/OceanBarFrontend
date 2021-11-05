@@ -26,6 +26,7 @@ const cartReducer = createReducer(initialState, (builder) => {
         price: action.payload.price,
         imageURL: action.payload.imageURL,
         numberOfDishes: action.payload.numberOfDishes,
+        ingredients:action.payload.ingredients
       }
       const updState = {...state}
       updState.dishes = [...state.dishes]

@@ -15,5 +15,6 @@ export type DishInCart = {
   name: string
   price: number
   imageURL: string
-  numberOfDishes: number
+  numberOfDishes: number,
+  ingredients:string
 }

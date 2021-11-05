@@ -37,9 +37,11 @@ const CompletedDish = (props: PropsType) => {
           name: props.currentDish.name,
           price: props.currentDish.price,
           imageURL: props.currentDish.imageURL,
+          ingredients:props.currentDish.ingredients,
           numberOfDishes: 1,
         })
       )
+      console.log(props.currentDish)
       orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
     }
   }

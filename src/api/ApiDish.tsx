@@ -1,10 +1,5 @@
-export const url: string = 'http://13.49.241.158:3000/api'
+import {instance} from "./Api";
 
-import axios from 'axios'
-
-const instance = axios.create({
-  baseURL: 'http://13.49.241.158:3000/'
-})
 
 export const ApiDish = {
   getAllDish() {

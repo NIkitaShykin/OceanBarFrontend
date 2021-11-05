@@ -8,13 +8,12 @@ import Toggler from './ToggleButton'
 import {clearCart} from '../../redux/actions'
 
 import './Cart.scss'
-
+import {ApiCart} from "../../api/ApiCart";
 const UserCart: React.FunctionComponent = (props: any) => {
   type radioBtnParams = {
     name: string
     value: string
   }[]
-
   const radios: radioBtnParams = [
     {name: 'Забронировать стол', value: '1'},
     {name: 'Доставка', value: '2'},
@@ -39,7 +38,7 @@ const UserCart: React.FunctionComponent = (props: any) => {
       numberOfDishes={order.numberOfDishes}
     />
   ))
-
+  console.log(ApiCart.getCart())
   const dispatch = useDispatch()
   const handleClearCart = (e: any) => {
     e.preventDefault()
