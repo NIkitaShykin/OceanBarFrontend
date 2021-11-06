@@ -1,7 +1,7 @@
 import {useState} from 'react'
 
-import ShiftingPersonal from
-  './personalData/shiftingPersonal'
+import ShiftingDelivery from
+  './deliveryAdress/shiftingDelivery'
 import CompletedDelivery from
   './deliveryAdress/completedDelivery'
 
@@ -19,7 +19,7 @@ const DeliveryAdress = () => {
 
         {isShifting ?
           <CompletedDelivery changeStatus={changeStatus}/> :
-          <ShiftingPersonal changeStatus={changeStatus}/> }
+          <ShiftingDelivery changeStatus={changeStatus}/> }
 
       </div>
 

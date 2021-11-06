@@ -18,5 +18,8 @@ export const ApiUser = {
   },
   setUserData(userData:UserType) {
     return instance.patch('/api/users', {userData: userData})
+  },
+  getDeliveryUserData() {
+    return instance.get('/api/users/???')
   }
 }

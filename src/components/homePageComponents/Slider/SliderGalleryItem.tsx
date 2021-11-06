@@ -1,5 +1,5 @@
 
-import {DishType} from '../../../redux/reducers/dishesReducer'
+import {DishType} from '../../../common/types/dishesType'
 
 type PropsType = {
   categoryDish: Array<DishType>

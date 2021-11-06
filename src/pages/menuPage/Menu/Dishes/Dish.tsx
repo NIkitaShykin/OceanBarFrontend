@@ -6,7 +6,7 @@ import ShiftingDish from './ShiftingDish'
 import CompletedDish from './CompletedDish'
 import {useAppSelector} from '../../../../redux/hooks'
 import MaybeIntresting from '../../../../components/maybeIntresting/maybeIntresting'
-import {IngredientsType} from '../../../../redux/reducers/dishesReducer'
+import {IngredientsType} from '../../../../common/types/dishesType'
 import {DishType} from '../../../../common/types/dishesType'
 
 
