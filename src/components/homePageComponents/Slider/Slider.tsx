@@ -18,7 +18,7 @@ const Slider = () => {
       <Row className='justify-content-md-center'>
         <Col xs lg='1'></Col>
         <Col>
-          { allDishes.length>10 ? <SliderGallery/> : null }
+          { allDishes.length > 10 ? <SliderGallery/> : null }
         </Col>
         <Col xs lg='1'></Col>
       </Row>
