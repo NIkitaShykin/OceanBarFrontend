@@ -1,28 +1,25 @@
+import {useState} from 'react'
 
-import {UserType} from '../../common/types/userTypes'
-import {AppStoreType} from '../../redux/reducers/rootReducer'
-import {useSelector} from 'react-redux'
+import ShiftingPersonal from
+  './personalData/shiftingPersonal'
+import CompletedPersonal from
+  './personalData/completedPersonal'
+
 
 const PersonalData = () => {
-  const user =
-    useSelector<AppStoreType, UserType>((state) => state.user)
-   console.log(user.user)
-
+  const [isShifting, setChangeStatus] = useState<boolean>(true)
+  const changeStatus=(status:boolean)=>{
+    setChangeStatus(status)
+  }
 
   return (
     <div className='profile-block ml-md-auto'>
       <h2 className='profile-subtitle'>
         Личные данные
       </h2>
-      <div className='info-block'>
-        <div className='user-name'>Имя</div>
-        <div className='second-name'>Фамилия</div>
-        <div className='user-email'>Электронная почта</div>
-        <div className='phone-number'>Телефон</div>
-      </div>
-      <button className='btn btn-outline-warning offset-md-10'>
-        Изменить
-      </button>
+      {isShifting ?
+        <CompletedPersonal changeStatus={changeStatus}/> :
+        <ShiftingPersonal changeStatus={changeStatus}/> }
     </div>
   )
 }

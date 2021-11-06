@@ -48,7 +48,6 @@ const ShiftingDish = (props: PropsType) => {
       <Row>
         <Col xs={'auto'} sm={6} md={8} lg={8}>
           <div
-            key={props.currentDish.id}
             style={{
               height: '100%', width: '100%',
               backgroundImage: `url(${props.currentDish.imageURL})`,
@@ -56,13 +55,6 @@ const ShiftingDish = (props: PropsType) => {
               backgroundPosition: 'center',
             } }
           />
-          {/* <img
-            className={'image'}
-            style={{ width: '100%', height: 'auto' }}
-            // src={props.currentDish.image}
-            src={"https://img.poehalisnami.by/static/countries/c84/small/84_637145235972434334.jpg"}
-            alt='dish image'
-          /> */}
         </Col>
         <Col xs={'auto'} sm={6} md={4} lg={4}>
           <div className={'ingredients'}>
