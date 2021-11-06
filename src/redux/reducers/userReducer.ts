@@ -11,9 +11,9 @@ import {UserType} from '../../common/types/userTypes'
 const initialState: UserType = {
   'user': {
     'id': 8,
-    'name': 'Andre',
-    'secondname': 'Andre2',
-    'email': '7656077@mail.ru',
+    'name': 'Ivan',
+    'secondname': 'Ivanov',
+    'email': 'ivanov@mail.ru',
     'password': '$2b$10$qJfHke4w.E/mAzb.YHaNoeFwLYrMNb0TPkTL7GhrYXV4eTNHmfLa.',
     'phone': '+375293632222'
   }
@@ -28,13 +28,25 @@ const dishesReducer = createReducer(initialState, (builder) => {
 
 export default dishesReducer
 
-export const getUserTC =
+export const getUserPersonalDataTC =
   (): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        const asyncResp = await ApiUser.getUsers()
+        const asyncResp = await ApiUser.getPersonalUsersData()
         const userData = asyncResp.data
         dispatch(getUserAC(userData))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+export const setPersonalUsersData =
+  (userData: any): ThunkAction<void, RootState, unknown, AnyAction> =>
+    async (dispatch) => {
+      try {
+        const asyncResp: any = await ApiUser.setUserData(userData)
+        // const userData = asyncResp.data
+      //   dispatch(getUserAC(userData))
       } catch (err) {
         console.log(err)
       }

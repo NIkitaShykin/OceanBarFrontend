@@ -1,8 +1,4 @@
-import {useState, ChangeEvent} from 'react'
-import {UserType} from '../../common/types/userTypes'
-import {AppStoreType} from '../../redux/reducers/rootReducer'
-import {useSelector} from 'react-redux'
-// import {Form, Button} from 'react-bootstrap'
+import {useState} from 'react'
 
 import ShiftingPersonal from
   './personalData/shiftingPersonal'
@@ -11,9 +7,6 @@ import CompletedPersonal from
 
 
 const PersonalData = () => {
-  const user =
-    useSelector<AppStoreType, UserType>((state) => state.user)
-
   const [isShifting, setChangeStatus] = useState<boolean>(true)
   const changeStatus=(status:boolean)=>{
     setChangeStatus(status)
@@ -32,21 +25,3 @@ const PersonalData = () => {
 }
 
 export default PersonalData
-
-
-// Добавить адрес: 
-// patch /api/users
-// {
-// city: 'город'
-// street: 'улица'
-// home№: 'дом'
-// homePart: 'корпус'
-// flat: 'квартира'
-// }
-
-// изменить
-
-// удалить
-// {
-// теже поля: пустое значение
-// }

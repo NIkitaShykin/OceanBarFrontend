@@ -1,4 +1,3 @@
-import {useState} from 'react'
 import {UserType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {useSelector} from 'react-redux'
@@ -12,7 +11,6 @@ const completedPersonal = (props:PropsType) => {
   const user =
     useSelector<AppStoreType, UserType>((state) => state.user)
 
-  const [isShifting, setIsShifting] = useState<boolean>(false)
 
   return (
     <div >
@@ -41,7 +39,6 @@ const completedPersonal = (props:PropsType) => {
         <Col sm={7}></Col>
       </Row>
       <br/>
-     
       <button
         className='btn btn-outline-warning offset-md-10'
         onClick={()=>{

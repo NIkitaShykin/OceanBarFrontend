@@ -3,8 +3,9 @@ import {UserType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {useSelector} from 'react-redux'
 import EditableSpan from './editableSpan/editableSpan'
-import {useHistory} from 'react-router-dom'
-import {Form, Modal, CloseButton} from 'react-bootstrap'
+import {Form, Modal} from 'react-bootstrap'
+import {useDispatch} from 'react-redux'
+import {setPersonalUsersData} from '../../../redux/reducers/userReducer'
 
 type PropsType = {
   changeStatus: (status:boolean) => void
@@ -13,10 +14,11 @@ type PropsType = {
 const shiftingPersonal = (props:PropsType) => {
   const user =
     useSelector<AppStoreType, UserType>((state) => state.user)
+  const dispatch = useDispatch()
 
   const [userName, setUserName] = useState<string>(user.user.name)
-  // eslint-disable-next-line max-len
-  const [userSecondname, setUserSecondname] = useState<string>(user.user.secondname)
+  const [userSecondname, setUserSecondname] =
+   useState<string>(user.user.secondname)
   const [userPhone, setUserPhone] = useState<string>(user.user.phone)
   const [userEmail, setUserEmail] = useState<string>(user.user.email)
 
@@ -31,6 +33,19 @@ const shiftingPersonal = (props:PropsType) => {
   }
   const setEmailCallback=(e: ChangeEvent<HTMLInputElement>)=>{
     setUserEmail(e.target.value)
+  }
+
+  const userData={userName: userName,
+    userSecondname: userSecondname,
+    userPhone: userPhone,
+    userEmail: userEmail
+  }
+
+  const clickHandler=()=>{
+    props.changeStatus(true)
+    dispatch(
+      setPersonalUsersData(userData)
+    )
   }
 
   return (
@@ -67,7 +82,7 @@ const shiftingPersonal = (props:PropsType) => {
           <button
             className='btn btn-outline-warning offset-md-10'
             onClick={()=>{
-              props.changeStatus(true)
+              clickHandler()
             }}
           >
         Сохранить
