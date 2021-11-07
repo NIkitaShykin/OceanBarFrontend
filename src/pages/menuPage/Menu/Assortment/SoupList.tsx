@@ -7,8 +7,10 @@ import {DishType} from '../../../../common/types/dishesType'
 type dishesType = Array<DishType>
 
 const SoupList = () => {
-  const allDishes: dishesType = useAppSelector<any>((state) => state.dish)
-  
+  const allDishes: dishesType = useAppSelector<any>(
+    (state) => state.dish.dishes
+  )
+
   const soupDishes = allDishes.filter((dish) => {
     return dish.dishCategory == 'Супы'
   })

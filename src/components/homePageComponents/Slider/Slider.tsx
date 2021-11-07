@@ -8,6 +8,7 @@ import Spinner from '../../../components/Spinner/Spinner'
 import {useAppSelector} from '../../../redux/hooks'
 
 const Slider = () => {
+  // @ts-ignore
   const allDishes =
    useAppSelector<DishType[]>((state) => state.dish.dishes)
 
@@ -20,7 +21,7 @@ const Slider = () => {
       <Row className='justify-content-md-center'>
         <Col xs lg='1'></Col>
         <Col>
-          <SliderGallery/>
+
           {/* { allDishes.length < 10 && <Spinner/>}
           { allDishes.length > 10 ? <SliderGallery/> : null } */}
         </Col>
