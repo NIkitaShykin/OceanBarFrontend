@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+
 import {createReducer} from '@reduxjs/toolkit'
 import {AnyAction} from 'redux'
 import {RootState} from '../store'
@@ -41,7 +41,6 @@ const dishesReducer = createReducer(initialState, (builder) => {
     .addCase(toggleLoading, (state, action) => {
       return {
         ...state,
-        dish: action.payload,
         isLoading: action.payload}
     })
 })

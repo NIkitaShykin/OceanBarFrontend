@@ -3,7 +3,7 @@ import axios from 'axios'
 import {UserType} from '../../src/common/types/userTypes'
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001/'
+  baseURL: 'http://13.51.224.150:3000/'
 })
 
 export const ApiUser = {
