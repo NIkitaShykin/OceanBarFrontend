@@ -1,25 +1,35 @@
 import axios from 'axios'
+import {url as baseURL} from './index'
 
 import {UserType} from '../../src/common/types/userTypes'
+import {DeliveryAdressType} from '../../src/common/types/userTypes'
+
+// const settings = {
+//   withCredentials: true
+// }
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001/'
+  baseURL,
+  // ...settings
 })
 
 export const ApiUser = {
-  userLogin(user:UserType) {
-    return instance.post('users/auth', {data: user})
+  // userLogin(user:UserType) {
+  //   return instance.post('users/auth', {data: user})
+  // },
+  // userRegister(user:UserType) {
+  //   return instance.post('users/register', {data: user})
+  // },
+  getUserPersonalData() {
+    return instance.get('users/')
   },
-  userRegister(user:UserType) {
-    return instance.post('users/register', {data: user})
+  getUserDeliveryData() {
+    return instance.get('users/')
   },
-  getPersonalUsersData() {
-    return instance.get('api/users/8')
+  setUserPersonalData(userData:UserType) {
+    return instance.patch('users/', {userData})
   },
-  setUserData(userData:UserType) {
-    return instance.patch('/api/users', {userData: userData})
-  },
-  getDeliveryUserData() {
-    return instance.get('/api/users/???')
+  setUserDeliveryData(deliveryData:DeliveryAdressType) {
+    return instance.patch('users/', {deliveryData})
   }
 }

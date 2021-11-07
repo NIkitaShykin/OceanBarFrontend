@@ -11,9 +11,9 @@ import {UserType} from '../../common/types/userTypes'
 const initialState: UserType = {
   'user': {
     'id': 8,
-    'name': 'Ivan',
-    'secondname': 'Ivanov',
-    'email': 'ivanov@mail.ru',
+    'name': 'Иван',
+    'secondname': 'Иванов',
+    'email': 'ivanov@mail.com',
     'password': '$2b$10$qJfHke4w.E/mAzb.YHaNoeFwLYrMNb0TPkTL7GhrYXV4eTNHmfLa.',
     'phone': '+375293632222'
   }
@@ -32,11 +32,11 @@ export const getUserPersonalDataTC =
   (): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        const asyncResp = await ApiUser.getPersonalUsersData()
-        const userData = asyncResp.data
-        dispatch(getUserAC(userData))
+        // const asyncResp = await ApiUser.getUserPersonalData()
+        // const userData = asyncResp.data
+        // dispatch(getUserAC(userData))
       } catch (err) {
-        console.log(err)
+        // console.log(err)
       }
     }
 
@@ -44,7 +44,7 @@ export const setPersonalUsersData =
   (userData: any): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        const asyncResp: any = await ApiUser.setUserData(userData)
+        const asyncResp: any = await ApiUser.setUserPersonalData(userData)
         // const userData = asyncResp.data
       //   dispatch(getUserAC(userData))
       } catch (err) {

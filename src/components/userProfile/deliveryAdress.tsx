@@ -12,19 +12,14 @@ const DeliveryAdress = () => {
   }
 
   return (
-
     <div className='profile-block justify-content-start'>
       <h2>Адрес доставки</h2>
       <div className='info-block'>
-
         {isShifting ?
           <CompletedDelivery changeStatus={changeStatus}/> :
           <ShiftingDelivery changeStatus={changeStatus}/> }
-
       </div>
-
     </div>
-
   )
 }
 

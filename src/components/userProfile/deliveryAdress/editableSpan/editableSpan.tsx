@@ -6,20 +6,16 @@ import { propTypes } from 'react-bootstrap/esm/Image'
 type EditableSpanType = {
   valueName: string
   valueType: string
-  setNameCallback: (e:ChangeEvent<HTMLInputElement>)=>void
+  setValueCallback: (e:ChangeEvent<HTMLInputElement>)=>void
  }
 
 const EditableSpan = (props:EditableSpanType) => {
-
-
   return (
     <div>
-      <br/>
       <SpanContainer
-        setNameCallback={props.setNameCallback}
+        setValueCallback={props.setValueCallback}
         valueName={props.valueName}
         valueType={props.valueType}
-
       />
     </div>
   )

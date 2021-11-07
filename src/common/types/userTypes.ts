@@ -22,13 +22,13 @@ export type UserType={
         'email': string,
         'password': string,
         'phone': string
-    }
+  }
 }
 
 export type DeliveryAdressType={
 city: string
 street: string
 home: string
-homePart?: string
-flat?: string
+homePart: string
+flat: string
     }

@@ -1,11 +1,11 @@
 import {useState, ChangeEvent} from 'react'
-import {UserType} from '../../../common/types/userTypes'
+import {DeliveryAdressType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {useSelector} from 'react-redux'
 import EditableSpan from './editableSpan/editableSpan'
 import {Form, Modal} from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
-// import {setPersonalUsersData} from '../../../redux/reducers/userReducer'
+import {setUserDeliveryData} from '../../../redux/reducers/deliveryReducer'
 
 type PropsType = {
   changeStatus: (status:boolean) => void
@@ -13,27 +13,45 @@ type PropsType = {
 
 const shiftingDelivery = (props:PropsType) => {
   const delivery =
-    useSelector<AppStoreType, any>((state) => state.delivery)
+    useSelector<AppStoreType, DeliveryAdressType>((state) => state.delivery)
   const dispatch = useDispatch()
 
   const [userCity, setUserCity] = useState<string>(delivery.city)
+  const [userStreet, setUserStreet] = useState<string>(delivery.street)
+  const [userHome, setUserHome] = useState<string>(delivery.home)
+  const [userHomePart, setUserHomePart] = useState<string>(delivery.homePart)
+  const [userFlat, setUserFlat] = useState<string>(delivery.flat)
 
 
   const setCityCallback=(e: ChangeEvent<HTMLInputElement>)=>{
     setUserCity(e.target.value)
   }
- 
-  // const userData={userName: userName,
-  //   userSecondname: userSecondname,
-  //   userPhone: userPhone,
-  //   userEmail: userEmail
-  // }
+  const setStreetCallback=(e: ChangeEvent<HTMLInputElement>)=>{
+    setUserStreet(e.target.value)
+  }
+  const setHomeCallback=(e: ChangeEvent<HTMLInputElement>)=>{
+    setUserHome(e.target.value)
+  }
+  const setHomePartCallback=(e: ChangeEvent<HTMLInputElement>)=>{
+    setUserHomePart(e.target.value)
+  }
+  const setFlatCallback=(e: ChangeEvent<HTMLInputElement>)=>{
+    setUserFlat(e.target.value)
+  }
+
+  const deliveryData={
+    city: userCity,
+    street: userStreet,
+    home: userHome,
+    homePart: userHomePart,
+    flat: userFlat
+  }
 
   const clickHandler=()=>{
     props.changeStatus(true)
-    // dispatch(
-    //   setPersonalUsersData(userData)
-    // )
+    dispatch(
+      setUserDeliveryData(deliveryData)
+    )
   }
 
   return (
@@ -49,11 +67,31 @@ const shiftingDelivery = (props:PropsType) => {
             <EditableSpan
               valueName={userCity}
               valueType='Город'
-              setNameCallback={setCityCallback}
+              setValueCallback={setCityCallback}
+            />
+            <EditableSpan
+              valueName={userStreet}
+              valueType='Улица'
+              setValueCallback={setStreetCallback}
+            />
+            <EditableSpan
+              valueName={userHome}
+              valueType='Дом'
+              setValueCallback={setHomeCallback}
+            />
+            <EditableSpan
+              valueName={userHomePart}
+              valueType='Корпус'
+              setValueCallback={setHomePartCallback}
+            />
+            <EditableSpan
+              valueName={userFlat}
+              valueType='Квартира'
+              setValueCallback={setFlatCallback}
             />
           </Form>
           <button
-            className='btn btn-outline-warning offset-md-10'
+            className='btn btn-outline-warning offset-md-5'
             onClick={()=>{
               clickHandler()
             }}

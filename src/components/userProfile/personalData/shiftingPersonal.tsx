@@ -35,7 +35,8 @@ const shiftingPersonal = (props:PropsType) => {
     setUserEmail(e.target.value)
   }
 
-  const userData={userName: userName,
+  const userData={
+    userName: userName,
     userSecondname: userSecondname,
     userPhone: userPhone,
     userEmail: userEmail

@@ -4,7 +4,7 @@ import Span from './Span'
 type GreetingContainerPropsType = {
   valueName: string
   valueType: string
-  setNameCallback: (e:ChangeEvent<HTMLInputElement>)=>void
+  setValueCallback: (e:ChangeEvent<HTMLInputElement>)=>void
 }
 
 
@@ -15,7 +15,7 @@ const SpanContainer: React.FC<GreetingContainerPropsType> =
        <Span
          valueName={props.valueName}
          valueType={props.valueType}
-         setNameCallback={props.setNameCallback}
+         setValueCallback={props.setValueCallback}
        />
 
      </div>

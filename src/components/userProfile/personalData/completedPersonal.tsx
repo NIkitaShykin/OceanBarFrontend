@@ -13,7 +13,7 @@ const completedPersonal = (props:PropsType) => {
 
 
   return (
-    <div >
+    <div className='info-block'>
       <Row>
       &#128100;
         <Col sm={3}><div className='user-name'><h5>Имя </h5></div></Col>
@@ -22,7 +22,7 @@ const completedPersonal = (props:PropsType) => {
         <Col sm={7}></Col>
       </Row>
       <Row>
-        &#128100;
+      &#128101;
         <Col sm={3}><div className='user-name'><h5>Фамилия </h5></div></Col>
         <Col sm={2}><div className='user-name'>
           <h5>{user.user.secondname}</h5></div></Col>
