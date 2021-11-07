@@ -8,11 +8,8 @@ import {Form, Button, Modal} from 'react-bootstrap'
 import {ValidationType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
 
-// import './SignUpForm.scss'
 
 const shiftingPersonalForm = (props:any) => {
-  // const history = useHistory()
-
   const userData =
   useSelector<AppStoreType, UserType>((state) => state.user)
 
@@ -67,18 +64,10 @@ const shiftingPersonalForm = (props:any) => {
     phoneNumberError: true,
   })
 
-  // const password = useInput('', {
-  //   isEmpty: true,
-  //   minLengthError: 8,
-  //   maxLengthError: 15,
-  //   passwordError: true,
-  // })
-
   const user = {
     name: firstName.value,
     secondname: lastName.value,
     email: email.value,
-    // password: password.value,
     phone: phoneNumber.value,
     id: null,
   }
@@ -211,29 +200,6 @@ const shiftingPersonalForm = (props:any) => {
                   </div>
                 }
               </Form.Floating>
-
-              {/* <Form.Floating className='mx-3'>
-                <Form.Control
-                  id='userPassword'
-                  type='password'
-                  placeholder='password'
-                  value={!authFailed ? password.value : ''}
-                  onChange={(e) => password.onChange(e)}
-                  onBlur={(e) => password.onBlur(e)}
-                />
-                <label htmlFor='userPassword'>Пароль</label>
-                {
-                  isPasswordInvalid &&
-                  <div className='error'>
-                    Пароль должен содержать 8-15 символов
-                    (включая 1 символ в верхнем регистре,
-                    1 символ в нижнем регистре и 1 цифру)
-                    без пробелов и специальных знаков (#, %, &, !, $, etc.).
-                    Обязательно к заполнению.
-                  </div>
-                }
-              </Form.Floating> */}
-
             </Form>
           </Modal.Body>
 
@@ -243,7 +209,6 @@ const shiftingPersonalForm = (props:any) => {
                 !lastName.inputValid ||
                 !email.inputValid ||
                 !phoneNumber.inputValid ||
-                // !password.inputValid ||
                 authFailed}
               variant='outline-warning'
               type='submit'
