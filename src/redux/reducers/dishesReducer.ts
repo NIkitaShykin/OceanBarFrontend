@@ -6,19 +6,9 @@ import {ThunkAction} from 'redux-thunk'
 
 import {addDishesAC, toggleLoading} from '../actions'
 import {API} from '../../api/index'
+import {IngredientType} from '../../common/types/dishesType'
+import {DishType} from '../../common/types/dishesType'
 
-export type IngredientType = { name: string; isAdded: boolean }
-export type IngredientsType = Array<IngredientType>
-export type DishType = {
-  'id': number,
-  'name': string,
-  'price': number,
-  'weight': string,
-  'calories': string,
-  'imageURL': string,
-  'ingredients': IngredientsType,
-  'dishCategory': string
-}
 export type dishesType = Array<DishType>
 
 // interface MenuState {

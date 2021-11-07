@@ -24,3 +24,11 @@ export type UserType={
         'phone': string
     }
 }
+
+export type DeliveryAdressType={
+city: string
+street: string
+home: string
+homePart?: string
+flat?: string
+    }
