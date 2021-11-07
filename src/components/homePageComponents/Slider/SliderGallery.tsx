@@ -7,7 +7,9 @@ import SliderGallertItem from './SliderGalleryItem'
 import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
 
 const ControlledCarousel = () => {
-  const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
+  const allDishes = useAppSelector<DishType[]>(
+    (state) => state.dish.dishes
+  )
 
   const desertDishes = allDishes.filter((dish) => {
     return dish.dishCategory === 'Десерты'

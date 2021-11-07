@@ -1,13 +1,15 @@
-
 import {Row, Col} from 'react-bootstrap'
+// import {useSelector} from 'react-redux'
+
 import SliderGallery from './SliderGallery'
-import {AppStoreType} from '../../../redux/reducers/rootReducer'
-import {useSelector} from 'react-redux'
-import {DishType} from 'src/common/types/dishesType'
+// import {AppStoreType} from '../../../redux/reducers/rootReducer'
+import {DishType} from '../../../common/types/dishesType'
+import Spinner from '../../../components/Spinner/Spinner'
+import {useAppSelector} from '../../../redux/hooks'
 
 const Slider = () => {
   const allDishes =
-   useSelector<AppStoreType, Array<DishType>>((state) => state.dish)
+   useAppSelector<DishType[]>((state) => state.dish.dishes)
 
   return (
     <>
@@ -18,7 +20,9 @@ const Slider = () => {
       <Row className='justify-content-md-center'>
         <Col xs lg='1'></Col>
         <Col>
-          { allDishes.length > 10 ? <SliderGallery/> : null }
+          <SliderGallery/>
+          {/* { allDishes.length < 10 && <Spinner/>}
+          { allDishes.length > 10 ? <SliderGallery/> : null } */}
         </Col>
         <Col xs lg='1'></Col>
       </Row>

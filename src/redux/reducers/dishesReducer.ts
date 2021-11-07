@@ -6,17 +6,16 @@ import {ThunkAction} from 'redux-thunk'
 
 import {addDishesAC, toggleLoading} from '../actions'
 import {API} from '../../api/index'
-import {IngredientType} from '../../common/types/dishesType'
-import {DishType} from '../../common/types/dishesType'
+import {DishType, IngredientType} from '../../common/types/dishesType'
 
-export type dishesType = Array<DishType>
+// type dishesType = Array<DishType>
 
-// interface MenuState {
-//   dishes: dishesType[],
-//   isLoading: boolean
-// }
+type InitialMenuStateType = {
+  dishes: DishType[],
+  isLoading?: boolean
+}
 
-const initialState: any = {
+const initialState: InitialMenuStateType = {
   dishes: [],
   isLoading: false,
 }

@@ -8,7 +8,7 @@ import './maybeIntresting.scss'
 
 const CompletedDish = () => {
   const intrestingDishes =
-   useAppSelector<Array<DishType>>((state) => state.dish)
+   useAppSelector<DishType[]>((state) => state.dish.dishes)
 
   let [index, setIndex] = useState(0)
   const handleSelect = (selectedIndex: string) => {
