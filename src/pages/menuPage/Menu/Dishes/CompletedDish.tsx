@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux'
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
 
-import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {DishType} from '../../../../common/types/dishesType'
 import {addDishToCart} from '../../../../redux/actions'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 

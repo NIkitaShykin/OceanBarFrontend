@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import {createReducer} from '@reduxjs/toolkit'
 import {AnyAction} from 'redux'
 import {RootState} from '../store'
@@ -40,14 +39,4 @@ export const getUserPersonalDataTC =
       }
     }
 
-export const setPersonalUsersData =
-  (userData: any): ThunkAction<void, RootState, unknown, AnyAction> =>
-    async (dispatch) => {
-      try {
-        const asyncResp: any = await ApiUser.setUserData(userData)
-        // const userData = asyncResp.data
-      //   dispatch(getUserAC(userData))
-      } catch (err) {
-        console.log(err)
-      }
-    }
+

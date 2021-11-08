@@ -1,5 +1,7 @@
 export type IngredientType = {name: string; isAdded: boolean}
+
 export type IngredientsType = Array<IngredientType>
+
 export type DishType = {
   id: number
   name: string
@@ -10,10 +12,16 @@ export type DishType = {
   ingredients: IngredientsType
   dishCategory: string
 }
+
 export type DishInCart = {
   id: number
   name: string
   price: number
   imageURL: string
   numberOfDishes: number
+}
+
+export type InitialMenuStateType = {
+  dishes: DishType[],
+  isLoading?: boolean
 }
