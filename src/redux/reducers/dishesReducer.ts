@@ -10,18 +10,6 @@ import {DishType,
   IngredientType,
   InitialMenuStateType} from '../../common/types/dishesType'
 
-// type InitialMenuStateType = {
-//   dishes: DishType[],
-//   isLoading?: boolean
-// }
-
-// type ResponseType = {
-//   data:{
-//     data:{
-//       dishes:Array<DishType>
-//     }
-//   }
-// }
 
 const initialState: InitialMenuStateType = {
   dishes: [],
@@ -47,7 +35,7 @@ export const getDishesFromApiTC =
     async (dispatch) => {
       dispatch(toggleLoading(true))
       try {
-        const asyncResp: AxiosResponse<unknown, any> = await API.getAllDish()
+        const asyncResp: any = await API.getAllDish()
         // @ts-ignore
         const restructDishes: DishType[] = asyncResp.data.data.dishes.map(
           (dish: DishType) => {
