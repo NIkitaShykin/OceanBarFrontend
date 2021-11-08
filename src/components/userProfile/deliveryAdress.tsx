@@ -5,7 +5,7 @@ import CompletedDelivery from
   './deliveryAdress/completedDelivery'
 import AbsentDelivery from
   './deliveryAdress/absentDelivery'
-import {findDOMNode} from 'react-dom'
+// import {findDOMNode} from 'react-dom'
 
 const DeliveryAdress = () => {
   const [isShifting, setChangeStatus] = useState<boolean>(true)

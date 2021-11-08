@@ -1,6 +1,5 @@
 import {useState} from 'react'
 // import {useHistory} from 'react-router-dom'
-import axios from 'axios'
 import {UserType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {useSelector} from 'react-redux'
@@ -64,13 +63,13 @@ const shiftingPersonalForm = (props:any) => {
     phoneNumberError: true,
   })
 
-  const user = {
-    name: firstName.value,
-    secondname: lastName.value,
-    email: email.value,
-    phone: phoneNumber.value,
-    id: null,
-  }
+  // const user = {
+  //   name: firstName.value,
+  //   secondname: lastName.value,
+  //   email: email.value,
+  //   phone: phoneNumber.value,
+  //   id: null,
+  // }
 
   // eslint-disable-next-line max-len
   const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)

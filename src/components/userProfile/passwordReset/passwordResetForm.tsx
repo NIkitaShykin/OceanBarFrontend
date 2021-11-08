@@ -1,19 +1,20 @@
 import {useState} from 'react'
 // import {useHistory} from 'react-router-dom'
-import {ApiUser} from '../../../api/ApiUser'
-import {ApiDish} from '../../../api/ApiDish'
-import {UserType} from '../../../common/types/userTypes'
-import {AppStoreType} from '../../../redux/reducers/rootReducer'
-import {useSelector} from 'react-redux'
-import {Form, Button, Modal, Row, Col,} from 'react-bootstrap'
+// import {ApiUser} from '../../../api/ApiUser'
+// import {ApiDish} from '../../../api/ApiDish'
+// import {UserType} from '../../../common/types/userTypes'
+// import {AppStoreType} from '../../../redux/reducers/rootReducer'
+// import {useSelector} from 'react-redux'
+import {Form, Button, Modal} from 'react-bootstrap'
 import {ValidationType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
-import { mainModule } from 'process'
+// import {mainModule} from 'process'
+// import axios from 'axios'
 
 
 const passwordResetForm = () => {
-  const userData =
-  useSelector<AppStoreType, UserType>((state) => state.user)
+  // const userData =
+  // useSelector<AppStoreType, UserType>((state) => state.user)
 
   const [authFailed, setAuthFailed] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
@@ -24,12 +25,27 @@ const passwordResetForm = () => {
 
 
   const oldPassOnBlur = (e: any) => {
-    // const response = ApiUser.userLogIn(userLoginData)
-    const response = ApiDish.getAllDish()
-    console.log(response)
-    response.then((res:any) => {console.log(res)
-    })
+  //  axios
+  //     .post(`${url}/users/register`, user)
+  //     .then((response: any) => {
+  //       if (response.status > 400) {
+  //         throw new Error(response.statusText)
+  //       }
+  //     })
+  //     .then(() => history.push('/signup-success'))
+  //     .catch((error) => {
+  //       console.log(error.response)
+  //       setAuthFailed(true)
+  //     })
   }
+
+  // const response = ApiUser.userLogIn(userLoginData)
+  // const response = ApiDish.getAllDish()
+  // console.log(response)
+  // response.then((res:any) => {
+  //   console.log(res)
+  // })
+  // }
 
   const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
@@ -62,24 +78,16 @@ const passwordResetForm = () => {
   })
 
 
-  const email = useInput(`${userData.email}`, {
-    isEmpty: true,
-    minLengthError: 8,
-    maxLengthError: 325,
-    emailError: true,
-  })
-
-  const userLoginData = {
-    // name: firstName.value,
-    // secondname: lastName.value,
-    email: 'ivan@mainModule.ru',
-    password: oldPassword,
-    // phone: phoneNumber.value,
-    // id: null,
-  }
+  // const userLoginData = {
+  // name: firstName.value,
+  // secondname: lastName.value,
+  // email: 'ivan@mainModule.ru',
+  // password: oldPassword,
+  // phone: phoneNumber.value,
+  // id: null,
+  // }
 
   // eslint-disable-next-line max-len
-  const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
   // eslint-disable-next-line max-len
   const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
 
@@ -186,9 +194,9 @@ const passwordResetForm = () => {
 
           <Button className='btn btn-outline-warning offset-md-8'
             style={{width: '100px'}}
-            disabled={
-              !email.inputValid ||
-               authFailed}
+            // disabled={
+            //   !email.inputValid ||
+            //    authFailed}
             variant='outline-warning'
             type='submit'
             onClick={(e) => handleSubmit(e)}
@@ -204,138 +212,7 @@ const passwordResetForm = () => {
         </Modal.Dialog>
       </div>
     </div>
-
-
-  // <div className='registration-form'>
-  //   <div className='container'>
-  //     <Modal.Dialog className='shadow p-1 mb-2 bg-body rounded' >
-  //       {
-  //         authFailed &&
-  //         <div className='error validation'>
-  //           Адрес электронной почты или пароль введен с ошибкой.
-  //           Пожалуйста, попробуйте еще раз.
-  //         </div>
-  //       }
-  //           <Row>
-
-  //          <Col xs={'auto'} sm={7} md={11} lg={11}>
-
-  //       <Modal.Body
-  //       //  style={{width: '300px'}}
-  //       >
-
-
-  //         {/* <Form className='my-3'
-  //           style={{width: '78%'}}
-  //         > */}
-
-
-  //               <Form.Floating className='mx-3'>
-  //                 <Form.Control
-  //                   id='userPassword'
-  //                   type='password'
-  //                   placeholder='password'
-  //                   value={!authFailed ? password.value : ''}
-  //                   onChange={(e) => password.onChange(e)}
-  //                   onBlur={(e) => password.onBlur(e)}
-  //                 />
-  //                 <label htmlFor='userPassword'>Старый пароль</label>
-  //                 {
-  //                   isPasswordInvalid &&
-  //               <div className='error'>
-  //                 Пароль должен содержать 8-15 символов
-  //                 (включая 1 символ в верхнем регистре,
-  //                 1 символ в нижнем регистре и 1 цифру)
-  //                 без пробелов и специальных знаков (#, %, &, !, $, etc.).
-  //                 Обязательно к заполнению.
-  //               </div>
-  //                 }
-  //               </Form.Floating>
-  //               <Form.Floating className='mx-3'>
-  //                 <Form.Control
-  //                   id='userPassword'
-  //                   type='password'
-  //                   placeholder='password'
-  //                   value={!authFailed ? password.value : ''}
-  //                   onChange={(e) => password.onChange(e)}
-  //                   onBlur={(e) => password.onBlur(e)}
-  //                 />
-  //                 <label htmlFor='userPassword'>Новый пароль</label>
-  //                 {
-  //                   isPasswordInvalid &&
-  //               <div className='error'>
-  //                 Пароль должен содержать 8-15 символов
-  //                 (включая 1 символ в верхнем регистре,
-  //                 1 символ в нижнем регистре и 1 цифру)
-  //                 без пробелов и специальных знаков (#, %, &, !, $, etc.).
-  //                 Обязательно к заполнению.
-  //               </div>
-  //                 }
-  //               </Form.Floating>
-  //               <Form.Floating className='mx-3'>
-  //                 <Form.Control
-  //                   id='userPassword'
-  //                   type='password'
-  //                   placeholder='password'
-  //                   value={!authFailed ? password.value : ''}
-  //                   onChange={(e) => password.onChange(e)}
-  //                   onBlur={(e) => password.onBlur(e)}
-  //                 />
-  //                 <label htmlFor='userPassword'>Повторите новый пароль</label>
-  //                 {
-  //                   isPasswordInvalid &&
-  //               <div className='error'>
-  //                 Пароль должен содержать 8-15 символов
-  //                 (включая 1 символ в верхнем регистре,
-  //                 1 символ в нижнем регистре и 1 цифру)
-  //                 без пробелов и специальных знаков (#, %, &, !, $, etc.).
-  //                 Обязательно к заполнению.
-  //               </div>
-  //                 }
-  //               </Form.Floating>
-  //               </Modal.Body>
-  //             </Col>
-
-  //             <Col xs={'auto'} sm={2} md={1} lg={1}>
-  //               <Button className='btn btn-outline-warning offset-md-9'
-  //               // style={{width:'100px'}}
-  //                 disabled={
-  //                   !email.inputValid ||
-  //             authFailed}
-  //                 variant='outline-warning'
-  //                 type='submit'
-  //                 onClick={(e) => handleSubmit(e)}
-  //               >
-  //           Сохранить
-  //               </Button>
-  //             </Col>
-
-  //           </Row>
-
-
-  //         {/* </Form> */}
-
-
-  //       {/* <Modal.Footer className='justify-content-center border-5'>
-  //         <Button className='btn btn-outline-warning offset-md-10'
-  //           disabled={
-  //             !email.inputValid ||
-  //             authFailed}
-  //           variant='outline-warning'
-  //           type='submit'
-  //           onClick={(e) => handleSubmit(e)}
-  //         >
-  //           Сохранить
-  //         </Button>
-  //       </Modal.Footer> */}
-
-
-  //     </Modal.Dialog>
-  //   </div>
-  // </div>
   )
 }
 
 export default passwordResetForm
-
-

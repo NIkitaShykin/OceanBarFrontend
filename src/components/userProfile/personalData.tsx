@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import ShiftingPersonalForm from './personalData/shiftingPersonalForm'
 
-import ShiftingPersonal from
-  './personalData/shiftingPersonal'
+// import ShiftingPersonal from
+//   './personalData/shiftingPersonal'
 import CompletedPersonal from
   './personalData/completedPersonal'
 
