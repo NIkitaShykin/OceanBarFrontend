@@ -2,8 +2,7 @@ import {toast} from 'react-toastify'
 
 import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 
-
-export const orderedToast = (message: string,autoClose?:number) => {
+export const orderedToast = (message: string, autoClose?: number) => {
   toast.warn(message, {
     position: 'top-center',
     autoClose: autoClose || 2000,
@@ -12,6 +11,6 @@ export const orderedToast = (message: string,autoClose?:number) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    icon: false
+    icon: false,
   })
 }

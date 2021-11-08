@@ -15,7 +15,7 @@ import Cookies from 'js-cookie'
 import ShiftingDish from '../../pages/menuPage/Menu/Dishes/ShiftingDish'
 import {DishType} from '../../common/types/dishesType'
 import {useAppSelector} from '../../redux/hooks'
-import {IngredientsType} from '../../redux/reducers/dishesReducer'
+import {IngredientsType} from '../../common/types/dishesType'
 import {parseString} from '../../common/parceInString'
 
 interface IOrderItemProps {
@@ -51,7 +51,6 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   const updateIngredients = (updIngridients: IngredientsType) => {
     setIngredients(updIngridients)
   }
-
   const changeStatus = () => {
     setDishСhangeStatus(!dishСhangeStatus)
   }
