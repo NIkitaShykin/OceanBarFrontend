@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import DatePicker from 'react-date-picker'
-// import TimePicker from 'react-time-picker'
 import {
   Form,
   Row,
@@ -14,9 +13,7 @@ import {
 import './OrderForms.scss'
 
 const DeliveryForm: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
-  // if timepicker is used instead of dropdown w/ time slots
-  // const [selectedTime, setSelectedTime] = useState('10:30')
+  const [selectedDate, setSelectedDate] = useState(new Date())
 
   const timeSlots: Array<string> = [
     '16:00 - 16:30',
@@ -74,24 +71,12 @@ const DeliveryForm: React.FC = () => {
           </div>
 
           <div className='section-content'>
-            {/* <TimePicker
-              clearIcon={null}
-              // maxDetail='second'
-              maxTime='08:00'
-              minTime='23:00'
-              onChange={(time: any) => setSelectedTime(time)}
-              required
-              value={selectedTime}
-              secondAriaLabel='Second'
-              minuteAriaLabel='Minute'
-              hourAriaLabel='Hour'
-            /> */}
             <FloatingLabel
               controlId='floatingSelectGrid'
               label='Доставка доступна с 16:00 до 22:00'
             >
               <Form.Select aria-label='Floating label select example'>
-                <option>Подходящее время можно выбрать в списке</option>
+                <option value=''>Выбрать...</option>
                 {timeSlots.map((time, idx) => (
                   <option value={time} key={idx}>{time}</option>
                 ))}

@@ -1,6 +1,5 @@
 import React, {ChangeEvent, useState} from 'react'
 import DatePicker from 'react-date-picker'
-// import TimePicker from 'react-time-picker'
 import {
   Form,
   FloatingLabel,
@@ -15,11 +14,9 @@ interface IReserveATableFormProps {
 
 const ReserveATableForm: React.FC<IReserveATableFormProps> =
   ({handleRadioValueClearance}) => {
-    const [date, setDate] = useState<Date>(new Date())
-    // if timepicker is used instead of dropdown w/ time slots
-    // const [selectedTime, setSelectedTime] = useState('10:30')
-    const [timeSlot, setTimeSlot] = useState('Выбрать...')
-    const [tableSize, setTableSize] = useState('Выбрать...')
+    const [date, setDate] = useState(new Date())
+    const [timeSlot, setTimeSlot] = useState('')
+    const [tableSize, setTableSize] = useState('')
     const [ispaymentConfirmed, setPaymentConfirmed] = useState(false)
     const [isTimeInputSkipped, setTimeInputSkipped] = useState(false)
     const [isTableInputSkipped, setTableInputSkipped] = useState(false)
@@ -125,14 +122,14 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   defaultValue={tableSize}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setTableSize(e.target.value)
-                    e.target.value === 'Выбрать...' ?
+                    !e.target.value ?
                       setTableInputSkipped(true) :
                       setTableInputSkipped(false)
                   }}
                   onBlur={(e) => table.onBlur(e)}
                   isInvalid={isTableInputSkipped}
                 >
-                  <option>Выбрать...</option>
+                  <option value=''>Выбрать...</option>
                   {tableSizes.map((size, idx) => (
                     <option
                       value={size}
@@ -160,18 +157,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
             </div>
 
             <div className='section-content'>
-              {/* <TimePicker
-                clearIcon={null}
-                // maxDetail='second'
-                maxTime='08:00'
-                minTime='23:00'
-                onChange={(time: any) => setSelectedTime(time)}
-                required
-                value={selectedTime}
-                secondAriaLabel='Second'
-                minuteAriaLabel='Minute'
-                hourAriaLabel='Hour'
-              /> */}
               <FloatingLabel
                 controlId='floatingSelectGrid'
                 label='Доставка доступна с 16:00 до 22:00'
@@ -181,14 +166,14 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   defaultValue={timeSlot}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setTimeSlot(e.target.value)
-                    e.target.value === 'Выбрать...' ?
+                    !e.target.value ?
                       setTimeInputSkipped(true) :
                       setTimeInputSkipped(false)
                   }}
                   onBlur={(e) => time.onBlur(e)}
                   isInvalid={isTimeInputSkipped}
                 >
-                  <option>Выбрать...</option>
+                  <option value=''>Выбрать...</option>
                   {timeSlots.map((time, idx) => (
                     <option value={time} key={idx}>{time}</option>
                   ))}
