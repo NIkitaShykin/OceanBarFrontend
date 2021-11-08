@@ -10,13 +10,15 @@ import {DeliveryAdressType} from '../../src/common/types/userTypes'
 
 const instance = axios.create({
   baseURL,
+  // timeout: 1000,
+  // headers: {'Authorization': 'Bearer '+token}
   // ...settings
 })
 
 export const ApiUser = {
-  // userLogin(user:UserType) {
-  //   return instance.post('users/auth', {data: user})
-  // },
+  userLogIn(data:any) {
+    return instance.post('users/auth', data)
+  },
   // userRegister(user:UserType) {
   //   return instance.post('users/register', {data: user})
   // },

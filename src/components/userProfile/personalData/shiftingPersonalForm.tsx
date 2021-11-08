@@ -1,6 +1,5 @@
 import {useState} from 'react'
 // import {useHistory} from 'react-router-dom'
-import axios from 'axios'
 import {UserType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {useSelector} from 'react-redux'
@@ -38,39 +37,39 @@ const shiftingPersonalForm = (props:any) => {
     }
   }
 
-  const firstName = useInput(`${userData.user.name}`, {
+  const firstName = useInput(`${userData.name}`, {
     isEmpty: true,
     minLengthError: 2,
     maxLengthError: 30,
     firstNameError: true,
   })
 
-  const lastName = useInput(`${userData.user.secondname}`, {
+  const lastName = useInput(`${userData.secondname}`, {
     isEmpty: true,
     minLengthError: 3,
     maxLengthError: 30,
     lastNameError: true,
   })
 
-  const email = useInput(`${userData.user.email}`, {
+  const email = useInput(`${userData.email}`, {
     isEmpty: true,
     minLengthError: 8,
     maxLengthError: 325,
     emailError: true,
   })
 
-  const phoneNumber = useInput(`${userData.user.phone}`, {
+  const phoneNumber = useInput(`${userData.phone}`, {
     isEmpty: true,
     phoneNumberError: true,
   })
 
-  const user = {
-    name: firstName.value,
-    secondname: lastName.value,
-    email: email.value,
-    phone: phoneNumber.value,
-    id: null,
-  }
+  // const user = {
+  //   name: firstName.value,
+  //   secondname: lastName.value,
+  //   email: email.value,
+  //   phone: phoneNumber.value,
+  //   id: null,
+  // }
 
   // eslint-disable-next-line max-len
   const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)

@@ -5,18 +5,16 @@ import {RootState} from '../store'
 import {ThunkAction} from 'redux-thunk'
 
 import {getUserAC} from '../actions'
-import {ApiUser} from '../../api/ApiUser'
+// import {ApiUser} from '../../api/ApiUser'
 import {UserType} from '../../common/types/userTypes'
 
 const initialState: UserType = {
-  'user': {
-    'id': 8,
-    'name': 'Иван',
-    'secondname': 'Иванов',
-    'email': 'ivanov@mail.com',
-    'password': '$2b$10$qJfHke4w.E/mAzb.YHaNoeFwLYrMNb0TPkTL7GhrYXV4eTNHmfLa.',
-    'phone': '+375293632222'
-  }
+  'id': 8,
+  'name': 'Иван',
+  'secondname': 'Иванов',
+  'email': 'ivanov@mail.com',
+  'password': '$2b$10$qJfHke4w.E/mAzb.YHaNoeFwLYrMNb0TPkTL7GhrYXV4eTNHmfLa.',
+  'phone': '+375293632222'
 }
 
 const dishesReducer = createReducer(initialState, (builder) => {
@@ -44,7 +42,7 @@ export const setPersonalUsersData =
   (userData: any): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        const asyncResp: any = await ApiUser.setUserPersonalData(userData)
+        // const asyncResp: any = await ApiUser.setUserPersonalData(userData)
         // const userData = asyncResp.data
       //   dispatch(getUserAC(userData))
       } catch (err) {

@@ -1,6 +1,5 @@
 import SpanContainer from './SpanContainer'
-import {useState, ChangeEvent} from 'react'
-import { propTypes } from 'react-bootstrap/esm/Image'
+import {ChangeEvent} from 'react'
 
 
 type EditableSpanType = {
