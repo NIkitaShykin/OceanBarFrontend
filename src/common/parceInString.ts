@@ -1,8 +1,10 @@
 export const parseString = (arr: []) => {
-    const string = arr.map((el: { name: string, isAdded: boolean }) => {
-        if (el.isAdded) {
-            return el.name;
-        }
+  const string = arr
+    .filter((el: {name: string; isAdded: boolean}) => {
+      if (el.isAdded) {
+        return el
+      }
     })
-    return `"${string.join(";")}"`;
+    .map((el: {name: string; isAdded: boolean}) => el.name)
+  return `"${string.join(';')}"`
 }

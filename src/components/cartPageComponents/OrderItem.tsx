@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
-import React, {useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Button, Image, Modal} from 'react-bootstrap'
-import {Form} from 'react-bootstrap'
+import React, {useEffect, useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {Image} from 'react-bootstrap'
 import {
   minusOneDish,
   plusOneDish,
@@ -13,6 +12,11 @@ import {orderedToast} from '../OrderToast/OrderedToast'
 import './Cart.scss'
 import {ApiCart} from '../../api/ApiCart'
 import Cookies from 'js-cookie'
+import ShiftingDish from '../../pages/menuPage/Menu/Dishes/ShiftingDish'
+import {DishType} from '../../common/types/dishesType'
+import {useAppSelector} from '../../redux/hooks'
+import {IngredientsType} from '../../redux/reducers/dishesReducer'
+import {parseString} from '../../common/parceInString'
 
 interface IOrderItemProps {
   id: number
@@ -31,21 +35,52 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   numberOfDishes,
   position,
 }) => {
-  let withoutIng: any
+  // const dishToken = useParams<{token: string}>()
+  const allDishes: DishType = useAppSelector<any>((state) => state.dish)
+  // @ts-ignore
+  const currentDish = allDishes.find((el) => el.id == id)
+  const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
+  const [ingredients, setIngredients] = useState(currentDish.ingredients)
+
+  useEffect(() => {
+    setIngredients(currentDish.ingredients)
+  }, [currentDish])
+
+  const updatedDish = {...currentDish, ingredients}
+
+  const updateIngredients = (updIngridients: IngredientsType) => {
+    setIngredients(updIngridients)
+  }
+
+  const changeStatus = () => {
+    setDishСhangeStatus(!dishСhangeStatus)
+  }
   const dispatch = useDispatch()
   let [counter, setCounter] = useState(numberOfDishes)
   const [show, setShow] = useState(false)
-  const handleClose = () => {
-    setShow(false)
-  }
-  const handleConfirm = () => {
-    withoutIng.map((el: any) => {})
-    // check index of ingredinets if they deleted
-    setShow(false)
-  }
-  const ingredients = useSelector((state: any) => state.cart)
-  const handleShow = () => setShow(true)
   const token = Cookies.get('token')
+  const handleClose = () => {
+    ApiCart.updateDishInCart(
+      position,
+      numberOfDishes,
+      token,
+      parseString(ingredients)
+    ).then((resp: any) => {
+      orderedToast(
+        `Добавленные игредиенты :
+      ${resp.data.updatedPosition.ingredients}`,
+        5000
+      )
+    })
+    setShow(false)
+  }
+  // const handleConfirm = () => {
+  //   // withoutIng.map((el: any) => {})
+  //   // check index of ingredinets if they deleted
+  //   setShow(false)
+  // }
+  // const ingredients = useSelector((state: any) => state.cart)
+  const handleShow = () => setShow(true)
   const onDeleteHandler = () => {
     ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {
       console.log('deleted')
@@ -56,94 +91,69 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   }
 
   return (
-    <div className='order-item shadow' id={String(id)}>
-      <div className='order-block order-img'>
-        <Image className='rounded-3' src={image} width={80} height={80} />
-      </div>
-
-      <div className='order-block order-details'>
-        <span className='order-title bold'>{name}</span>
-        <span>{Number(price) * numberOfDishes} BYN</span>
-        <a onClick={handleShow} style={{cursor: 'pointer'}}>
-          Изменить состав
-        </a>
-      </div>
+    <>
       {show ? (
-        <>
-          <Modal autoFocus={true} show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>Изменение состава</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              {ingredients.dishes.map((el: any) => {
-                if (el.id === id) {
-                  withoutIng = []
-                  return el.ingredients.map((ing: any, index: number) => {
-                    return (
-                      <ul key={index}>
-                        <Form.Check
-                          onChange={(e) => {
-                            withoutIng.push(index)
-                          }}
-                          defaultChecked={true}
-                          type='checkbox'
-                          label={`${ing.name}`}
-                        />
-                      </ul>
-                    )
-                  })
-                }
-              })}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant='warning' onClick={handleClose}>
-                Отменить
-              </Button>
-              <Button variant='success' onClick={handleConfirm}>
-                Сохранить
-              </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      ) : null}
-      <div className='order-block order-counter'>
-        <button
-          className='control'
-          onClick={() => {
-            if (counter > 1) {
-              setCounter(--counter)
-              ApiCart.updateDishInCart(position, counter, token).then(() => {
-                console.log(numberOfDishes)
-              })
-              dispatch(minusOneDish({id: id, numberOfDishes: counter}))
-            } else {
-              onDeleteHandler()
-            }
-          }}
-        >
-          -
-        </button>
-        <span className='counter'>{counter < 0 ? 0 : counter}</span>
-        <button
-          className='control'
-          onClick={() => {
-            setCounter(++counter)
-            ApiCart.updateDishInCart(position, counter, token).then(() => {
-              console.log(numberOfDishes)
-            })
-            dispatch(plusOneDish({id: id, numberOfDishes: counter}))
-          }}
-        >
-          +
-        </button>
-      </div>
+        <ShiftingDish
+          changeStatus={changeStatus}
+          currentDish={updatedDish}
+          updIngredients={updateIngredients}
+          handleClose={handleClose}
+        />
+      ) : (
+        <div className='order-item shadow' id={String(id)}>
+          <div className='order-block order-img'>
+            <Image className='rounded-3' src={image} width={80} height={80} />
+          </div>
 
-      <div className='order-block'>
-        <div className='order-deletion' onClick={() => onDeleteHandler()}>
-          <i className='far fa-trash-alt icon-height delete-button'></i>
+          <div className='order-block order-details'>
+            <span className='order-title bold'>{name}</span>
+            <span>{Number(price) * numberOfDishes} BYN</span>
+            <a onClick={handleShow} style={{cursor: 'pointer'}}>
+              Изменить состав
+            </a>
+          </div>
+          <div className='order-block order-counter'>
+            <button
+              className='control'
+              onClick={() => {
+                if (counter > 1) {
+                  setCounter(--counter)
+                  ApiCart.updateDishInCart(position, counter, token).then(
+                    () => {
+                      console.log(numberOfDishes)
+                    }
+                  )
+                  dispatch(minusOneDish({id: id, numberOfDishes: counter}))
+                } else {
+                  onDeleteHandler()
+                }
+              }}
+            >
+              -
+            </button>
+            <span className='counter'>{counter < 0 ? 0 : counter}</span>
+            <button
+              className='control'
+              onClick={() => {
+                setCounter(++counter)
+                ApiCart.updateDishInCart(position, counter, token).then(() => {
+                  console.log(numberOfDishes)
+                })
+                dispatch(plusOneDish({id: id, numberOfDishes: counter}))
+              }}
+            >
+              +
+            </button>
+          </div>
+
+          <div className='order-block'>
+            <div className='order-deletion' onClick={() => onDeleteHandler()}>
+              <i className='far fa-trash-alt icon-height delete-button'></i>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 
