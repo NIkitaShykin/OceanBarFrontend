@@ -14,8 +14,12 @@ import './profile.scss'
 const UserProfile = () => {
   const dispatch = useDispatch()
 
+  // const delivery =
+  // useSelector<AppStoreType, DeliveryAdressType>((state) => state.delivery)
+
   useEffect(() => {
     dispatch(getUserPersonalDataTC())
+    dispatch(getUserDeliveryDataTC())
   }, [])
 
 
