@@ -1,32 +1,50 @@
 import axios from "axios";
 
 export const instance = axios.create({
-    baseURL: 'http://localhost:3001/',
+    baseURL: 'http://13.51.224.150:3000/',
 })
 export const ApiCart = {
-     getCart() {
-          instance.get('api/cart/').then((resp:any):any=>{
-              console.log(resp)
-          })
+    getCart(token: string | undefined): any {
+        instance.get('api/cart/', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then((resp: any): any => {
+            return resp.data.cart
+        })
     },
-    addDishToCart( id: string, ingredients?: any) {
-        console.log(id)
-        console.log(ingredients)
+    addDishToCart(id: string, token: string | undefined, ingredients?: any) {
         return instance.post(`api/cart/`, {
-            id:id,
+            id: id,
             ingredients: ingredients
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
     },
-    updateDishInCart(userId: string, dishId: string, ingredients: any) {
-        return instance.patch(`api/cart/updateDish/${userId}`, {
-            dishId: dishId,
+    updateDishInCart(position: number, quantity: number, token: string | undefined, ingredients?: any | undefined) {
+        return instance.patch(`api/cart/${position}`, {
+            quantity: quantity,
             ingredients: ingredients
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
         })
     },
-    deleteDihsFromCart(userId: string, dishId: string) {
-        return instance.put(`api/cart/deleteDish/${userId}`, {dishId: dishId})
+    deleteDishFromCart(position: number, token: string | undefined) {
+        return instance.delete(`api/cart/${position}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
     },
-    clearUserCart(userId: string) {
-        return instance.delete(`api/cart/deleteAllDihs/${userId}`)
+    clearCart(token: string | undefined) {
+        return instance.delete(`api/cart/`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
     }
 }

@@ -1,12 +1,17 @@
 import {useDispatch, useSelector} from 'react-redux'
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
 
-import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {DishType} from '../../../../common/types/dishesType'
 import {addDishToCart} from '../../../../redux/actions'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 
 import './Dish.scss'
 import {DishInCart} from '../../../../common/types/dishesType'
+import {ApiCart} from '../../../../api/ApiCart'
+import Cookies from 'js-cookie'
+import {parseString} from '../../../../common/parceInString'
+import any = jasmine.any
+import {useHistory} from 'react-router-dom'
 
 type PropsType = {
   changeStatus: () => void
@@ -15,8 +20,9 @@ type PropsType = {
 
 const CompletedDish = (props: PropsType) => {
   const dishes = useSelector((state: any) => state.cart.dishes)
+  const history = useHistory()
+  const isLogIn = useSelector((state: any) => state.auth)
   const dispatch = useDispatch()
-
   const ingredientList = props.currentDish.ingredients.map((el) => {
     if (el.isAdded) {
       return (
@@ -27,22 +33,33 @@ const CompletedDish = (props: PropsType) => {
     }
   })
 
-  const orderDish = (name: string) => {
-    if (dishes.find((dish: DishInCart) => dish.id === props.currentDish.id)) {
-      orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
-    } else {
-      dispatch(
-        addDishToCart({
-          id: props.currentDish.id,
-          name: props.currentDish.name,
-          price: props.currentDish.price,
-          imageURL: props.currentDish.imageURL,
-          ingredients:props.currentDish.ingredients,
-          numberOfDishes: 1,
+  const orderDish = async (name: string, ingredients: any) => {
+    if (isLogIn.isAuthorized) {
+      if (dishes.find((dish: DishInCart) => dish.id === props.currentDish.id)) {
+        orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+      } else {
+        await ApiCart.addDishToCart(
+          props.currentDish.id.toString(),
+          Cookies.get('token'),
+          parseString(ingredients)
+        ).then((res) => {
+          console.log(res)
         })
-      )
-      console.log(props.currentDish)
-      orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+        dispatch(
+          addDishToCart({
+            id: props.currentDish.id,
+            name: props.currentDish.name,
+            price: props.currentDish.price,
+            imageURL: props.currentDish.imageURL,
+            ingredients: props.currentDish.ingredients,
+            numberOfDishes: 1,
+          })
+        )
+        orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+      }
+    } else {
+      orderedToast('Войдите в сущесвтующий аккаунт или зарегистрируйтесь', 4000)
+      history.push('/login')
     }
   }
 
@@ -110,7 +127,7 @@ const CompletedDish = (props: PropsType) => {
             <button
               className={'order-btn-dish'}
               onClick={() => {
-                orderDish(props.currentDish.name)
+                orderDish(props.currentDish.name, props.currentDish.ingredients)
               }}
             >
               Заказать

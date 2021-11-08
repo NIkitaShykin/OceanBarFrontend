@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {
   Navbar,
   Nav} from 'react-bootstrap'
@@ -7,6 +7,12 @@ import DropDownNavBar from './DropDownNavBar/DropDown'
 import SearchField from './Search/Search'
 
 import './navBar.scss'
+import axios from "axios";
+import {url} from "../../../api";
+import Cookies from "js-cookie";
+import {DishFromBack} from "../../../common/types/dishesType";
+import {addDishToCart} from "../../../redux/actions";
+import {useDispatch} from "react-redux";
 
 
 const NavBarComponent: React.FC = () => {
@@ -53,7 +59,7 @@ const NavBarComponent: React.FC = () => {
           >
             <SearchField />
 
-            <Nav.Link as={Link} to={'/cart'}
+            <Nav.Link  as={Link} to={'/cart'}
               className='nav-link-icon'
             >
               <i className='fas fa-shopping-basket icon-height'></i>

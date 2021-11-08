@@ -8,8 +8,13 @@ import Toggler from './ToggleButton'
 import {clearCart} from '../../redux/actions'
 
 import './Cart.scss'
-import {ApiCart} from "../../api/ApiCart";
+import {ApiCart} from '../../api/ApiCart'
+import Cookies from 'js-cookie'
+import {orderedToast} from '../OrderToast/OrderedToast'
+
 const UserCart: React.FunctionComponent = (props: any) => {
+  const dispatch = useDispatch()
+  console.log()
   type radioBtnParams = {
     name: string
     value: string
@@ -27,7 +32,6 @@ const UserCart: React.FunctionComponent = (props: any) => {
   )
   const cartSectionsClassName: string =
     props.dishes.length < 1 ? 'cart-sections hidden' : 'cart-sections'
-
   const orderCodes: JSX.Element[] = props.dishes.map((order: any) => (
     <OrderItem
       key={order.id}
@@ -36,13 +40,16 @@ const UserCart: React.FunctionComponent = (props: any) => {
       price={order.price}
       image={order.imageURL}
       numberOfDishes={order.numberOfDishes}
+      position={order.position}
     />
   ))
-  console.log(ApiCart.getCart())
-  const dispatch = useDispatch()
   const handleClearCart = (e: any) => {
     e.preventDefault()
+    ApiCart.clearCart(Cookies.get('token')).then(() => {
+      console.log('deleted')
+    })
     dispatch(clearCart())
+    orderedToast(`Корзина очищена`)
   }
 
   return (
