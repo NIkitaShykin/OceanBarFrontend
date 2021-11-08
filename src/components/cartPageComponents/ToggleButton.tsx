@@ -13,7 +13,7 @@ interface ITogglerProps {
 
 const Toggler: React.FC<ITogglerProps> =
   ({radios, size, checkedBtn, handleRadioValueChange}) => {
-    const [radioValue, setRadioValue] = useState(checkedBtn)
+    const [radioValue, setRadioValue] = useState<string>(checkedBtn)
 
     const showCheckedOrderType = (checkedValue: string) => {
       handleRadioValueChange(checkedValue)
@@ -25,7 +25,7 @@ const Toggler: React.FC<ITogglerProps> =
           {radios.map((radio, idx) => (
             <ToggleButton
               size={size}
-              key={idx}
+              key={radio.value}
               id={`radio-${idx}`}
               type='radio'
               variant='outline-warning'

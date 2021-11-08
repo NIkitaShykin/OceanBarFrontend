@@ -15,6 +15,7 @@ module.exports = {
     open: true,
 
 
+    // under discussion with the team / to be removed if appears uselsess
     // proxy: {
     //   '*': {
     //     target: 'http://localhost:3000',

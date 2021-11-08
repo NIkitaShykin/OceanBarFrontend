@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import React from 'react'
 import {useState} from 'react'
 import {useDispatch} from 'react-redux'
@@ -29,7 +28,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   numberOfDishes,
 }) => {
   const dispatch = useDispatch()
-  const [counter, setCounter] = useState(numberOfDishes)
+  const [counter, setCounter] = useState<number>(numberOfDishes)
 
   const onDeleteHandler = () => {
     dispatch(removeDishFromCart(id))

@@ -39,7 +39,6 @@ $mainColor: #ff9e05;
       }
       .section-content {
         display: flex;
-        align-items: center;
         width: 24rem;
         form,
         .form-floating {
@@ -70,6 +69,10 @@ $mainColor: #ff9e05;
         &.payment-types {
           display: flex;
           flex-direction: column;
+          justify-content: center;
+          .form-check {
+            text-align: left;
+          }
           .btn-outline-warning {
             &:active {
               background-color: $mainColor;

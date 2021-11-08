@@ -16,7 +16,7 @@ import './Cart.scss'
 
 const UserCart: React.FC = (props: any) => {
   // 'props: any' as cart functionality is still in progress
-  const [orderType, setOrderType] = useState('')
+  const [orderType, setOrderType] = useState<string>('')
 
   const radios: TRadioBtnParams[] = [
     {name: 'Забронировать стол', value: 'reserve-a-table'},

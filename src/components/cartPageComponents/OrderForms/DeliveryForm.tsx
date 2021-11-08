@@ -13,21 +13,12 @@ import {
 import './OrderForms.scss'
 
 const DeliveryForm: React.FC = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
 
   const timeSlots: Array<string> = [
-    '16:00 - 16:30',
-    '16:30 - 17:00',
-    '17:00 - 17:30',
-    '17:30 - 18:00',
-    '18:00 - 18:30',
-    '18:30 - 19:00',
-    '19:00 - 19:30',
-    '19:30 - 20:00',
-    '20:00 - 20:30',
-    '20:30 - 21:00',
-    '21:00 - 21:30',
-    '21:30 - 22:00',
+    '16:00 - 18:00',
+    '18:00 - 20:00',
+    '20:00 - 22:00',
   ]
 
   return (
@@ -78,7 +69,7 @@ const DeliveryForm: React.FC = () => {
               <Form.Select aria-label='Floating label select example'>
                 <option value=''>Выбрать...</option>
                 {timeSlots.map((time, idx) => (
-                  <option value={time} key={idx}>{time}</option>
+                  <option value={time} key={time}>{time}</option>
                 ))}
               </Form.Select>
             </FloatingLabel>
