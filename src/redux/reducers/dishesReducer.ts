@@ -5,20 +5,10 @@ import {RootState} from '../store'
 import {ThunkAction} from 'redux-thunk'
 
 import {addDishesAC} from '../actions'
-import {API} from '../../api/index'
+import {ApiDish} from '../../api/ApiDish'
+import {IngredientType} from '../../common/types/dishesType'
+import {DishType} from '../../common/types/dishesType'
 
-export type IngredientType = { name: string; isAdded: boolean }
-export type IngredientsType = Array<IngredientType>
-export type DishType = {
-  'id': number,
-  'name': string,
-  'price': number,
-  'weight': string,
-  'calories': string,
-  'imageURL': string,
-  'ingredients': IngredientsType,
-  'dishCategory': string
-}
 export type dishesType = Array<DishType>
 const initialState: dishesType = [
   {
@@ -156,7 +146,7 @@ export const getDishesFromApiTC =
   (): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        const asyncResp = await API.getAllDish()
+        const asyncResp = await ApiDish.getAllDish()
         // @ts-ignore
         const restructDishes = asyncResp.data.data.dishes.map((dish) => {
           const myObj: Array<IngredientType> = []

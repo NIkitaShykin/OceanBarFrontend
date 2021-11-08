@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {Col, Row} from 'react-bootstrap'
 
-import {IngredientType} from '../../../../redux/reducers/dishesReducer'
+import {IngredientType} from '../../../../common/types/dishesType'
 
 type PropsType = {
   setIngredient: (arg0: any) => void

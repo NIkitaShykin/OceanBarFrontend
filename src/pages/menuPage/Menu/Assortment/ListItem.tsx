@@ -2,7 +2,7 @@ import {NavLink, useHistory} from 'react-router-dom'
 import {Button, Card, Col, Row} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 
-import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {DishType} from '../../../../common/types/dishesType'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 import {addDishToCart} from '../../../../redux/actions'
 import {DishInCart} from '../../../../common/types/dishesType'

@@ -13,5 +13,6 @@ export const minusOneDish = createAction<any>('MINUS_ONE_DISH')
 export const getDishesFromApiTC = createAction<any>('GET_DISHES')
 export const addDishesAC = createAction<any>('SET_DISHES')
 
-export const getUserTC = createAction<any>('GET_USER')
+export const getUserPersonalDataTC = createAction<any>('GET_USER_DATA')
+export const setPersonalUsersData = createAction<any>('SET_USER_DATA')
 export const getUserAC = createAction<any>('SET_USER')
