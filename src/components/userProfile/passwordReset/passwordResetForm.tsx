@@ -1,21 +1,12 @@
 import {useState} from 'react'
-// import {useHistory} from 'react-router-dom'
-// import {ApiUser} from '../../../api/ApiUser'
-// import {ApiDish} from '../../../api/ApiDish'
-// import {UserType} from '../../../common/types/userTypes'
-// import {AppStoreType} from '../../../redux/reducers/rootReducer'
-// import {useSelector} from 'react-redux'
 import {Form, Button, Modal} from 'react-bootstrap'
 import {ValidationType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
-// import {mainModule} from 'process'
-import {url} from '../../../api/index'
-import axios from 'axios'
+
+
 
 
 const passwordResetForm = () => {
-  // const userData =
-  // useSelector<AppStoreType, UserType>((state) => state.user)
 
   const [authFailed, setAuthFailed] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
@@ -24,42 +15,11 @@ const passwordResetForm = () => {
     setOldPassword(e.target.value)
   }
 
+
   const oldPassOnBlur = (e: any) => {
-    // @ts-ignore
-    const token:any = JSON.parse(sessionStorage.getItem('data'))
-    console.log(token)
-    const config = {
-      headers: {Authorization: `Bearer ${token}`}
-    }
-
-    const bodyParameters = {
-      email: 'myemail@mail.com',
-      password: oldPassword
-    }
-
-    axios
-      .post(`${url}/users/auth`, bodyParameters, config)
-      .then((response: any) => {
-        if (response.status > 400) {
-          throw new Error(response.statusText)
-        }
-      })
-      .then((res) => console.log(res) )
-      .catch((error) => {
-        console.log(error.response)
-        setAuthFailed(true)
-      })
   }
 
-  // const response = ApiUser.userLogIn(userLoginData)
-  // const response = ApiDish.getAllDish()
-  // console.log(response)
-  // response.then((res:any) => {
-  //   console.log(res)
-  // })
-  // }
-
-  const useInput = (initialValue: string, validations: ValidationType) => {
+    const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)
@@ -89,37 +49,10 @@ const passwordResetForm = () => {
     passwordError: true,
   })
 
-
-  // const userLoginData = {
-  // name: firstName.value,
-  // secondname: lastName.value,
-  // email: 'ivan@mainModule.ru',
-  // password: oldPassword,
-  // phone: phoneNumber.value,
-  // id: null,
-  // }
-
-  // eslint-disable-next-line max-len
-  // eslint-disable-next-line max-len
   const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
 
 
   const handleSubmit = (e: any) => {
-    // e.preventDefault()
-
-    // axios
-    //   .post(`${url}/users/register`, user)
-    //   .then((response: any) => {
-    //     if (response.status > 400) {
-    //       throw new Error(response.statusText)
-    //     }
-    //   })
-
-    //   .then(() => history.push('/signup-success'))
-    //   .catch((error) => {
-    //     console.log(error.response)
-    //     setAuthFailed(true)
-    //   })
   }
 
   return (

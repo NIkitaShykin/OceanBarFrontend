@@ -10,8 +10,6 @@ import {DeliveryAdressType} from '../../src/common/types/userTypes'
 
 const instance = axios.create({
   baseURL,
-  // timeout: 1000,
-  // headers: {'Authorization': 'Bearer '+token}
   // ...settings
 })
 
