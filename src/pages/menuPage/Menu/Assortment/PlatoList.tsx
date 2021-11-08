@@ -1,12 +1,13 @@
-
 import {Row} from 'react-bootstrap'
 
 import ListItem from './ListItem'
 import {useAppSelector} from '../../../../redux/hooks'
+import {DishType} from '../../../../common/types/dishesType'
 
 
 const PlatoList = () => {
-  const allDishes = useAppSelector<any>((state) => state.dish)
+  const allDishes: DishType[] =
+    useAppSelector<any>((state) => state.dish.dishes)
   // @ts-ignores
   const platoDishes = allDishes.filter((dish) => {
     return dish.dishCategory=='Плато'
@@ -15,7 +16,7 @@ const PlatoList = () => {
   return (
     <>
       <Row>
-        <ListItem data={platoDishes} />
+        <ListItem data={platoDishes} isIntresting={false} />
       </Row>
     </>
 
