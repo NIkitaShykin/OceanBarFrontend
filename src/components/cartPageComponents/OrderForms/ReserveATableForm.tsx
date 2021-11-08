@@ -13,12 +13,12 @@ const ReserveATableForm: React.FC = () => {
   const [date, setDate] = useState<Date>(new Date())
   // if timepicker is used instead of dropdown w/ time slots
   // const [selectedTime, setSelectedTime] = useState('10:30')
-  const [timeSlot, setTimeSlot] = useState<string>('Выбрать...')
-  const [tableSize, setTableSize] = useState<string>('Выбрать...')
-  const [ispaymentConfirmed, setPaymentConfirmed] = useState<boolean>(false)
-  const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
-  const [isTableInputSkipped, setTableInputSkipped] = useState<boolean>(false)
-  const [isPaymentSkipped, setPaymentSkipped] = useState<boolean>(false)
+  const [timeSlot, setTimeSlot] = useState('Выбрать...')
+  const [tableSize, setTableSize] = useState('Выбрать...')
+  const [ispaymentConfirmed, setPaymentConfirmed] = useState(false)
+  const [isTimeInputSkipped, setTimeInputSkipped] = useState(false)
+  const [isTableInputSkipped, setTableInputSkipped] = useState(false)
+  const [isPaymentSkipped, setPaymentSkipped] = useState(false)
 
   const useInput = () => {
     const [isDirty, setDirty] = useState(false)

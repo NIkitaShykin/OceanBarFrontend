@@ -69,10 +69,21 @@ const LogInForm = () => {
     password: password.value,
   }
 
-  // eslint-disable-next-line max-len
-  const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
-  // eslint-disable-next-line max-len
-  const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
+  const isEmailInvalid =
+    email.isDirty && (
+      email.isEmpty ||
+      email.minLengthError ||
+      email.maxLengthError ||
+      email.emailError
+    )
+
+  const isPasswordInvalid =
+    password.isDirty && (
+      password.isEmpty ||
+      password.minLengthError ||
+      password.maxLengthError ||
+      password.passwordError
+    )
 
   const handleClose = () => {
     history.push('/')

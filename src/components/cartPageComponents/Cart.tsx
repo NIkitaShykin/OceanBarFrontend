@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {MouseEvent, useState} from 'react'
 import {useDispatch} from 'react-redux'
 
 import OrderItem from './OrderItem'
@@ -10,31 +10,29 @@ import TakeawayForm from './OrderForms/TakeawayForm'
 
 import {clearCart} from '../../redux/actions'
 
+import {TRadioBtnParams, TOrderItem} from '../../common/types/cartTypes'
+
 import './Cart.scss'
 
-const UserCart: React.FunctionComponent = (props: any) => {
-  type radioBtnParams = {
-    name: string
-    value: string
-  }[]
-
+const UserCart: React.FC = (props: any) => {
+  // 'props: any' as cart functionality is still in progress
   const [orderType, setOrderType] = useState<string>('')
 
-  const radios: radioBtnParams = [
+  const radios: TRadioBtnParams[] = [
     {name: 'Забронировать стол', value: 'reserve-a-table'},
     {name: 'Доставка', value: 'delivery'},
     {name: 'Навынос', value: 'takeaway'},
   ]
 
-  const totalSum: any = props.dishes.reduce(
-    (sum: any, current: any) =>
+  const totalSum = props.dishes.reduce(
+    (sum: number, current: TOrderItem) =>
       sum + Number(current.price) * current.numberOfDishes,
     0
   )
-  const cartSectionsClassName: string =
+  const cartSectionsClassName =
     props.dishes.length < 1 ? 'cart-sections hidden' : 'cart-sections'
 
-  const orderCodes: JSX.Element[] = props.dishes.map((order: any) => (
+  const orderCodes = props.dishes.map((order: TOrderItem) => (
     <OrderItem
       key={order.id}
       id={order.id}
@@ -46,7 +44,7 @@ const UserCart: React.FunctionComponent = (props: any) => {
   ))
 
   const dispatch = useDispatch()
-  const handleClearCart = (e: any) => {
+  const handleClearCart = (e: MouseEvent) => {
     e.preventDefault()
     dispatch(clearCart())
   }
