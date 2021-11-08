@@ -5,9 +5,10 @@ import {useAppSelector} from '../../../../redux/hooks'
 import {DishType} from '../../../../common/types/dishesType'
 
 const DessertList = () => {
-  const allDishes: DishType = useAppSelector<any>((state) => state.dish.dishes)
-  // @ts-ignores
-  const desertDishes = allDishes.filter((dish) => {
+  const allDishes: DishType[] =
+    useAppSelector<any>((state) => state.dish.dishes)
+
+  const desertDishes: DishType[] = allDishes.filter((dish: DishType) => {
     return dish.dishCategory == 'Десерты'
   })
 

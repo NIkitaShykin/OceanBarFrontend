@@ -1,12 +1,12 @@
 import {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
+
 import OrderHistory from '../../components/userProfile/orderHistory'
 import DeliveryAdress from '../../components/userProfile/deliveryAdress'
 import MyCreditCards from '../../components/userProfile/myCards'
 import PasswordReset from '../../components/userProfile/passwordReset'
 import PersonalData from '../../components/userProfile/personalData'
 import {getUserPersonalDataTC} from '../../redux/reducers/userReducer'
-import {useDispatch} from 'react-redux'
-
 
 import './profile.scss'
 

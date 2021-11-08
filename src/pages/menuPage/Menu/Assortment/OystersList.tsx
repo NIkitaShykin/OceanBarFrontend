@@ -4,9 +4,10 @@ import {useAppSelector} from '../../../../redux/hooks'
 import {DishType} from '../../../../common/types/dishesType'
 
 const OystersList = () => {
-  const allDishes: DishType = useAppSelector<any>((state) => state.dish.dishes)
-  // @ts-ignores
-  const oystersDishes = allDishes.filter((dish) => {
+  const allDishes: DishType[] =
+    useAppSelector<any>((state) => state.dish.dishes)
+
+  const oystersDishes: DishType[] = allDishes.filter((dish: DishType) => {
     return dish.dishCategory == 'Запеченные устрицы'
   })
 

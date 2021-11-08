@@ -1,12 +1,12 @@
 export type ValidationType={
-isEmpty: boolean,
-minLengthError?: number,
-maxLengthError?: number,
-firstNameError?: boolean,
-lastNameError?: boolean,
-emailError?: boolean,
-phoneNumberError?: boolean,
-passwordError?: boolean
+    isEmpty: boolean,
+    minLengthError?: number,
+    maxLengthError?: number,
+    firstNameError?: boolean,
+    lastNameError?: boolean,
+    emailError?: boolean,
+    phoneNumberError?: boolean,
+    passwordError?: boolean
 }
 
 export type UserAuthType={
@@ -15,20 +15,13 @@ password: string
 }
 
 export type UserType={
-    'user': {
-        'id': number,
-        'name': string,
-        'secondname': string,
-        'email': string,
-        'password': string,
-        'phone': string
-    }
+  'user': {
+    'id': number,
+    'name': string,
+    'secondname': string,
+    'email': string,
+    'password': string,
+    'phone': string
+  }
 }
 
-export type DeliveryAdressType={
-city: string
-street: string
-home: string
-homePart?: string
-flat?: string
-}
