@@ -67,7 +67,9 @@ $mainColor: #ff9e05;
         .react-time-picker__clock {
           border-radius: 5px;
         }
-        .payment-types {
+        &.payment-types {
+          display: flex;
+          flex-direction: column;
           .btn-outline-warning {
             &:active {
               background-color: $mainColor;
@@ -92,5 +94,11 @@ $mainColor: #ff9e05;
         width: 6rem;
       }
     }
+  }
+
+  .error {
+    font-size: smaller;
+    color: red;
+    margin-top: 3px;
   }
 }

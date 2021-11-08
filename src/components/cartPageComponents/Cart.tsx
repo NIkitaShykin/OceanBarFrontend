@@ -16,7 +16,7 @@ import './Cart.scss'
 
 const UserCart: React.FC = (props: any) => {
   // 'props: any' as cart functionality is still in progress
-  const [orderType, setOrderType] = useState<string>('')
+  const [orderType, setOrderType] = useState('')
 
   const radios: TRadioBtnParams[] = [
     {name: 'Забронировать стол', value: 'reserve-a-table'},
@@ -50,6 +50,10 @@ const UserCart: React.FC = (props: any) => {
   }
 
   const handleRadioValueChange = (value: string) => {
+    setOrderType(value)
+  }
+
+  const handleRadioValueClearance = (value: string) => {
     setOrderType(value)
   }
 
@@ -102,13 +106,29 @@ const UserCart: React.FC = (props: any) => {
               <Toggler
                 radios={radios}
                 size='lg'
+                checkedBtn={orderType}
                 handleRadioValueChange =
                   {(value: string) => handleRadioValueChange(value)}
               />
             </div>
-            {orderType === 'reserve-a-table' && <ReserveATableForm />}
-            {orderType === 'delivery' && <DeliveryForm />}
-            {orderType === 'takeaway' && <TakeawayForm />}
+            {
+              orderType === 'reserve-a-table' &&
+              <ReserveATableForm
+                handleRadioValueClearance =
+                  {(value: string) => handleRadioValueClearance(value)}
+              />
+            }
+            {
+              orderType === 'delivery' &&
+              <DeliveryForm />
+            }
+            {
+              orderType === 'takeaway' &&
+              <TakeawayForm
+                handleRadioValueClearance =
+                  {(value: string) => handleRadioValueClearance(value)}
+              />
+            }
           </div>
         </div>
       </div>

@@ -2,50 +2,47 @@ import React from 'react'
 import {useState} from 'react'
 import {ButtonGroup, ToggleButton} from 'react-bootstrap'
 
-type radioBtnParams = {
-  name: string,
-  value: string
-}[]
+import {TRadioBtnParams} from '../../common/types/cartTypes'
 
 interface ITogglerProps {
-  radios: radioBtnParams,
+  radios: TRadioBtnParams[],
   size: 'sm' | 'lg',
+  checkedBtn: string,
   handleRadioValueChange: (value: string) => void
 }
 
-const Toggler: React.FunctionComponent<ITogglerProps> =
-({radios, size, handleRadioValueChange}) => {
-  const [radioValue, setRadioValue] = useState('')
+const Toggler: React.FC<ITogglerProps> =
+  ({radios, size, checkedBtn, handleRadioValueChange}) => {
+    const [radioValue, setRadioValue] = useState(checkedBtn)
 
-  const showCheckedOrderType = (checkedValue: string) => {
-    // debugger //
-    handleRadioValueChange(checkedValue)
+    const showCheckedOrderType = (checkedValue: string) => {
+      handleRadioValueChange(checkedValue)
+    }
+
+    return (
+      <>
+        <ButtonGroup>
+          {radios.map((radio, idx) => (
+            <ToggleButton
+              size={size}
+              key={idx}
+              id={`radio-${idx}`}
+              type='radio'
+              variant='outline-warning'
+              name='radio'
+              value={radio.value}
+              checked={checkedBtn !== '' && radioValue === radio.value}
+              onChange={(e) => {
+                setRadioValue(e.currentTarget.value)
+                showCheckedOrderType(e.currentTarget.value)
+              }}
+            >
+              {radio.name}
+            </ToggleButton>
+          ))}
+        </ButtonGroup>
+      </>
+    )
   }
-
-  return (
-    <>
-      <ButtonGroup>
-        {radios.map((radio, idx) => (
-          <ToggleButton
-            size={size}
-            key={idx}
-            id={`radio-${idx}`}
-            type='radio'
-            variant='outline-warning'
-            name='radio'
-            value={radio.value}
-            checked={radioValue === radio.value}
-            onChange={(e) => {
-              setRadioValue(e.currentTarget.value)
-              showCheckedOrderType(e.currentTarget.value)
-            }}
-          >
-            {radio.name}
-          </ToggleButton>
-        ))}
-      </ButtonGroup>
-    </>
-  )
-}
 
 export default Toggler
