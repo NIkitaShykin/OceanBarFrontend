@@ -15,12 +15,18 @@ password: string
 }
 
 export type UserType={
-    'user': {
-        'id': number,
-        'name': string,
-        'secondname': string,
-        'email': string,
-        'password': string,
-        'phone': string
-    }
+    'id': number,
+    'name': string,
+    'secondname': string,
+    'email': string,
+    'password': string,
+    'phone': string
 }
+
+export type DeliveryAdressType={
+city: string
+street: string
+home: string
+homePart: string
+flat: string
+    }

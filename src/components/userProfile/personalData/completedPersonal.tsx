@@ -13,29 +13,33 @@ const completedPersonal = (props:PropsType) => {
 
 
   return (
-    <div >
+    <div className='info-block'>
       <Row>
       &#128100;
         <Col sm={3}><div className='user-name'><h5>Имя </h5></div></Col>
-        <Col sm={2}><div className='user-name'><h5>{user.user.name}</h5></div></Col>
+        <Col sm={2}><div className='user-name'>
+          <h5>{user.name}</h5></div></Col>
         <Col sm={7}></Col>
       </Row>
       <Row>
-        &#128100;
+      &#128101;
         <Col sm={3}><div className='user-name'><h5>Фамилия </h5></div></Col>
-        <Col sm={2}><div className='user-name'><h5>{user.user.secondname}</h5></div></Col>
+        <Col sm={2}><div className='user-name'>
+          <h5>{user.secondname}</h5></div></Col>
         <Col sm={7}></Col>
       </Row>
       <Row>
       &#128386;
         <Col sm={3}><div className='user-name'><h5>Емейл </h5></div></Col>
-        <Col sm={2}><div className='user-name'><h5>{user.user.email}</h5></div></Col>
+        <Col sm={2}><div className='user-name'>
+          <h5>{user.email}</h5></div></Col>
         <Col sm={7}></Col>
       </Row>
       <Row>
       &#9742;
         <Col sm={3}><div className='user-name'><h5>Телефон</h5></div></Col>
-        <Col sm={2}><div className='user-name'><h5>{user.user.phone}</h5></div></Col>
+        <Col sm={2}><div className='user-name'>
+          <h5>{user.phone}</h5></div></Col>
         <Col sm={7}></Col>
       </Row>
       <br/>

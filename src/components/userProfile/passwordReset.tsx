@@ -1,5 +1,7 @@
 
 import {Form} from 'react-bootstrap'
+import PasswordResetFrorm from './passwordReset/passwordResetForm'
+
 
 const PasswordReset = () => {
   return (
@@ -8,14 +10,20 @@ const PasswordReset = () => {
         Изменение пароля
       </h2>
       <div className='info-block'>
-        <Form>
-          <Form.Group className='mb-3' controlId='formBasicPassword'>
 
+        <PasswordResetFrorm/>
+
+
+        {/* <Form>
+          <Form.Group className='mb-3' controlId='formBasicPassword'>
+            <Form.Control type='password' placeholder='Старый пароль' />
+          </Form.Group>
+
+          <Form.Group className='mb-3' controlId='formBasicPassword'>
             <Form.Control type='password' placeholder='Новый пароль' />
           </Form.Group>
 
           <Form.Group className='mb-3' controlId='formBasicPassword'>
-
             <Form.Control type='password' placeholder='Повторить пароль' />
           </Form.Group>
 
@@ -24,7 +32,7 @@ const PasswordReset = () => {
             className='btn btn-outline-warning offset-md-10 disabled'>
             Сохранить
           </button>
-        </Form>
+        </Form> */}
       </div>
     </div>
   )

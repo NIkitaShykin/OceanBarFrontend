@@ -2,9 +2,9 @@ import {useState} from 'react'
 import './Dish.scss'
 import DishIngridients from './DishIngridients'
 import {Row, Col} from 'react-bootstrap'
-import {IngredientType} from '../../../../redux/reducers/dishesReducer'
-import {IngredientsType} from '../../../../redux/reducers/dishesReducer'
-import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {IngredientType} from '../../../../common/types/dishesType'
+import {IngredientsType} from '../../../../common/types/dishesType'
+import {DishType} from '../../../../common/types/dishesType'
 
 type PropsType = {
   changeStatus: () => void

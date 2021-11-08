@@ -16,11 +16,11 @@ const shiftingPersonal = (props:PropsType) => {
     useSelector<AppStoreType, UserType>((state) => state.user)
   const dispatch = useDispatch()
 
-  const [userName, setUserName] = useState<string>(user.user.name)
+  const [userName, setUserName] = useState<string>(user.name)
   const [userSecondname, setUserSecondname] =
-   useState<string>(user.user.secondname)
-  const [userPhone, setUserPhone] = useState<string>(user.user.phone)
-  const [userEmail, setUserEmail] = useState<string>(user.user.email)
+   useState<string>(user.secondname)
+  const [userPhone, setUserPhone] = useState<string>(user.phone)
+  const [userEmail, setUserEmail] = useState<string>(user.email)
 
   const setNameCallback=(e: ChangeEvent<HTMLInputElement>)=>{
     setUserName(e.target.value)
@@ -35,7 +35,8 @@ const shiftingPersonal = (props:PropsType) => {
     setUserEmail(e.target.value)
   }
 
-  const userData={userName: userName,
+  const userData={
+    userName: userName,
     userSecondname: userSecondname,
     userPhone: userPhone,
     userEmail: userEmail
