@@ -1,7 +1,7 @@
-export const url: string = 'http://13.51.224.150:3000/api'
-
 import axios from 'axios'
+import { IngredientsType } from '../common/types/dishesType'
 
+export const url: string = 'http://13.51.224.150:3000/api'
 const instance = axios.create({
   baseURL: 'http://13.51.224.150:3000/'
 })
@@ -13,13 +13,16 @@ export const API = {
   getAllDishesFromCart(userId: string) {
     return instance.get(`api/cart/get/${userId}`)
   },
-  addDishToCart(userId: string, dishId: string, ingredients: any) {
+  addDishToCart(userId: string, dishId: string, ingredients: IngredientsType) {
     return instance.post(`api/cart/addDish/${userId}`, {
       dishId: dishId,
       ingredients: ingredients
     })
   },
-  updateDishInCart(userId: string, dishId: string, ingredients: any) {
+  updateDishInCart(
+    userId: string,
+    dishId: string,
+    ingredients: IngredientsType) {
     return instance.patch(`api/cart/updateDish/${userId}`, {
       dishId: dishId,
       ingredients: ingredients

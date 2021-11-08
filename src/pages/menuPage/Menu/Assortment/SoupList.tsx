@@ -4,10 +4,9 @@ import ListItem from './ListItem'
 import {useAppSelector} from '../../../../redux/hooks'
 import {DishType} from '../../../../common/types/dishesType'
 
-type dishesType = Array<DishType>
-
+// @ts-ignores
 const SoupList = () => {
-  const allDishes: dishesType = useAppSelector<any>(
+  const allDishes: DishType[] = useAppSelector<any>(
     (state) => state.dish.dishes
   )
 
