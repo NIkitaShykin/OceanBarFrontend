@@ -9,7 +9,6 @@ import {DishType,
   IngredientType,
   InitialMenuStateType} from '../../common/types/dishesType'
 
-
 const initialState: InitialMenuStateType = {
   dishes: [],
   isLoading: false,
@@ -20,7 +19,7 @@ const dishesReducer = createReducer(initialState, (builder) => {
     .addCase(addDishesAC, (state, action) => {
       return {
         dishes: action.payload,
-        isLoading: action.payload
+        isLoading: false
       }
     })
     .addCase(toggleLoading, (state, action) => {
@@ -50,7 +49,6 @@ export const getDishesFromApiTC =
             return ({...dish, ingredients: myObj})
           })
         dispatch(addDishesAC(restructDishes))
-        dispatch(toggleLoading(false))
       } catch (err) {
         dispatch(toggleLoading(false))
         console.log(err)

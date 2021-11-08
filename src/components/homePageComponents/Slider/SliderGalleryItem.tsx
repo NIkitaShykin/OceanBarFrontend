@@ -36,7 +36,7 @@ const SliderGallertItem = (props: PropsType) => {
           margin: imgMargin,
           height: imgHeight,
           width: imgWidth,
-          backgroundImage: `url(${props.categoryDish[0].imageURL})`,
+          backgroundImage: `url(${props.categoryDish[1].imageURL})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
@@ -48,7 +48,7 @@ const SliderGallertItem = (props: PropsType) => {
           margin: imgMargin,
           height: imgHeight,
           width: imgWidth,
-          backgroundImage: `url(${props.categoryDish[1].imageURL})`,
+          backgroundImage: `url(${props.categoryDish[2].imageURL})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}

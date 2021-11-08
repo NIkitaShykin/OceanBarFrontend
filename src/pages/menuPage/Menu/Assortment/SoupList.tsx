@@ -4,14 +4,14 @@ import {Row} from 'react-bootstrap'
 import ListItem from './ListItem'
 import {useAppSelector} from '../../../../redux/hooks'
 import {DishType} from '../../../../common/types/dishesType'
+import {AppStoreType} from '../../../../redux/reducers/rootReducer'
 
-// @ts-ignores
 const SoupList = () => {
   const allDishes: DishType[] = useAppSelector<any>(
-    (state) => state.dish.dishes
+    (state: AppStoreType) => state.dish.dishes
   )
 
-  const soupDishes = allDishes.filter((dish) => {
+  const soupDishes = allDishes.filter((dish: DishType) => {
     return dish.dishCategory=='Супы'
   })
 

@@ -8,11 +8,10 @@ import {useAppSelector} from '../../../redux/hooks'
 
 
 const Slider = () => {
-  // @ts-ignore
   const allDishes: DishType[] =
    useAppSelector((state: AppStoreType) => state.dish.dishes)
   const isLoading: boolean = useAppSelector<any>(
-    (state) => state.dish.isLoading
+    (state: AppStoreType) => state.dish.isLoading
   )
 
   return (
