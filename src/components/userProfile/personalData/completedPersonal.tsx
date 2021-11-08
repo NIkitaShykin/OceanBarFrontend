@@ -9,7 +9,7 @@ type PropsType = {
 
 const completedPersonal = (props:PropsType) => {
   const user =
-    useSelector<AppStoreType, UserType>((state) => state.user)
+  useSelector<AppStoreType, UserType>((state) => state.user)
 
 
   return (
