@@ -17,3 +17,8 @@ export type DishInCart = {
   imageURL: string
   numberOfDishes: number
 }
+
+export type InitialMenuStateType = {
+  dishes: DishType[],
+  isLoading?: boolean
+}

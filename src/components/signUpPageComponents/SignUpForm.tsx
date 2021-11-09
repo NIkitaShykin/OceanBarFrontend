@@ -6,6 +6,7 @@ import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 import {ValidationType} from '../../common/types/userTypes'
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
+import Spinner from '../../components/Spinner/Spinner'
 
 import './SignUpForm.scss'
 
@@ -13,6 +14,7 @@ const SignUp = () => {
   const history = useHistory()
 
   const [authFailed, setAuthFailed] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
@@ -123,18 +125,20 @@ const SignUp = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
+    setIsLoading(true)
     axios
       .post(`${url}/users/register`, user)
       .then((response: any) => {
         if (response.status > 400) {
+          setIsLoading(false)
           throw new Error(response.statusText)
-        }
+        } else setIsLoading(false)
       })
 
       .then(() => history.push('/signup-success'))
       .catch((error) => {
         console.log(error.response)
+        setIsLoading(false)
         setAuthFailed(true)
       })
   }
@@ -148,8 +152,9 @@ const SignUp = () => {
             <CloseButton onClick={() => handleClose()}/>
           </Modal.Header>
 
+          {isLoading && <Spinner />}
           {
-            authFailed &&
+            !isLoading && authFailed &&
             <div className='error validation'>
               Пользователь с таким адресом электронной почты уже существует.
             </div>

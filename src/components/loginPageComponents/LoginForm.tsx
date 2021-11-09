@@ -8,6 +8,7 @@ import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
 import {logIn} from '../../redux/actions'
+import Spinner from '../../components/Spinner/Spinner'
 import {ValidationType} from '../../common/types/userTypes'
 
 
@@ -26,6 +27,7 @@ const LogInForm = () => {
   const dispatch = useDispatch()
 
   const [authFailed, setAuthFailed] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
@@ -91,20 +93,23 @@ const LogInForm = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
+    setIsLoading(true)
     axios
       .post(`${url}/users/auth`, user)
       .then((response: any) => {
         if (response.status >= 200 && response.status < 300) {
           Cookies.set('token', response.data.token, {expires: 30})
+          setIsLoading(false)
           dispatch(logIn(response.data.data))
         } else {
+          setIsLoading(false)
           throw new Error(response.statusText)
         }
       })
       .then(() => history.push('/'))
       .catch((error) => {
         console.log(error.response)
+        setIsLoading(false)
         setAuthFailed(true)
       })
   }
@@ -118,8 +123,9 @@ const LogInForm = () => {
             <CloseButton onClick={() => handleClose()}/>
           </Modal.Header>
 
+          {isLoading && <Spinner />}
           {
-            authFailed &&
+            !isLoading && authFailed &&
             <div className='error validation'>
               Адрес электронной почты или пароль введен с ошибкой.
               Пожалуйста, попробуйте еще раз.

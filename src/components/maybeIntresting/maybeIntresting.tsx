@@ -5,10 +5,11 @@ import {DishType} from '../../common/types/dishesType'
 import {useAppSelector} from '../../redux/hooks'
 
 import './maybeIntresting.scss'
+import {AppStoreType} from '../../redux/reducers/rootReducer'
 
 const CompletedDish = () => {
   const intrestingDishes =
-   useAppSelector<Array<DishType>>((state) => state.dish)
+   useAppSelector<DishType[]>((state: AppStoreType) => state.dish.dishes)
 
   let [index, setIndex] = useState(0)
   const handleSelect = (selectedIndex: string) => {
