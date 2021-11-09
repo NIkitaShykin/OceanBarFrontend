@@ -2,38 +2,47 @@ import React from 'react'
 import {useState} from 'react'
 import {ButtonGroup, ToggleButton} from 'react-bootstrap'
 
-type radioBtnParams = {
-  name: string,
-  value: string
-}[]
+import {TRadioBtnParams} from '../../common/types/cartTypes'
 
 interface ITogglerProps {
-  radios: radioBtnParams
+  radios: TRadioBtnParams[],
+  size: 'sm' | 'lg',
+  checkedBtn: string,
+  handleRadioValueChange: (value: string) => void
 }
 
-const Toggler: React.FunctionComponent<ITogglerProps> = ({radios}) => {
-  const [radioValue, setRadioValue] = useState('0')
+const Toggler: React.FC<ITogglerProps> =
+  ({radios, size, checkedBtn, handleRadioValueChange}) => {
+    const [radioValue, setRadioValue] = useState<string>(checkedBtn)
 
-  return (
-    <>
-      <ButtonGroup>
-        {radios.map((radio, idx) => (
-          <ToggleButton
-            key={idx}
-            id={`radio-${idx}`}
-            type='radio'
-            variant='outline-warning'
-            name='radio'
-            value={radio.value}
-            checked={radioValue === radio.value}
-            onChange={(e) => setRadioValue(e.currentTarget.value)}
-          >
-            {radio.name}
-          </ToggleButton>
-        ))}
-      </ButtonGroup>
-    </>
-  )
-}
+    const showCheckedOrderType = (checkedValue: string) => {
+      handleRadioValueChange(checkedValue)
+    }
+
+    return (
+      <>
+        <ButtonGroup>
+          {radios.map((radio, idx) => (
+            <ToggleButton
+              size={size}
+              key={radio.value}
+              id={`radio-${idx}`}
+              type='radio'
+              variant='outline-warning'
+              name='radio'
+              value={radio.value}
+              checked={checkedBtn !== '' && radioValue === radio.value}
+              onChange={(e) => {
+                setRadioValue(e.currentTarget.value)
+                showCheckedOrderType(e.currentTarget.value)
+              }}
+            >
+              {radio.name}
+            </ToggleButton>
+          ))}
+        </ButtonGroup>
+      </>
+    )
+  }
 
 export default Toggler
