@@ -2,7 +2,7 @@
 import {useDispatch, useSelector} from 'react-redux'
 import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
 
-import {DishType} from '../../../../common/types/dishesType'
+import {DishType, TDish} from '../../../../common/types/dishesType'
 import {addDishToCart} from '../../../../redux/actions'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 
@@ -11,14 +11,6 @@ import './Dish.scss'
 type PropsType = {
   changeStatus: () => void
   currentDish: DishType
-}
-
-type TDish = {
-  id: number,
-  name: string,
-  prise: string,
-  image: string,
-  numberOfDishes: number,
 }
 
 const CompletedDish = (props: PropsType) => {

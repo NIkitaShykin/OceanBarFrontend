@@ -4,14 +4,11 @@ import {NavLink} from 'react-router-dom'
 
 import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
 import {useAppSelector} from '../../../redux/hooks'
-import {DishType} from '../../../common/types/dishesType'
 import SliderGallertItem from './SliderGalleryItem'
-import {AppStoreType} from '../../../redux/reducers/rootReducer'
 
 
 const ControlledCarousel = () => {
-  const allDishes = useAppSelector<DishType[]>(
-    (state: AppStoreType) => state.dish.dishes
+  const allDishes = useAppSelector((state) => state.dish.dishes
   )
 
   const desertDishes = allDishes.filter((dish) => {

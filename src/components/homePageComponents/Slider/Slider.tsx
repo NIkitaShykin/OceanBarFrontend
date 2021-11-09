@@ -1,17 +1,13 @@
 import {Row, Col} from 'react-bootstrap'
 
 import SliderGallery from './SliderGallery'
-import {AppStoreType} from '../../../redux/reducers/rootReducer'
-import {DishType} from '../../../common/types/dishesType'
 import Spinner from '../../../components/Spinner/Spinner'
 import {useAppSelector} from '../../../redux/hooks'
 
 
 const Slider = () => {
-  const allDishes: DishType[] =
-   useAppSelector((state: AppStoreType) => state.dish.dishes)
-  const isLoading: boolean = useAppSelector<any>(
-    (state: AppStoreType) => state.dish.isLoading
+  const allDishes = useAppSelector((state) => state.dish.dishes)
+  const isLoading = useAppSelector((state) => state.dish.isLoading
   )
 
   return (

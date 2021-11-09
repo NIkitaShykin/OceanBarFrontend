@@ -25,3 +25,11 @@ export type InitialMenuStateType = {
   dishes: DishType[],
   isLoading?: boolean
 }
+
+export type TDish = {
+  id: number,
+  name: string,
+  prise: string,
+  image: string,
+  numberOfDishes: number,
+}
