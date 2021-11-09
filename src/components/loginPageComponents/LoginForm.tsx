@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
 import Cookies from 'js-cookie'
-import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
+import {Button, CloseButton, Form, Modal} from 'react-bootstrap'
 
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
@@ -11,16 +11,7 @@ import {addDishToCart, logIn} from '../../redux/actions'
 import {ValidationType} from '../../common/types/userTypes'
 
 import './LoginForm.scss'
-import {ApiCart} from '../../api/ApiCart'
 import {DishFromBack} from '../../common/types/dishesType'
-
-// interface FormEventTarget extends EventTarget {
-//   value: string
-// }
-
-// interface FormChangeEvent extends React.ChangeEvent<HTMLElement> {
-//   target: FormEventTarget
-// }
 
 const LogInForm = () => {
   const history = useHistory()
@@ -70,14 +61,13 @@ const LogInForm = () => {
     password: password.value,
   }
 
-  // eslint-disable-next-line max-len
   const isEmailInvalid =
     email.isDirty &&
     (email.isEmpty ||
       email.minLengthError ||
       email.maxLengthError ||
       email.emailError)
-  // eslint-disable-next-line max-len
+
   const isPasswordInvalid =
     password.isDirty &&
     (password.isEmpty ||

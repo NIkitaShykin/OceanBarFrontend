@@ -10,7 +10,6 @@ import {DishInCart} from '../../../../common/types/dishesType'
 import {ApiCart} from '../../../../api/ApiCart'
 import Cookies from 'js-cookie'
 import {parseString} from '../../../../common/parceInString'
-import any = jasmine.any
 import {useHistory} from 'react-router-dom'
 
 type PropsType = {

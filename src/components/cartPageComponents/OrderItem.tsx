@@ -35,9 +35,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   numberOfDishes,
   position,
 }) => {
-  // const dishToken = useParams<{token: string}>()
-  const allDishes: DishType = useAppSelector<any>((state) => state.dish)
-  // @ts-ignore
+  const allDishes: DishType[] = useAppSelector<any>((state) => state.dish)
   const currentDish = allDishes.find((el) => el.id == id)
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
   const [ingredients, setIngredients] = useState(currentDish.ingredients)
@@ -73,19 +71,12 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
     })
     setShow(false)
   }
-  // const handleConfirm = () => {
-  //   // withoutIng.map((el: any) => {})
-  //   // check index of ingredinets if they deleted
-  //   setShow(false)
-  // }
-  // const ingredients = useSelector((state: any) => state.cart)
   const handleShow = () => setShow(true)
   const onDeleteHandler = () => {
     ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {
       console.log('deleted')
     })
     dispatch(removeDishFromCart(id))
-    // eslint-disable-next-line new-cap
     orderedToast(`Блюдо "${name}" удалено из корзины`)
   }
 

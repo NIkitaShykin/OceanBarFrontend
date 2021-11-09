@@ -44,19 +44,6 @@ const cartReducer = createReducer(initialState, (builder) => {
       return initialState
     })
 
-    // ***********************************************************************
-    // v2 with immutable data
-    // .addCase(plusOneDish, (state, action) => {
-    //   const index = state.dishes.findIndex(
-    //     (dish) => dish.id === action.payload.id)
-
-    //   const updState = {...state}
-
-    //   updState.dishes[index].numberOfDishes = action.payload.numberOfDishes
-    //   return updState
-    // })
-    // ***********************************************************************
-
     .addCase(plusOneDish, (state, action) => {
       const index = state.dishes.findIndex(
         (dish) => dish.id === action.payload.id
