@@ -29,7 +29,7 @@ export type InitialMenuStateType = {
 export type TDish = {
   id: number,
   name: string,
-  prise: string,
+  priсe: string,
   image: string,
   numberOfDishes: number,
 }
