@@ -10,7 +10,6 @@ export const API = {
   getAllDish() {
     return instance.get('api/menu/')
   },
-
   getAllDishesFromCart(userId: string) {
     return instance.get(`api/cart/get/${userId}`)
   },
@@ -29,14 +28,9 @@ export const API = {
       ingredients: ingredients
     })
   },
-
-  deleteDishFromCart(userId: string, dishId: string) {
-    return instance.put(
-      `api/cart/deleteDish/${userId}`,
-      {'dishId': dishId}
-    )
+  deleteDihsFromCart(userId: string, dishId: string) {
+    return instance.put(`api/cart/deleteDish/${userId}`, {dishId: dishId})
   },
-
   clearUserCart(userId: string) {
     return instance.delete(`api/cart/deleteAllDihs/${userId}`)
   }

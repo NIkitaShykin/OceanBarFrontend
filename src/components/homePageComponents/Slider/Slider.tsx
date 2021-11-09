@@ -4,7 +4,6 @@ import SliderGallery from './SliderGallery'
 import Spinner from '../../../components/Spinner/Spinner'
 import {useAppSelector} from '../../../redux/hooks'
 
-
 const Slider = () => {
   const allDishes = useAppSelector((state) => state.dish.dishes)
   const isLoading = useAppSelector((state) => state.dish.isLoading

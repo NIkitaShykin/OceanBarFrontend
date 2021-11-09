@@ -1,3 +1,4 @@
+
 import './HowItWorks.scss'
 
 const HowItWorks = () => {

@@ -1,21 +1,30 @@
+import {useState} from 'react'
+import ShiftingPersonalForm from './personalData/shiftingPersonalForm'
+
+// import ShiftingPersonal from
+//   './personalData/shiftingPersonal'
+import CompletedPersonal from
+  './personalData/completedPersonal'
 
 
-const PersonalData = () => (
-  <div className='profile-block ml-md-auto'>
-    <h2 className='profile-subtitle'>
-      Личные данные
-    </h2>
-    <div className='info-block'>
-      <div className='user-name'>Имя</div>
-      <div className='second-name'>Фамилия</div>
-      <div className='user-email'>Электронная почта</div>
-      <div className='phone-number'>Телефон</div>
+const PersonalData = () => {
+  const [isShifting, setChangeStatus] = useState<boolean>(true)
+  const changeStatus=(status:boolean)=>{
+    setChangeStatus(status)
+  }
+
+  return (
+    <div className='profile-block ml-md-auto'>
+      <h2 className='profile-subtitle'>
+        Личные данные
+      </h2>
+      {isShifting ?
+        <CompletedPersonal changeStatus={changeStatus}/> :
+        // <ShiftingPersonal changeStatus={changeStatus}/> }
+        <ShiftingPersonalForm changeStatus={changeStatus}/> }
+
     </div>
-    <button className='btn btn-outline-warning offset-md-10'>
-      Изменить
-    </button>
-  </div>
-)
-
+  )
+}
 
 export default PersonalData

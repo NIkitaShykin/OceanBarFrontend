@@ -2,6 +2,7 @@ import {Row} from 'react-bootstrap'
 
 import ListItem from './ListItem'
 import {useAppSelector} from '../../../../redux/hooks'
+import {DishType} from '../../../../common/types/dishesType'
 
 const PlatoList = () => {
   const allDishes = useAppSelector((state) => state.dish.dishes)
@@ -16,7 +17,6 @@ const PlatoList = () => {
         <ListItem data={platoDishes} isIntresting={false} />
       </Row>
     </>
-
   )
 }
 

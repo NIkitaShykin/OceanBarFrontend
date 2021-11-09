@@ -3,7 +3,6 @@ import {
   Navbar,
   Nav} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
-
 import DropDownNavBar from './DropDownNavBar/DropDown'
 import SearchField from './Search/Search'
 
@@ -38,15 +37,13 @@ const NavBarComponent: React.FC = () => {
               as={Link}
               to={'/menu'}
               className='nav-link-mr'
-            >
-              Меню
+            >Меню
             </Nav.Link>
             <Nav.Link
               as={Link}
               to={'/booking-table'}
               className='nav-link-mr'
-            >
-              Забронировать стол
+            >Забронировать стол
             </Nav.Link>
           </Nav>
 

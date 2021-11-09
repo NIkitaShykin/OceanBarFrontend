@@ -40,7 +40,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(sc|c)ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
@@ -56,6 +56,6 @@ module.exports = {
     alias: {
       App: path.resolve(__dirname, 'src'),
     },
-    extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.css'],
   },
 }

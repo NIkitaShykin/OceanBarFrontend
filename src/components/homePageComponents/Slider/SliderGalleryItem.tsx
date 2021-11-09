@@ -12,6 +12,7 @@ const SliderGallertItem = (props: PropsType) => {
 
   return (
     <div
+      key={props.categoryDish[0].id}
       style={{
         display: 'flex',
         flexWrap: 'wrap',
@@ -19,7 +20,6 @@ const SliderGallertItem = (props: PropsType) => {
       }}
     >
       <div
-        key={props.categoryDish[0].id}
         style={{
           margin: imgMargin,
           height: imgHeight,
@@ -31,7 +31,6 @@ const SliderGallertItem = (props: PropsType) => {
       />
 
       <div
-        key={props.categoryDish[1].id}
         style={{
           margin: imgMargin,
           height: imgHeight,
@@ -43,7 +42,6 @@ const SliderGallertItem = (props: PropsType) => {
       />
 
       <div
-        key={props.categoryDish[0].id}
         style={{
           margin: imgMargin,
           height: imgHeight,

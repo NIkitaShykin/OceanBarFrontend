@@ -8,20 +8,17 @@ import MaybeIntresting from
   '../../../../components/maybeIntresting/maybeIntresting'
 import {IngredientsType} from '../../../../common/types/dishesType'
 import {DishType} from '../../../../common/types/dishesType'
-import {AppStoreType} from '../../../../redux/reducers/rootReducer'
 
 
 const Dish = () => {
   const token = useParams<{token: string}>()
-  const allDishes: DishType[] =
-   useAppSelector((state: AppStoreType) => state.dish.dishes)
+  const allDishes: DishType = useAppSelector<any>((state) => state.dish)
   // @ts-ignore
   const currentDish: DishType = allDishes.find((el) => el.id == token.token)
 
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
   const [ingredients, setIngredients] =
     useState<IngredientsType>(currentDish.ingredients)
-
 
   useEffect(() => {
     setIngredients(currentDish.ingredients)
@@ -39,28 +36,25 @@ const Dish = () => {
 
   return (
     <>
-      {dishСhangeStatus ?
+      {dishСhangeStatus ? (
         <ShiftingDish
           changeStatus={changeStatus}
           currentDish={updatedDish}
           updIngredients={updateIngredients}
-        /> :
-        <CompletedDish
-          changeStatus={changeStatus}
-          currentDish={updatedDish}
         />
-      }
+      ) : (
+        <CompletedDish changeStatus={changeStatus} currentDish={updatedDish} />
+      )}
 
-      {!dishСhangeStatus ?
+      {!dishСhangeStatus ? (
         <div>
           <MaybeIntresting />
-        </div> :
+        </div>
+      ) : (
         <div style={{marginTop: '100px'}}></div>
-      }
+      )}
     </>
   )
 }
 
 export default Dish
-
-

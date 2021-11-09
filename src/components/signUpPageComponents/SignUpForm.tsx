@@ -3,6 +3,7 @@ import {useHistory} from 'react-router-dom'
 import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
+import {ValidationType} from '../../common/types/userTypes'
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
 import Spinner from '../../components/Spinner/Spinner'
@@ -15,7 +16,7 @@ const SignUp = () => {
   const [authFailed, setAuthFailed] = useState(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const useInput = (initialValue: string, validations: any) => {
+  const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)
@@ -80,39 +81,43 @@ const SignUp = () => {
     id: null,
   }
 
-
-  const isFirstNameInvalid = firstName.isDirty &&
-    (firstName.isEmpty ||
+  const isFirstNameInvalid =
+    firstName.isDirty && (
+      firstName.isEmpty ||
       firstName.minLengthError ||
       firstName.maxLengthError ||
       firstName.firstNameError
     )
 
-  const isLastNameInvalid = lastName.isDirty &&
-  (lastName.isEmpty ||
-    lastName.minLengthError ||
-    lastName.maxLengthError ||
-    lastName.lastNameError
-  )
+  const isLastNameInvalid =
+    lastName.isDirty && (
+      lastName.isEmpty ||
+      lastName.minLengthError ||
+      lastName.maxLengthError ||
+      lastName.lastNameError
+    )
 
-  const isEmailInvalid = email.isDirty &&
-  (email.isEmpty ||
-    email.minLengthError ||
-    email.maxLengthError ||
-    email.emailError
-  )
+  const isEmailInvalid =
+    email.isDirty && (
+      email.isEmpty ||
+      email.minLengthError ||
+      email.maxLengthError ||
+      email.emailError
+    )
 
-  const isPhoneNumberInvalid = phoneNumber.isDirty &&
-    (phoneNumber.isEmpty ||
+  const isPhoneNumberInvalid =
+    phoneNumber.isDirty && (
+      phoneNumber.isEmpty ||
       phoneNumber.phoneNumberError
     )
 
-  const isPasswordInvalid = password.isDirty &&
-  (password.isEmpty ||
-    password.minLengthError ||
-    password.maxLengthError ||
-    password.passwordError
-  )
+  const isPasswordInvalid =
+    password.isDirty && (
+      password.isEmpty ||
+      password.minLengthError ||
+      password.maxLengthError ||
+      password.passwordError
+    )
 
   const handleClose = () => {
     history.push('/')

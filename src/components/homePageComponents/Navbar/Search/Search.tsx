@@ -1,15 +1,15 @@
+
 import axios from 'axios'
 import {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {Form, FormControl} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
 
-import {url} from '../../../../api/index'
+// import {url} from '../../../../api/index'
 import useDebounce from '../../../../utils/useDebounce'
 import Spinner from '../../../Spinner/Spinner'
 
 import './search.scss'
-import Dish from 'src/pages/menuPage/Menu/Dishes/Dish'
 
 type Dish = {
   id: string,
@@ -42,7 +42,9 @@ const SearchField = () => {
   const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !dishes || dishes.length === 0
 
-  const debouncedSearchQuery = useDebounce(searchQuery, 500)
+  const debouncedSearchQuery = useDebounce(searchQuery, 2000)
+
+  const url = 'http://13.49.241.158:3000/api'
 
   useEffect(() => {
     const getMenu = async (query: string) => {
