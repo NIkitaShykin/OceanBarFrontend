@@ -5,7 +5,7 @@ import {RootState} from '../store'
 import {ThunkAction} from 'redux-thunk'
 
 import {getUserAC} from '../actions'
-// import {ApiUser} from '../../api/ApiUser'
+import {ApiUser} from '../../api/ApiUser'
 import {UserType} from '../../common/types/userTypes'
 
 const initialState: UserType = {
@@ -17,22 +17,23 @@ const initialState: UserType = {
   'phone': '+375293632222'
 }
 
-const dishesReducer = createReducer(initialState, (builder) => {
+const userReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(getUserAC, (state, action) => {
       return action.payload
     })
 })
 
-export default dishesReducer
+export default userReducer
 
 export const getUserPersonalDataTC =
-  (): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (token:string|undefined, userId:string): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        // const asyncResp = await ApiUser.getUserPersonalData()
-        // const userData = asyncResp.data
-        // dispatch(getUserAC(userData))
+        const asyncResp = await ApiUser.getUserPersonalData(token, userId)
+        // @ts-ignore
+        const userData = asyncResp.data.data.user
+        dispatch(getUserAC(userData))
       } catch (err) {
         // console.log(err)
       }

@@ -9,11 +9,14 @@ import {Form, Button, Modal} from 'react-bootstrap'
 import {ValidationType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
 import Cookies from 'js-cookie'
+import {orderedToast} from '../../../components/OrderToast/OrderedToast'
 
 const passwordResetForm = () => {
-  const userData =
-  useSelector<AppStoreType, any>((state) => state.auth)
-  console.log(userData)
+  // const userId =
+  // useSelector<AppStoreType, any>((state) => state.auth.user)
+
+  const userPersonal =
+  useSelector<AppStoreType, UserType>((state) => state.user)
 
   const [authFailed, setAuthFailed] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
@@ -31,7 +34,7 @@ const passwordResetForm = () => {
   const oldPassOnBlur = (e: any) => {
     ApiUser.checkUserPassword(
       token,
-      {password: oldPassword, email: '7656077@mail.ru'}
+      {password: oldPassword, email: userPersonal.email}
     )
       .then((resp: any) =>{
         if (resp.status > 400) {
@@ -48,31 +51,31 @@ const passwordResetForm = () => {
         setShowOldPassError(true)
       })
   }
-// ---------------------------------------------------------
+
   const setNewPass = (e: any) => {
     e.preventDefault()
     ApiUser.changeUserPassword(
-      token, {password: oldPassword}
+      token, userPersonal.id, {password: newUserPassword.password}
     )
       .then((resp: any) =>{
-        console.log(resp)
-        console.log(resp)
-        console.log(resp)
-        console.log(resp)
+        // console.log(resp)
         if (resp.status > 400) {
           throw new Error(resp.statusText)
         }
-        if (resp.data.token) {
-        //  show popup
+        if (resp.statusText=='OK') {
+          orderedToast(`Пароль изменен`)
+          setOldPassword('')
+          setOldPassCorrect(false)
+          setRetypeNewPass('')
+          password.value='' // Не работает => как обнулить это значение???
+          // или задиспатчить запрос за данными =>
+          // перерисовать всю страницу ???
         }
       })
       .catch((error) => {
         console.log(error.response)
-        //  show popup error
-        // clear fields
       })
   }
-// ---------------------------------------------------------
 
 
   const changeRetypeNewPass=(e: any)=>{
@@ -87,7 +90,7 @@ const passwordResetForm = () => {
   }
 
   const onBlureRetypeNewPass = (e: any) => {
-    console.log('remove mouse from retype')
+    console.log('remove mouse from retype field')
   }
 
   const useInput = (initialValue: string, validations: ValidationType) => {
@@ -124,28 +127,14 @@ const passwordResetForm = () => {
     password: password.value,
   }
 
-  // if (retypeNewPass===newUserPassword.password &&
-  //    retypeNewPass!=='') {
-  //   if (!newPassIsEqual) {
-  //     setNewPassIsEqual(true)
-  //     console.log('pass is Equal')
-  //   }
-  // }
-
-  // eslint-disable-next-line max-len
-  const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
+  const isPasswordInvalid = password.isDirty &&
+   (password.isEmpty || password.minLengthError || password.maxLengthError ||
+     password.passwordError)
 
   return (
     <div className='login-form'>
       <div className='container'>
         <Modal.Dialog className='shadow p-3 mb-5 bg-body rounded'>
-          {
-            authFailed &&
-          <div className='error validation'>
-            Адрес электронной почты или пароль введен с ошибкой.
-            Пожалуйста, попробуйте еще раз.
-          </div>
-          }
           <Modal.Body>
             <Form className='my-3' style={{width: '100%'}}>
               <Form.Floating className='mb-3 mx-3'>
@@ -167,6 +156,7 @@ const passwordResetForm = () => {
               <Form.Floating className='mb-3 mx-3'>
                 <Form.Control
                   id='userNewPassword'
+                  disabled={!oldPassCorrect}
                   type='password'
                   placeholder='password'
                   value={!authFailed ? password.value : ''}
@@ -189,6 +179,7 @@ const passwordResetForm = () => {
               <Form.Floating className='mx-3'>
                 <Form.Control
                   id='userAgainNewPassword'
+                  disabled={!oldPassCorrect}
                   type='password'
                   placeholder='password'
                   value={retypeNewPass}
