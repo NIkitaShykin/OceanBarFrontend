@@ -29,9 +29,7 @@ const ListItem = (props: PropsType) => {
           Dish.id,
           Cookies.get('token'),
           parseString(Dish.ingredients)
-        ).then((res) => {
-          console.log(res)
-        })
+        ).then((res) => {})
         dispatch(
           addDishToCart({
             id: Dish.id,

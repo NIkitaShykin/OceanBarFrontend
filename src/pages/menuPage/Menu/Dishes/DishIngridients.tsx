@@ -14,7 +14,6 @@ const DishIngredients = (props: PropsType) => {
   )
 
   const toggleIngredient = (el: IngredientType, i: number) => {
-    console.log(i)
     const elCopy = {...el}
     elCopy.isAdded = !el.isAdded
     const copyIngredients = [...ingredients]

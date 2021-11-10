@@ -19,7 +19,7 @@ import {orderedToast} from '../OrderToast/OrderedToast'
 import {DishInCart} from '../../common/types/dishesType'
 
 type PropsType = {
-  dishes: [Object: DishInCart]
+  dishes: DishInCart[]
 }
 const UserCart = (props: PropsType) => {
   // 'props: any' as cart functionality is still in progress
@@ -53,9 +53,7 @@ const UserCart = (props: PropsType) => {
   const dispatch = useDispatch()
   const handleClearCart = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault()
-    ApiCart.clearCart(Cookies.get('token')).then(() => {
-      console.log('deleted')
-    })
+    ApiCart.clearCart(Cookies.get('token')).then(() => {})
     dispatch(clearCart())
     orderedToast(`Корзина очищена`)
   }

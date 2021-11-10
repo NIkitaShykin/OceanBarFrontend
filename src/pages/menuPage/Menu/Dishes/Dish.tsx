@@ -40,7 +40,7 @@ const Dish = () => {
         <ShiftingDish
           changeStatus={changeStatus}
           currentDish={updatedDish}
-          updIngredients={updateIngredients}
+          updateIngredients={updateIngredients}
         />
       ) : (
         <CompletedDish changeStatus={changeStatus} currentDish={updatedDish} />

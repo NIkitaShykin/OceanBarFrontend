@@ -1,16 +1,12 @@
-import axios from 'axios'
 import {
-  DishFromBack,
+  ApiDish,
   DishFromBackAfterAdding,
   UpdatedDish,
 } from '../common/types/dishesType'
-
-export const instance = axios.create({
-  baseURL: 'http://13.51.224.150:3000/',
-})
+import {instance} from './index'
 export const ApiCart = {
   getCart(token: string | undefined) {
-    return instance.get<{cart: [DishFromBack]}>('api/cart/', {
+    return instance.get<{cart: [ApiDish]}>('api/cart/', {
       headers: {
         Authorization: `Bearer ${token}`,
       },

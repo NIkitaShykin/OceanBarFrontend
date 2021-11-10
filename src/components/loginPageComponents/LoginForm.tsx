@@ -13,7 +13,7 @@ import {ValidationType} from '../../common/types/userTypes'
 import './LoginForm.scss'
 import Spinner from '../Spinner/Spinner'
 import {ApiCart} from '../../api/ApiCart'
-import {DishFromBack} from '../../common/types/dishesType'
+import {ApiDish} from '../../common/types/dishesType'
 
 const LogInForm = () => {
   const history = useHistory()
@@ -91,7 +91,6 @@ const LogInForm = () => {
         if (response.status >= 200 && response.status < 300) {
           Cookies.set('token', response.data.token, {expires: 30})
           setIsLoading(false)
-          console.log(response.data.token)
           dispatch(logIn(response.data.data))
           history.push('/')
         } else {
@@ -105,8 +104,7 @@ const LogInForm = () => {
       })
       .then(() => {
         ApiCart.getCart(Cookies.get('token')).then((resp) => {
-          console.log(resp)
-          resp.data.cart.forEach((dish: DishFromBack) => {
+          resp.data.cart.forEach((dish: ApiDish) => {
             dispatch(
               addDishToCart({
                 id: dish.dish.id,

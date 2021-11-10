@@ -37,7 +37,6 @@ const CompletedDish = (props: PropsType) => {
   })
 
   const orderDish = async (name: string, ingredients: IngredientsType) => {
-    console.log(ingredients)
     if (isLogIn.isAuthorized) {
       if (dishes.find((dish: DishInCart) => dish.id === props.currentDish.id)) {
         orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
@@ -46,9 +45,7 @@ const CompletedDish = (props: PropsType) => {
           props.currentDish.id,
           Cookies.get('token'),
           parseString(ingredients)
-        ).then((res) => {
-          console.log(res)
-        })
+        ).then((res) => {})
         dispatch(
           addDishToCart({
             id: props.currentDish.id,

@@ -8,15 +8,19 @@ import {DishType} from '../../../../common/types/dishesType'
 
 type PropsType = {
   changeStatus: () => void
-  currentDish: DishType | any
-  updIngredients: (arg0: any) => void
+  currentDish: DishType
+  updateIngredients: (arg0: any) => void
   handleClose?: () => void
 }
 
-const ShiftingDish = (props: PropsType) => {
-  console.log(props)
+const ShiftingDish = ({
+  changeStatus,
+  currentDish,
+  updateIngredients,
+  handleClose,
+}: PropsType) => {
   const [ingredients, setIngredients] = useState<IngredientType[]>(
-    props.currentDish?.ingredients
+    currentDish?.ingredients
   )
 
   let disableIngredientAccept = false
@@ -33,20 +37,20 @@ const ShiftingDish = (props: PropsType) => {
   }
 
   const updateIngridient = (updIngredients: IngredientsType) => {
-    props.updIngredients(updIngredients)
+    updateIngredients(updIngredients)
     setIngredients(updIngredients)
   }
 
   const finishSifting = () => {
-    if (props.handleClose) {
-      props.handleClose()
-    } else props.changeStatus()
+    if (handleClose) {
+      handleClose()
+    } else changeStatus()
   }
 
   return (
     <>
       <div className={'title-dish'}>
-        <h1>{props.currentDish.name}</h1>
+        <h1>{currentDish.name}</h1>
       </div>
       <Row>
         <Col xs={'auto'} sm={6} md={8} lg={8}>
@@ -54,7 +58,7 @@ const ShiftingDish = (props: PropsType) => {
             style={{
               height: '100%',
               width: '100%',
-              backgroundImage: `url(${props.currentDish.imageURL})`,
+              backgroundImage: `url(${currentDish.imageURL})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -81,10 +85,10 @@ const ShiftingDish = (props: PropsType) => {
             </button>
             <br /> <br /> <br />
             <span>
-              <h5>Вес: {props.currentDish?.weight}</h5>
+              <h5>Вес: {currentDish?.weight}</h5>
             </span>
             <span>
-              <h5>Калории: {props.currentDish?.calories}</h5>
+              <h5>Калории: {currentDish?.calories}</h5>
             </span>
             <div className='line-dish'></div>
             <br />
@@ -93,7 +97,7 @@ const ShiftingDish = (props: PropsType) => {
                 <h5>Стоимость:</h5>
               </span>
               <span style={{fontSize: '20px', marginLeft: '3px'}}>
-                {props.currentDish?.price}
+                {currentDish?.price}
               </span>
               <span style={{fontSize: '18px', marginLeft: '2px'}}>BYN</span>
             </div>

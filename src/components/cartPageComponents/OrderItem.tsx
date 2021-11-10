@@ -73,9 +73,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   }
   const handleShow = () => setShow(true)
   const onDeleteHandler = () => {
-    ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {
-      console.log('deleted')
-    })
+    ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {})
     dispatch(removeDishFromCart(id))
     orderedToast(`Блюдо "${name}" удалено из корзины`)
   }
@@ -86,7 +84,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
         <ShiftingDish
           changeStatus={changeStatus}
           currentDish={updatedDish}
-          updIngredients={updateIngredients}
+          updateIngredients={updateIngredients}
           handleClose={handleClose}
         />
       ) : (
@@ -109,9 +107,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
                 if (counter > 1) {
                   setCounter(--counter)
                   ApiCart.updateDishInCart(position, counter, token).then(
-                    () => {
-                      console.log(numberOfDishes)
-                    }
+                    () => {}
                   )
                   dispatch(minusOneDish({id: id, numberOfDishes: counter}))
                 } else {
@@ -127,10 +123,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
               onClick={() => {
                 setCounter(++counter)
                 ApiCart.updateDishInCart(position, counter, token).then(
-                  (resp) => {
-                    console.log(resp)
-                    console.log(numberOfDishes)
-                  }
+                  (resp) => {}
                 )
                 dispatch(plusOneDish({id: id, numberOfDishes: counter}))
               }}

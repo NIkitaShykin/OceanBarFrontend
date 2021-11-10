@@ -19,7 +19,7 @@ export type DishInCart = {
   ingredients: string
   position: number
 }
-export type DishFromBack = {
+export type ApiDish = {
   dish: {
     calories: string
     dishCategory: string
@@ -34,7 +34,7 @@ export type DishFromBack = {
   ingredients: string
   quantity: number
 }
-export type DishFromBackAfterAdding = DishFromBack & {
+export type DishFromBackAfterAdding = ApiDish & {
   user: number
 }
 export type UpdatedDish = {
