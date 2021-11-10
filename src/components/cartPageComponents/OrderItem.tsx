@@ -38,9 +38,11 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   const allDishes: DishType[] = useAppSelector<any>((state) => state.dish)
   const currentDish = allDishes.find((el) => el.id == id)
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
+  // @ts-ignore
   const [ingredients, setIngredients] = useState(currentDish.ingredients)
 
   useEffect(() => {
+    // @ts-ignore
     setIngredients(currentDish.ingredients)
   }, [currentDish])
 
