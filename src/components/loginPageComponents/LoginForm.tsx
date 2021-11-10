@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
@@ -11,8 +11,9 @@ import {addDishToCart, logIn} from '../../redux/actions'
 import {ValidationType} from '../../common/types/userTypes'
 
 import './LoginForm.scss'
-import {DishFromBack} from '../../common/types/dishesType'
 import Spinner from '../Spinner/Spinner'
+import {ApiCart} from '../../api/ApiCart'
+import {DishFromBack} from '../../common/types/dishesType'
 
 const LogInForm = () => {
   const history = useHistory()
@@ -81,49 +82,44 @@ const LogInForm = () => {
     history.push('/')
   }
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault()
     setIsLoading(true)
     axios
-      .post(`${url}/users/auth`, user)
-      .then((response: any) => {
+      .post<{token: string; data: {}}>(`${url}/users/auth`, user)
+      .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           Cookies.set('token', response.data.token, {expires: 30})
           setIsLoading(false)
           console.log(response.data.token)
           dispatch(logIn(response.data.data))
+          history.push('/')
         } else {
           setIsLoading(false)
           throw new Error(response.statusText)
         }
       })
-      .then(() => {
-        axios
-          .get(`${url}/cart`, {
-            headers: {
-              Authorization: `Bearer ${Cookies.get('token')}`,
-            },
-          })
-          .then((resp: any) => {
-            resp.data.cart.forEach((dish: DishFromBack) => {
-              dispatch(
-                addDishToCart({
-                  id: dish.dish.id,
-                  name: dish.dish.name,
-                  price: dish.dish.price,
-                  imageURL: dish.dish.imageURL,
-                  ingredients: dish.dish.ingredients,
-                  numberOfDishes: dish.quantity,
-                  position: dish.id,
-                })
-              )
-            })
-          })
-        history.push('/')
-      })
       .catch((error) => {
-        console.log(error.response)
+        setIsLoading(false)
         setAuthFailed(true)
+      })
+      .then(() => {
+        ApiCart.getCart(Cookies.get('token')).then((resp) => {
+          console.log(resp)
+          resp.data.cart.forEach((dish: DishFromBack) => {
+            dispatch(
+              addDishToCart({
+                id: dish.dish.id,
+                name: dish.dish.name,
+                price: dish.dish.price,
+                imageURL: dish.dish.imageURL,
+                ingredients: dish.dish.ingredients,
+                numberOfDishes: dish.quantity,
+                position: dish.id,
+              })
+            )
+          })
+        })
       })
   }
 

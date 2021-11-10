@@ -1,4 +1,4 @@
-import React, {MouseEvent, useState} from 'react'
+import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 
 import OrderItem from './OrderItem'
@@ -10,14 +10,18 @@ import TakeawayForm from './OrderForms/TakeawayForm'
 
 import {clearCart} from '../../redux/actions'
 
-import {TRadioBtnParams, TOrderItem} from '../../common/types/cartTypes'
+import {TRadioBtnParams} from '../../common/types/cartTypes'
 
 import './Cart.scss'
 import {ApiCart} from '../../api/ApiCart'
 import Cookies from 'js-cookie'
 import {orderedToast} from '../OrderToast/OrderedToast'
+import {DishInCart} from '../../common/types/dishesType'
 
-const UserCart: React.FC = (props: any) => {
+type PropsType = {
+  dishes: [Object: DishInCart]
+}
+const UserCart = (props: PropsType) => {
   // 'props: any' as cart functionality is still in progress
   const [orderType, setOrderType] = useState<string>('')
   const radios: TRadioBtnParams[] = [
@@ -27,14 +31,14 @@ const UserCart: React.FC = (props: any) => {
   ]
 
   const totalSum = props.dishes.reduce(
-    (sum: number, current: TOrderItem) =>
+    (sum: number, current) =>
       sum + Number(current.price) * current.numberOfDishes,
     0
   )
   const cartSectionsClassName =
     props.dishes.length < 1 ? 'cart-sections hidden' : 'cart-sections'
 
-  const orderCodes: JSX.Element[] = props.dishes.map((order: any) => (
+  const orderCodes: JSX.Element[] = props.dishes.map((order) => (
     <OrderItem
       key={order.id}
       id={order.id}
@@ -47,7 +51,7 @@ const UserCart: React.FC = (props: any) => {
   ))
 
   const dispatch = useDispatch()
-  const handleClearCart = (e: any) => {
+  const handleClearCart = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault()
     ApiCart.clearCart(Cookies.get('token')).then(() => {
       console.log('deleted')

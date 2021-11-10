@@ -1,14 +1,14 @@
 import {NavLink, useHistory} from 'react-router-dom'
 import {Button, Card, Col, Row} from 'react-bootstrap'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
-import {DishType} from '../../../../common/types/dishesType'
+import {DishInCart, DishType} from '../../../../common/types/dishesType'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 import {addDishToCart} from '../../../../redux/actions'
-import {DishInCart} from '../../../../common/types/dishesType'
 import {ApiCart} from '../../../../api/ApiCart'
 import {parseString} from '../../../../common/parceInString'
 import Cookies from 'js-cookie'
+import {useAppSelector} from '../../../../redux/hooks'
 
 type PropsType = {
   data: Array<DishType>
@@ -17,14 +17,12 @@ type PropsType = {
 
 const ListItem = (props: PropsType) => {
   const history = useHistory()
-  const isLogIn = useSelector((state: any) => state.auth)
+  const isLogIn = useAppSelector((state) => state.auth)
   const dispatch = useDispatch()
-  const dishes: Array<DishInCart> = useSelector(
-    (state: any) => state.cart.dishes
-  )
-  const orderDish = async (Dish: any) => {
+  const dishes: Array<DishInCart> = useAppSelector((state) => state.cart.dishes)
+  const orderDish = async (Dish: DishType) => {
     if (isLogIn.isAuthorized) {
-      if (dishes.find((dish: any) => dish.id === Dish.id)) {
+      if (dishes.find((dish) => dish.id === Dish.id)) {
         orderedToast(`Блюдо "${Dish.name}" уже в корзине!`)
       } else {
         await ApiCart.addDishToCart(
@@ -60,30 +58,30 @@ const ListItem = (props: PropsType) => {
           text='dark'
           className='mb-3 mx-2 my-2'
           style={
-            props.isIntresting ?
-              {width: '12rem', height: '19rem'} :
-              {width: '18rem', height: '22rem'}
+            props.isIntresting
+              ? {width: '12rem', height: '19rem'}
+              : {width: '18rem', height: '22rem'}
           }
         >
           <NavLink to={'/dish/' + dish.id}>
             <div
               key={dish.id}
               style={
-                props.isIntresting ?
-                  {
-                    height: '150px',
-                    width: '100%',
-                    backgroundImage: `url(${dish.imageURL})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  } :
-                  {
-                    height: '200px',
-                    width: '100%',
-                    backgroundImage: `url(${dish.imageURL})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }
+                props.isIntresting
+                  ? {
+                      height: '150px',
+                      width: '100%',
+                      backgroundImage: `url(${dish.imageURL})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }
+                  : {
+                      height: '200px',
+                      width: '100%',
+                      backgroundImage: `url(${dish.imageURL})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }
               }
             />
           </NavLink>

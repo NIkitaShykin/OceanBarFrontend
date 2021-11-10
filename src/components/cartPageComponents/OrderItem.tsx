@@ -13,9 +13,8 @@ import './Cart.scss'
 import {ApiCart} from '../../api/ApiCart'
 import Cookies from 'js-cookie'
 import ShiftingDish from '../../pages/menuPage/Menu/Dishes/ShiftingDish'
-import {DishType} from '../../common/types/dishesType'
+import {DishType, IngredientsType} from '../../common/types/dishesType'
 import {useAppSelector} from '../../redux/hooks'
-import {IngredientsType} from '../../common/types/dishesType'
 import {parseString} from '../../common/parceInString'
 
 interface IOrderItemProps {
@@ -35,15 +34,14 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   numberOfDishes,
   position,
 }) => {
-  const allDishes: DishType[] = useAppSelector<any>((state) => state.dish)
-  const currentDish = allDishes.find((el) => el.id == id)
+  const allDishes = useAppSelector((state) => state.dish.dishes)
+  const currentDish = allDishes.find((el: DishType) => el.id == id)
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
   // @ts-ignore
   const [ingredients, setIngredients] = useState(currentDish.ingredients)
 
   useEffect(() => {
-    // @ts-ignore
-    setIngredients(currentDish.ingredients)
+    setIngredients(ingredients)
   }, [currentDish])
 
   const updatedDish = {...currentDish, ingredients}
@@ -64,7 +62,7 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
       numberOfDishes,
       token,
       parseString(ingredients)
-    ).then((resp: any) => {
+    ).then((resp) => {
       orderedToast(
         `Добавленные игредиенты :
       ${resp.data.updatedPosition.ingredients}`,
@@ -128,9 +126,12 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
               className='control'
               onClick={() => {
                 setCounter(++counter)
-                ApiCart.updateDishInCart(position, counter, token).then(() => {
-                  console.log(numberOfDishes)
-                })
+                ApiCart.updateDishInCart(position, counter, token).then(
+                  (resp) => {
+                    console.log(resp)
+                    console.log(numberOfDishes)
+                  }
+                )
                 dispatch(plusOneDish({id: id, numberOfDishes: counter}))
               }}
             >

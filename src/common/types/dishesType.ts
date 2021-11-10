@@ -7,13 +7,13 @@ export type DishType = {
   weight: string
   calories: string
   imageURL: string
-  ingredients: IngredientType[]
+  ingredients: IngredientsType
   dishCategory: string
 }
 export type DishInCart = {
   id: number
   name: string
-  price: number
+  price: string
   imageURL: string
   numberOfDishes: number
   ingredients: string
@@ -34,8 +34,15 @@ export type DishFromBack = {
   ingredients: string
   quantity: number
 }
-
+export type DishFromBackAfterAdding = DishFromBack & {
+  user: number
+}
+export type UpdatedDish = {
+  id: number
+  ingredients: string
+  quantity: number
+}
 export type InitialMenuStateType = {
-  dishes: DishType[],
+  dishes: DishType[]
   isLoading?: boolean
 }

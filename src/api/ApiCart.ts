@@ -1,22 +1,27 @@
 import axios from 'axios'
+import {
+  DishFromBack,
+  DishFromBackAfterAdding,
+  UpdatedDish,
+} from '../common/types/dishesType'
 
 export const instance = axios.create({
   baseURL: 'http://13.51.224.150:3000/',
 })
 export const ApiCart = {
-  getCart(token: string | undefined): any {
-    instance
-      .get('api/cart/', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((resp: any): any => {
-        return resp.data.cart
-      })
+  getCart(token: string | undefined) {
+    return instance.get<{cart: [DishFromBack]}>('api/cart/', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
   },
-  addDishToCart(id: string, token: string | undefined, ingredients?: any) {
-    return instance.post(
+  addDishToCart(
+    id: number,
+    token: string | undefined,
+    ingredients?: string | undefined
+  ) {
+    return instance.post<DishFromBackAfterAdding>(
       `api/cart/`,
       {
         id: id,
@@ -33,9 +38,9 @@ export const ApiCart = {
     position: number,
     quantity: number,
     token: string | undefined,
-    ingredients?: any | undefined
+    ingredients?: string | undefined
   ) {
-    return instance.patch(
+    return instance.patch<{updatedPosition: UpdatedDish}>(
       `api/cart/${position}`,
       {
         quantity: quantity,
@@ -49,14 +54,14 @@ export const ApiCart = {
     )
   },
   deleteDishFromCart(position: number, token: string | undefined) {
-    return instance.delete(`api/cart/${position}`, {
+    return instance.delete<string>(`api/cart/${position}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
   },
   clearCart(token: string | undefined) {
-    return instance.delete(`api/cart/`, {
+    return instance.delete<string>(`api/cart/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
