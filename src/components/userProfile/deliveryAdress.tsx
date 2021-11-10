@@ -1,6 +1,8 @@
 import {useState} from 'react'
-import ShiftingDelivery from
-  './deliveryAdress/shiftingDelivery'
+// import ShiftingDelivery from
+//   './deliveryAdress/shiftingDelivery'
+import ShiftingDeliveryAPI from
+  './deliveryAdress/shiftingDeliveryAPI'
 import CompletedDelivery from
   './deliveryAdress/completedDelivery'
 import AbsentDelivery from
@@ -27,7 +29,8 @@ const DeliveryAdress = () => {
           <div>
             {isShifting ?
               <CompletedDelivery changeStatus={changeStatus}/> :
-              <ShiftingDelivery changeStatus={changeStatus}/> }
+              // <ShiftingDelivery changeStatus={changeStatus}/> }
+              <ShiftingDeliveryAPI changeStatus={changeStatus}/> }
           </div>
         }
 
