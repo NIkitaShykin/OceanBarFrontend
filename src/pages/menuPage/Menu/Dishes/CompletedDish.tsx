@@ -59,7 +59,7 @@ const CompletedDish = (props: PropsType) => {
         orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
       }
     } else {
-      orderedToast('Войдите в сущесвтующий аккаунт или зарегистрируйтесь', 4000)
+      orderedToast('Войдите в существующий аккаунт или зарегистрируйтесь', 4000)
       history.push('/login')
     }
   }

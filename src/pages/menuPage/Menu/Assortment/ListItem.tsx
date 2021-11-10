@@ -43,7 +43,7 @@ const ListItem = (props: PropsType) => {
         orderedToast(`Блюдо "${Dish.name}" добавлено в корзину`)
       }
     } else {
-      orderedToast('Войдите в сущесвтующий аккаунт или зарегистрируйтесь', 4000)
+      orderedToast('Войдите в существующий аккаунт или зарегистрируйтесь', 4000)
       history.push('/login')
     }
   }
@@ -56,30 +56,30 @@ const ListItem = (props: PropsType) => {
           text='dark'
           className='mb-3 mx-2 my-2'
           style={
-            props.isIntresting ?
-              {width: '12rem', height: '19rem'} :
-              {width: '18rem', height: '22rem'}
+            props.isIntresting
+              ? {width: '12rem', height: '19rem'}
+              : {width: '18rem', height: '22rem'}
           }
         >
           <NavLink to={'/dish/' + dish.id}>
             <div
               key={dish.id}
               style={
-                props.isIntresting ?
-                  {
-                    height: '150px',
-                    width: '100%',
-                    backgroundImage: `url(${dish.imageURL})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  } :
-                  {
-                    height: '200px',
-                    width: '100%',
-                    backgroundImage: `url(${dish.imageURL})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                  }
+                props.isIntresting
+                  ? {
+                      height: '150px',
+                      width: '100%',
+                      backgroundImage: `url(${dish.imageURL})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }
+                  : {
+                      height: '200px',
+                      width: '100%',
+                      backgroundImage: `url(${dish.imageURL})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }
               }
             />
           </NavLink>
