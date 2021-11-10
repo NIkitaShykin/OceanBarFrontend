@@ -12,12 +12,14 @@ import {ValidationType} from '../../common/types/userTypes'
 
 import './LoginForm.scss'
 import {DishFromBack} from '../../common/types/dishesType'
+import Spinner from '../Spinner/Spinner'
 
 const LogInForm = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
   const [authFailed, setAuthFailed] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
@@ -81,14 +83,17 @@ const LogInForm = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
+    setIsLoading(true)
     axios
       .post(`${url}/users/auth`, user)
       .then((response: any) => {
         if (response.status >= 200 && response.status < 300) {
           Cookies.set('token', response.data.token, {expires: 30})
+          setIsLoading(false)
           console.log(response.data.token)
           dispatch(logIn(response.data.data))
         } else {
+          setIsLoading(false)
           throw new Error(response.statusText)
         }
       })
@@ -130,7 +135,7 @@ const LogInForm = () => {
             <Modal.Title className='form-title'>Вход</Modal.Title>
             <CloseButton onClick={() => handleClose()} />
           </Modal.Header>
-
+          {isLoading && <Spinner />}
           {authFailed && (
             <div className='error validation'>
               Адрес электронной почты или пароль введен с ошибкой. Пожалуйста,
