@@ -34,3 +34,8 @@ export type DishFromBack = {
   ingredients: string
   quantity: number
 }
+
+export type InitialMenuStateType = {
+  dishes: DishType[],
+  isLoading?: boolean
+}
