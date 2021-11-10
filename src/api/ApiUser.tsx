@@ -10,8 +10,6 @@ export const ApiUser = {
     return instance.post('users/register', {data: user})
   },
   getUsers() {
-    return instance.get('api/users/8')
+    return instance.get('users/8')
   },
 }
-
-

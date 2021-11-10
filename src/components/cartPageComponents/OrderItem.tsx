@@ -44,8 +44,6 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
     setIngredients(ingredients)
   }, [currentDish])
 
-  const updatedDish = {...currentDish, ingredients}
-
   const updateIngredients = (updIngridients: IngredientsType) => {
     setIngredients(updIngridients)
   }
@@ -77,13 +75,15 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
     dispatch(removeDishFromCart(id))
     orderedToast(`Блюдо "${name}" удалено из корзины`)
   }
-
   return (
     <>
-      {show ? (
+      {show && currentDish ? (
         <ShiftingDish
           changeStatus={changeStatus}
-          currentDish={updatedDish}
+          currentDish={{
+            ...currentDish,
+            ingredients,
+          }}
           updateIngredients={updateIngredients}
           handleClose={handleClose}
         />

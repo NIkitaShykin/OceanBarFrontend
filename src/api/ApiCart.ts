@@ -6,7 +6,7 @@ import {
 import {instance} from './index'
 export const ApiCart = {
   getCart(token: string | undefined) {
-    return instance.get<{cart: [ApiDish]}>('api/cart/', {
+    return instance.get<{cart: [ApiDish]}>('cart/', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -18,7 +18,7 @@ export const ApiCart = {
     ingredients?: string | undefined
   ) {
     return instance.post<DishFromBackAfterAdding>(
-      `api/cart/`,
+      `cart/`,
       {
         id: id,
         ingredients: ingredients,
@@ -37,7 +37,7 @@ export const ApiCart = {
     ingredients?: string | undefined
   ) {
     return instance.patch<{updatedPosition: UpdatedDish}>(
-      `api/cart/${position}`,
+      `cart/${position}`,
       {
         quantity: quantity,
         ingredients: ingredients,
@@ -50,14 +50,14 @@ export const ApiCart = {
     )
   },
   deleteDishFromCart(position: number, token: string | undefined) {
-    return instance.delete<string>(`api/cart/${position}`, {
+    return instance.delete<string>(`cart/${position}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
   },
   clearCart(token: string | undefined) {
-    return instance.delete<string>(`api/cart/`, {
+    return instance.delete<string>(`cart/`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
