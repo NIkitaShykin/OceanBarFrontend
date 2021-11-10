@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom'
 import ShiftingDish from './ShiftingDish'
 import CompletedDish from './CompletedDish'
 import {useAppSelector} from '../../../../redux/hooks'
+// eslint-disable-next-line max-len
 import MaybeIntresting from '../../../../components/maybeIntresting/maybeIntresting'
 import {IngredientsType} from '../../../../common/types/dishesType'
 import {DishType} from '../../../../common/types/dishesType'
