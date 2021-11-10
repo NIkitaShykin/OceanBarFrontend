@@ -2,7 +2,6 @@ import {Row} from 'react-bootstrap'
 
 import ListItem from './ListItem'
 import {useAppSelector} from '../../../../redux/hooks'
-import {DishType} from '../../../../common/types/dishesType'
 
 
 const SaladList = () => {

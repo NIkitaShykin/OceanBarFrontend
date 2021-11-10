@@ -5,9 +5,11 @@ import {ThunkAction} from 'redux-thunk'
 import {RootState} from '../store'
 import {addDishesAC, toggleLoading} from '../actions'
 import {API} from '../../api/index'
-import {DishType,
+import {
+  DishType,
   IngredientType,
-  InitialMenuStateType} from '../../common/types/dishesType'
+  InitialMenuStateType,
+} from '../../common/types/dishesType'
 
 const initialState: InitialMenuStateType = {
   dishes: [],
@@ -19,13 +21,13 @@ const dishesReducer = createReducer(initialState, (builder) => {
     .addCase(addDishesAC, (state, action) => {
       return {
         dishes: action.payload,
-        isLoading: false
+        isLoading: false,
       }
     })
     .addCase(toggleLoading, (state, action) => {
       return {
         ...state,
-        isLoading: action.payload
+        isLoading: action.payload,
       }
     })
 })
@@ -33,24 +35,23 @@ const dishesReducer = createReducer(initialState, (builder) => {
 export default dishesReducer
 
 export const getDishesFromApiTC =
-  (): ThunkAction<void, RootState, unknown, AnyAction> =>
-    async (dispatch) => {
-      dispatch(toggleLoading(true))
-      try {
-        const asyncResp: any = await API.getAllDish()
-        // @ts-ignore
-        const restructDishes: DishType[] = asyncResp.data.data.dishes.map(
-          (dish: DishType) => {
-            const myObj: Array<IngredientType> = []
-            // @ts-ignore
-            dish.ingredients.split(';').forEach((ingr) => {
-              myObj.push({name: ingr, isAdded: true})
-            })
-            return ({...dish, ingredients: myObj})
+  (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch) => {
+    dispatch(toggleLoading(true))
+    try {
+      const asyncResp: any = await API.getAllDish()
+      // @ts-ignore
+      const restructDishes: DishType[] = asyncResp.data.data.dishes.map(
+        (dish: DishType) => {
+          const myObj: Array<IngredientType> = []
+          // @ts-ignore
+          dish.ingredients.split(';').forEach((ingr) => {
+            myObj.push({name: ingr, isAdded: true})
           })
-        dispatch(addDishesAC(restructDishes))
-      } catch (err) {
-        dispatch(toggleLoading(false))
-        console.log(err)
-      }
+          return {...dish, ingredients: myObj}
+        }
+      )
+      dispatch(addDishesAC(restructDishes))
+    } catch (err) {
+      dispatch(toggleLoading(false))
     }
+  }

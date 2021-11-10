@@ -17,35 +17,30 @@ const initialState: DeliveryAdressType = {
 }
 
 const deliveryReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(getUserAC, (state, action) => {
-      return action.payload
-    })
+  builder.addCase(getUserAC, (state, action) => {
+    return action.payload
+  })
 })
 
 export default deliveryReducer
 
 export const getUserDeliveryDataTC =
-  (): ThunkAction<void, RootState, unknown, AnyAction> =>
-    async (dispatch) => {
-      try {
-        // const asyncResp = await ApiUser.getUserDeliveryData()
-        // const userData = asyncResp.data
-        // dispatch(getUserAC(userData))
-      } catch (err) {
-        console.log(err)
-      }
-    }
-
+  (): ThunkAction<void, RootState, unknown, AnyAction> => async (dispatch) => {
+    try {
+      // const asyncResp = await ApiUser.getUserDeliveryData()
+      // const userData = asyncResp.data
+      // dispatch(getUserAC(userData))
+    } catch (err) {}
+  }
 
 export const setUserDeliveryData =
-  (deliveryData: DeliveryAdressType): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (
+    deliveryData: DeliveryAdressType
+  ): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        // const asyncResp: any = await ApiUser.setUserDeliveryData(deliveryData)
-        // const userData = asyncResp.data
+      // const asyncResp: any = await ApiUser.setUserDeliveryData(deliveryData)
+      // const userData = asyncResp.data
       //   dispatch(getUserAC(userData))
-      } catch (err) {
-        console.log(err)
-      }
+      } catch (err) {}
     }

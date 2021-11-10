@@ -1,12 +1,20 @@
-import {useDispatch, useSelector} from 'react-redux'
-import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
+import {useDispatch} from 'react-redux'
+import {CloseButton, Col, Modal, Row} from 'react-bootstrap'
 
-import {DishType} from '../../../../common/types/dishesType'
+import {
+  DishInCart,
+  DishType,
+  IngredientsType,
+} from '../../../../common/types/dishesType'
 import {addDishToCart} from '../../../../redux/actions'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 
 import './Dish.scss'
-import {DishInCart} from '../../../../common/types/dishesType'
+import {ApiCart} from '../../../../api/ApiCart'
+import Cookies from 'js-cookie'
+import {parseString} from '../../../../common/parceInString'
+import {useHistory} from 'react-router-dom'
+import {useAppSelector} from '../../../../redux/hooks'
 
 type PropsType = {
   changeStatus: () => void
@@ -14,9 +22,10 @@ type PropsType = {
 }
 
 const CompletedDish = (props: PropsType) => {
-  const dishes = useSelector((state: any) => state.cart.dishes)
+  const dishes = useAppSelector((state) => state.cart.dishes)
+  const history = useHistory()
+  const isLogIn = useAppSelector((state) => state.auth)
   const dispatch = useDispatch()
-
   const ingredientList = props.currentDish.ingredients.map((el) => {
     if (el.isAdded) {
       return (
@@ -27,20 +36,31 @@ const CompletedDish = (props: PropsType) => {
     }
   })
 
-  const orderDish = (name: string) => {
-    if (dishes.find((dish: DishInCart) => dish.id === props.currentDish.id)) {
-      orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+  const orderDish = async (name: string, ingredients: IngredientsType) => {
+    if (isLogIn.isAuthorized) {
+      if (dishes.find((dish: DishInCart) => dish.id === props.currentDish.id)) {
+        orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+      } else {
+        await ApiCart.addDishToCart(
+          props.currentDish.id,
+          Cookies.get('token'),
+          parseString(ingredients)
+        ).then((res) => {})
+        dispatch(
+          addDishToCart({
+            id: props.currentDish.id,
+            name: props.currentDish.name,
+            price: props.currentDish.price,
+            imageURL: props.currentDish.imageURL,
+            ingredients: props.currentDish.ingredients,
+            numberOfDishes: 1,
+          })
+        )
+        orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+      }
     } else {
-      dispatch(
-        addDishToCart({
-          id: props.currentDish.id,
-          name: props.currentDish.name,
-          price: props.currentDish.price,
-          imageURL: props.currentDish.imageURL,
-          numberOfDishes: 1,
-        })
-      )
-      orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+      orderedToast('Войдите в существующий аккаунт или зарегистрируйтесь', 4000)
+      history.push('/login')
     }
   }
 
@@ -108,7 +128,7 @@ const CompletedDish = (props: PropsType) => {
             <button
               className={'order-btn-dish'}
               onClick={() => {
-                orderDish(props.currentDish.name)
+                orderDish(props.currentDish.name, props.currentDish.ingredients)
               }}
             >
               Заказать
