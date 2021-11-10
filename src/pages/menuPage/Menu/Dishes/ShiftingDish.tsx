@@ -8,12 +8,13 @@ import {DishType} from '../../../../common/types/dishesType'
 
 type PropsType = {
   changeStatus: () => void
-  currentDish: DishType
+  currentDish: DishType | any
   updIngredients: (arg0: any) => void
-  handleClose?: any
+  handleClose?: () => void
 }
 
 const ShiftingDish = (props: PropsType) => {
+  console.log(props)
   const [ingredients, setIngredients] = useState<IngredientType[]>(
     props.currentDish?.ingredients
   )
@@ -37,8 +38,9 @@ const ShiftingDish = (props: PropsType) => {
   }
 
   const finishSifting = () => {
-    props.handleClose()
-    props.changeStatus()
+    if (props.handleClose) {
+      props.handleClose()
+    } else props.changeStatus()
   }
 
   return (
