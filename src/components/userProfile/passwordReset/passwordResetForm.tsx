@@ -1,7 +1,5 @@
 import {useState} from 'react'
-// import {useHistory} from 'react-router-dom'
 import {ApiUser} from '../../../api/ApiUser'
-// import {ApiDish} from '../../../api/ApiDish'
 import {UserType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {useSelector} from 'react-redux'
@@ -9,29 +7,29 @@ import {Form, Button, Modal} from 'react-bootstrap'
 import {ValidationType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
 import Cookies from 'js-cookie'
-import {orderedToast} from '../../../components/OrderToast/OrderedToast'
 
 const passwordResetForm = () => {
-  // const userId =
-  // useSelector<AppStoreType, any>((state) => state.auth.user)
-
+  const token = Cookies.get('token')
   const userPersonal =
   useSelector<AppStoreType, UserType>((state) => state.user)
 
   const [authFailed, setAuthFailed] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
   const [oldPassCorrect, setOldPassCorrect] = useState(false)
-  const [retypeNewPass, setRetypeNewPass] = useState<string>('')
+  const [retypeNewPass, setRetypeNewPass] = useState('')
   const [showOldPassError, setShowOldPassError] = useState(false)
   const [newPassIsEqual, setNewPassIsEqual] = useState(false)
+  const [showEqualPassError, setShowEqualPassError] = useState(false)
+  const [passSuccessChanged, setPassSuccessChanged] = useState(false)
+
 
   const oldPassChange = (e: any) => {
     setOldPassword(e.target.value)
+    setShowOldPassError(false)
   }
 
-  const token = Cookies.get('token')
-
-  const oldPassOnBlur = (e: any) => {
+  const oldPassCheck = (e: any) => {
+    e.preventDefault()
     ApiUser.checkUserPassword(
       token,
       {password: oldPassword, email: userPersonal.email}
@@ -53,17 +51,22 @@ const passwordResetForm = () => {
   }
 
   const setNewPass = (e: any) => {
+    if (!newPassIsEqual) {
+      setShowEqualPassError(true)
+      return
+    }
+
     e.preventDefault()
     ApiUser.changeUserPassword(
       token, userPersonal.id, {password: newUserPassword.password}
     )
       .then((resp: any) =>{
-        // console.log(resp)
         if (resp.status > 400) {
           throw new Error(resp.statusText)
         }
         if (resp.statusText=='OK') {
-          orderedToast(`Пароль изменен`)
+          // orderedToast(`Пароль изменен`)
+          setPassSuccessChanged(true)
           setOldPassword('')
           setOldPassCorrect(false)
           setRetypeNewPass('')
@@ -77,9 +80,9 @@ const passwordResetForm = () => {
       })
   }
 
-
   const changeRetypeNewPass=(e: any)=>{
     setRetypeNewPass(e.target.value)
+    setShowEqualPassError(false)
 
     if (e.target.value===newUserPassword.password &&
       e.target.value!=='') {
@@ -87,10 +90,6 @@ const passwordResetForm = () => {
     } else {
       setNewPassIsEqual(false)
     }
-  }
-
-  const onBlureRetypeNewPass = (e: any) => {
-    console.log('remove mouse from retype field')
   }
 
   const useInput = (initialValue: string, validations: ValidationType) => {
@@ -135,37 +134,82 @@ const passwordResetForm = () => {
     <div className='login-form'>
       <div className='container'>
         <Modal.Dialog className='shadow p-3 mb-5 bg-body rounded'>
+
           <Modal.Body>
             <Form className='my-3' style={{width: '100%'}}>
-              <Form.Floating className='mb-3 mx-3'>
-                <Form.Control
-                  id='userOldPassword'
-                  type='password'
-                  placeholder='password'
-                  value={oldPassword}
-                  onChange={(e) => oldPassChange(e)}
-                  onBlur={(e) => oldPassOnBlur(e)}
-                />
-                <label htmlFor='userOldPassword'>Старый пароль</label>
-                {showOldPassError && <div className='error'>
+
+              {passSuccessChanged &&
+              <div
+                style={{display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
+                <h4>Пароль успешно изменен</h4>
+                <Button
+                  className='btn btn-outline-warning offset-md-0'
+                  variant='outline-warning'
+                  type='submit'
+                  onClick={() => setPassSuccessChanged(false)}
+                >
+             Ok
+                </Button>
+              </div>}
+
+              {!passSuccessChanged &&
+              <>
+                {!oldPassCorrect &&<><h4>Подтвердите старый пароль</h4><br/></>}
+                <Form.Floating className='mb-3 mx-3'>
+                  {!oldPassCorrect &&<>
+                    <Form.Control
+                      id='userOldPassword'
+                      disabled={oldPassCorrect}
+                      type='password'
+                      placeholder='password'
+                      value={oldPassword}
+                      onChange={(e) => oldPassChange(e)}
+                    />
+                    <label htmlFor='userOldPassword'>Старый пароль</label>
+                    {(showOldPassError) &&
+                 <div className='error'>
                   Вы ввели не верный пароль </div>
-                }
-                {oldPassCorrect && <div style={{color: 'green'}}>
-                  Пароль верный </div>}
-              </Form.Floating>
-              <Form.Floating className='mb-3 mx-3'>
-                <Form.Control
-                  id='userNewPassword'
-                  disabled={!oldPassCorrect}
-                  type='password'
-                  placeholder='password'
-                  value={!authFailed ? password.value : ''}
-                  onChange={(e) => password.onChange(e)}
-                  onBlur={(e) => password.onBlur(e)}
-                />
-                <label htmlFor='userNewPassword'>Новый пароль</label>
-                {
-                  isPasswordInvalid &&
+                    }
+                  </>}
+
+                  { !oldPassCorrect && <>
+                    <Modal.Footer className='justify-content-center border-0'>
+                      <Button
+                        className='btn btn-outline-warning offset-md-4'
+                        variant='outline-warning'
+                        type='submit'
+                        onClick={(e) => oldPassCheck(e)}
+                      >
+              Проверить
+                      </Button>
+                    </Modal.Footer>
+                  </>}
+
+                </Form.Floating>
+
+              </>}
+
+
+              {oldPassCorrect &&<><h4>Введите новый пароль</h4><br/></>}
+              { oldPassCorrect &&
+              <>
+                <Form.Floating className='mb-3 mx-3'>
+                  <Form.Control
+                    id='userNewPassword'
+                    disabled={!oldPassCorrect}
+                    type='password'
+                    placeholder='password'
+                    value={!authFailed ? password.value : ''}
+                    onChange={(e) => password.onChange(e)}
+                    onBlur={(e) => password.onBlur(e)}
+                  />
+                  <label htmlFor='userNewPassword'>Новый пароль</label>
+                  {
+                    isPasswordInvalid &&
                 <div className='error'>
                   Пароль должен содержать 8-15 символов
                   (включая 1 символ в верхнем регистре,
@@ -173,43 +217,49 @@ const passwordResetForm = () => {
                   без пробелов и специальных знаков (#, %, &, !, $, etc.).
                   Обязательно к заполнению.
                 </div>
-                }
-              </Form.Floating>
+                  }
+                </Form.Floating>
 
-              <Form.Floating className='mx-3'>
-                <Form.Control
-                  id='userAgainNewPassword'
-                  disabled={!oldPassCorrect}
-                  type='password'
-                  placeholder='password'
-                  value={retypeNewPass}
-                  onChange={(e) => changeRetypeNewPass(e)}
-                  onBlur={(e) => onBlureRetypeNewPass(e)}
-                />
-                <label htmlFor='userAgainNewPassword'>
+                <Form.Floating className='mx-3'>
+                  <Form.Control
+                    id='userAgainNewPassword'
+                    disabled={!oldPassCorrect}
+                    type='password'
+                    placeholder='password'
+                    value={retypeNewPass}
+                    onChange={(e) => changeRetypeNewPass(e)}
+                  />
+                  <label htmlFor='userAgainNewPassword'>
                   Повторите новый пароль
-                </label>
-                {
-                  !newPassIsEqual && (retypeNewPass!=='') &&
+                  </label>
+
+                  {(!newPassIsEqual && showEqualPassError) &&
+                     (retypeNewPass!=='') &&
                 <div className='error'>
-                  Пароли не совподают
+                  Пароли не совпадают
                 </div>
-                }
-              </Form.Floating>
+                  }
+                </Form.Floating>
+
+              </>}
+
             </Form>
           </Modal.Body>
 
-          <Button className='btn btn-outline-warning offset-md-8'
-            style={{width: '100px'}}
-            disabled={!oldPassCorrect || isPasswordInvalid}
-            variant='outline-warning'
-            type='submit'
-            onClick={(e) => setNewPass(e)}
-          >
+          { oldPassCorrect && <>
+            <Modal.Footer className='justify-content-center border-0'>
+              <Button
+                className='btn btn-outline-warning offset-md-0'
+                disabled={isPasswordInvalid || retypeNewPass===''}
+                variant='outline-warning'
+                type='submit'
+                onClick={(e) => setNewPass(e)}
+              >
              Сохранить
-          </Button>
-          <Modal.Footer className='justify-content-center border-0'>
-          </Modal.Footer>
+              </Button>
+            </Modal.Footer>
+          </>}
+
         </Modal.Dialog>
       </div>
     </div>

@@ -10,11 +10,11 @@ import {UserType} from '../../common/types/userTypes'
 
 const initialState: UserType = {
   'id': 8,
-  'name': 'Иван',
-  'secondname': 'Иванов',
-  'email': 'ivanov@mail.com',
+  'name': 'Неизвестно',
+  'secondname': 'Неизвестно',
+  'email': 'неизвестно@mail.com',
   'password': '$2b$10$qJfHke4w.E/mAzb.YHaNoeFwLYrMNb0TPkTL7GhrYXV4eTNHmfLa.',
-  'phone': '+375293632222'
+  'phone': 'неизвестно'
 }
 
 const userReducer = createReducer(initialState, (builder) => {
@@ -27,7 +27,7 @@ const userReducer = createReducer(initialState, (builder) => {
 export default userReducer
 
 export const getUserPersonalDataTC =
-  (token:string|undefined, userId:string): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (token:string|undefined, userId:number): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
         const asyncResp = await ApiUser.getUserPersonalData(token, userId)

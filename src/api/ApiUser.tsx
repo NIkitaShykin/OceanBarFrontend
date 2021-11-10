@@ -15,8 +15,9 @@ export const ApiUser = {
   // userRegister(user:UserType) {
   //   return instance.post('users/register', {data: user})
   // },
-  getUserPersonalData(token: string|undefined, userId:string) {
+  getUserPersonalData(token: string|undefined, userId:number) {
     {
+      console.log(userId)
       return Promise.resolve(
         instance.get(`users/${userId}`,
           {headers: {Authorization: `Bearer ${token}`}}
@@ -42,7 +43,8 @@ export const ApiUser = {
       )
     )
   },
-  changeUserPassword(token: string | undefined, userId: number,
+  changeUserPassword(token: string | undefined,
+    userId: number,
     body?: {password: string}
   ) {
     return Promise.resolve(

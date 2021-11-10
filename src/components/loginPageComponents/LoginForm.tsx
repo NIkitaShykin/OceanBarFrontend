@@ -13,14 +13,6 @@ import {ValidationType} from '../../common/types/userTypes'
 
 import './LoginForm.scss'
 
-// interface FormEventTarget extends EventTarget {
-//   value: string
-// }
-
-// interface FormChangeEvent extends React.ChangeEvent<HTMLElement> {
-//   target: FormEventTarget
-// }
-
 const LogInForm = () => {
   const history = useHistory()
   const dispatch = useDispatch()
@@ -86,7 +78,7 @@ const LogInForm = () => {
     )
 
   const handleClose = () => {
-    history.push('/')
+    history.push('/profile')
   }
 
   const handleSubmit = (e: any) => {
@@ -102,13 +94,12 @@ const LogInForm = () => {
           throw new Error(response.statusText)
         }
       })
-      .then(() => history.push('/'))
+      .then(() => history.push('/profile'))
       .catch((error) => {
         console.log(error.response)
         setAuthFailed(true)
       })
   }
-
   return (
     <div className='login-form'>
       <div className='container'>
