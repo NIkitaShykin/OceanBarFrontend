@@ -1,5 +1,7 @@
 import axios from 'axios'
 import {url as baseURL} from './index'
+import Cookies from 'js-cookie'
+const token2 = Cookies.get('token')
 
 import {UserType} from '../../src/common/types/userTypes'
 import {DeliveryAdressType} from '../../src/common/types/userTypes'
@@ -17,10 +19,9 @@ export const ApiUser = {
   // },
   getUserPersonalData(token: string|undefined, userId:number) {
     {
-      console.log(userId)
       return Promise.resolve(
         instance.get(`users/${userId}`,
-          {headers: {Authorization: `Bearer ${token}`}}
+          {headers: {Authorization: `Bearer ${token2}`}}
         )
       )
     }
@@ -28,9 +29,22 @@ export const ApiUser = {
   getUserDeliveryData() {
     return instance.get('users/')
   },
-  setUserPersonalData(userData:UserType) {
-    return instance.patch('users/', {userData})
+
+  setUserPersonalData(userData:any, token:any) {
+    console.log(userData)
+    console.log(token)
+    return Promise.resolve(
+      instance.patch( 'users/1', userData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+    )
   },
+
+
   setUserDeliveryData(deliveryData:DeliveryAdressType) {
     return instance.patch('users/', {deliveryData})
   },

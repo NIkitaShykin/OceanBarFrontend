@@ -6,6 +6,7 @@ import dishesReducer from './dishesReducer'
 import userReducer from './userReducer'
 import deliveryReducer from './deliveryReducer'
 
+
 const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,

@@ -2,12 +2,13 @@ import {Carousel} from 'react-bootstrap'
 import {useState} from 'react'
 import {NavLink} from 'react-router-dom'
 import {useAppSelector} from '../../../redux/hooks'
-import {DishType} from '../../../common/types/dishesType'
 import SliderGallertItem from './SliderGalleryItem'
 import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
 
+
 const ControlledCarousel = () => {
-  const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
+  const allDishes = useAppSelector((state) => state.dish.dishes
+  )
 
   const desertDishes = allDishes.filter((dish) => {
     return dish.dishCategory === 'Десерты'

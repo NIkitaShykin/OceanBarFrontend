@@ -24,32 +24,27 @@ const DishIngredients = (props: PropsType) => {
 
   const ingridientsItem = ingredients.map((ingredient, i) => {
     return (
-      <>
-        <Row key={`${i}`}>
-          <Col xs={11}>
-            <label style={{marginTop: '10px'}}>
-              <input style={{marginRight: '10px'}}
-                checked={!!ingredient.isAdded}
-                type='checkbox' name='name'
-                onChange={() => {
-                  toggleIngredient(ingredient, i)
-                }}
-              />
-              <span style={{lineHeight: '15px'}}>
-                {ingredient.name}
-              </span>
-            </label>
-          </Col>
-          <Col xs={1}>
-          </Col>
-        </Row>
-      </>
+      <Row key={i}>
+        <Col xs={11}>
+          <label style={{marginTop: '10px'}}>
+            <input
+              style={{marginRight: '10px'}}
+              checked={!!ingredient.isAdded}
+              type='checkbox'
+              name='name'
+              onChange={() => {
+                toggleIngredient(ingredient, i)
+              }}
+            />
+            <span style={{lineHeight: '15px'}}>{ingredient.name}</span>
+          </label>
+        </Col>
+        <Col xs={1}></Col>
+      </Row>
     )
   })
 
-  return <>
-    {ingridientsItem}
-  </>
+  return <>{ingridientsItem}</>
 }
 
 export default DishIngredients

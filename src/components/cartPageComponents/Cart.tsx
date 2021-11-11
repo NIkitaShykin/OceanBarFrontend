@@ -1,4 +1,4 @@
-import React, {MouseEvent, useState} from 'react'
+import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 
 import OrderItem from './OrderItem'
@@ -10,14 +10,20 @@ import TakeawayForm from './OrderForms/TakeawayForm'
 
 import {clearCart} from '../../redux/actions'
 
-import {TRadioBtnParams, TOrderItem} from '../../common/types/cartTypes'
+import {TRadioBtnParams} from '../../common/types/cartTypes'
 
 import './Cart.scss'
+import {ApiCart} from '../../api/ApiCart'
+import Cookies from 'js-cookie'
+import {orderedToast} from '../OrderToast/OrderedToast'
+import {DishInCart} from '../../common/types/dishesType'
 
-const UserCart: React.FC = (props: any) => {
+type PropsType = {
+  dishes: DishInCart[]
+}
+const UserCart = (props: PropsType) => {
   // 'props: any' as cart functionality is still in progress
   const [orderType, setOrderType] = useState<string>('')
-
   const radios: TRadioBtnParams[] = [
     {name: 'Забронировать стол', value: 'reserve-a-table'},
     {name: 'Доставка', value: 'delivery'},
@@ -25,14 +31,14 @@ const UserCart: React.FC = (props: any) => {
   ]
 
   const totalSum = props.dishes.reduce(
-    (sum: number, current: TOrderItem) =>
+    (sum: number, current) =>
       sum + Number(current.price) * current.numberOfDishes,
     0
   )
   const cartSectionsClassName =
     props.dishes.length < 1 ? 'cart-sections hidden' : 'cart-sections'
 
-  const orderCodes = props.dishes.map((order: TOrderItem) => (
+  const orderCodes: JSX.Element[] = props.dishes.map((order) => (
     <OrderItem
       key={order.id}
       id={order.id}
@@ -40,13 +46,16 @@ const UserCart: React.FC = (props: any) => {
       price={order.price}
       image={order.imageURL}
       numberOfDishes={order.numberOfDishes}
+      position={order.position}
     />
   ))
 
   const dispatch = useDispatch()
-  const handleClearCart = (e: MouseEvent) => {
+  const handleClearCart = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault()
+    ApiCart.clearCart(Cookies.get('token')).then(() => {})
     dispatch(clearCart())
+    orderedToast(`Корзина очищена`)
   }
 
   const handleRadioValueChange = (value: string) => {
@@ -72,9 +81,7 @@ const UserCart: React.FC = (props: any) => {
           <div className='cart-section'>
             <div className='section-block section-title'>
               <div>
-                <span className='uppercase'>
-                  Ваш заказ
-                </span>
+                <span className='uppercase'>Ваш заказ</span>
               </div>
               <div>
                 <button
@@ -90,45 +97,39 @@ const UserCart: React.FC = (props: any) => {
               {orderCodes}
             </div>
             <div className='section-block cart-total'>
-              <span className='uppercase'>
-                Итого: {totalSum} BYN
-              </span>
+              <span className='uppercase'>Итого: {totalSum} BYN</span>
             </div>
           </div>
 
           <div className='cart-section'>
             <div className='section-block section-title'>
-              <span className='uppercase'>
-                Тип заказа
-              </span>
+              <span className='uppercase'>Тип заказа</span>
             </div>
             <div className='section-block section-data options'>
               <Toggler
                 radios={radios}
                 size='lg'
                 checkedBtn={orderType}
-                handleRadioValueChange =
-                  {(value: string) => handleRadioValueChange(value)}
+                handleRadioValueChange={(value: string) =>
+                  handleRadioValueChange(value)
+                }
               />
             </div>
-            {
-              orderType === 'reserve-a-table' &&
+            {orderType === 'reserve-a-table' && (
               <ReserveATableForm
-                handleRadioValueClearance =
-                  {(value: string) => handleRadioValueClearance(value)}
+                handleRadioValueClearance={(value: string) =>
+                  handleRadioValueClearance(value)
+                }
               />
-            }
-            {
-              orderType === 'delivery' &&
-              <DeliveryForm />
-            }
-            {
-              orderType === 'takeaway' &&
+            )}
+            {orderType === 'delivery' && <DeliveryForm />}
+            {orderType === 'takeaway' && (
               <TakeawayForm
-                handleRadioValueClearance =
-                  {(value: string) => handleRadioValueClearance(value)}
+                handleRadioValueClearance={(value: string) =>
+                  handleRadioValueClearance(value)
+                }
               />
-            }
+            )}
           </div>
         </div>
       </div>

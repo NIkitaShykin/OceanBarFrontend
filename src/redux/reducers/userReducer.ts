@@ -6,15 +6,22 @@ import {ThunkAction} from 'redux-thunk'
 
 import {getUserAC} from '../actions'
 import {ApiUser} from '../../api/ApiUser'
-import {UserType} from '../../common/types/userTypes'
+// import {UserType} from '../../common/types/userTypes'
+import {CommonUserType} from '../../common/types/userTypes'
 
-const initialState: UserType = {
+const initialState: CommonUserType = {
   'id': 8,
   'name': 'Неизвестно',
   'secondname': 'Неизвестно',
   'email': 'неизвестно@mail.com',
-  'password': '$2b$10$qJfHke4w.E/mAzb.YHaNoeFwLYrMNb0TPkTL7GhrYXV4eTNHmfLa.',
-  'phone': 'неизвестно'
+  'password': '*********',
+  // ----was separate------
+  'phone': 'неизвестно',
+  'city': 'неизвестно',
+  'street': 'неизвестно',
+  'home': 'неизвестно',
+  'homePart': 'неизвестно',
+  'flat': 'неизвестно'
 }
 
 const userReducer = createReducer(initialState, (builder) => {
@@ -39,12 +46,13 @@ export const getUserPersonalDataTC =
       }
     }
 
-export const setPersonalUsersData =
-  (userData: any): ThunkAction<void, RootState, unknown, AnyAction> =>
+export const setUserPersonalDataTC =
+  (userData: any, token:any): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        // const asyncResp: any = await ApiUser.setUserPersonalData(userData)
-        // const userData = asyncResp.data
+        const asyncResp: any = await ApiUser.setUserPersonalData(userData, token)
+        const response = asyncResp.data
+        console.log(response)
       //   dispatch(getUserAC(userData))
       } catch (err) {
         console.log(err)

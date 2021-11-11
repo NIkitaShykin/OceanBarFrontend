@@ -18,15 +18,14 @@ const UserProfile = () => {
   const dispatch = useDispatch()
   const token = Cookies.get('token')
 
-  // const userId =
-  // useSelector<AppStoreType, any>((state) => state.auth.user.id)
+  // const userId2 =
+  // useSelector<AppStoreType, any>((state) => state.auth)
 
   const userId = 10000 // unAffected value, because there are token
 
   useEffect(() => {
     dispatch(getUserPersonalDataTC(token, userId))
   }, [])
-
 
   return (
     <div>

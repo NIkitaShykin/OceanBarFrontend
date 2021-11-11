@@ -30,3 +30,5 @@ home: string
 homePart: string
 flat: string
     }
+
+export type CommonUserType=DeliveryAdressType & UserType

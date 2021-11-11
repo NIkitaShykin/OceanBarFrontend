@@ -6,6 +6,7 @@ import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 import {ValidationType} from '../../common/types/userTypes'
 import {url} from '../../api'
 import {useValidation} from '../../utils/validation'
+import Spinner from '../../components/Spinner/Spinner'
 
 import './SignUpForm.scss'
 
@@ -13,6 +14,7 @@ const SignUp = () => {
   const history = useHistory()
 
   const [authFailed, setAuthFailed] = useState(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
@@ -33,7 +35,7 @@ const SignUp = () => {
       onChange,
       onBlur,
       isDirty,
-      ...valid
+      ...valid,
     }
   }
 
@@ -80,42 +82,35 @@ const SignUp = () => {
   }
 
   const isFirstNameInvalid =
-    firstName.isDirty && (
-      firstName.isEmpty ||
+    firstName.isDirty &&
+    (firstName.isEmpty ||
       firstName.minLengthError ||
       firstName.maxLengthError ||
-      firstName.firstNameError
-    )
+      firstName.firstNameError)
 
   const isLastNameInvalid =
-    lastName.isDirty && (
-      lastName.isEmpty ||
+    lastName.isDirty &&
+    (lastName.isEmpty ||
       lastName.minLengthError ||
       lastName.maxLengthError ||
-      lastName.lastNameError
-    )
+      lastName.lastNameError)
 
   const isEmailInvalid =
-    email.isDirty && (
-      email.isEmpty ||
+    email.isDirty &&
+    (email.isEmpty ||
       email.minLengthError ||
       email.maxLengthError ||
-      email.emailError
-    )
+      email.emailError)
 
   const isPhoneNumberInvalid =
-    phoneNumber.isDirty && (
-      phoneNumber.isEmpty ||
-      phoneNumber.phoneNumberError
-    )
+    phoneNumber.isDirty && (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
 
   const isPasswordInvalid =
-    password.isDirty && (
-      password.isEmpty ||
+    password.isDirty &&
+    (password.isEmpty ||
       password.minLengthError ||
       password.maxLengthError ||
-      password.passwordError
-    )
+      password.passwordError)
 
   const handleClose = () => {
     history.push('/')
@@ -123,18 +118,19 @@ const SignUp = () => {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
+    setIsLoading(true)
     axios
       .post(`${url}/users/register`, user)
       .then((response: any) => {
         if (response.status > 400) {
+          setIsLoading(false)
           throw new Error(response.statusText)
-        }
+        } else setIsLoading(false)
       })
 
       .then(() => history.push('/signup-success'))
       .catch((error) => {
-        console.log(error.response)
+        setIsLoading(false)
         setAuthFailed(true)
       })
   }
@@ -145,15 +141,15 @@ const SignUp = () => {
         <Modal.Dialog className='shadow p-3 mb-5 bg-body rounded'>
           <Modal.Header className='border-0'>
             <Modal.Title className='form-title'>Регистрация</Modal.Title>
-            <CloseButton onClick={() => handleClose()}/>
+            <CloseButton onClick={() => handleClose()} />
           </Modal.Header>
 
-          {
-            authFailed &&
+          {isLoading && <Spinner />}
+          {!isLoading && authFailed && (
             <div className='error validation'>
               Пользователь с таким адресом электронной почты уже существует.
             </div>
-          }
+          )}
 
           <Modal.Body>
             <Form className='my-3' style={{width: '100%'}}>
@@ -167,14 +163,13 @@ const SignUp = () => {
                   onBlur={(e) => firstName.onBlur(e)}
                 />
                 <label htmlFor='userFirstName'>Имя</label>
-                {
-                  isFirstNameInvalid &&
+                {isFirstNameInvalid && (
                   <div className='error'>
-                    Это поле должно содержать 2-30 знаков,
-                    без специальных символов (#, %, &, !, $, etc.) и
-                    чисел (0-9). Обязательно к заполнению.
+                    Это поле должно содержать 2-30 знаков, без специальных
+                    символов (#, %, &, !, $, etc.) и чисел (0-9). Обязательно к
+                    заполнению.
                   </div>
-                }
+                )}
               </Form.Floating>
 
               <Form.Floating className='mb-3 mx-3'>
@@ -187,14 +182,13 @@ const SignUp = () => {
                   onBlur={(e) => lastName.onBlur(e)}
                 />
                 <label htmlFor='userLastName'>Фамилия</label>
-                {
-                  isLastNameInvalid &&
+                {isLastNameInvalid && (
                   <div className='error'>
-                    Это поле должно содержать 3-30 знаков,
-                    без специальных символов (#, %, &, !, $, etc.) и
-                    чисел (0-9). Обязательно к заполнению.
+                    Это поле должно содержать 3-30 знаков, без специальных
+                    символов (#, %, &, !, $, etc.) и чисел (0-9). Обязательно к
+                    заполнению.
                   </div>
-                }
+                )}
               </Form.Floating>
 
               <Form.Floating className='mb-3 mx-3'>
@@ -207,14 +201,13 @@ const SignUp = () => {
                   onBlur={(e) => email.onBlur(e)}
                 />
                 <label htmlFor='userEmail'>Электронная почта</label>
-                {
-                  isEmailInvalid &&
+                {isEmailInvalid && (
                   <div className='error'>
-                    Электронная почта должна быть в формате xxx@yyy.zzz,
-                    без специальных символов (#, %, &, !, $, etc.).
-                    Обязательно к заполнению.
+                    Электронная почта должна быть в формате xxx@yyy.zzz, без
+                    специальных символов (#, %, &, !, $, etc.). Обязательно к
+                    заполнению.
                   </div>
-                }
+                )}
               </Form.Floating>
 
               <Form.Floating className='mb-3 mx-3'>
@@ -227,14 +220,12 @@ const SignUp = () => {
                   onBlur={(e) => phoneNumber.onBlur(e)}
                 />
                 <label htmlFor='userPhoneNumber'>Телефон</label>
-                {
-                  isPhoneNumberInvalid &&
+                {isPhoneNumberInvalid && (
                   <div className='error'>
-                    Телефон должен содержать код в формате
-                    +375 (+ опционально) либо 80 и 9 цифр основного номера.
-                    Обязательно к заполнению.
+                    Телефон должен содержать код в формате +375 (+ опционально)
+                    либо 80 и 9 цифр основного номера. Обязательно к заполнению.
                   </div>
-                }
+                )}
               </Form.Floating>
 
               <Form.Floating className='mx-3'>
@@ -247,16 +238,14 @@ const SignUp = () => {
                   onBlur={(e) => password.onBlur(e)}
                 />
                 <label htmlFor='userPassword'>Пароль</label>
-                {
-                  isPasswordInvalid &&
+                {isPasswordInvalid && (
                   <div className='error'>
-                    Пароль должен содержать 8-15 символов
-                    (включая 1 символ в верхнем регистре,
-                    1 символ в нижнем регистре и 1 цифру)
-                    без пробелов и специальных знаков (#, %, &, !, $, etc.).
+                    Пароль должен содержать 8-15 символов (включая 1 символ в
+                    верхнем регистре, 1 символ в нижнем регистре и 1 цифру) без
+                    пробелов и специальных знаков (#, %, &, !, $, etc.).
                     Обязательно к заполнению.
                   </div>
-                }
+                )}
               </Form.Floating>
             </Form>
           </Modal.Body>
@@ -270,12 +259,14 @@ const SignUp = () => {
               Отменить
             </Button>
             <Button
-              disabled={!firstName.inputValid ||
+              disabled={
+                !firstName.inputValid ||
                 !lastName.inputValid ||
                 !email.inputValid ||
                 !phoneNumber.inputValid ||
                 !password.inputValid ||
-                authFailed}
+                authFailed
+              }
               variant='outline-warning'
               type='submit'
               onClick={(e) => handleSubmit(e)}
