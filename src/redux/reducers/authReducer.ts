@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit'
 import {logIn, logOut} from '../actions'
 
 interface IUserState {
-  user: any,
+  user: any | null,
   isAuthorized: boolean
 }
 
@@ -13,7 +13,6 @@ const initialState: IUserState = {
 
 const authReducer = createReducer(initialState, (builder) => {
   builder
-
     .addCase(logIn, (state, action) => {
       return {
         ...state,

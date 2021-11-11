@@ -1,11 +1,13 @@
-
 import {Row, Col} from 'react-bootstrap'
+
 import SliderGallery from './SliderGallery'
+import Spinner from '../../../components/Spinner/Spinner'
 import {useAppSelector} from '../../../redux/hooks'
 
-
 const Slider = () => {
-  const allDishes = useAppSelector<any>((state) => state.dish)
+  const allDishes = useAppSelector((state) => state.dish.dishes)
+  const isLoading = useAppSelector((state) => state.dish.isLoading
+  )
 
   return (
     <>
@@ -16,7 +18,9 @@ const Slider = () => {
       <Row className='justify-content-md-center'>
         <Col xs lg='1'></Col>
         <Col>
-          { allDishes.length>10 ? <SliderGallery/> : null }
+
+          { isLoading && <Spinner/>}
+          { allDishes.length > 10 ? <SliderGallery/> : null }
         </Col>
         <Col xs lg='1'></Col>
       </Row>

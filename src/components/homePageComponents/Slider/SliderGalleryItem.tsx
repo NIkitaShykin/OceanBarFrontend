@@ -1,8 +1,8 @@
 
-import {DishType} from '../../../redux/reducers/dishesReducer'
+import {DishType} from '../../../common/types/dishesType'
 
 type PropsType = {
-  categoryDish: Array<DishType>
+  categoryDish: DishType[]
 }
 
 const SliderGallertItem = (props: PropsType) => {
@@ -12,6 +12,7 @@ const SliderGallertItem = (props: PropsType) => {
 
   return (
     <div
+      key={props.categoryDish[0].id}
       style={{
         display: 'flex',
         flexWrap: 'wrap',
@@ -19,7 +20,6 @@ const SliderGallertItem = (props: PropsType) => {
       }}
     >
       <div
-        key={props.categoryDish[0].id}
         style={{
           margin: imgMargin,
           height: imgHeight,
@@ -31,24 +31,22 @@ const SliderGallertItem = (props: PropsType) => {
       />
 
       <div
-        key={props.categoryDish[1].id}
-        style={{
-          margin: imgMargin,
-          height: imgHeight,
-          width: imgWidth,
-          backgroundImage: `url(${props.categoryDish[0].imageURL})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      />
-
-      <div
-        key={props.categoryDish[0].id}
         style={{
           margin: imgMargin,
           height: imgHeight,
           width: imgWidth,
           backgroundImage: `url(${props.categoryDish[1].imageURL})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      />
+
+      <div
+        style={{
+          margin: imgMargin,
+          height: imgHeight,
+          width: imgWidth,
+          backgroundImage: `url(${props.categoryDish[2].imageURL})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}

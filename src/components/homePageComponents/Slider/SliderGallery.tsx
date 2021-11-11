@@ -1,29 +1,29 @@
 import {Carousel} from 'react-bootstrap'
 import {useState} from 'react'
 import {NavLink} from 'react-router-dom'
-
+import {useAppSelector} from '../../../redux/hooks'
 import SliderGallertItem from './SliderGalleryItem'
 import {PATH} from '../../../pages/menuPage/Menu/MenuRoutes'
-import {useAppSelector} from '../../../redux/hooks'
-import {DishType} from '../../../redux/reducers/dishesReducer'
+
 
 const ControlledCarousel = () => {
-  const allDishes = useAppSelector<Array<DishType>>((state) => state.dish)
+  const allDishes = useAppSelector((state) => state.dish.dishes
+  )
 
   const desertDishes = allDishes.filter((dish) => {
-    return dish.dishCategory == 'Десерты'
+    return dish.dishCategory === 'Десерты'
   })
   const oystersDishes = allDishes.filter((dish) => {
-    return dish.dishCategory == 'Запеченные устрицы'
+    return dish.dishCategory === 'Запеченные устрицы'
   })
   const platoDishes = allDishes.filter((dish) => {
-    return dish.dishCategory == 'Плато'
+    return dish.dishCategory === 'Плато'
   })
   const saladDishes = allDishes.filter((dish) => {
-    return dish.dishCategory == 'Салаты'
+    return dish.dishCategory === 'Салаты'
   })
   const soupDishes = allDishes.filter((dish) => {
-    return dish.dishCategory == 'Супы'
+    return dish.dishCategory === 'Супы'
   })
 
   const [index, setIndex] = useState(1)

@@ -1,21 +1,21 @@
-
 import {Row} from 'react-bootstrap'
 
 import ListItem from './ListItem'
 import {useAppSelector} from '../../../../redux/hooks'
 
+
 const SaladList = () => {
-  const allDishes = useAppSelector<any>((state) => state.dish)
-  // @ts-ignores
-  const saladDishes = allDishes.filter((dish) => {
-    return dish.dishCategory=='Салаты'
-  })
+  const allDishes = useAppSelector((state) => state.dish.dishes)
+
+  const saladDishes = allDishes.filter((dish) =>
+    dish.dishCategory=='Салаты'
+  )
 
 
   return (
     <>
       <Row>
-        <ListItem data={saladDishes} />
+        <ListItem data={saladDishes} isIntresting={false} />
       </Row>
     </>
   )

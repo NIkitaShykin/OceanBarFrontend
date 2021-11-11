@@ -13,17 +13,6 @@ module.exports = {
     static: path.resolve(__dirname, 'public'),
     hot: true,
     open: true,
-
-
-    // proxy: {
-    //   '*': {
-    //     target: 'http://localhost:3000',
-    //     changeOrigin: true,
-    //     secure: false,
-    //   },
-    // },
-
-
   },
   module: {
     rules: [
@@ -45,14 +34,13 @@ module.exports = {
             options: {
               presets: [
                 '@babel/preset-env',
-                // {targets: 'defaults'}
               ]
             },
           }
         ]
       },
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.(sc|c)ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
@@ -68,6 +56,6 @@ module.exports = {
     alias: {
       App: path.resolve(__dirname, 'src'),
     },
-    extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['*', '.ts', '.tsx', '.js', '.jsx', '.css'],
   },
 }

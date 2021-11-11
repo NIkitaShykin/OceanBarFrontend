@@ -2,20 +2,25 @@ import {useState} from 'react'
 import './Dish.scss'
 import DishIngridients from './DishIngridients'
 import {Row, Col} from 'react-bootstrap'
-import {IngredientType} from '../../../../redux/reducers/dishesReducer'
-import {IngredientsType} from '../../../../redux/reducers/dishesReducer'
-import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {IngredientType} from '../../../../common/types/dishesType'
+import {IngredientsType} from '../../../../common/types/dishesType'
+import {DishType} from '../../../../common/types/dishesType'
 
 type PropsType = {
   changeStatus: () => void
   currentDish: DishType
-  updIngredients: (arg0: any) => void
+  updateIngredients: (arg0: any) => void
+  handleClose?: () => void
 }
 
-
-const ShiftingDish = (props: PropsType) => {
+const ShiftingDish = ({
+  changeStatus,
+  currentDish,
+  updateIngredients,
+  handleClose,
+}: PropsType) => {
   const [ingredients, setIngredients] = useState<IngredientType[]>(
-    props.currentDish?.ingredients
+    currentDish?.ingredients
   )
 
   let disableIngredientAccept = false
@@ -32,44 +37,41 @@ const ShiftingDish = (props: PropsType) => {
   }
 
   const updateIngridient = (updIngredients: IngredientsType) => {
-    props.updIngredients(updIngredients)
+    updateIngredients(updIngredients)
     setIngredients(updIngredients)
   }
 
   const finishSifting = () => {
-    props.changeStatus()
+    if (handleClose) {
+      handleClose()
+    } else changeStatus()
   }
 
   return (
     <>
       <div className={'title-dish'}>
-        <h1>{props.currentDish.name}</h1>
+        <h1>{currentDish.name}</h1>
       </div>
       <Row>
-        <Col md={8} lg={8}>
+        <Col xs={'auto'} sm={6} md={8} lg={8}>
           <div
-            key={props.currentDish.id}
             style={{
-              height: '100%', width: '100%',
-              backgroundImage: `url(${props.currentDish.imageURL})`,
+              height: '100%',
+              width: '100%',
+              backgroundImage: `url(${currentDish.imageURL})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-            } }
+            }}
           />
-          {/* <img
-            className={'image'}
-            style={{ width: '100%', height: 'auto' }}
-            // src={props.currentDish.image}
-            src={"https://img.poehalisnami.by/static/countries/c84/small/84_637145235972434334.jpg"}
-            alt='dish image'
-          /> */}
         </Col>
-        <Col md={4} lg={4}>
+        <Col xs={'auto'} sm={6} md={4} lg={4}>
           <div className={'ingredients'}>
             <div className={'changing-shifting'}>
               <span className={'composition'}>Состав</span>
             </div>
-            <br /><br /><br />
+            <br />
+            <br />
+            <br />
             <DishIngridients
               setIngredient={updateIngridient}
               ingredients={ingredients}
@@ -81,22 +83,21 @@ const ShiftingDish = (props: PropsType) => {
             >
               Готово
             </button>
-            <br />  <br />  <br />
+            <br /> <br /> <br />
             <span>
-              <h5>Вес: {props.currentDish?.weight}</h5>
+              <h5>Вес: {currentDish?.weight}</h5>
             </span>
             <span>
-              <h5>Калории: {props.currentDish?.calories}</h5>
+              <h5>Калории: {currentDish?.calories}</h5>
             </span>
             <div className='line-dish'></div>
             <br />
             <div style={{display: 'flex', alignItems: 'baseline'}}>
-              <span style={{fontSize: '15px'}}><h5>Стоимость:</h5></span>
-              <span style=
-                {{fontSize: '20px',
-                  marginLeft: '3px'
-                }}>
-                {props.currentDish?.price}
+              <span style={{fontSize: '15px'}}>
+                <h5>Стоимость:</h5>
+              </span>
+              <span style={{fontSize: '20px', marginLeft: '3px'}}>
+                {currentDish?.price}
               </span>
               <span style={{fontSize: '18px', marginLeft: '2px'}}>BYN</span>
             </div>

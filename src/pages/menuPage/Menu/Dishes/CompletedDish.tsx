@@ -1,13 +1,20 @@
+import {useDispatch} from 'react-redux'
+import {CloseButton, Col, Modal, Row} from 'react-bootstrap'
 
-import {useDispatch, useSelector} from 'react-redux'
-import {Row, Col, Modal, CloseButton} from 'react-bootstrap'
-
-import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {
+  DishInCart,
+  DishType,
+  IngredientsType,
+} from '../../../../common/types/dishesType'
 import {addDishToCart} from '../../../../redux/actions'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
-import {TDish} from '../common'
 
 import './Dish.scss'
+import {ApiCart} from '../../../../api/ApiCart'
+import Cookies from 'js-cookie'
+import {parseString} from '../../../../common/parceInString'
+import {useHistory} from 'react-router-dom'
+import {useAppSelector} from '../../../../redux/hooks'
 
 type PropsType = {
   changeStatus: () => void
@@ -15,35 +22,47 @@ type PropsType = {
 }
 
 const CompletedDish = (props: PropsType) => {
-  const dishes = useSelector((state: any) => state.cart.dishes)
+  const dishes = useAppSelector((state) => state.cart.dishes)
+  const history = useHistory()
+  const isLogIn = useAppSelector((state) => state.auth)
   const dispatch = useDispatch()
-
   const ingredientList = props.currentDish.ingredients.map((el) => {
     if (el.isAdded) {
       return (
-        <li style={{lineHeight: '15px'}}><p>{el.name}</p></li>
+        <li style={{lineHeight: '15px'}}>
+          <p>{el.name}</p>
+        </li>
       )
     }
   })
 
-
-  const orderDish = (name: string) => {
-    if (dishes.find((dish: TDish) => dish.id === props.currentDish.id)) {
-      orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+  const orderDish = async (name: string, ingredients: IngredientsType) => {
+    if (isLogIn.isAuthorized) {
+      if (dishes.find((dish: DishInCart) => dish.id === props.currentDish.id)) {
+        orderedToast(`Блюдо "${props.currentDish.name}" уже в корзине!`)
+      } else {
+        await ApiCart.addDishToCart(
+          props.currentDish.id,
+          Cookies.get('token'),
+          parseString(ingredients)
+        ).then((res) => {})
+        dispatch(
+          addDishToCart({
+            id: props.currentDish.id,
+            name: props.currentDish.name,
+            price: props.currentDish.price,
+            imageURL: props.currentDish.imageURL,
+            ingredients: props.currentDish.ingredients,
+            numberOfDishes: 1,
+          })
+        )
+        orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+      }
     } else {
-      dispatch(
-        addDishToCart({
-          id: props.currentDish.id,
-          name: props.currentDish.name,
-          price: props.currentDish.price,
-          imageURL: props.currentDish.imageURL,
-          numberOfDishes: 1,
-        })
-      )
-      orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
+      orderedToast('Войдите в существующий аккаунт или зарегистрируйтесь', 4000)
+      history.push('/login')
     }
   }
-
 
   const handleClose = () => {
     window.history.go(-1)
@@ -55,18 +74,19 @@ const CompletedDish = (props: PropsType) => {
         <h1>{props.currentDish.name}</h1>
       </div>
       <Row>
-        <Col md={8} lg={8}>
+        <Col xs={'auto'} sm={6} md={8} lg={8}>
           <div
             key={props.currentDish.id}
             style={{
-              height: '100%', width: '100%',
+              height: '100%',
+              width: '100%',
               backgroundImage: `url(${props.currentDish.imageURL})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-            } }
+            }}
           />
         </Col>
-        <Col md={4} lg={4}>
+        <Col xs={'auto'} sm={6} md={4} lg={4}>
           <div className={'ingredients'}>
             <span>
               <Modal.Header className='border-0'>
@@ -85,9 +105,7 @@ const CompletedDish = (props: PropsType) => {
               </span>
             </div>
 
-            <ul>
-              {ingredientList}
-            </ul>
+            <ul>{ingredientList}</ul>
 
             <br />
             <span>
@@ -99,7 +117,9 @@ const CompletedDish = (props: PropsType) => {
             <div className='line-dish'></div>
             <br />
             <div style={{display: 'flex', alignItems: 'baseline'}}>
-              <span style={{fontSize: '15px'}}><h5>Стоимость:</h5></span>
+              <span style={{fontSize: '15px'}}>
+                <h5>Стоимость:</h5>
+              </span>
               <span style={{fontSize: '20px', marginLeft: '3px'}}>
                 {props.currentDish?.price}
               </span>
@@ -108,7 +128,7 @@ const CompletedDish = (props: PropsType) => {
             <button
               className={'order-btn-dish'}
               onClick={() => {
-                orderDish(props.currentDish.name)
+                orderDish(props.currentDish.name, props.currentDish.ingredients)
               }}
             >
               Заказать

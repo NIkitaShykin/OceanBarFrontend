@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {Col, Row} from 'react-bootstrap'
 
-import {IngredientType} from '../../../../redux/reducers/dishesReducer'
+import {IngredientType} from '../../../../common/types/dishesType'
 
 type PropsType = {
   setIngredient: (arg0: any) => void
@@ -28,28 +28,25 @@ const DishIngredients = (props: PropsType) => {
         <Row key={`${i}`}>
           <Col xs={11}>
             <label style={{marginTop: '10px'}}>
-              <input style={{marginRight: '10px'}}
+              <input
+                style={{marginRight: '10px'}}
                 checked={!!ingredient.isAdded}
-                type='checkbox' name='name'
+                type='checkbox'
+                name='name'
                 onChange={() => {
                   toggleIngredient(ingredient, i)
                 }}
               />
-              <span style={{lineHeight: '15px'}}>
-                {ingredient.name}
-              </span>
+              <span style={{lineHeight: '15px'}}>{ingredient.name}</span>
             </label>
           </Col>
-          <Col xs={1}>
-          </Col>
+          <Col xs={1}></Col>
         </Row>
       </>
     )
   })
 
-  return <>
-    {ingridientsItem}
-  </>
+  return <>{ingridientsItem}</>
 }
 
 export default DishIngredients

@@ -1,4 +1,3 @@
-
 import {useHistory} from 'react-router-dom'
 import {NavDropdown} from 'react-bootstrap'
 
@@ -25,12 +24,8 @@ const DropDownNavBar = () => {
         id='navbarScrollingDropdown'
         className={!isAuthorized ? 'nav-item dropdown' : 'authorized'}
       >
-        <NavDropdown.Item
-          href='/login'>Войти
-        </NavDropdown.Item>
-        <NavDropdown.Item
-          href='/signup'>Зарегистрироваться
-        </NavDropdown.Item>
+        <NavDropdown.Item href='/login'>Войти</NavDropdown.Item>
+        <NavDropdown.Item href='/signup'>Зарегистрироваться</NavDropdown.Item>
       </NavDropdown>
 
       {/* for authorised user */}
@@ -40,9 +35,7 @@ const DropDownNavBar = () => {
         id='navbarScrollingDropdown'
         className={isAuthorized ? 'authorized change' : 'authorized'}
       >
-        <NavDropdown.Item
-          href='/profile'>Профиль
-        </NavDropdown.Item>
+        <NavDropdown.Item href='/profile'>Профиль</NavDropdown.Item>
         <NavDropdown.Item href='/' onClick={() => handleClose()}>
           Выйти из профиля
         </NavDropdown.Item>

@@ -1,76 +1,93 @@
-
-import {NavLink} from 'react-router-dom'
+import {NavLink, useHistory} from 'react-router-dom'
 import {Button, Card, Col, Row} from 'react-bootstrap'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
-import {DishType} from '../../../../redux/reducers/dishesReducer'
+import {DishInCart, DishType} from '../../../../common/types/dishesType'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 import {addDishToCart} from '../../../../redux/actions'
-
-// import {TDish} from '../common'  ??????
+import {ApiCart} from '../../../../api/ApiCart'
+import {parseString} from '../../../../common/parceInString'
+import Cookies from 'js-cookie'
+import {useAppSelector} from '../../../../redux/hooks'
 
 type PropsType = {
   data: Array<DishType>
-  isIntresting?: any
+  isIntresting: boolean
 }
 
 const ListItem = (props: PropsType) => {
-  // const token = useParams<{ token: string }>()
+  const history = useHistory()
+  const isLogIn = useAppSelector((state) => state.auth)
   const dispatch = useDispatch()
-  const dishes = useSelector((state: any) => state.cart.dishes)
-  const orderDish = (Dish: any) => {
-    if (dishes.find((dish: any) => dish.id === Dish.id)) {
-      orderedToast(`Блюдо "${Dish.name}" уже в корзине!`)
+  const dishes: Array<DishInCart> = useAppSelector((state) => state.cart.dishes)
+  const orderDish = async (Dish: DishType) => {
+    if (isLogIn.isAuthorized) {
+      if (dishes.find((dish) => dish.id === Dish.id)) {
+        orderedToast(`Блюдо "${Dish.name}" уже в корзине!`)
+      } else {
+        await ApiCart.addDishToCart(
+          Dish.id,
+          Cookies.get('token'),
+          parseString(Dish.ingredients)
+        ).then((res) => {})
+        dispatch(
+          addDishToCart({
+            id: Dish.id,
+            name: Dish.name,
+            price: Dish.price,
+            imageURL: Dish.imageURL,
+            ingredients: Dish.ingredients,
+            numberOfDishes: 1,
+          })
+        )
+        orderedToast(`Блюдо "${Dish.name}" добавлено в корзину`)
+      }
     } else {
-      dispatch(
-        addDishToCart({
-          id: Dish.id,
-          name: Dish.name,
-          price: Dish.price,
-          imageURL: Dish.imageURL,
-          numberOfDishes: 1,
-        })
-      )
-      orderedToast(`Блюдо "${Dish.name}" добавлено в корзину`)
+      orderedToast('Войдите в существующий аккаунт или зарегистрируйтесь', 4000)
+      history.push('/login')
     }
   }
 
   const arrayDishes = props.data.map((dish) => {
     return (
-      <Col
-        style={{position: 'relative'}}
-        key={dish.id}
-      >
+      <Col style={{position: 'relative'}} key={dish.id}>
         <Card
           key={`${dish.id}`}
           text='dark'
           className='mb-3 mx-2 my-2'
-          style={props.isIntresting ?
-            {width: '12rem', height: '19rem'} :
-            {width: '18rem', height: '22rem'}}
+          style={
+            props.isIntresting
+              ? {width: '12rem', height: '19rem'}
+              : {width: '18rem', height: '22rem'}
+          }
         >
           <NavLink to={'/dish/' + dish.id}>
             <div
               key={dish.id}
-              style={props.isIntresting ?
-                {
-                  height: '150px', width: '100%',
-                  backgroundImage: `url(${dish.imageURL})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                } :
-                {
-                  height: '200px', width: '100%',
-                  backgroundImage: `url(${dish.imageURL})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }
+              style={
+                props.isIntresting
+                  ? {
+                      height: '150px',
+                      width: '100%',
+                      backgroundImage: `url(${dish.imageURL})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }
+                  : {
+                      height: '200px',
+                      width: '100%',
+                      backgroundImage: `url(${dish.imageURL})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }
               }
             />
           </NavLink>
           <Card.Body>
             <Row>
-              <Col md='auto'><Card.Title>{dish.name}</Card.Title></Col>
+              <Col md='auto'>
+                <Card.Title>{dish.name}</Card.Title>
+              </Col>
               <Col sm={9}></Col>
             </Row>
             <br />
@@ -79,7 +96,8 @@ const ListItem = (props: PropsType) => {
                 position: 'absolute',
                 bottom: '5%',
                 width: '100%',
-              }}>
+              }}
+            >
               <Row>
                 <Col xs={5} sm={5} md={5} lg={4}>
                   <div style={{display: 'flex', alignItems: 'baseline'}}>
@@ -96,21 +114,19 @@ const ListItem = (props: PropsType) => {
                   {dish.weight}
                 </Col>
               </Row>
-              <NavLink to={'/dish/' + dish.id}>
-                <Button
-                  variant='outline-warning'
-                  onClick={() => orderDish(dish)}
-                  key={dish.id}
-                  style={props.isIntresting ? {display: 'none'} : {}}
-                >
-                  Заказать
-                </Button>
-              </NavLink>
+              <Button
+                variant='outline-warning'
+                onClick={() => orderDish(dish)}
+                key={dish.id}
+                style={props.isIntresting ? {display: 'none'} : {}}
+              >
+                Заказать
+              </Button>
             </div>
             <br />
           </Card.Body>
         </Card>
-      </Col >
+      </Col>
     )
   })
 

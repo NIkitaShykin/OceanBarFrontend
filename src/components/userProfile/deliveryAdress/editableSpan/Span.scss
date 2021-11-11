@@ -1,0 +1,187 @@
+// .errorInput {
+// }
+
+// .superInput {
+// }
+
+// .hint {
+//     background: yellow;
+//     margin-left: 20px;
+// }
+
+.valid {
+  outline: none;
+  border: 0px;
+  font-size: 18px; 
+  padding-left: 40px; 
+  width: 220px;
+}
+
+.error {
+  font-size: 15px;
+  /* # Тень элемента. 0 - смещение Х, 4 - смещение Y*/
+  /* 6 - степень размытия, #ccc - цвет */
+  /*box-shadow: 0 4px 6px #ccc;*/
+  color: red;
+  outline: none;
+  border: 0px;
+  }
+
+
+  .group {
+    position: relative;
+    display: flex;
+   }
+
+  .label, .error ~ .label {
+    color: #e04fb5;
+    font-size: 16px;
+    position: absolute;
+    pointer-events: none;
+    left: 90px;
+    top: 2px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+
+
+  .valid:focus ~ .label, .valid:valid ~ .label {
+    top: -12px;
+    margin-left: 120px;
+    font-size: 16px;
+    color: #e04fb5;
+    // display: none;
+  }
+
+  .bar {
+    position: relative;
+    display: block;
+    background-color: rgb(255, 78, 47);
+    width: 250px;
+  }
+
+  .bar:before, .bar:after {
+    content: "";
+    height: 2px;
+    width: 0;
+    bottom: 0;
+    position: absolute;
+    background: #5264AE;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+  .bar:before {
+    left: 5%;
+  }
+  .bar:after {
+    right: 30%;
+  }
+
+  .valid:focus ~ .bar:before,
+  .valid:focus ~ .bar:after {
+    width: 50%;
+  }
+
+  .editableValueTypeStyle{
+    font-size: 15px;
+    width: 50px;
+    display: block;
+  }
+
+
+
+//   // .errorInput {
+// // }
+
+// // .superInput {
+// // }
+
+// // .hint {
+// //     background: yellow;
+// //     margin-left: 20px;
+// // }
+
+// .valid {
+//   outline: none;
+//   border: 0px;
+//   font-size: 20px; 
+//   padding-left: 20px; 
+// }
+
+// .error {
+//   font-size: 15px;
+//   /* # Тень элемента. 0 - смещение Х, 4 - смещение Y*/
+//   /* 6 - степень размытия, #ccc - цвет */
+//   /*box-shadow: 0 4px 6px #ccc;*/
+//   color: red;
+//   outline: none;
+//   border: 0px;
+//   }
+
+
+//   .group {
+//     position: relative;
+//     display: flex;
+//    }
+
+//   .label, .error ~ .label {
+//     color: #e04fb5;
+//     font-size: 16px;
+//     position: absolute;
+//     pointer-events: none;
+//     left: 80px;
+//     top: 2px;
+//     transition: 0.2s ease all;
+//     -moz-transition: 0.2s ease all;
+//     -webkit-transition: 0.2s ease all;
+//   }
+
+
+//   .valid:focus ~ .label, .valid:valid ~ .label {
+//     top: -20px;
+//     margin-left: 120px;
+//     font-size: 16px;
+//     color: #e04fb5;
+//     // display: none;
+//   }
+
+//   .bar {
+//     position: relative;
+//     display: block;
+//     width: 250px;
+//   }
+
+//   .bar:before, .bar:after {
+//     content: "";
+//     height: 2px;
+//     width: 0;
+//     bottom: 0;
+//     position: absolute;
+//     background: #5264AE;
+//     transition: 0.2s ease all;
+//     -moz-transition: 0.2s ease all;
+//     -webkit-transition: 0.2s ease all;
+//   }
+//   .bar:before {
+//     left: 50%;
+//   }
+//   .bar:after {
+//     right: 30%;
+//   }
+
+//   .valid:focus ~ .bar:before,
+//   .valid:focus ~ .bar:after {
+//     width: 50%;
+//   }
+
+//   .editableValueTypeStyle{
+//     font-size: 15px;
+//     background-color: rosybrown;
+//     width: 350px;
+//     display: block;
+//   }
+
+ 
+

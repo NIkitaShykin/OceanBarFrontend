@@ -4,28 +4,27 @@ import {useHistory} from 'react-router-dom'
 import {Form, FormControl} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
 
-import {url} from '../../../../api/index'
 import useDebounce from '../../../../utils/useDebounce'
 import Spinner from '../../../Spinner/Spinner'
 
 import './search.scss'
-import Dish from 'src/pages/menuPage/Menu/Dishes/Dish'
+import {url} from '../../../../api'
 
 type Dish = {
-  id: string,
-  name: string,
-  price: number,
+  id: string
+  name: string
+  price: number
   weight: string
   calories: string
   imageURL: string
-  ingredients: string,
+  ingredients: string
   dishCategory: string
 }
 
 type ResponseType = {
-  data:{
-    data:{
-      dishes:Array<Dish>
+  data: {
+    data: {
+      dishes: Array<Dish>
     }
   }
 }
@@ -42,7 +41,7 @@ const SearchField = () => {
   const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !dishes || dishes.length === 0
 
-  const debouncedSearchQuery = useDebounce(searchQuery, 500)
+  const debouncedSearchQuery = useDebounce(searchQuery, 2000)
 
   useEffect(() => {
     const getMenu = async (query: string) => {
@@ -52,7 +51,7 @@ const SearchField = () => {
       if (!query || query.trim() === '') return
 
       const response: ResponseType = await axios.get(
-        `${url}/menu/?name=${searchQuery}`
+        `${url}menu/?name=${searchQuery}`
       )
       setIsLoading(false)
       setMenu(response.data.data.dishes)
@@ -65,9 +64,8 @@ const SearchField = () => {
     if (searchQuery) {
       setIsOpen(true)
       setIsLoading(true)
-      const filteredDishes = dishes.filter((dish: Dish) => (
-        dish.name.toLowerCase().includes(searchQuery.toLowerCase()
-        ))
+      const filteredDishes = dishes.filter((dish: Dish) =>
+        dish.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
 
       setMenu(filteredDishes)
@@ -119,16 +117,18 @@ const SearchField = () => {
           </ul>
         )}
 
-        {isOpen && !isEmpty && !isLoading &&(
+        {isOpen && !isEmpty && !isLoading && (
           <ul className='autocomplete'>
             {dishes.map((val: Dish, index: number) => {
-              return <li
-                key={index}
-                className='autocomplete__item'
-                onClick={() => itemClickHandler(val.id)}
-              >
-                {val.name}
-              </li>
+              return (
+                <li
+                  key={index}
+                  className='autocomplete__item'
+                  onClick={() => itemClickHandler(val.id)}
+                >
+                  {val.name}
+                </li>
+              )
             })}
           </ul>
         )}
@@ -140,5 +140,3 @@ const SearchField = () => {
 }
 
 export default SearchField
-
-
