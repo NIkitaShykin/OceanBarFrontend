@@ -6,6 +6,7 @@ import {ValidationType} from '../../../common/types/userTypes'
 import {UserType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
 import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
+import {getUserPersonalDataTC} from '../../../redux/reducers/userReducer'
 import Cookies from 'js-cookie'
 
 
@@ -73,39 +74,24 @@ const shiftingPersonalForm = (props:any) => {
     secondname: lastName.value,
     email: email.value,
     phone: phoneNumber.value,
-    // id: null
   }
 
-  // eslint-disable-next-line max-len
-  const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)
-  // eslint-disable-next-line max-len
-  const isLastNameInvalid = lastName.isDirty && (lastName.isEmpty || lastName.minLengthError || lastName.maxLengthError || lastName.lastNameError)
-  // eslint-disable-next-line max-len
-  const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
-  // eslint-disable-next-line max-len
-  const isPhoneNumberInvalid = phoneNumber.isDirty && (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
-  // eslint-disable-next-line max-len
-  // const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
-
+  const isFirstNameInvalid = firstName.isDirty &&
+      (firstName.isEmpty || firstName.minLengthError ||
+         firstName.maxLengthError || firstName.firstNameError)
+  const isLastNameInvalid = lastName.isDirty &&
+   (lastName.isEmpty || lastName.minLengthError ||
+     lastName.maxLengthError || lastName.lastNameError)
+  const isEmailInvalid = email.isDirty &&
+   (email.isEmpty || email.minLengthError ||
+     email.maxLengthError || email.emailError)
+  const isPhoneNumberInvalid = phoneNumber.isDirty &&
+   (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
     props.changeStatus(true)
     dispatch(setUserPersonalDataTC(userPersonalData, token))
-
-    // axios
-    //   .post(`${url}/users/register`, user)
-    //   .then((response: any) => {
-    //     if (response.status > 400) {
-    //       throw new Error(response.statusText)
-    //     }
-    //   })
-
-    //   .then(() => history.push('/signup-success'))
-    //   .catch((error) => {
-    //     console.log(error.response)
-    //     setAuthFailed(true)
-    //   })
   }
 
   return (

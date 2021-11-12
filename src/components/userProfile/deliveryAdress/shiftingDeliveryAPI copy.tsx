@@ -1,4 +1,4 @@
-// import {useState, ChangeEvent} from 'react'
+import {useState, ChangeEvent} from 'react'
 // import {DeliveryAdressType} from '../../../common/types/userTypes'
 // import {AppStoreType} from '../../../redux/reducers/rootReducer'
 // import {useSelector} from 'react-redux'
@@ -21,48 +21,38 @@ const shiftingDeliveryAPI = (props:PropsType) => {
 
   // const KEY = 'dff137738364ea1d173be3de51fd7c58c1ccba70'
   // const secret = 'bc4e9baf934b999a702edc43fca98656cb02f7b6'
+  const [searchAdress, setSearchAdress] = useState('')
+  const [resivedAdress, setResivedAdress] = useState([])
 
-
-  const clickHandler=(query:string)=>{
-    ApiDelivery.getDelivery(query)
+  const clickHandler=()=>{
+    ApiDelivery.getDelivery(searchAdress)
       .then((resp: any) =>{
         if (resp.status > 400) {
           throw new Error(resp.statusText)
         }
-        console.log(resp)
+        setResivedAdress(resp.data.suggestions)
       })
       .catch((error) => {
         console.log(error.response)
       })
   }
 
-
-  // axios.post(
-  //   'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address',
-  //   {'query': 'Чюрленис',
-  //     'locations': [
-  //       {country_iso_code: 'BY'}
-  //     ]
-  //   },
-  //   {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json',
-  //       'Authorization': 'Token ' + KEY
-  //     },
-  //     // withCredentials: true
-  //   }
-  // )
-  //   .then(function(response) {
-  //     console.log(response) // Здесь обработать ответ как надо
-  //   })
-  //   .catch(function(error) {
-  //     console.log(error)
-  //   })
-
-  const oldPassChange=(e:any)=>{
-    console.log(e.target.value)
+  const inputAdress=(e:any)=>{
+    setSearchAdress(e.target.value)
   }
+
+ 
+  
+  const adressSuggestionsList = resivedAdress.map((adress, i)=> {
+    //@ts-ignore
+    console.log(adress.value)
+    //@ts-ignore
+    return <div key={i}>{adress.value}</div>
+  } )
+
+  console.log("adressSuggestionsList");
+  console.log(adressSuggestionsList);
+  
 
   return (
     <div className='login-form'>
@@ -72,17 +62,19 @@ const shiftingDeliveryAPI = (props:PropsType) => {
           <Modal.Body>
             <Form className='my-3' style={{width: '100%'}}>
               <Form.Floating className='mb-3 mx-3'>
-
+ 
+                <h3>adress</h3>
+                {adressSuggestionsList}
+                <h3>adress</h3>
 
                 <Form.Control
-                  id='userOldPassword'
-                  type='firstName'
-                  placeholder='password'
-                  value={'gfhg'}
-                  onChange={(e) => oldPassChange(e)}
+                  id='adress'
+                  type='adress'
+                  placeholder='adress'
+                  value={searchAdress}
+                  onChange={(e) => inputAdress(e)}
                 />
               </Form.Floating>
-
 
             </Form>
           </Modal.Body>
@@ -92,7 +84,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
               className='btn btn-outline-warning offset-md-0'
               variant='outline-warning'
               type='submit'
-              onClick={(e) => clickHandler('Чюрленис')}
+              onClick={(e) => clickHandler()}
             >           Сохранить
             </Button>
           </Modal.Footer>

@@ -1,13 +1,15 @@
 import {useState} from 'react'
 // import ShiftingDelivery from
 //   './deliveryAdress/shiftingDelivery'
-import ShiftingDeliveryAPI from
-  './deliveryAdress/shiftingDeliveryAPI'
+// import ShiftingDeliveryAPI from
+//   './deliveryAdress/shiftingDeliveryAPI'
+import ShiftingDeliveryR from
+  './deliveryAdress/shiftingDeliveryR'
 import CompletedDelivery from
   './deliveryAdress/completedDelivery'
 import AbsentDelivery from
   './deliveryAdress/absentDelivery'
-// import {findDOMNode} from 'react-dom'
+
 
 const DeliveryAdress = () => {
   const [isShifting, setChangeStatus] = useState<boolean>(true)
@@ -22,20 +24,20 @@ const DeliveryAdress = () => {
   return (
     <div className='profile-block justify-content-start'>
       <h2>Адрес доставки</h2>
-      <div className='info-block'>
+      {adressAbsent ?
+        <AbsentDelivery changeStatus={isAdress}/> :
+        <ShiftingDeliveryR changeStatus={changeStatus}/>
+        // <div>
+        //   {isShifting ?
+        //     <CompletedDelivery changeStatus={changeStatus}/> :
+        //     <>
+        //       {/* <ShiftingDelivery changeStatus={changeStatus}/> */}
+        //       {/* <ShiftingDeliveryAPI changeStatus={changeStatus}/> */}
+        //     </>}
+        // </div>
+      }
 
-        {adressAbsent ?
-          <AbsentDelivery changeStatus={isAdress}/> :
-          <div>
-            {isShifting ?
-              <CompletedDelivery changeStatus={changeStatus}/> :
-              // <ShiftingDelivery changeStatus={changeStatus}/> }
-              <ShiftingDeliveryAPI changeStatus={changeStatus}/> }
-          </div>
-        }
 
-
-      </div>
     </div>
   )
 }

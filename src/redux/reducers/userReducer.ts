@@ -34,10 +34,11 @@ const userReducer = createReducer(initialState, (builder) => {
 export default userReducer
 
 export const getUserPersonalDataTC =
-  (token:string|undefined, userId:number): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (token?:string|undefined, userId?:number): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        const asyncResp = await ApiUser.getUserPersonalData(token, userId)
+        // const asyncResp = await ApiUser.getUserPersonalData(token, userId?)
+        const asyncResp = await ApiUser.getUserPersonalData()
         // @ts-ignore
         const userData = asyncResp.data.data.user
         dispatch(getUserAC(userData))

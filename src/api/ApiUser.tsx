@@ -11,16 +11,11 @@ const instance = axios.create({
 })
 
 export const ApiUser = {
-  // userLogIn() {
-  //   return instance.post('users/auth')
-  // },
-  // userRegister(user:UserType) {
-  //   return instance.post('users/register', {data: user})
-  // },
-  getUserPersonalData(token: string|undefined, userId:number) {
+  getUserPersonalData(token?: string|undefined, userId?:number) {
     {
       return Promise.resolve(
-        instance.get(`users/${userId}`,
+        // instance.get(`users/${userId}`,
+        instance.get(`users/`,
           {headers: {Authorization: `Bearer ${token2}`}}
         )
       )
@@ -31,8 +26,6 @@ export const ApiUser = {
   },
 
   setUserPersonalData(userData:any, token:any) {
-    console.log(userData)
-    console.log(token)
     return Promise.resolve(
       instance.patch( 'users/1', userData,
         {
