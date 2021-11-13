@@ -11,8 +11,8 @@ import {CommonUserType} from '../../common/types/userTypes'
 
 const initialState: CommonUserType = {
   'id': 8,
-  'name': 'Неизвестно',
-  'secondname': 'Неизвестно',
+  'name': 'неизвестно',
+  'secondname': 'неизвестно',
   'email': 'неизвестно@mail.com',
   'password': '*********',
   // ----was separate------

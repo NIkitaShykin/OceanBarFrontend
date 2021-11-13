@@ -1,4 +1,8 @@
 import {useState} from 'react'
+import {useEffect} from 'react'
+import {AppStoreType} from '../../redux/reducers/rootReducer'
+import {useSelector} from 'react-redux'
+import {DeliveryAdressType} from '../../common/types/userTypes'
 import ShiftingDelivery from
   './deliveryAdress/shiftingDelivery'
 import ShiftingDeliveryAPI from
@@ -12,8 +16,21 @@ import AbsentDelivery from
 
 
 const DeliveryAdress = () => {
+  const delivery =
+  useSelector<AppStoreType, any>((state:any) => state.user)
+
   const [isShifting, setChangeStatus] = useState<boolean>(true)
   const [adressAbsent, setadressPresent] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (delivery.street==='неизвестно') {
+      setadressPresent(true)
+    } else {
+      setadressPresent(false)
+    }
+  }, [delivery])
+
+
   const isAdress=(status:boolean)=>{
     setadressPresent(status)
   }

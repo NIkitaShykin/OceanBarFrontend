@@ -9,9 +9,9 @@ type PropsType = {
 
 const completedDelivery = (props:PropsType) => {
   const delivery =
-    useSelector<AppStoreType, DeliveryAdressType>((state) => state.delivery)
+    useSelector<AppStoreType, DeliveryAdressType>((state) => state.user)
 
-  return (
+    return (
     <div className='info-block'>
       <br/>
       <Row>
