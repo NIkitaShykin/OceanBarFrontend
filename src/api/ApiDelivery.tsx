@@ -10,8 +10,9 @@ export const ApiDelivery = {
   getDelivery(query:string) {
     return instance.post('', {'query': `${query}`,
       'locations': [
-        {'country': 'Беларусь', 'region': 'Минск'},
-      ]
+        {'country': 'Беларусь', 'region': 'Минск'}
+      ],
+      'restrict_value': true
     },
     {
       headers: {

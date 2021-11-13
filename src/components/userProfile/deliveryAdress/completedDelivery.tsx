@@ -13,38 +13,39 @@ const completedDelivery = (props:PropsType) => {
 
   return (
     <div className='info-block'>
+      <br/>
       <Row>
-        <Col sm={2}><div className='user-name'>
+        <Col sm={3}><div className='user-name'>
           <h5>&#127984;&nbsp;Город</h5></div></Col>
-        <Col sm={5}><div className='user-name'>
+        <Col sm={4}><div className='user-name'>
           <h5>{delivery.city}</h5></div></Col>
         <Col sm={5}></Col>
       </Row>
       <Row>
-        <Col sm={2}><div className='user-name'>
+        <Col sm={3}><div className='user-name'>
           <h5>&#10153;&nbsp;&nbsp;Улица</h5></div></Col>
-        <Col sm={5}><div className='user-name'>
+        <Col sm={4}><div className='user-name'>
           <h5>{delivery.street}</h5></div></Col>
         <Col sm={5}></Col>
       </Row>
       <Row>
-        <Col sm={2}><div className='user-name'>
+        <Col sm={3}><div className='user-name'>
           <h5>&#10153;&nbsp;&nbsp;Дом</h5></div></Col>
-        <Col sm={5}><div className='user-name'>
+        <Col sm={4}><div className='user-name'>
           <h5>{delivery.home}</h5></div></Col>
         <Col sm={5}></Col>
       </Row>
       <Row>
-        <Col sm={2}><div className='user-name'>
+        <Col sm={3}><div className='user-name'>
           <h5>&#10153;&nbsp;&nbsp;Корпус</h5></div></Col>
-        <Col sm={5}><div className='user-name'>
+        <Col sm={4}><div className='user-name'>
           <h5>{delivery.homePart}</h5></div></Col>
         <Col sm={5}></Col>
       </Row>
       <Row>
-        <Col sm={2}><div className='user-name'>
+        <Col sm={3}><div className='user-name'>
           <h5>&#10153;&nbsp;&nbsp;Квартира</h5></div></Col>
-        <Col sm={5}><div className='user-name'>
+        <Col sm={4}><div className='user-name'>
           <h5>{delivery.flat}</h5></div></Col>
         <Col sm={5}></Col>
       </Row>

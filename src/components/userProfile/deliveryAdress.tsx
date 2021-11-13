@@ -1,10 +1,10 @@
 import {useState} from 'react'
-// import ShiftingDelivery from
-//   './deliveryAdress/shiftingDelivery'
-// import ShiftingDeliveryAPI from
-//   './deliveryAdress/shiftingDeliveryAPI'
-import ShiftingDeliveryR from
-  './deliveryAdress/shiftingDeliveryR'
+import ShiftingDelivery from
+  './deliveryAdress/shiftingDelivery'
+import ShiftingDeliveryAPI from
+  './deliveryAdress/shiftingDeliveryAPI'
+// import ShiftingDeliveryR from
+//   './deliveryAdress/shiftingDeliveryR'
 import CompletedDelivery from
   './deliveryAdress/completedDelivery'
 import AbsentDelivery from
@@ -26,16 +26,14 @@ const DeliveryAdress = () => {
       <h2>Адрес доставки</h2>
       {adressAbsent ?
         <AbsentDelivery changeStatus={isAdress}/> :
-        <ShiftingDeliveryR changeStatus={changeStatus}/>
-        // <div>
-        //   {isShifting ?
-        //     <CompletedDelivery changeStatus={changeStatus}/> :
-        //     <>
-        //       {/* <ShiftingDelivery changeStatus={changeStatus}/> */}
-        //       {/* <ShiftingDeliveryAPI changeStatus={changeStatus}/> */}
-        //     </>}
-        // </div>
+        <>
+          {isShifting ?
+            <CompletedDelivery changeStatus={changeStatus}/> :
+            <ShiftingDeliveryAPI changeStatus={changeStatus}/>
+          }
+        </>
       }
+      {/* <ShiftingDeliveryR changeStatus={changeStatus}/> */}
 
 
     </div>

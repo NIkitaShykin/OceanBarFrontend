@@ -3,6 +3,8 @@ import {useEffect, useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {Form, FormControl} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
+import {DeliveryAdressType} from '../../../common/types/userTypes'
+import {ApiDelivery} from '../../../api/ApiDelivery'
 
 import useDebounce from '../../../utils/useDebounce'
 import Spinner from '../../Spinner/Spinner'
@@ -30,7 +32,6 @@ type ResponseType = {
 }
 
 const SearchField = () => {
-  const history = useHistory()
   const [ref, isClickedOutside] = useClickOutside()
 
   const [dishes, setMenu] = useState<Dish[]>([])
@@ -50,23 +51,40 @@ const SearchField = () => {
       setIsLoading(true)
       if (!query || query.trim() === '') return
 
-      const response: ResponseType = await axios.get(
-        `${url}menu/?name=${searchQuery}`
-      )
+      const response: any = await
+      ApiDelivery.getDelivery(searchQuery)
+      // axios.get(
+      //   `${url}menu/?name=${searchQuery}`
+      // )
       setIsLoading(false)
-      setMenu(response.data.data.dishes)
+
+      console.log('первый ')
+      console.log(response.data.suggestions)
+      console.log('-----------------------------')
+
+
+      setMenu(response.data.suggestions)
     }
     getMenu(debouncedSearchQuery)
     setIsOpen(false)
   }, [debouncedSearchQuery])
 
+  console.log('вне эффекта ')
+  console.log(dishes)
+  console.log('-----------------------------')
+
+
   useEffect(() => {
     if (searchQuery) {
       setIsOpen(true)
       setIsLoading(true)
-      const filteredDishes = dishes.filter((dish: Dish) =>
-        dish.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const filteredDishes = dishes.filter((dish: any) =>
+        dish.value.toLowerCase().includes(searchQuery.toLowerCase())
       )
+      console.log('второй ')
+      console.log(dishes)
+      console.log(filteredDishes)
+      console.log('-----------------------------')
 
       setMenu(filteredDishes)
     } else {
@@ -76,6 +94,7 @@ const SearchField = () => {
   }, [debouncedSearchQuery])
 
   useEffect(() => {
+    console.log('33333')
     if (isClickedOutside) {
       setIsOpen(false)
       setSearchQuery('')
@@ -83,31 +102,28 @@ const SearchField = () => {
     }
   }, [isClickedOutside])
 
-  const itemClickHandler = (id: string) => {
-    dishes.find((dish: Dish) => dish.id === id)
+  const itemClickHandler = (value: any) => {
+    // dishes.find((dish: Dish) => dish.id === id)
+    console.log('selected')
+    console.log(value)
     setSearchQuery('')
     setIsOpen(false)
-    history.push(`/dish/${id} `)
   }
 
   return (
     <>
-      <Form className='d-flex mx-6 d-flex-pos justify-content-end' ref={ref}>
-        <FormControl
+      <Form ref={ref}>
+        <input
+          placeholder='Улица'
+          name='search'
           type='text'
-          placeholder='Search...'
-          className='form-control-pad nav-input '
-          aria-label='Search'
           value={searchQuery}
-          onChange={(event) => {
-            setSearchQuery(event.target.value)
-          }}
-        />
+          onChange={(e)=>setSearchQuery(e.target.value)} />
 
         {isLoading && <Spinner />}
         {noQuery && isEmpty && isOpen && (
           <ul className='autocomplete autocomplete-warn'>
-            Начните вводить название блюда
+            Начните вводить название улицы
           </ul>
         )}
 
@@ -118,22 +134,19 @@ const SearchField = () => {
         )}
 
         {isOpen && !isEmpty && !isLoading && (
-          <ul className='autocomplete'>
-            {dishes.map((val: Dish, index: number) => {
+          <ul >
+            {dishes.map((adress: any, index: number) => {
               return (
                 <li
                   key={index}
-                  className='autocomplete__item'
-                  onClick={() => itemClickHandler(val.id)}
+                  onClick={() => itemClickHandler(adress)}
                 >
-                  {val.name}
+                  {adress.value}
                 </li>
               )
             })}
           </ul>
         )}
-
-        <i className='fas fa-search icon-height search-icon'></i>
       </Form>
     </>
   )
