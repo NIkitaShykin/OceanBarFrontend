@@ -1,15 +1,7 @@
-import {useState, ChangeEvent} from 'react'
-import {DropdownButton, Row, Col, Dropdown} from 'react-bootstrap'
-// import {DeliveryAdressType} from '../../../common/types/userTypes'
-// import {AppStoreType} from '../../../redux/reducers/rootReducer'
-// import {useSelector} from 'react-redux'
-// import EditableSpan from './editableSpan/editableSpan'
-// import {Form, Modal} from 'react-bootstrap'
-// import {useDispatch} from 'react-redux'
-// import {setUserDeliveryData} from '../../../redux/reducers/deliveryReducer'
-import {ApiDelivery} from '../../../api/ApiDelivery'
-// import Cookies from 'js-cookie'
-// import axios from 'axios'
+import {useState} from 'react'
+import {Row, Col} from 'react-bootstrap'
+import {useDispatch} from 'react-redux'
+import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
 import {Form, Modal} from 'react-bootstrap'
 import Search from './Search'
 
@@ -20,44 +12,44 @@ type PropsType = {
 
 
 const shiftingDeliveryAPI = (props:PropsType) => {
-  // const token = Cookies.get('token')
+  const dispatch = useDispatch()
+  const [homeNumber, setHome] = useState()
+  const [homePart, setHomePart] = useState()
+  const [street, setStreet] = useState('')
+  const [flat, setFlat] = useState()
 
-  // const KEY = 'dff137738364ea1d173be3de51fd7c58c1ccba70'
-  // const secret = 'bc4e9baf934b999a702edc43fca98656cb02f7b6'
-  const [searchAdress, setSearchAdress] = useState('Улица')
-  const [resivedAdress, setResivedAdress] = useState([])
-
-  const clickHandler=()=>{
-    ApiDelivery.getDelivery(searchAdress)
-      .then((resp: any) =>{
-        if (resp.status > 400) {
-          throw new Error(resp.statusText)
-        }
-        setResivedAdress(resp.data.suggestions)
-      })
-      .catch((error) => {
-        console.log(error.response)
-      })
+  const setDelivery=()=>{
+    dispatch(setUserPersonalDataTC(userDeliveryData))
+    props.changeStatus(true)
   }
 
-  const inputAdress=(e:any)=>{
-    setSearchAdress(e.target.value)
+  const arr = []
+  for (let i = 1; i <= 10; i++) {
+    arr.push(i)
   }
-
-  // const cancellHandleer=()=>{
-  //   props.changeStatus(false)
-  // }
-
-
-  const adressSuggestionsList = resivedAdress.map((adress, i)=> {
-    // @ts-ignore
-    console.log(adress.value)
-    // @ts-ignore
-    return <div key={i}>{adress.value}</div>
+  const numberArray=arr.map((el:number, i:number) =>{
+    return (<option key={i} value={el}>{el}</option>)
   } )
 
-  console.log('adressSuggestionsList')
-  console.log(adressSuggestionsList)
+  const userDeliveryData = {
+    homeNumber: homeNumber,
+    homePart: homePart,
+    street: street,
+    flat: flat,
+  }
+
+  const streetSelect=(value:string)=>{
+    setStreet(value)
+  }
+  const homeSelect=(e:any)=>{
+    setHome(e.target.value)
+  }
+  const homePartSelect=(e:any)=>{
+    setHomePart(e.target.value)
+  }
+  const flatSelect=(e:any)=>{
+    setFlat(e.target.value)
+  }
 
   return (
     <div className='container'>
@@ -85,48 +77,41 @@ const shiftingDeliveryAPI = (props:PropsType) => {
                 </Col>
               </Row>
 
-              <Search/>
-
-              {adressSuggestionsList}
+              <Search searchValue={streetSelect}/>
 
               <Row>
                 <Col xs={'auto'} sm={4} md={4} lg={4}>
-                  {/* <input
-                    name='search'
-                    type='text'
-                    value={searchAdress}
-                    onChange={(e)=>inputAdress(e)} /> */}
                 </Col>
                 <Col xs={'auto'} sm={8} md={8} lg={8}>
-
                 </Col>
               </Row>
-
               <br/>
-
               <Row>
                 <Col>
-                  <select>
+                  <select onChange={homeSelect}>
                     <option selected value='Дом'>Дом</option>
-                    <option value='1'>1</option>
+                    {numberArray}
+                    {/* <option value='1'>1</option>
                     <option value='2'>2</option>
-                    <option value='3'>3</option>
+                    <option value='3'>3</option> */}
                   </select>
                 </Col>
                 <Col>
-                  <select>
+                  <select onChange={homePartSelect}>
                     <option selected value='Корпус'>Корпус</option>
-                    <option value='1'>1</option>
+                    {numberArray}
+                    {/* <option value='1'>1</option>
                     <option value='2'>2</option>
-                    <option value='3'>3</option>
+                    <option value='3'>3</option> */}
                   </select>
                 </Col>
                 <Col>
-                  <select>
+                  <select onChange={flatSelect}>
                     <option selected value='Квартира'>Квартира</option>
-                    <option value='1'>1</option>
+                    {numberArray}
+                    {/* <option value='1'>1</option>
                     <option value='2'>2</option>
-                    <option value='3'>3</option>
+                    <option value='3'>3</option> */}
                   </select>
                 </Col>
                 <Col>
@@ -140,7 +125,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
                       cursor: 'pointer',
                       lineHeight: '20px',
                     }}
-                    onClick={(e) => clickHandler()}>
+                    onClick={(e) => setDelivery()}>
                     Готово
                   </div>
                 </Col>

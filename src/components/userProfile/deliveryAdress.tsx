@@ -23,7 +23,7 @@ const DeliveryAdress = () => {
   const [adressAbsent, setadressPresent] = useState<boolean>(true)
 
   useEffect(() => {
-    if (delivery.street==='неизвестно') {
+    if (delivery.street==='') {
       setadressPresent(true)
     } else {
       setadressPresent(false)

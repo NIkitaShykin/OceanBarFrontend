@@ -11,7 +11,7 @@ const completedDelivery = (props:PropsType) => {
   const delivery =
     useSelector<AppStoreType, DeliveryAdressType>((state) => state.user)
 
-    return (
+  return (
     <div className='info-block'>
       <br/>
       <Row>
@@ -32,7 +32,7 @@ const completedDelivery = (props:PropsType) => {
         <Col sm={3}><div className='user-name'>
           <h5>&#10153;&nbsp;&nbsp;Дом</h5></div></Col>
         <Col sm={4}><div className='user-name'>
-          <h5>{delivery.home}</h5></div></Col>
+          <h5>{delivery.homeNumber}</h5></div></Col>
         <Col sm={5}></Col>
       </Row>
       <Row>

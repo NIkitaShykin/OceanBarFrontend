@@ -1,25 +1,22 @@
-/* eslint-disable max-len */
 import {createReducer} from '@reduxjs/toolkit'
 import {AnyAction} from 'redux'
 import {RootState} from '../store'
 import {ThunkAction} from 'redux-thunk'
-
 import {getUserAC} from '../actions'
 import {ApiUser} from '../../api/ApiUser'
-// import {UserType} from '../../common/types/userTypes'
-import {CommonUserType} from '../../common/types/userTypes'
+import {UserType} from '../../common/types/userTypes'
+import {DeliveryAdressType} from '../../common/types/userTypes'
 
-const initialState: CommonUserType = {
-  'id': 8,
+
+const initialState: UserType & DeliveryAdressType = {
+  'id': 10000,
   'name': 'неизвестно',
   'secondname': 'неизвестно',
   'email': 'неизвестно@mail.com',
-  'password': '*********',
-  // ----was separate------
   'phone': 'неизвестно',
   'city': 'неизвестно',
-  'street': 'неизвестно',
-  'home': 'неизвестно',
+  'street': '',
+  'homeNumber': 'неизвестно',
   'homePart': 'неизвестно',
   'flat': 'неизвестно'
 }
@@ -34,27 +31,27 @@ const userReducer = createReducer(initialState, (builder) => {
 export default userReducer
 
 export const getUserPersonalDataTC =
-  (token?:string|undefined, userId?:number): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (token?:string|undefined): ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        // const asyncResp = await ApiUser.getUserPersonalData(token, userId?)
         const asyncResp = await ApiUser.getUserPersonalData()
         // @ts-ignore
         const userData = asyncResp.data.data.user
         dispatch(getUserAC(userData))
       } catch (err) {
-        // console.log(err)
+        console.log(err)
       }
     }
 
 export const setUserPersonalDataTC =
-  (userData: any, token:any): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (userData: any, token?:string):
+   ThunkAction<void, RootState, unknown, AnyAction> =>
     async (dispatch) => {
       try {
-        const asyncResp: any = await ApiUser.setUserPersonalData(userData, token)
-        const response = asyncResp.data
-        console.log(response)
-      //   dispatch(getUserAC(userData))
+        const asyncResp: any =
+         await ApiUser.setUserPersonalData(userData, token)
+        const response = asyncResp.data.data.user
+        dispatch(getUserAC(response))
       } catch (err) {
         console.log(err)
       }

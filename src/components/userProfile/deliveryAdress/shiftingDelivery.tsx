@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux'
 import EditableSpan from './editableSpan/editableSpan'
 import {Form, Modal} from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
-import {setUserDeliveryData} from '../../../redux/reducers/deliveryReducer'
+import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
 
 type PropsType = {
   changeStatus: (status:boolean) => void
@@ -13,12 +13,12 @@ type PropsType = {
 
 const shiftingDelivery = (props:PropsType) => {
   const delivery =
-    useSelector<AppStoreType, DeliveryAdressType>((state) => state.delivery)
+    useSelector<AppStoreType, DeliveryAdressType>((state) => state.user)
   const dispatch = useDispatch()
 
   const [userCity, setUserCity] = useState<string>(delivery.city)
   const [userStreet, setUserStreet] = useState<string>(delivery.street)
-  const [userHome, setUserHome] = useState<string>(delivery.home)
+  const [userHome, setUserHome] = useState<string>(delivery.homeNumber)
   const [userHomePart, setUserHomePart] = useState<string>(delivery.homePart)
   const [userFlat, setUserFlat] = useState<string>(delivery.flat)
 
@@ -50,7 +50,7 @@ const shiftingDelivery = (props:PropsType) => {
   const clickHandler=()=>{
     props.changeStatus(true)
     dispatch(
-      setUserDeliveryData(deliveryData)
+      setUserPersonalDataTC(deliveryData)
     )
   }
 

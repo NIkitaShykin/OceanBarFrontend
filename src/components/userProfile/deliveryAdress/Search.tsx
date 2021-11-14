@@ -1,92 +1,56 @@
-import axios from 'axios'
 import {useEffect, useState} from 'react'
-import {useHistory} from 'react-router-dom'
-import {Form, FormControl} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
 import {DeliveryAdressType} from '../../../common/types/userTypes'
 import {ApiDelivery} from '../../../api/ApiDelivery'
-
 import useDebounce from '../../../utils/useDebounce'
 import Spinner from '../../Spinner/Spinner'
 
 import './search.scss'
-import {url} from '../../../api/index'
 
-type Dish = {
-  id: string
-  name: string
-  price: number
-  weight: string
-  calories: string
-  imageURL: string
-  ingredients: string
-  dishCategory: string
+type PropsType = {
+  searchValue: (value:string) => void
 }
 
-type ResponseType = {
-  data: {
-    data: {
-      dishes: Array<Dish>
-    }
-  }
-}
-
-const SearchField = () => {
+const SearchField = (props:PropsType) => {
   const [ref, isClickedOutside] = useClickOutside()
 
-  const [dishes, setMenu] = useState<Dish[]>([])
+  const [adress, setAdress] = useState<DeliveryAdressType[]>([])
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [street, setStreet] = useState('Улица')
 
   const noQuery = searchQuery && searchQuery.length === 0
-  const isEmpty = !dishes || dishes.length === 0
+  const isEmpty = !adress || adress.length === 0
 
-  const debouncedSearchQuery = useDebounce(searchQuery, 2000)
+  const debouncedSearchQuery = useDebounce(searchQuery, 1000)
 
   useEffect(() => {
-    const getMenu = async (query: string) => {
+    const getData = async (query: string) => {
       setSearchQuery(query)
       setIsOpen(true)
       setIsLoading(true)
       if (!query || query.trim() === '') return
 
-      const response: any = await
+      const response: {data:any} = await
       ApiDelivery.getDelivery(searchQuery)
-      // axios.get(
-      //   `${url}menu/?name=${searchQuery}`
-      // )
       setIsLoading(false)
-
-      console.log('первый ')
-      console.log(response.data.suggestions)
-      console.log('-----------------------------')
-
-
-      setMenu(response.data.suggestions)
+      setAdress(response.data.suggestions)
     }
-    getMenu(debouncedSearchQuery)
+    getData(debouncedSearchQuery)
     setIsOpen(false)
   }, [debouncedSearchQuery])
-
-  console.log('вне эффекта ')
-  console.log(dishes)
-  console.log('-----------------------------')
-
 
   useEffect(() => {
     if (searchQuery) {
       setIsOpen(true)
       setIsLoading(true)
-      const filteredDishes = dishes.filter((dish: any) =>
-        dish.value.toLowerCase().includes(searchQuery.toLowerCase())
+      const filteredAdress = adress.filter((adress: any) =>
+        adress.value.toLowerCase().includes(searchQuery.toLowerCase())
       )
-      console.log('второй ')
-      console.log(dishes)
-      console.log(filteredDishes)
-      console.log('-----------------------------')
 
-      setMenu(filteredDishes)
+      setAdress(filteredAdress)
     } else {
       setIsOpen(false)
       setIsLoading(false)
@@ -94,7 +58,6 @@ const SearchField = () => {
   }, [debouncedSearchQuery])
 
   useEffect(() => {
-    console.log('33333')
     if (isClickedOutside) {
       setIsOpen(false)
       setSearchQuery('')
@@ -102,10 +65,9 @@ const SearchField = () => {
     }
   }, [isClickedOutside])
 
-  const itemClickHandler = (value: any) => {
-    // dishes.find((dish: Dish) => dish.id === id)
-    console.log('selected')
-    console.log(value)
+  const itemClickHandler = (value: string) => {
+    props.searchValue(value)
+    setStreet(value)
     setSearchQuery('')
     setIsOpen(false)
   }
@@ -114,7 +76,7 @@ const SearchField = () => {
     <>
       <Form ref={ref}>
         <input
-          placeholder='Улица'
+          placeholder={street}
           name='search'
           type='text'
           value={searchQuery}
@@ -134,14 +96,16 @@ const SearchField = () => {
         )}
 
         {isOpen && !isEmpty && !isLoading && (
-          <ul >
-            {dishes.map((adress: any, index: number) => {
+          <ul className={'streetLi'}>
+            {adress.map((adress:any, index: number) => {
+              const temp=adress.value.split(' ')
               return (
-                <li
+                <li className={'streetLi'}
+                  style={{cursor: 'pointer'}}
                   key={index}
-                  onClick={() => itemClickHandler(adress)}
+                  onClick={() => itemClickHandler(temp[1])}
                 >
-                  {adress.value}
+                  {temp[1]}
                 </li>
               )
             })}
