@@ -6,7 +6,6 @@ import {ValidationType} from '../../../common/types/userTypes'
 import {UserType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
 import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
-import {getUserPersonalDataTC} from '../../../redux/reducers/userReducer'
 import Cookies from 'js-cookie'
 
 
