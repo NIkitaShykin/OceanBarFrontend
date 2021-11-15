@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
-
 import ShiftingDish from './ShiftingDish'
 import CompletedDish from './CompletedDish'
 import {useAppSelector} from '../../../../redux/hooks'
@@ -10,18 +9,21 @@ import {IngredientsType} from '../../../../common/types/dishesType'
 import {DishType} from '../../../../common/types/dishesType'
 
 const Dish = () => {
-  const token = useParams<{token: string}>()
-  const allDishes: DishType = useAppSelector<any>((state) => state.dish.dishes)
-  // @ts-ignore
-  const currentDish: DishType = allDishes.find((el) => el.id == token.token)
+  const token = + useParams<{token: string}>().token
+
+  const allDishes: DishType[] =
+  useAppSelector<DishType[]>((state) => state.dish.dishes)
+
+  const currentDish: DishType | any =
+  allDishes.find((el) => el.id === token)
 
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
-  const [ingredients, setIngredients] = useState<IngredientsType>(
-    currentDish.ingredients
-  )
+  const [ingredients, setIngredients] = useState<IngredientsType>([])
 
   useEffect(() => {
-    setIngredients(currentDish.ingredients)
+    if (currentDish) {
+      setIngredients(currentDish.ingredients)
+    }
   }, [currentDish])
 
   const updatedDish = {...currentDish, ingredients}

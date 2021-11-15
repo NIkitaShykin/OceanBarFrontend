@@ -2,9 +2,9 @@ import {useState} from 'react'
 import {useEffect} from 'react'
 import {AppStoreType} from '../../redux/reducers/rootReducer'
 import {useSelector} from 'react-redux'
-import {DeliveryAdressType} from '../../common/types/userTypes'
-import ShiftingDelivery from
-  './deliveryAdress/shiftingDelivery'
+// import {DeliveryAdressType} from '../../common/types/userTypes'
+// import ShiftingDelivery from
+//   './deliveryAdress/shiftingDelivery'
 import ShiftingDeliveryAPI from
   './deliveryAdress/shiftingDeliveryAPI'
 // import ShiftingDeliveryR from
@@ -19,20 +19,21 @@ const DeliveryAdress = () => {
   const delivery =
   useSelector<AppStoreType, any>((state:any) => state.user)
 
-  const [isShifting, setChangeStatus] = useState<boolean>(true)
-  const [adressAbsent, setadressPresent] = useState<boolean>(true)
+  const [isChange, setChangeStatus] = useState<boolean>(true)
+  const [adressAbsent, setAdressAbsent] = useState<boolean>(true)
 
   useEffect(() => {
     if (delivery.street==='') {
-      setadressPresent(true)
+      setAdressAbsent(true)
     } else {
-      setadressPresent(false)
+      setAdressAbsent(false)
+      setChangeStatus(false)
     }
   }, [delivery])
 
 
   const isAdress=(status:boolean)=>{
-    setadressPresent(status)
+    setAdressAbsent(status)
   }
   const changeStatus=(status:boolean)=>{
     setChangeStatus(status)
@@ -41,18 +42,16 @@ const DeliveryAdress = () => {
   return (
     <div className='profile-block justify-content-start'>
       <h2>Адрес доставки</h2>
+
       {adressAbsent ?
         <AbsentDelivery changeStatus={isAdress}/> :
         <>
-          {isShifting ?
-            <CompletedDelivery changeStatus={changeStatus}/> :
-            <ShiftingDeliveryAPI changeStatus={changeStatus}/>
+          {isChange ?
+            <ShiftingDeliveryAPI changeStatus={changeStatus}/> :
+            <CompletedDelivery changeStatus={changeStatus}/>
           }
         </>
       }
-      {/* <ShiftingDeliveryR changeStatus={changeStatus}/> */}
-
-
     </div>
   )
 }

@@ -8,7 +8,7 @@ import useDebounce from '../../../../utils/useDebounce'
 import Spinner from '../../../Spinner/Spinner'
 
 import './search.scss'
-import {url} from '../../../../api/index'
+import {url} from '../../../../api'
 
 type Dish = {
   id: string

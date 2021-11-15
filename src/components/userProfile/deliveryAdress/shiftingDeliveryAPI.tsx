@@ -20,16 +20,8 @@ const shiftingDeliveryAPI = (props:PropsType) => {
 
   const setDelivery=()=>{
     dispatch(setUserPersonalDataTC(userDeliveryData))
-    props.changeStatus(true)
+    props.changeStatus(false)
   }
-
-  const arr = []
-  for (let i = 1; i <= 10; i++) {
-    arr.push(i)
-  }
-  const numberArray=arr.map((el:number, i:number) =>{
-    return (<option key={i} value={el}>{el}</option>)
-  } )
 
   const userDeliveryData = {
     homeNumber: homeNumber,
@@ -44,6 +36,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
   const homeSelect=(e:any)=>{
     setHome(e.target.value)
   }
+
   const homePartSelect=(e:any)=>{
     setHomePart(e.target.value)
   }
@@ -58,13 +51,12 @@ const shiftingDeliveryAPI = (props:PropsType) => {
         <Modal.Body>
           <Form className='my-1' style={{width: '100%'}}>
             <Form.Floating className='mb-3 mx-3'>
-
               <Row>
                 <Col xs={'auto'} sm={9} md={9} lg={9}>
                 </Col>
                 <Col xs={'auto'} sm={3} md={3} lg={3}>
                   <h5 style={{cursor: 'pointer'}}
-                    onClick={() => props.changeStatus(true)}>
+                    onClick={() => props.changeStatus(false)}>
                     Oтмена
                   </h5>
                 </Col>
@@ -79,47 +71,45 @@ const shiftingDeliveryAPI = (props:PropsType) => {
 
               <Search searchValue={streetSelect}/>
 
-              <Row>
-                <Col xs={'auto'} sm={4} md={4} lg={4}>
-                </Col>
-                <Col xs={'auto'} sm={8} md={8} lg={8}>
-                </Col>
-              </Row>
               <br/>
               <Row>
-                <Col>
-                  <select onChange={homeSelect}>
-                    <option selected value='Дом'>Дом</option>
-                    {numberArray}
-                    {/* <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option> */}
-                  </select>
+                <Col xs={'auto'} sm={3} md={3} lg={2}>
+                  <input
+                    style={{width: '50px', height: '22px', borderRadius: '4px'}}
+                    placeholder='Дом'
+                    name='home'
+                    type='text'
+                    value={homeNumber}
+                    onChange={homeSelect}
+                  />
                 </Col>
-                <Col>
-                  <select onChange={homePartSelect}>
-                    <option selected value='Корпус'>Корпус</option>
-                    {numberArray}
-                    {/* <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option> */}
-                  </select>
+                <Col xs={'auto'} sm={3} md={3} lg={2}>
+                  <input
+                    style={{width: '60px', height: '22px', borderRadius: '4px'}}
+                    placeholder='Корпус'
+                    name='homePart'
+                    type='text'
+                    value={homePart}
+                    onChange={homePartSelect}
+                  />
                 </Col>
-                <Col>
-                  <select onChange={flatSelect}>
-                    <option selected value='Квартира'>Квартира</option>
-                    {numberArray}
-                    {/* <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option> */}
-                  </select>
+                <Col xs={'auto'} sm={4} md={4} lg={5}>
+                  <input
+                    style={{width: '70px', height: '22px', borderRadius: '4px'}}
+                    placeholder='Квартира'
+                    name='flat'
+                    type='text'
+                    value={flat}
+                    onChange={flatSelect}
+                  />
                 </Col>
-                <Col>
+                <Col xs={'auto'} sm={3} md={3} lg={3}>
                   <div
                     style={{
-                      border: '1px solid gray',
-                      color: 'black',
-                      height: '22px',
+                      borderRadius: '4px',
+                      border: '2px solid #fdd008',
+                      color: 'gray',
+                      height: '25px',
                       width: '80px',
                       textAlign: 'center',
                       cursor: 'pointer',
@@ -128,6 +118,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
                     onClick={(e) => setDelivery()}>
                     Готово
                   </div>
+
                 </Col>
               </Row>
 

@@ -26,12 +26,10 @@ const CompletedDish = (props: PropsType) => {
   const history = useHistory()
   const isLogIn = useAppSelector((state) => state.auth)
   const dispatch = useDispatch()
-  const ingredientList = props.currentDish.ingredients.map((el, i) => {
+  const ingredientList = props.currentDish.ingredients.map((el) => {
     if (el.isAdded) {
       return (
-        <li
-          key={i}
-          style={{lineHeight: '15px'}}>
+        <li style={{lineHeight: '15px'}}>
           <p>{el.name}</p>
         </li>
       )
@@ -78,6 +76,7 @@ const CompletedDish = (props: PropsType) => {
       <Row>
         <Col xs={'auto'} sm={6} md={8} lg={8}>
           <div
+            key={props.currentDish.id}
             style={{
               height: '100%',
               width: '100%',
@@ -105,7 +104,9 @@ const CompletedDish = (props: PropsType) => {
                 Изменить
               </span>
             </div>
+
             <ul>{ingredientList}</ul>
+
             <br />
             <span>
               <h5>Вес: {props.currentDish?.weight}</h5>

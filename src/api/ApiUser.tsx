@@ -3,7 +3,7 @@ import {url as baseURL} from './index'
 import Cookies from 'js-cookie'
 const token = Cookies.get('token')
 
-import {UserType} from '../../src/common/types/userTypes'
+// import {UserType} from '../../src/common/types/userTypes'
 import {DeliveryAdressType} from '../../src/common/types/userTypes'
 
 const instance = axios.create({

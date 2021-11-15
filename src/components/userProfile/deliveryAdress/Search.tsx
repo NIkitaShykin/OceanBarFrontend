@@ -76,6 +76,7 @@ const SearchField = (props:PropsType) => {
     <>
       <Form ref={ref}>
         <input
+          style={{borderRadius: '4px'}}
           placeholder={street}
           name='search'
           type='text'

@@ -10,15 +10,15 @@ import {DeliveryAdressType} from '../../common/types/userTypes'
 
 const initialState: UserType & DeliveryAdressType = {
   'id': 10000,
-  'name': 'неизвестно',
-  'secondname': 'неизвестно',
-  'email': 'неизвестно@mail.com',
-  'phone': 'неизвестно',
-  'city': 'неизвестно',
+  'name': 'Имя',
+  'secondname': 'Фамилия',
+  'email': '',
+  'phone': '',
+  'city': '',
   'street': '',
-  'homeNumber': 'неизвестно',
-  'homePart': 'неизвестно',
-  'flat': 'неизвестно'
+  'homeNumber': '',
+  'homePart': '',
+  'flat': ''
 }
 
 const userReducer = createReducer(initialState, (builder) => {
