@@ -1,17 +1,39 @@
 import {useState} from 'react'
-import ShiftingDelivery from
-  './deliveryAdress/shiftingDelivery'
+import {useEffect} from 'react'
+import {AppStoreType} from '../../redux/reducers/rootReducer'
+import {useSelector} from 'react-redux'
+// import {DeliveryAdressType} from '../../common/types/userTypes'
+// import ShiftingDelivery from
+//   './deliveryAdress/shiftingDelivery'
+import ShiftingDeliveryAPI from
+  './deliveryAdress/shiftingDeliveryAPI'
+// import ShiftingDeliveryR from
+//   './deliveryAdress/shiftingDeliveryR'
 import CompletedDelivery from
   './deliveryAdress/completedDelivery'
 import AbsentDelivery from
   './deliveryAdress/absentDelivery'
-// import {findDOMNode} from 'react-dom'
+
 
 const DeliveryAdress = () => {
-  const [isShifting, setChangeStatus] = useState<boolean>(true)
-  const [adressAbsent, setadressPresent] = useState<boolean>(true)
-  const isAdress=(status:boolean)=>{
-    setadressPresent(status)
+  const delivery =
+  useSelector<AppStoreType, any>((state:any) => state.user)
+
+  const [isChange, setChangeStatus] = useState<boolean>(true)
+  const [adressAbsent, setAdressAbsent] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (delivery.street==='') {
+      setAdressAbsent(true)
+    } else {
+      setAdressAbsent(false)
+      setChangeStatus(false)
+    }
+  }, [delivery])
+
+
+  const changeAbsent=(status:boolean)=>{
+    setAdressAbsent(status)
   }
   const changeStatus=(status:boolean)=>{
     setChangeStatus(status)
@@ -20,19 +42,19 @@ const DeliveryAdress = () => {
   return (
     <div className='profile-block justify-content-start'>
       <h2>Адрес доставки</h2>
-      <div className='info-block'>
 
-        {adressAbsent ?
-          <AbsentDelivery changeStatus={isAdress}/> :
-          <div>
-            {isShifting ?
-              <CompletedDelivery changeStatus={changeStatus}/> :
-              <ShiftingDelivery changeStatus={changeStatus}/> }
-          </div>
-        }
-
-
-      </div>
+      {adressAbsent ?
+        <AbsentDelivery changeAbsent={changeAbsent}/> :
+        <>
+          {isChange ?
+            <ShiftingDeliveryAPI changeStatus={changeStatus}/> :
+            <CompletedDelivery
+              changeStatus={changeStatus}
+              changeAbsent={changeAbsent}
+            />
+          }
+        </>
+      }
     </div>
   )
 }

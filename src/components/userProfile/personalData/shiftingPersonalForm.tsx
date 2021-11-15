@@ -1,16 +1,21 @@
 import {useState} from 'react'
-// import {useHistory} from 'react-router-dom'
-import {UserType} from '../../../common/types/userTypes'
+import {useSelector, useDispatch} from 'react-redux'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
-import {useSelector} from 'react-redux'
 import {Form, Button, Modal} from 'react-bootstrap'
 import {ValidationType} from '../../../common/types/userTypes'
+import {UserType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
+import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
+import Cookies from 'js-cookie'
 
 
 const shiftingPersonalForm = (props:any) => {
   const userData =
   useSelector<AppStoreType, UserType>((state) => state.user)
+
+  const token = Cookies.get('token')
+
+  const dispatch = useDispatch()
 
   const [authFailed, setAuthFailed] = useState(false)
 
@@ -53,8 +58,8 @@ const shiftingPersonalForm = (props:any) => {
 
   const email = useInput(`${userData.email}`, {
     isEmpty: true,
-    minLengthError: 8,
-    maxLengthError: 325,
+    minLengthError: 5,
+    maxLengthError: 30,
     emailError: true,
   })
 
@@ -63,44 +68,29 @@ const shiftingPersonalForm = (props:any) => {
     phoneNumberError: true,
   })
 
-  // const user = {
-  //   name: firstName.value,
-  //   secondname: lastName.value,
-  //   email: email.value,
-  //   phone: phoneNumber.value,
-  //   id: null,
-  // }
+  const userPersonalData = {
+    name: firstName.value,
+    secondname: lastName.value,
+    email: email.value,
+    phone: phoneNumber.value,
+  }
 
-  // eslint-disable-next-line max-len
-  const isFirstNameInvalid = firstName.isDirty && (firstName.isEmpty || firstName.minLengthError || firstName.maxLengthError || firstName.firstNameError)
-  // eslint-disable-next-line max-len
-  const isLastNameInvalid = lastName.isDirty && (lastName.isEmpty || lastName.minLengthError || lastName.maxLengthError || lastName.lastNameError)
-  // eslint-disable-next-line max-len
-  const isEmailInvalid = email.isDirty && (email.isEmpty || email.minLengthError || email.maxLengthError || email.emailError)
-  // eslint-disable-next-line max-len
-  const isPhoneNumberInvalid = phoneNumber.isDirty && (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
-  // eslint-disable-next-line max-len
-  // const isPasswordInvalid = password.isDirty && (password.isEmpty || password.minLengthError || password.maxLengthError || password.passwordError)
-
+  const isFirstNameInvalid = firstName.isDirty &&
+      (firstName.isEmpty || firstName.minLengthError ||
+         firstName.maxLengthError || firstName.firstNameError)
+  const isLastNameInvalid = lastName.isDirty &&
+   (lastName.isEmpty || lastName.minLengthError ||
+     lastName.maxLengthError || lastName.lastNameError)
+  const isEmailInvalid = email.isDirty &&
+   (email.isEmpty || email.minLengthError ||
+     email.maxLengthError || email.emailError)
+  const isPhoneNumberInvalid = phoneNumber.isDirty &&
+   (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
 
   const handleSubmit = (e: any) => {
+    e.preventDefault()
     props.changeStatus(true)
-
-    // e.preventDefault()
-
-    // axios
-    //   .post(`${url}/users/register`, user)
-    //   .then((response: any) => {
-    //     if (response.status > 400) {
-    //       throw new Error(response.statusText)
-    //     }
-    //   })
-
-    //   .then(() => history.push('/signup-success'))
-    //   .catch((error) => {
-    //     console.log(error.response)
-    //     setAuthFailed(true)
-    //   })
+    dispatch(setUserPersonalDataTC(userPersonalData, token))
   }
 
   return (

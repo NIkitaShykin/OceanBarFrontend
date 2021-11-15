@@ -26,10 +26,10 @@ const CompletedDish = (props: PropsType) => {
   const history = useHistory()
   const isLogIn = useAppSelector((state) => state.auth)
   const dispatch = useDispatch()
-  const ingredientList = props.currentDish.ingredients.map((el) => {
+  const ingredientList = props.currentDish.ingredients.map((el, i) => {
     if (el.isAdded) {
       return (
-        <li style={{lineHeight: '15px'}}>
+        <li key={i} style={{lineHeight: '15px'}}>
           <p>{el.name}</p>
         </li>
       )

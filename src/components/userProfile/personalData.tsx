@@ -1,8 +1,6 @@
 import {useState} from 'react'
 import ShiftingPersonalForm from './personalData/shiftingPersonalForm'
 
-// import ShiftingPersonal from
-//   './personalData/shiftingPersonal'
 import CompletedPersonal from
   './personalData/completedPersonal'
 
@@ -20,7 +18,6 @@ const PersonalData = () => {
       </h2>
       {isShifting ?
         <CompletedPersonal changeStatus={changeStatus}/> :
-        // <ShiftingPersonal changeStatus={changeStatus}/> }
         <ShiftingPersonalForm changeStatus={changeStatus}/> }
 
     </div>

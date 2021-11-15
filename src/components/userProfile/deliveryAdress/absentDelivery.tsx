@@ -1,6 +1,6 @@
 
 type PropsType = {
-  changeStatus: (status:boolean) => void
+  changeAbsent: (status:boolean) => void
 }
 
 const absentDelivery = (props:PropsType) => {
@@ -15,7 +15,7 @@ const absentDelivery = (props:PropsType) => {
         <button
           className='btn btn-outline-warning offset-md-4'
           onClick={()=>{
-            props.changeStatus(false)
+            props.changeAbsent(false)
           }}
         >
         Добавить адрес доставки
