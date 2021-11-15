@@ -155,6 +155,7 @@ const SignUp = () => {
             <Form className='my-3' style={{width: '100%'}}>
               <Form.Floating className='mb-3 mx-3'>
                 <Form.Control
+                  autoFocus
                   id='userFirstName'
                   type='firstName'
                   placeholder='Иван'
