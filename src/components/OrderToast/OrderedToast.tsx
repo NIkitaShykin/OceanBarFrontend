@@ -11,6 +11,7 @@ export const orderedToast = (message: string, autoClose?: number) => {
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    icon: false,
+    // need to look at problem with TS
+    // icon: false,
   })
 }
