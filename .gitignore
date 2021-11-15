@@ -31,3 +31,5 @@ Thumbs.db
 # some macOS cache
 .DS_Store
 node_modules
+
+.env
