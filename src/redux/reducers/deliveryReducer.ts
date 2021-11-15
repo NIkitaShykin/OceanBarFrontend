@@ -9,11 +9,11 @@ import {getUserAC} from '../actions'
 import {DeliveryAdressType} from '../../common/types/userTypes'
 
 const initialState: DeliveryAdressType = {
-  city: 'Минск',
-  street: 'Революционная',
-  home: '17',
-  homePart: '2',
-  flat: '48',
+  city: '',
+  street: '',
+  homeNumber: '',
+  homePart: '',
+  flat: '',
 }
 
 const deliveryReducer = createReducer(initialState, (builder) => {
