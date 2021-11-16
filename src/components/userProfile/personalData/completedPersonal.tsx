@@ -8,8 +8,8 @@ type PropsType = {
 }
 
 const completedPersonal = (props:PropsType) => {
-  const user =
-  useSelector<AppStoreType, UserType>((state) => state.user)
+  // eslint-disable-next-line max-len
+  const user = useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
 
   return (
     <div className='info-block'>

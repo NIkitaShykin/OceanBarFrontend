@@ -10,8 +10,8 @@ import Cookies from 'js-cookie'
 
 const passwordResetForm = () => {
   const token = Cookies.get('token')
-  const userPersonal =
-  useSelector<AppStoreType, UserType>((state) => state.user)
+  // eslint-disable-next-line max-len
+  const userPersonal = useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
 
   const [authFailed, setAuthFailed] = useState(false)
   const [oldPassword, setOldPassword] = useState('')

@@ -12,8 +12,8 @@ type PropsType = {
 }
 
 const shiftingDelivery = (props:PropsType) => {
-  const delivery =
-    useSelector<AppStoreType, DeliveryAdressType>((state) => state.user)
+  // eslint-disable-next-line max-len
+  const delivery = useSelector<AppStoreType, DeliveryAdressType>((state) => state.user.userProfile)
   const dispatch = useDispatch()
 
   const [userCity, setUserCity] = useState<string>(delivery.city)

@@ -18,6 +18,9 @@ export const addDishesAC =
 export const toggleLoading =
   createAction<boolean, 'TOGGLE_LOADING'>('TOGGLE_LOADING')
 
+export const toggleLoadingUser =
+  createAction<boolean, 'TOGGLE_LOADING_USER'>('TOGGLE_LOADING_USER')
+
 export const getUserPersonalDataTC = createAction<any>('GET_USER_DATA')
 export const setPersonalUsersData = createAction<any>('SET_USER_DATA')
 export const getUserAC = createAction<any>('SET_USER')

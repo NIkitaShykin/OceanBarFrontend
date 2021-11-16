@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {DeliveryAdressType} from '../../../common/types/userTypes'
 import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
-import Search from './Search'
+import SearchDelivery from './SearchDelivery'
 
 
 type PropsType = {
@@ -14,8 +14,8 @@ type PropsType = {
 const shiftingDeliveryAPI = (props:PropsType) => {
   const dispatch = useDispatch()
 
-  const delivery =
-  useSelector<AppStoreType, DeliveryAdressType>((state) => state.user)
+  // eslint-disable-next-line max-len
+  const delivery = useSelector<AppStoreType, DeliveryAdressType>((state) => state.user.userProfile)
 
   const [homeNumber, setHome] = useState(delivery.homeNumber)
   const [homePart, setHomePart] = useState(delivery.homePart)
@@ -71,7 +71,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
           </Col>
         </Row>
         <Row>
-          <Search
+          <SearchDelivery
             searchValue={streetSelect}
             currentValue={street}
           />
