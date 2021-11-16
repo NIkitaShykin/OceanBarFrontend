@@ -69,7 +69,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const handleSubmit = ((e)=> history.push('/confirmation'))
 
     return (
-      <form className='delivery-form shadow'>
+      <div className='delivery-form shadow'>
         <div className='form-section'>
           <div className='form-data'>
             <div className='section-numeration'>
@@ -287,7 +287,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
             </Button>
           </div>
         </div>
-      </form>
+      </div>
     )
   }
 
