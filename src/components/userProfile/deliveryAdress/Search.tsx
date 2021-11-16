@@ -10,6 +10,7 @@ import './search.scss'
 
 type PropsType = {
   searchValue: (value:string) => void
+  currentValue:string
 }
 
 const SearchField = (props:PropsType) => {
@@ -19,7 +20,7 @@ const SearchField = (props:PropsType) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [street, setStreet] = useState('Улица')
+  // const [street, setStreet] = useState('Улица')
 
   const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !adress || adress.length === 0
@@ -67,7 +68,7 @@ const SearchField = (props:PropsType) => {
 
   const itemClickHandler = (value: string) => {
     props.searchValue(value)
-    setStreet(value)
+    // setStreet(value)
     setSearchQuery('')
     setIsOpen(false)
   }
@@ -75,13 +76,14 @@ const SearchField = (props:PropsType) => {
   return (
     <>
       <Form ref={ref}>
-        <input
-          style={{borderRadius: '4px'}}
-          placeholder={street}
+        <label htmlFor='search'>Улица</label>
+        <Form.Control
+          placeholder={props.currentValue}
+          required
           name='search'
-          type='text'
           value={searchQuery}
-          onChange={(e)=>setSearchQuery(e.target.value)} />
+          onChange={(e)=>setSearchQuery(e.target.value)}
+        />
 
         {isLoading && <Spinner />}
         {noQuery && isEmpty && isOpen && (

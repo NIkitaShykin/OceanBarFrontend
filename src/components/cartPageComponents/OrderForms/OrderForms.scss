@@ -39,6 +39,7 @@ $mainColor: #ff9e05;
       }
       .section-content {
         display: flex;
+        flex-direction: column;
         width: 24rem;
         form,
         .form-floating {
@@ -102,6 +103,6 @@ $mainColor: #ff9e05;
   .error {
     font-size: smaller;
     color: #dc3545;
-    margin-top: 3px;
+    margin-top: 4px;
   }
 }

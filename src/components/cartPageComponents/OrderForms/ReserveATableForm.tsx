@@ -5,8 +5,10 @@ import {
   FloatingLabel,
   Button
 } from 'react-bootstrap'
+import {useHistory} from 'react-router-dom'
 
 import './OrderForms.scss'
+
 
 interface IReserveATableFormProps {
   handleRadioValueClearance: (value: string) => void
@@ -14,6 +16,7 @@ interface IReserveATableFormProps {
 
 const ReserveATableForm: React.FC<IReserveATableFormProps> =
   ({handleRadioValueClearance}) => {
+    const history = useHistory()
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
     const [tableSize, setTableSize] = useState<string>('')
@@ -68,6 +71,10 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       '20:00 - 21:00',
       '21:00 - 22:00',
     ]
+
+    const handleSubmit =
+      ((e: any) =>
+        history.push('/confirmation'))
 
     const clearCheckedOrderType = (checkedValue: string) => {
       handleRadioValueClearance(checkedValue)
@@ -226,9 +233,14 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               Отмена
             </Button>
             <Button
+              onClick={(e) => handleSubmit(e)}
               variant='outline-warning'
               disabled={
-                isTableInvalid || isTimeInvalid || isPaymentSkipped || !date
+                isTableInvalid ||
+                isTimeInvalid ||
+                isPaymentSkipped ||
+                !date ||
+                !ispaymentConfirmed
               }
             >
               Далее

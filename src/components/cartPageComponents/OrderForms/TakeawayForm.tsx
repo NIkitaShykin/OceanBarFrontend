@@ -7,6 +7,7 @@ import {
   ToggleButton,
   ToggleButtonGroup
 } from 'react-bootstrap'
+import {useHistory} from 'react-router-dom'
 
 import './OrderForms.scss'
 
@@ -16,6 +17,7 @@ interface ITakeawayFormProps {
 
 const TakeawayForm: React.FC<ITakeawayFormProps> =
   ({handleRadioValueClearance}) => {
+    const history = useHistory()
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
     const [paymentMethod, setPaymentMethod] = useState<string>('')
@@ -54,6 +56,8 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
     const clearCheckedOrderType = (checkedValue: string) => {
       handleRadioValueClearance(checkedValue)
     }
+    // @ts-ignore
+    const handleSubmit = ((e)=> history.push('/confirmation'))
 
     return (
       <div className='takeaway-form shadow'>
@@ -197,13 +201,16 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
             <Button
               variant='outline-warning'
               disabled={
-                !date || isTimeInvalid || isPaymentInputSkipped
+                !date ||
+                isTimeInvalid ||
+                isPaymentInputSkipped
               }
               onClick={
-                () => {
+                (e) => {
                   if (!paymentMethod) {
                     setPaymentInputSkipped(true)
                   }
+                  handleSubmit(e)
                 }
               }
             >

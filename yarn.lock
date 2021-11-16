@@ -6449,6 +6449,11 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
+highlight-words@^1.0.6:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/highlight-words/-/highlight-words-1.2.0.tgz#af52bc7fb767d0306012948f0bdd8b4185d73de6"
+  integrity sha512-Oz1v8z10MzF8x/G5llSVv4sNBSE4SFLXglohGKZf/8gNydRGD+vZJWssfXwivCpqD8PpWq1YBVwKgq0iLh5NzA==
+
 history@^4.9.0:
   version "4.10.1"
   resolved "https://registry.yarnpkg.com/history/-/history-4.10.1.tgz#33371a65e3a83b267434e2b3f3b1b4c58aad4cf3"
@@ -10531,6 +10536,15 @@ react-click-outside-hook@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/react-click-outside-hook/-/react-click-outside-hook-1.1.1.tgz#e64d354aee463ff7c5c8dca4c5e2fd947b16df5f"
   integrity sha512-wIPef9ik68f/Tz/0uvuOZI7hE7XLOc2moKUGWu9c68LqYS8b0D9LnR7J9i0Uc0DiXZaJENlRqZpmaYJFhjADMA==
+
+react-dadata@^2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/react-dadata/-/react-dadata-2.13.0.tgz#fa3bcf06c129d8bf5f9199e59744345e71dcc775"
+  integrity sha512-DKI0bLrsQ+RyIIfoiBDAgAQW7PJYV8HT5e/je/rLvIl9A0Zpg6HuyFgqGQCYm8+zkhU5jCLVfnjwLQyNMEQUZQ==
+  dependencies:
+    highlight-words "^1.0.6"
+    lodash.debounce "^4.0.8"
+    shallowequal "^1.1.0"
 
 react-date-picker@^8.3.5:
   version "8.3.5"

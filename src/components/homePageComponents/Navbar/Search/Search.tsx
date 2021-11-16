@@ -6,9 +6,10 @@ import {useClickOutside} from 'react-click-outside-hook'
 
 import useDebounce from '../../../../utils/useDebounce'
 import Spinner from '../../../Spinner/Spinner'
+import {url} from '../../../../api'
 
 import './search.scss'
-import {url} from '../../../../api'
+
 
 type Dish = {
   id: string
@@ -41,7 +42,7 @@ const SearchField = () => {
   const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !dishes || dishes.length === 0
 
-  const debouncedSearchQuery = useDebounce(searchQuery, 2000)
+  const debouncedSearchQuery = useDebounce(searchQuery, 1000)
 
   useEffect(() => {
     const getMenu = async (query: string) => {
@@ -51,7 +52,7 @@ const SearchField = () => {
       if (!query || query.trim() === '') return
 
       const response: ResponseType = await axios.get(
-        `${url}menu/?name=${searchQuery}`
+        `${url}/menu/?name=${searchQuery}`
       )
       setIsLoading(false)
       setMenu(response.data.data.dishes)

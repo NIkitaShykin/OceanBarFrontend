@@ -71,7 +71,7 @@ const passwordResetForm = () => {
           setOldPassCorrect(false)
           setRetypeNewPass('')
           password.value='' // Не работает => как обнулить это значение???
-          // или задиспатчить запрос за данными на бэк =>
+          // или задиспатчить запрос за данными =>
           // перерисовать всю страницу ???
         }
       })
@@ -178,6 +178,7 @@ const passwordResetForm = () => {
 
                   { !oldPassCorrect && <>
                     <Modal.Footer className='justify-content-center border-0'>
+                      <br/><br/><br/>
                       <Button
                         className='btn btn-outline-warning offset-md-4'
                         variant='outline-warning'

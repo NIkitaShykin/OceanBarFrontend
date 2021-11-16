@@ -14,11 +14,11 @@ const initialState: UserType & DeliveryAdressType = {
   'secondname': 'Фамилия',
   'email': '',
   'phone': '',
-  'city': '',
-  'street': '',
-  'homeNumber': '',
-  'homePart': '',
-  'flat': ''
+  'city': 'Минск',
+  'street': 'Улица',
+  'homeNumber': 'Дом',
+  'homePart': 'Корпус',
+  'flat': 'Квартира'
 }
 
 const userReducer = createReducer(initialState, (builder) => {
