@@ -22,7 +22,6 @@ type PropsType = {
   dishes: DishInCart[]
 }
 const UserCart = (props: PropsType) => {
-  // 'props: any' as cart functionality is still in progress
   const [orderType, setOrderType] = useState<string>('')
   const radios: TRadioBtnParams[] = [
     {name: 'Забронировать стол', value: 'reserve-a-table'},
@@ -122,7 +121,12 @@ const UserCart = (props: PropsType) => {
                 }
               />
             )}
-            {orderType === 'delivery' && <DeliveryForm />}
+            {orderType === 'delivery' &&
+              <DeliveryForm
+                handleRadioValueClearance={(value: string) =>
+                  handleRadioValueClearance(value)
+                }
+              />}
             {orderType === 'takeaway' && (
               <TakeawayForm
                 handleRadioValueClearance={(value: string) =>
