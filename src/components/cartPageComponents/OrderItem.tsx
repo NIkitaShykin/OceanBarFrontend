@@ -1,44 +1,54 @@
-/* eslint-disable max-len */
 import React, {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {Image} from 'react-bootstrap'
+import Cookies from 'js-cookie'
+
+import {orderedToast} from '../OrderToast/OrderedToast'
+import ShiftingDish from '../../pages/menuPage/Menu/Dishes/ShiftingDish'
+
+import {parseString} from '../../common/parceInString'
+import {
+  DishInCart,
+  IngredientType,
+  IngredientsType,
+} from '../../common/types/dishesType'
+import {TOrderItem} from '../../common/types/cartTypes'
+
+import {useAppSelector} from '../../redux/hooks'
 import {
   minusOneDish,
   plusOneDish,
   removeDishFromCart,
+  updateDishInCart,
 } from '../../redux/actions'
-import {orderedToast} from '../OrderToast/OrderedToast'
+import {ApiCart} from '../../api/ApiCart'
 
 import './Cart.scss'
-import {ApiCart} from '../../api/ApiCart'
-import Cookies from 'js-cookie'
-import ShiftingDish from '../../pages/menuPage/Menu/Dishes/ShiftingDish'
-import {DishType, IngredientsType} from '../../common/types/dishesType'
-import {useAppSelector} from '../../redux/hooks'
-import {parseString} from '../../common/parceInString'
 
-interface IOrderItemProps {
-  id: number
-  name: string
-  price: string
-  image: string
-  numberOfDishes: number
-  position: number
-}
-
-const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
+const OrderItem: React.FunctionComponent<TOrderItem> = ({
   id,
   name,
   price,
-  image,
+  imageURL,
   numberOfDishes,
   position,
 }) => {
-  const allDishes = useAppSelector((state) => state.dish.dishes)
-  const currentDish = allDishes.find((el: DishType) => el.id == id)
+  const cartDishes = useAppSelector((state) => state.cart.dishes)
+  const currentDish = cartDishes.find((el: DishInCart) => el.id === id)
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
-  // @ts-ignore
-  const [ingredients, setIngredients] = useState(currentDish.ingredients)
+  const [ingredients, setIngredients] =
+    useState(currentDish ? currentDish.ingredients : [])
+
+  const removedIngredientsArr: Array<string> = []
+
+  ingredients.forEach((ingredient: IngredientType) => {
+    if (ingredient.isAdded === false) {
+      removedIngredientsArr.push(ingredient.name)
+    }
+  })
+
+  const removedIngredients =
+    removedIngredientsArr.length ? removedIngredientsArr.join(', ') : ''
 
   useEffect(() => {
     setIngredients(ingredients)
@@ -47,34 +57,36 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
   const updateIngredients = (updIngridients: IngredientsType) => {
     setIngredients(updIngridients)
   }
+
   const changeStatus = () => {
     setDishСhangeStatus(!dishСhangeStatus)
   }
+
   const dispatch = useDispatch()
   let [counter, setCounter] = useState(numberOfDishes)
   const [show, setShow] = useState(false)
   const token = Cookies.get('token')
+
+  const handleShow = () => setShow(true)
+
   const handleClose = () => {
     ApiCart.updateDishInCart(
       position,
       numberOfDishes,
       token,
       parseString(ingredients)
-    ).then((resp) => {
-      orderedToast(
-        `Добавленные игредиенты :
-      ${resp.data.updatedPosition.ingredients}`,
-        5000
-      )
-    })
+    ).then(() => {})
+
+    dispatch(updateDishInCart({id: id, ingredients: ingredients}))
     setShow(false)
   }
-  const handleShow = () => setShow(true)
+
   const onDeleteHandler = () => {
     ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {})
     dispatch(removeDishFromCart(id))
     orderedToast(`Блюдо "${name}" удалено из корзины`)
   }
+
   return (
     <>
       {show && currentDish ? (
@@ -90,7 +102,12 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
       ) : (
         <div className='order-item shadow' id={String(id)}>
           <div className='order-block order-img'>
-            <Image className='rounded-3' src={image} width={80} height={80} />
+            <Image
+              className='rounded-3'
+              src={imageURL}
+              width={80}
+              height={80}
+            />
           </div>
 
           <div className='order-block order-details'>
@@ -99,6 +116,12 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
             <a onClick={handleShow} style={{cursor: 'pointer'}}>
               Изменить состав
             </a>
+            {
+              removedIngredients &&
+              <span className='short-notice'>
+                без добавления ингредиента: {removedIngredients}
+              </span>
+            }
           </div>
           <div className='order-block order-counter'>
             <button

@@ -103,6 +103,13 @@ $mainColor: #ff9e05;
               }
             }
           }
+
+          .short-notice {
+            font-size: smaller;
+            font-style: italic;
+            text-align: left;
+            margin-top: 7px;
+          }
         }
         .btn-outline-warning {
           color: black;

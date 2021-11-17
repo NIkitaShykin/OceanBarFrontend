@@ -5,6 +5,7 @@ import {DishType} from '../../common/types/dishesType'
 
 
 const Cart = () => {
+  // eslint-disable-next-line max-len
   const dishes:DishType = useSelector((state:any) => state.cart.dishes)
   // @ts-ignore
   return <UserCart dishes={dishes} />

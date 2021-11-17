@@ -3,6 +3,7 @@ import {createReducer} from '@reduxjs/toolkit'
 import {
   addDishToCart,
   removeDishFromCart,
+  updateDishInCart,
   clearCart,
   minusOneDish,
   plusOneDish,
@@ -34,12 +35,21 @@ const cartReducer = createReducer(initialState, (builder) => {
       updState.dishes.push(newDish)
       return updState
     })
+
     .addCase(removeDishFromCart, (state, action) => {
       const id = action.payload
       const updState = {...state}
       updState.dishes = updState.dishes.filter((dish) => dish.id !== id)
       return updState
     })
+
+    .addCase(updateDishInCart, (state, action) => {
+      const index = state.dishes.findIndex(
+        (dish) => dish.id === action.payload.id
+      )
+      state.dishes[index].ingredients = action.payload.ingredients
+    })
+
     .addCase(clearCart, (state, action) => {
       return initialState
     })
@@ -48,15 +58,14 @@ const cartReducer = createReducer(initialState, (builder) => {
       const index = state.dishes.findIndex(
         (dish) => dish.id === action.payload.id
       )
-
       state.dishes[index].numberOfDishes = action.payload.numberOfDishes
       return state
     })
+
     .addCase(minusOneDish, (state, action) => {
       const index = state.dishes.findIndex(
         (dish) => dish.id === action.payload.id
       )
-
       state.dishes[index].numberOfDishes = action.payload.numberOfDishes
       return state
     })

@@ -2,13 +2,13 @@ import {useState} from 'react'
 import './Dish.scss'
 import DishIngridients from './DishIngridients'
 import {Row, Col} from 'react-bootstrap'
-import {IngredientType} from '../../../../common/types/dishesType'
+import {DishInCart, IngredientType} from '../../../../common/types/dishesType'
 import {IngredientsType} from '../../../../common/types/dishesType'
 import {DishType} from '../../../../common/types/dishesType'
 
 type PropsType = {
   changeStatus: () => void
-  currentDish: DishType
+  currentDish: DishType | DishInCart
   updateIngredients: (arg0: any) => void
   handleClose?: () => void
 }
