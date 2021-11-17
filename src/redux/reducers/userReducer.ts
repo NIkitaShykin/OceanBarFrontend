@@ -21,10 +21,10 @@ const initialState: InitialStateType = {
     'email': '',
     'phone': '',
     'city': 'Минск',
-    'street': 'Улица',
-    'homeNumber': 'Дом',
-    'homePart': 'Корпус',
-    'flat': 'Квартира'
+    'street': '',
+    'homeNumber': '',
+    'homePart': '',
+    'flat': ''
   },
   isLoading: false
 }

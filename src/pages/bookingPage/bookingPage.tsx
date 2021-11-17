@@ -1,7 +1,20 @@
+import ReserveATableForm from './ReserveATableForm'
+
 const Booking = () => {
+  const handleRadioValueClearance = (value: string) => {
+    console.log('Забронировать стол');
+    (value)
+  }
+
   return (
-    <div>
-      <h1 className='m-3'>ЗАБРОНИРОВАТЬ СТОЛ</h1>
+    <div className='cart'>
+      <div className='container'>
+        <h1 className='m-3'>Забронируйте стол</h1>
+        <ReserveATableForm
+          handleRadioValueClearance={(value: string) =>
+            handleRadioValueClearance(value)
+          }/>
+      </div>
     </div>
   )
 }

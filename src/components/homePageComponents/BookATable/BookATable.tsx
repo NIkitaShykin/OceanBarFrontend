@@ -1,11 +1,19 @@
 
-import {Dropdown, Form} from 'react-bootstrap'
+import {
+  // Dropdown,
+  Form} from 'react-bootstrap'
+import {useHistory} from 'react-router-dom'
 import './BookATable.scss'
 
 const BookATable = () => {
+  const history = useHistory()
+  const handleClose = () => {
+    history.push('booking-table/')
+  }
+
   return (
     <div className='book-a-table'>
-      <h2 className='bookTable'>Забронируйте стол</h2>
+      <h2 className='bookTable'>Забронируйте стол по телефону</h2>
       <div className='order-form'>
         <Form>
           <Form.Control
@@ -23,10 +31,10 @@ const BookATable = () => {
           />
         </Form>
       </div>
-      <br />
-      <div className='time-date'>
-        <Dropdown className={'dropdown-cont'}>
-          <Dropdown.Toggle
+      {/* <br /> */}
+      {/* <div className='time-date'> */}
+      {/* <Dropdown className={'dropdown-cont'}> */}
+      {/* <Dropdown.Toggle
             style={{
               backgroundColor: 'white',
               color: 'black',
@@ -37,13 +45,13 @@ const BookATable = () => {
             className='dropdown-basic'
           >
             Дата
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
+          </Dropdown.Toggle> */}
+      {/* <Dropdown.Menu>
             <Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-        <Dropdown>
-          <Dropdown.Toggle
+          </Dropdown.Menu> */}
+      {/* </Dropdown> */}
+      {/* <Dropdown> */}
+      {/* <Dropdown.Toggle
             style={{
               backgroundColor: 'white',
               color: 'black',
@@ -54,15 +62,17 @@ const BookATable = () => {
             className='dropdown-basic'
           >
             Время
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
+          </Dropdown.Toggle> */}
+      {/* <Dropdown.Menu>
             <Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
+          </Dropdown.Menu> */}
+      {/* </Dropdown> */}
+      {/* </div> */}
       <div className={'order-button-container'}>
         <button className={'order-button'}>
-          <span className='menu-text-main-page'>Забронировать</span>
+          <span className='menu-text-main-page'
+            onClick={handleClose}
+          >Забронировать</span>
         </button>
       </div>
     </div>

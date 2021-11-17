@@ -1,5 +1,6 @@
 import {UserType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
+import Spinner from '../../Spinner/Spinner'
 import {useSelector} from 'react-redux'
 import {Col, Row} from 'react-bootstrap'
 
@@ -10,9 +11,13 @@ type PropsType = {
 const completedPersonal = (props:PropsType) => {
   // eslint-disable-next-line max-len
   const user = useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
+  // eslint-disable-next-line max-len
+  const loading = useSelector<AppStoreType, boolean>((state) => state.user.isLoading)
+
 
   return (
     <div className='info-block'>
+      { loading && <Spinner/> }
       <br/>
       <Row>
         <Col xs={'auto'} sm={3} md={3} lg={3}>

@@ -5,6 +5,7 @@ import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {DeliveryAdressType} from '../../../common/types/userTypes'
 import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
 import SearchDelivery from './SearchDelivery'
+import Spinner from '../../Spinner/Spinner'
 
 
 type PropsType = {
@@ -16,6 +17,8 @@ const shiftingDeliveryAPI = (props:PropsType) => {
 
   // eslint-disable-next-line max-len
   const delivery = useSelector<AppStoreType, DeliveryAdressType>((state) => state.user.userProfile)
+  // eslint-disable-next-line max-len
+  const loading = useSelector<AppStoreType, boolean>((state) => state.user.isLoading)
 
   const [homeNumber, setHome] = useState(delivery.homeNumber)
   const [homePart, setHomePart] = useState(delivery.homePart)
@@ -50,6 +53,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
 
   return (
     <div className='info-block'>
+      { loading && <Spinner/> }
       <Row>
         <Col xs={'auto'} sm={0} md={10} lg={10}>
         </Col>
@@ -114,20 +118,6 @@ const shiftingDeliveryAPI = (props:PropsType) => {
 
         </Row>
         <br/>
-        {/* <div
-                    style={{
-                      borderRadius: '4px',
-                      border: '2px solid #fdd008',
-                      color: 'gray',
-                      height: '25px',
-                      width: '80px',
-                      textAlign: 'center',
-                      cursor: 'pointer',
-                      lineHeight: '20px',
-                    }}
-                    onClick={(e) => setDelivery()}>
-                    Готово
-                  </div> */}
       </Col>
       <Col>
       </Col>

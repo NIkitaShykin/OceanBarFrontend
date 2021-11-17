@@ -18,7 +18,7 @@ const DeliveryAdress = () => {
   const [adressAbsent, setAdressAbsent] = useState<boolean>(true)
 
   useEffect(() => {
-    if (delivery.street===''||delivery.street==='Улица') {
+    if (delivery.userProfile.street=='') {
       setAdressAbsent(true)
     } else {
       setAdressAbsent(false)

@@ -1,9 +1,8 @@
 .book-a-table {
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  max-width: 1100px;
-  height: 600px;
+  max-width: 900px;
+  height: 500px;
   margin: 0 auto;
   box-shadow: 8px 12px 5px   #eeeeee, -8px  0 0.6em  #eeeeee;
   position: relative;
@@ -12,11 +11,11 @@
   margin-top: 5rem;
   margin-bottom: 3rem;
 }
-.time-date {
-  margin-top: 50px;
-  display: flex;
-  justify-content: space-evenly;
-}
+// .time-date {
+//   margin-top: 50px;
+//   display: flex;
+//   justify-content: space-evenly;
+// }
 
 .order-form{
   display: flex;
@@ -28,11 +27,11 @@ Form{
 .form-item{
   height: 50px;
 }
-.dropdown-cont{
-  width: 100px;
-}
+// .dropdown-cont{
+//   width: 100px;
+// }
 .order-button-container{
-  margin-top: 90px;
+  margin-top: 50px;
 }
 .order-button {
   background-color: #ff9e05;
@@ -43,19 +42,19 @@ Form{
 }
 
 
-@media all and (max-width: 650px) {
-  .time-date {
-    display: flex;
-    justify-content: space-around;
-  }
-}
-@media all and (max-width: 530px) {
-  .time-date {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  .dropdown-basic{
-    max-width: 130px;
-  }
-}
+// @media all and (max-width: 650px) {
+//   .time-date {
+//     display: flex;
+//     justify-content: space-around;
+//   }
+// }
+// @media all and (max-width: 530px) {
+//   .time-date {
+//     display: flex;
+//     justify-content: space-evenly;
+//   }
+//   .dropdown-basic{
+//     max-width: 130px;
+//   }
+// }
 

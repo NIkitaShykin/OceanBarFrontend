@@ -23,7 +23,7 @@ const completedDelivery = (props:PropsType) => {
     flat: '',
   }
 
-  const setDelivery=()=>{
+  const delDelivery=()=>{
     dispatch(setUserPersonalDataTC(userDeliveryData))
     props.changeStatus(true)
     props.changeAbsent(true)
@@ -33,38 +33,43 @@ const completedDelivery = (props:PropsType) => {
     <div className='info-block'>
       <Row>
         <span style={{cursor: 'pointer', color: 'gray', textAlign: 'right'}}
-          onClick={()=>setDelivery()}
+          onClick={()=>delDelivery()}
         >
       Удалить адрес
         </span>
       </Row>
       <Row>
         <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#127984;&nbsp;Город</h5></div></Col>
+          {/* <h5>&#127984;&nbsp;Город</h5></div></Col> */}
+          <h5>Город</h5></div></Col>
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>{delivery.city}</h5></div></Col>
       </Row>
       <Row>
         <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#10153;&nbsp;&nbsp;Улица</h5></div></Col>
+          {/* <h5>&#10153;&nbsp;&nbsp;Улица</h5></div></Col> */}
+          <h5>Улица</h5></div></Col>
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>{delivery.street}</h5></div></Col>
       </Row>
       <Row>
         <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#10153;&nbsp;&nbsp;Дом</h5></div></Col>
+          {/* <h5>&#10153;&nbsp;&nbsp;Дом</h5></div></Col> */}
+          <h5>Дом</h5></div></Col>
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>{delivery.homeNumber}</h5></div></Col>
       </Row>
       <Row>
         <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#10153;&nbsp;&nbsp;Корпус</h5></div></Col>
+          {/* <h5>&#10153;&nbsp;&nbsp;Корпус</h5></div></Col> */}
+          <h5>Корпус</h5></div></Col>
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>{delivery.homePart}</h5></div></Col>
       </Row>
       <Row>
         <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#10153;&nbsp;&nbsp;Квартира</h5></div></Col>
+          {/* <h5>&#10153;&nbsp;&nbsp;Квартира</h5></div></Col> */}
+          <h5>Квартира</h5></div></Col>
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>{delivery.flat}</h5></div></Col>
       </Row>

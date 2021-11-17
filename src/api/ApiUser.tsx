@@ -10,6 +10,8 @@ const instance = axios.create({
   baseURL
 })
 
+console.log(token)
+
 export const ApiUser = {
   getUserPersonalData(userId?:number) {
     {
