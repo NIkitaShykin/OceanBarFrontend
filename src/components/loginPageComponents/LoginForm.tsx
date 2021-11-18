@@ -5,15 +5,20 @@ import axios from 'axios'
 import Cookies from 'js-cookie'
 import {Button, CloseButton, Form, Modal} from 'react-bootstrap'
 
+import Spinner from '../Spinner/Spinner'
+
 import {url} from '../../api'
-import {useValidation} from '../../utils/validation'
+import {ApiCart} from '../../api/ApiCart'
+
 import {addDishToCart, logIn} from '../../redux/actions'
+
+import {useValidation} from '../../utils/validation'
+import {mapApiDishToDishInCart} from '../../utils/typeMappers'
+
 import {ValidationType} from '../../common/types/userTypes'
+import {ApiDish} from '../../common/types/dishesType'
 
 import './LoginForm.scss'
-import Spinner from '../Spinner/Spinner'
-import {ApiCart} from '../../api/ApiCart'
-import {ApiDish} from '../../common/types/dishesType'
 
 const LogInForm = () => {
   const history = useHistory()
@@ -107,15 +112,7 @@ const LogInForm = () => {
         ApiCart.getCart(Cookies.get('token')).then((resp) => {
           resp.data.cart.forEach((dish: ApiDish) => {
             dispatch(
-              addDishToCart({
-                id: dish.dish.id,
-                name: dish.dish.name,
-                price: dish.dish.price,
-                imageURL: dish.dish.imageURL,
-                ingredients: dish.dish.ingredients,
-                numberOfDishes: dish.quantity,
-                position: dish.id,
-              })
+              addDishToCart(mapApiDishToDishInCart(dish))
             )
           })
         })

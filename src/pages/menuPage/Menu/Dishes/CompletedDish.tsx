@@ -4,8 +4,10 @@ import {CloseButton, Col, Modal, Row} from 'react-bootstrap'
 import {
   DishInCart,
   DishType,
-  IngredientsType,
+  IngredientsType
 } from '../../../../common/types/dishesType'
+import {mapDishTypeToDishInCart} from '../../../../utils/typeMappers'
+
 import {addDishToCart} from '../../../../redux/actions'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 
@@ -47,14 +49,7 @@ const CompletedDish = (props: PropsType) => {
           parseString(ingredients)
         ).then((res) => {})
         dispatch(
-          addDishToCart({
-            id: props.currentDish.id,
-            name: props.currentDish.name,
-            price: props.currentDish.price,
-            imageURL: props.currentDish.imageURL,
-            ingredients: props.currentDish.ingredients,
-            numberOfDishes: 1,
-          })
+          addDishToCart(mapDishTypeToDishInCart(props.currentDish))
         )
         orderedToast(`Блюдо "${props.currentDish.name}" добавлено в корзину`)
       }

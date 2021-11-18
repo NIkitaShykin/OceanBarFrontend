@@ -21,18 +21,9 @@ export const initialState: IUserState = {
 const cartReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addDishToCart, (state, action) => {
-      const newDish: DishInCart = {
-        id: action.payload.id,
-        name: action.payload.name,
-        price: action.payload.price,
-        imageURL: action.payload.imageURL,
-        numberOfDishes: action.payload.numberOfDishes,
-        ingredients: action.payload.ingredients,
-        position: action.payload.position,
-      }
       const updState = {...state}
       updState.dishes = [...state.dishes]
-      updState.dishes.push(newDish)
+      updState.dishes.push(action.payload)
       return updState
     })
 

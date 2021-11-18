@@ -48,3 +48,13 @@ export type InitialMenuStateType = {
   dishes: DishType[]
   isLoading?: boolean
 }
+
+export interface IUpdQuantity {
+  id: number,
+  numberOfDishes: number
+}
+
+export interface IUpdContent {
+  id: number,
+  ingredients: IngredientsType
+}

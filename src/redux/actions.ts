@@ -1,15 +1,20 @@
 import {createAction} from '@reduxjs/toolkit'
-import {DishType} from 'src/common/types/dishesType'
+import {
+  DishInCart,
+  DishType,
+  IUpdQuantity,
+  IUpdContent
+} from 'src/common/types/dishesType'
 
 export const logIn = createAction<any>('SET_LOG_IN')
 export const logOut = createAction('SET_LOG_OUT')
 
-export const addDishToCart = createAction<any>('ADD_DISH_TO_CART')
-export const removeDishFromCart = createAction<any>('REMOVE_DISH_FROM_CART')
-export const updateDishInCart = createAction<any>('UPDATE_DISH_IN-CART')
+export const addDishToCart = createAction<DishInCart>('ADD_DISH_TO_CART')
+export const removeDishFromCart = createAction<number>('REMOVE_DISH_FROM_CART')
+export const updateDishInCart = createAction<IUpdContent>('UPDATE_DISH_IN-CART')
 export const clearCart = createAction('CLEAR_CART')
-export const plusOneDish = createAction<any>('PLUS_ONE_DISH')
-export const minusOneDish = createAction<any>('MINUS_ONE_DISH')
+export const plusOneDish = createAction<IUpdQuantity>('PLUS_ONE_DISH')
+export const minusOneDish = createAction<IUpdQuantity>('MINUS_ONE_DISH')
 
 export const getDishesFromApiTC =
   createAction<DishType[]>('GET_DISHES')

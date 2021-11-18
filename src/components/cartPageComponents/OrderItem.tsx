@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {Image} from 'react-bootstrap'
 import Cookies from 'js-cookie'
 
@@ -13,8 +13,8 @@ import {
   IngredientsType,
 } from '../../common/types/dishesType'
 import {TOrderItem} from '../../common/types/cartTypes'
+import {IReduxGlobalState} from '../../common/types/globalStateType'
 
-import {useAppSelector} from '../../redux/hooks'
 import {
   minusOneDish,
   plusOneDish,
@@ -25,7 +25,7 @@ import {ApiCart} from '../../api/ApiCart'
 
 import './Cart.scss'
 
-const OrderItem: React.FunctionComponent<TOrderItem> = ({
+const OrderItem: React.FC<TOrderItem> = ({
   id,
   name,
   price,
@@ -33,28 +33,36 @@ const OrderItem: React.FunctionComponent<TOrderItem> = ({
   numberOfDishes,
   position,
 }) => {
-  const cartDishes = useAppSelector((state) => state.cart.dishes)
+  const token = Cookies.get('token')
+
+  const cartDishes: DishInCart[] =
+    useSelector((state: IReduxGlobalState) => state.cart.dishes)
   const currentDish = cartDishes.find((el: DishInCart) => el.id === id)
+
+  let [counter, setCounter] = useState<number>(numberOfDishes)
+  const [show, setShow] = useState<boolean>(false)
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
   const [ingredients, setIngredients] =
-    useState(currentDish ? currentDish.ingredients : [])
+    useState<IngredientsType>(currentDish ? currentDish.ingredients : [])
 
-  const removedIngredientsArr: Array<string> = []
-
-  if (typeof ingredients !== 'string') {
-    ingredients.forEach((ingredient: IngredientType) => {
-      if (ingredient.isAdded === false) {
-        removedIngredientsArr.push(ingredient.name)
-      }
-    })
-  }
-
-  const removedIngredients =
-    removedIngredientsArr.length ? removedIngredientsArr.join(', ') : ''
+  const dispatch = useDispatch()
 
   useEffect(() => {
     setIngredients(ingredients)
   }, [currentDish])
+
+  const removedIngredientsArr: Array<string> = []
+
+  ingredients.forEach((ingredient: IngredientType) => {
+    if (ingredient.isAdded === false) {
+      removedIngredientsArr.push(ingredient.name)
+    }
+  })
+
+  const removedIngredients =
+    removedIngredientsArr.length ? removedIngredientsArr.join(', ') : ''
+
+  const showIngredientsList = () => setShow(true)
 
   const updateIngredients = (updIngridients: IngredientsType) => {
     setIngredients(updIngridients)
@@ -64,14 +72,7 @@ const OrderItem: React.FunctionComponent<TOrderItem> = ({
     setDishСhangeStatus(!dishСhangeStatus)
   }
 
-  const dispatch = useDispatch()
-  let [counter, setCounter] = useState(numberOfDishes)
-  const [show, setShow] = useState(false)
-  const token = Cookies.get('token')
-
-  const handleShow = () => setShow(true)
-
-  const handleClose = () => {
+  const closeIngredientsList = () => {
     ApiCart.updateDishInCart(
       position,
       numberOfDishes,
@@ -99,7 +100,7 @@ const OrderItem: React.FunctionComponent<TOrderItem> = ({
             ingredients,
           }}
           updateIngredients={updateIngredients}
-          handleClose={handleClose}
+          handleClose={closeIngredientsList}
         />
       ) : (
         <div className='order-item shadow' id={String(id)}>
@@ -115,7 +116,7 @@ const OrderItem: React.FunctionComponent<TOrderItem> = ({
           <div className='order-block order-details'>
             <span className='order-title bold'>{name}</span>
             <span>{Number(price) * numberOfDishes} BYN</span>
-            <a onClick={handleShow} style={{cursor: 'pointer'}}>
+            <a onClick={showIngredientsList} style={{cursor: 'pointer'}}>
               Изменить состав
             </a>
             {
