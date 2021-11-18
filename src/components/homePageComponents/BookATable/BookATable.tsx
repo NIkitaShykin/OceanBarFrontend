@@ -1,12 +1,10 @@
-
-import {
-  // Dropdown,
-  Form} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
 import './BookATable.scss'
 
 const BookATable = () => {
   const history = useHistory()
+
   const handleClose = () => {
     history.push('booking-table/')
   }
@@ -31,43 +29,6 @@ const BookATable = () => {
           />
         </Form>
       </div>
-      {/* <br /> */}
-      {/* <div className='time-date'> */}
-      {/* <Dropdown className={'dropdown-cont'}> */}
-      {/* <Dropdown.Toggle
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              border: '1px solid #989898FF',
-              width: '200px'
-            }}
-            variant='info'
-            className='dropdown-basic'
-          >
-            Дата
-          </Dropdown.Toggle> */}
-      {/* <Dropdown.Menu>
-            <Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
-          </Dropdown.Menu> */}
-      {/* </Dropdown> */}
-      {/* <Dropdown> */}
-      {/* <Dropdown.Toggle
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              border: '1px solid #989898FF',
-              width: '200px'
-            }}
-            variant='info'
-            className='dropdown-basic'
-          >
-            Время
-          </Dropdown.Toggle> */}
-      {/* <Dropdown.Menu>
-            <Dropdown.Item href='#/action-1'>Action</Dropdown.Item>
-          </Dropdown.Menu> */}
-      {/* </Dropdown> */}
-      {/* </div> */}
       <div className={'order-button-container'}>
         <button className={'order-button'}>
           <span className='menu-text-main-page'

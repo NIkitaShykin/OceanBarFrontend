@@ -16,8 +16,8 @@ const initialState: InitialStateType = {
 
   userProfile: {
     'id': 10000,
-    'name': 'Имя',
-    'secondname': 'Фамилия',
+    'name': '',
+    'secondname': '',
     'email': '',
     'phone': '',
     'city': 'Минск',

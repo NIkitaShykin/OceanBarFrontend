@@ -1,52 +1,73 @@
 import React, {ChangeEvent, useState} from 'react'
+import {useSelector} from 'react-redux'
 import DatePicker from 'react-date-picker'
-import {Form, FloatingLabel, Button} from 'react-bootstrap'
-// import {useHistory} from 'react-router-dom'
-
+import {Form, FloatingLabel, Button, Modal} from 'react-bootstrap'
+import {AppStoreType} from '../../redux/reducers/rootReducer'
+import {useValidation} from '../../utils/validation'
+import {UserType} from '../../common/types/userTypes'
 import './OrderForms.scss'
 
-
 interface IReserveATableFormProps {
-  handleRadioValueClearance: (value: string) => void
+  handleBookingData: (bookingOrder: any) => void
 }
 
-// появляется сообщение :
-// «Спасибо за вашу заявку ! Администратор свяжется с вами в течение 10 минут»
-
 const ReserveATableForm: React.FC<IReserveATableFormProps> =
-  ({handleRadioValueClearance}) => {
-    // const history = useHistory()
+  ({handleBookingData}) => {
+    const user =
+     useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
+
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
     const [tableSize, setTableSize] = useState<string>('')
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
     const [isTableInputSkipped, setTableInputSkipped] = useState<boolean>(false)
-    const [userNamer, setUserNamer] = useState<string>('')
-    const [userPhone, setUserPhone] = useState<string>('')
 
-    const useInput = () => {
-      const [isDirty, setDirty] = useState<boolean>(false)
+    const useInput = (initialValue: string, validations: any) => {
+      const [value, setValue] = useState(initialValue)
+      const [isDirty, setDirty] = useState(false)
+      const valid = useValidation(value, validations)
 
-      const onBlur = (e: ChangeEvent<HTMLSelectElement>) => {
+      const onChange = (e: any) => {
+        setValue(e.target.value)
+      }
+
+      const onBlur = (e: any) => {
         setDirty(true)
       }
 
       return {
+        value,
+        onChange,
         onBlur,
-        isDirty
+        isDirty,
+        ...valid
       }
     }
 
-    const table = useInput()
-    const time = useInput()
+    const table = useInput('', {})
+    const time = useInput('', {})
 
-    const isTimeInvalid =
-      !time.isDirty ||
-      time.isDirty && isTimeInputSkipped
+    const phoneNumber = useInput(`${user.phone}`, {
+      isEmpty: true,
+      phoneNumberError: true,
+    })
 
-    const isTableInvalid =
-      !table.isDirty ||
-      table.isDirty && isTableInputSkipped
+    const userName = useInput(`${user.name}`, {
+      isEmpty: true,
+      firstNameError: true,
+      minLengthError: 2,
+      maxLengthError: 30,
+    })
+
+    const isTimeInvalid = !time.isDirty || time.isDirty && isTimeInputSkipped
+
+    const isTableInvalid = !table.isDirty ||table.isDirty && isTableInputSkipped
+
+    const isPhoneNumberInvalid = phoneNumber.isDirty &&
+    (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
+
+    const isUserNameInvalid = (userName.firstNameError && userName.isDirty) ||
+    (userName.isEmpty && userName.isDirty)
 
     const tableSizes: Array<string> = [
       'двоих гостей',
@@ -71,24 +92,18 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       '21:00 - 22:00',
     ]
 
-    // const handleSubmit =
-    //   ((e: any) =>
-    //     history.push('/confirmation'))
-
-    const reserveTable = () => {
-      // handleRadioValueClearance()
-      console.log('reserve table')
+    const reservOrder={
+      date: date,
+      timeSlot: timeSlot,
+      tableSize: tableSize,
+      userName: userName.value,
+      userPhone: phoneNumber.value
     }
 
-    const enterName = (e:any) => {
-      setUserNamer(e.target.value)
-      console.log(e.target.value)
-    }
 
-    const enterPhone = (e:any) => {
-      setUserPhone(e.target.value)
-      console.log(e.target.value)
-    }
+    // const enterName = (e:React.ChangeEvent<any>) => {
+    //   setUserName(e.target.value)
+    // }
 
     return (
       <div className='reserve-a-table-form-booking shadow'>
@@ -213,34 +228,50 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
             <div className='section-content payment-types'>
 
 
-              {/* <Form.Group controlId='formBasicCheckbox'> */}
               <Form.Floating className='mx-1'>
-
                 <Form.Control
                   id='userName'
-                  // disabled={!oldPassCorrect}
+                  disabled={user.name.length>0}
                   type='text'
-                  placeholder='password'
-                  value={userNamer}
-                  onChange={(e) => enterName(e)}
+                  placeholder='userName'
+                  value={userName.value}
+                  isInvalid={isUserNameInvalid}
+                  onChange={(e) => userName.onChange(e)}
+                  onBlur={(e) => userName.onBlur(e)}
                 />
                 <label htmlFor='userName'>
                   Введите имя
                 </label>
               </Form.Floating>
+              {
+                isUserNameInvalid &&
+                  <div className='error'>
+                   Имя обязательно
+                  </div>
+              }
 
               <Form.Floating className='mx-1 my-3'>
                 <Form.Control
                   id='userPhones'
-                  // disabled={!oldPassCorrect}
-                  type='phones'
+                  disabled={user.phone.length>0}
+                  type='phoneNumber'
                   placeholder='phones'
-                  value={userPhone}
-                  onChange={(e) => enterPhone(e)}
+                  value={phoneNumber.value}
+                  isInvalid={isPhoneNumberInvalid}
+                  onChange={(e) => phoneNumber.onChange(e)}
+                  onBlur={(e) => phoneNumber.onBlur(e)}
                 />
                 <label htmlFor='userPhones'>
                   Введите номер телефона
                 </label>
+                {
+                  isPhoneNumberInvalid &&
+                  <div className='error'>
+                    Телефон должен содержать код в формате
+                    +375 (+ опционально) либо 80 и 9 цифр основного номера.
+                    Обязательно к заполнению.
+                  </div>
+                }
               </Form.Floating>
 
             </div>
@@ -251,22 +282,19 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
         <div className='form-section'>
           <div className='form-buttons'>
-            {/* <Modal.Footer className='justify-content-center border-0'> */}
-            <Button
-              className='btn btn-outline-warning offset-md-0'
-              onClick={reserveTable}
-              style={{width: '140px'}}
-              variant='outline-warning'
-              disabled={
-                isTableInvalid ||
-                isTimeInvalid ||
-                !date
-              }
-            >
+            <Modal.Footer className='justify-content-center border-0'>
+              <Button
+                onClick={()=>handleBookingData(reservOrder)}
+                style={{width: '140px'}}
+                variant='outline-warning'
+                disabled={ isTableInvalid || isTimeInvalid || !date ||
+                  isUserNameInvalid || isPhoneNumberInvalid
+                }
+              >
               Забронировать
-            </Button>
+              </Button>
 
-            {/* <div
+              {/* <div
                 style={{
                   borderRadius: '4px',
                   border: '2px solid #fdd008',
@@ -280,7 +308,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                 onClick={reserveTable}>
                     Готово
               </div> */}
-            {/* </Modal.Footer> */}
+            </Modal.Footer>
           </div>
         </div>
       </div>
