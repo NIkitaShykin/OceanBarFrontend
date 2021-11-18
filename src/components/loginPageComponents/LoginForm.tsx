@@ -90,6 +90,7 @@ const LogInForm = () => {
       .then((response) => {
         if (response.status >= 200 && response.status < 300) {
           Cookies.set('token', response.data.token, {expires: 30})
+          localStorage.setItem('token', response.data.token) //
           setIsLoading(false)
           dispatch(logIn(response.data.data))
           history.push('/')

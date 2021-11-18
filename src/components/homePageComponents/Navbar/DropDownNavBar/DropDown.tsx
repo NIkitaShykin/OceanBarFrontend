@@ -12,6 +12,7 @@ const DropDownNavBar = () => {
   const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
 
   const handleClose = () => {
+    localStorage.removeItem('token')
     dispatch(logOut())
     history.push('/')
   }
