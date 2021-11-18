@@ -1,35 +1,39 @@
 /* eslint-disable react/prop-types */
+import {useContext, useEffect} from 'react'
 import {Image} from 'react-bootstrap'
+import {useDispatch} from 'react-redux'
 
+import {ReserveContext} from
+  '../cartPageComponents/OrderForms/ReserveATableForm'
+import {getUserPersonalDataTC} from '../../redux/reducers/userReducer'
+import {getUserDeliveryDataTC} from 'src/redux/reducers/deliveryReducer'
 
 import './orderDetails.scss'
 import '../cartPageComponents/Cart.scss'
 
-interface IOrderItemProps {
-  id?: number
-  name?: string
-  price?: string
-  image?: string
-  numberOfDishes: number | undefined
-  position?: number
-}
+
 // @ ts-ignore
-const OrderDetails: React.FunctionComponent<IOrderItemProps> = ({
-  id,
-  name,
-  price,
-  image,
-  numberOfDishes = 1,
-  position
-}) => {
+const OrderDetails = () => {
+  // @ts-ignore
+  const {timeSlot, tableSize, orderType} = useContext(ReserveContext)
+
+  console.log(timeSlot, tableSize, orderType)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserPersonalDataTC())
+    dispatch(getUserDeliveryDataTC())
+  }, [])
+
   return (
     <>
       <div className='details-block'>
         <div className='details-title'>
          Заказ:
         </div>
-        <div className='details-shadow details-border'>
-          <div className='details-item' id={String(id)}>
+        <div className='shadow details-border'>
+          <div className='details-item'>
             <div className='details-item-block details-header'>
               <span>Название</span>
             </div>
@@ -40,7 +44,7 @@ const OrderDetails: React.FunctionComponent<IOrderItemProps> = ({
               <span>Цена за 1 позицию</span>
             </div>
           </div>
-          <div className='details-item' id={String(id)}>
+          <div className='details-item' >
             <div className='details-item-block details-img'>
               <Image className='rounded-3' src='https://www.edimdoma.ru/system/images/contents/0000/6787/wide/AdobeStock_275611083_%D0%B8%D1%81%D0%BF%D1%80.jpg?1564142039' width={40} height={40} />
             </div>
@@ -57,7 +61,7 @@ const OrderDetails: React.FunctionComponent<IOrderItemProps> = ({
 
           <div className='details-devider'></div>
 
-          <div className='details-item' id={String(id)}>
+          <div className='details-item' >
             <div className='details-item-block details-img'>
               <Image className='rounded-3' src='https://www.edimdoma.ru/system/images/contents/0000/6788/wide/AdobeStock_166014726_result.jpeg?1564134468'
               />
@@ -81,7 +85,7 @@ const OrderDetails: React.FunctionComponent<IOrderItemProps> = ({
                 Тип заказа:
               </div>
               <div className='col order-type-text'>
-                Бронирование стола
+                {orderType}
               </div>
             </div>
             <div className='row'>
@@ -97,7 +101,7 @@ const OrderDetails: React.FunctionComponent<IOrderItemProps> = ({
                 Время:
               </div>
               <div className='col order-type-text'>
-                15.00
+                {timeSlot}
               </div>
             </div>
             <div className='row'>
@@ -113,7 +117,7 @@ const OrderDetails: React.FunctionComponent<IOrderItemProps> = ({
                 Стол на:
               </div>
               <div className='col order-type-text'>
-                двоих
+                {tableSize}
               </div>
             </div>
           </div>
@@ -144,3 +148,5 @@ const OrderDetails: React.FunctionComponent<IOrderItemProps> = ({
 }
 
 export default OrderDetails
+
+
