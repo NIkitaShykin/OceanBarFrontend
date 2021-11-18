@@ -41,11 +41,13 @@ const OrderItem: React.FunctionComponent<TOrderItem> = ({
 
   const removedIngredientsArr: Array<string> = []
 
-  ingredients.forEach((ingredient: IngredientType) => {
-    if (ingredient.isAdded === false) {
-      removedIngredientsArr.push(ingredient.name)
-    }
-  })
+  if (typeof ingredients !== 'string') {
+    ingredients.forEach((ingredient: IngredientType) => {
+      if (ingredient.isAdded === false) {
+        removedIngredientsArr.push(ingredient.name)
+      }
+    })
+  }
 
   const removedIngredients =
     removedIngredientsArr.length ? removedIngredientsArr.join(', ') : ''
