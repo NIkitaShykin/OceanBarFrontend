@@ -5,7 +5,7 @@ import MyCreditCards from '../../components/userProfile/myCards'
 import PasswordReset from '../../components/userProfile/passwordReset'
 import PersonalData from '../../components/userProfile/personalData'
 import {getUserPersonalDataTC} from '../../redux/reducers/userReducer'
-import {getUserDeliveryDataTC} from '../../redux/reducers/deliveryReducer'
+// import {getUserDeliveryDataTC} from '../../redux/reducers/deliveryReducer'
 // import {AppStoreType} from '../../redux/reducers/rootReducer'
 // import {DeliveryAdressType} from '../../common/types/userTypes'
 import {useDispatch} from 'react-redux'
@@ -21,7 +21,6 @@ const UserProfile = () => {
 
   useEffect(() => {
     dispatch(getUserPersonalDataTC())
-    dispatch(getUserDeliveryDataTC())
   }, [])
 
 
