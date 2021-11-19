@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {Image} from 'react-bootstrap'
 import Cookies from 'js-cookie'
 
@@ -13,7 +13,6 @@ import {
   IngredientsType,
 } from '../../common/types/dishesType'
 import {TOrderItem} from '../../common/types/cartTypes'
-import {IReduxGlobalState} from '../../common/types/globalStateType'
 
 import {
   minusOneDish,
@@ -21,6 +20,7 @@ import {
   removeDishFromCart,
   updateDishInCart,
 } from '../../redux/actions'
+import {useAppSelector} from '../../redux/hooks'
 import {ApiCart} from '../../api/ApiCart'
 
 import './Cart.scss'
@@ -36,10 +36,10 @@ const OrderItem: React.FC<TOrderItem> = ({
   const token = Cookies.get('token')
 
   const cartDishes: DishInCart[] =
-    useSelector((state: IReduxGlobalState) => state.cart.dishes)
+    useAppSelector((state) => state.cart.dishes)
   const currentDish = cartDishes.find((el: DishInCart) => el.id === id)
 
-  let [counter, setCounter] = useState<number>(numberOfDishes)
+  const [counter, setCounter] = useState<number>(numberOfDishes)
   const [show, setShow] = useState<boolean>(false)
   const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
   const [ingredients, setIngredients] =
@@ -47,20 +47,17 @@ const OrderItem: React.FC<TOrderItem> = ({
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    setIngredients(ingredients)
-  }, [currentDish])
+  const getRemovedIngredients = (ingredients: IngredientType[]) => {
+    const removedIngredientsArr: Array<string> = []
 
-  const removedIngredientsArr: Array<string> = []
+    ingredients.forEach((ingredient) => {
+      if (ingredient.isAdded === false) {
+        removedIngredientsArr.push(ingredient.name)
+      }
+    })
 
-  ingredients.forEach((ingredient: IngredientType) => {
-    if (ingredient.isAdded === false) {
-      removedIngredientsArr.push(ingredient.name)
-    }
-  })
-
-  const removedIngredients =
-    removedIngredientsArr.length ? removedIngredientsArr.join(', ') : ''
+    return removedIngredientsArr.join(', ')
+  }
 
   const showIngredientsList = () => setShow(true)
 
@@ -78,16 +75,17 @@ const OrderItem: React.FC<TOrderItem> = ({
       numberOfDishes,
       token,
       parseString(ingredients)
-    ).then(() => {})
-
-    dispatch(updateDishInCart({id: id, ingredients: ingredients}))
-    setShow(false)
+    ).then(() => {
+      dispatch(updateDishInCart({id: id, ingredients: ingredients}))
+      setShow(false)
+    })
   }
 
   const onDeleteHandler = () => {
-    ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {})
-    dispatch(removeDishFromCart(id))
-    orderedToast(`Блюдо "${name}" удалено из корзины`)
+    ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {
+      dispatch(removeDishFromCart(id))
+      orderedToast(`Блюдо "${name}" удалено из корзины`)
+    })
   }
 
   return (
@@ -120,9 +118,9 @@ const OrderItem: React.FC<TOrderItem> = ({
               Изменить состав
             </a>
             {
-              removedIngredients &&
+              getRemovedIngredients(ingredients) &&
               <span className='short-notice'>
-                без добавления ингредиента: {removedIngredients}
+                без добавления ингредиента: {getRemovedIngredients(ingredients)}
               </span>
             }
           </div>
@@ -131,11 +129,17 @@ const OrderItem: React.FC<TOrderItem> = ({
               className='control'
               onClick={() => {
                 if (counter > 1) {
-                  setCounter(--counter)
-                  ApiCart.updateDishInCart(position, counter, token).then(
-                    () => {}
-                  )
-                  dispatch(minusOneDish({id: id, numberOfDishes: counter}))
+                  let readCounterVal = counter
+                  setCounter(--readCounterVal)
+                  ApiCart.updateDishInCart(position, readCounterVal, token)
+                    .then(
+                      () => {
+                        dispatch(minusOneDish({
+                          id: id,
+                          numberOfDishes: readCounterVal
+                        }))
+                      }
+                    )
                 } else {
                   onDeleteHandler()
                 }
@@ -147,11 +151,16 @@ const OrderItem: React.FC<TOrderItem> = ({
             <button
               className='control'
               onClick={() => {
-                setCounter(++counter)
-                ApiCart.updateDishInCart(position, counter, token).then(
-                  (resp) => {}
+                let readCounterVal = counter
+                setCounter(++readCounterVal)
+                ApiCart.updateDishInCart(position, readCounterVal, token).then(
+                  () => {
+                    dispatch(plusOneDish({
+                      id: id,
+                      numberOfDishes: readCounterVal
+                    }))
+                  }
                 )
-                dispatch(plusOneDish({id: id, numberOfDishes: counter}))
               }}
             >
               +

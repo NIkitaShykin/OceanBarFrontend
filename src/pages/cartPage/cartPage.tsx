@@ -1,13 +1,10 @@
-import {useSelector} from 'react-redux'
 import UserCart from '../../components/cartPageComponents/Cart'
 import {DishInCart} from '../../common/types/dishesType'
-import {IReduxGlobalState} from '../../common/types/globalStateType'
+import {useAppSelector} from '../../redux/hooks'
 
 const Cart = () => {
-  // debugger //
   const dishes: DishInCart[] =
-    useSelector((state: IReduxGlobalState) => state.cart.dishes)
-  // @ts-ignore
+    useAppSelector((state) => state.cart.dishes)
   return <UserCart dishes={dishes} />
 }
 
