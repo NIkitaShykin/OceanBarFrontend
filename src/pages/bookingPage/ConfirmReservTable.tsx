@@ -14,9 +14,9 @@ const ConfirmReservTable = (props:any) => {
       <div className='container'>
         <Card className='shadow p-3 my-5 bg-body rounded'>
           <Card.Body>
-            <Card.Title><h2>Спасибо за вашу заявку!</h2></Card.Title>
+            <Card.Title><h2>Столик забронирован!</h2></Card.Title>
             <Card.Text className='mb-5'>
-              <h4>Администратор свяжется с вами в течение 10 минут</h4>
+              {/* <h4>Администратор свяжется с вами в течение 10 минут</h4> */}
             </Card.Text>
             <Button
               variant='outline-warning'

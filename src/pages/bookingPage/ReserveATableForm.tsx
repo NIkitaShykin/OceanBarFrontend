@@ -100,11 +100,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       userPhone: phoneNumber.value
     }
 
-
-    // const enterName = (e:React.ChangeEvent<any>) => {
-    //   setUserName(e.target.value)
-    // }
-
     return (
       <div className='reserve-a-table-form-booking shadow'>
         <div className='form-section'>
@@ -240,7 +235,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   onBlur={(e) => userName.onBlur(e)}
                 />
                 <label htmlFor='userName'>
-                  Введите имя
+                  Имя
                 </label>
               </Form.Floating>
               {
@@ -262,7 +257,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   onBlur={(e) => phoneNumber.onBlur(e)}
                 />
                 <label htmlFor='userPhones'>
-                  Введите номер телефона
+                  Номер телефона
                 </label>
                 {
                   isPhoneNumberInvalid &&
