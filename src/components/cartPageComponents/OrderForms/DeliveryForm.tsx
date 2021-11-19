@@ -9,11 +9,14 @@ import {
   ToggleButton,
   ToggleButtonGroup
 } from 'react-bootstrap'
-import {AddressSuggestions, DaDataSuggestion, DaDataAddress} from 'react-dadata'
 import {useHistory} from 'react-router-dom'
 
+import SearchField from '../../userProfile/deliveryAdress/Search'
+
 import './OrderForms.scss'
-import 'react-dadata/dist/react-dadata.css'
+import {useDispatch} from 'react-redux'
+import {addOrder} from 'src/redux/actions'
+
 
 interface ITakeawayFormProps {
   handleRadioValueClearance: (value: string) => void
@@ -23,7 +26,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
   ({handleRadioValueClearance}) => {
     const history = useHistory()
 
-    const [date, setDate] = useState<Date>(new Date())
+    const [date, setDate] = useState<Date>(new Date('2015-04-02'))
     const [timeSlot, setTimeSlot] = useState<string>('')
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
 
@@ -31,15 +34,21 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const [isPaymentInputSkipped, setPaymentInputSkipped] =
       useState<boolean>(false)
 
-    const [adress, setAdress] =
-      useState<DaDataSuggestion<DaDataAddress> | undefined>()
+    const [street, setStreet] = useState<string>()
+    const [isStreetInputSkipped, setStreetInputSkipped] =
+      useState<boolean>(false)
 
-    const token = '9ca4903b39a3e857c09d921ee7bd29a41e495a09'
+    const [homeNumber, setHomeNumber] = useState<string>()
+    const [isHomeInputSkipped, setHomeInputSkipped] =
+      useState<boolean>(false)
+
+    const [homePart, setHomePart] = useState<string>()
+    const [flat, setFlat] = useState<string>()
 
     const useInput = () => {
       const [isDirty, setDirty] = useState<boolean>(false)
 
-      const onBlur = (e: ChangeEvent<HTMLSelectElement>) => {
+      const onBlur = (e: any) => {
         setDirty(true)
       }
 
@@ -50,10 +59,21 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     }
 
     const time = useInput()
+    const adress = useInput()
+    const home = useInput()
+
+    const streetSelect = (value:string) => {
+      setStreet(value)
+    }
 
     const isTimeInvalid =
       !time.isDirty ||
       time.isDirty && isTimeInputSkipped
+
+    // const isStreetInvalid =
+    //   !street ||
+    //   !adress.isDirty ||
+    //   adress.isDirty && isStreetInputSkipped
 
     const timeSlots: Array<string> = [
       '16:00 - 18:00',
@@ -65,8 +85,20 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       handleRadioValueClearance(checkedValue)
     }
 
-    // @ts-ignore
-    const handleSubmit = ((e)=> history.push('/confirmation'))
+    const dispatch = useDispatch()
+    const handleSubmit = ((e: React.MouseEvent<Element, MouseEvent>)=> {
+      dispatch(addOrder({
+        city: 'г.Минск',
+        street: street,
+        homeNumber: homeNumber,
+        homePart: homePart,
+        flat: flat,
+        date: date.toLocaleDateString(),
+        timeSlot: timeSlot,
+        orderType: 'Доставка'
+      }))
+      history.push('/confirmation')
+    })
 
     return (
       <div className='delivery-form shadow'>
@@ -83,7 +115,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
             <div className='section-content'>
               <DatePicker
                 clearIcon={null}
-                format='d-MM-y'
+                format='dd.MM.y'
                 minDate={new Date()}
                 onChange={(date: Date) => setDate(date)}
                 required
@@ -114,12 +146,11 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 label='Доставка доступна с 16:00 до 22:00'
               >
                 <Form.Select
-                  name='time'
                   aria-label='Floating label select example'
                   defaultValue={timeSlot}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setTimeSlot(e.target.value)
-                    setTimeInputSkipped(false)
+                    setTimeInputSkipped(!e.target.value)
                   }}
                   onBlur={(e) => time.onBlur(e)}
                   isInvalid={isTimeInputSkipped}
@@ -157,34 +188,59 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
               <Form>
                 <Row className='mb-3'>
                   <Col>
-                    <AddressSuggestions
-                      token={token}
-                      value={adress}
-                      onChange={setAdress}
-                      filterLocations={[
-                        {'country': 'Беларусь',
-                          'city': 'Минск',
-                          'restrict_value': true}
-                      ]}
-                      hintText='Выберите вариант или продолжите ввод'
-                      count={8}
-                      delay={500}
+                    <span className='street-lable'>г.Минск</span>
+                    <SearchField
+                      searchValue={streetSelect}
+                      isInvalid={isStreetInputSkipped}
+                      onChange={(e: any) => {
+                        setStreet(e.target.value)
+                        setStreetInputSkipped(!e.target.value)
+                      }}
+                      onBlur={(e: any) => {
+                        adress.onBlur(e)
+                        setStreetInputSkipped(true)
+                      }}
                     />
                   </Col>
                 </Row>
+                {
+                  (adress.isDirty && isStreetInputSkipped) &&
+                  <div className='error error-adress'>
+                    Пожалуйста, укажите адрес доставки
+                  </div>
+                }
                 <Row>
                   <Col>
                     <Form.Control
                       placeholder='Дом'
                       required
                       name='house'
+                      defaultValue={homeNumber}
+                      isInvalid={isHomeInputSkipped}
+                      onChange={(e: any) => {
+                        setHomeNumber(e.target.value)
+                        setHomeInputSkipped(!e.target.value)
+                      }}
+                      onBlur={(e: any) => {
+                        home.onBlur(e)
+                        setHomeInputSkipped(true)
+                      }}
                     />
                   </Col>
                   <Col>
-                    <Form.Control placeholder='Корпус' />
+                    <Form.Control
+                      placeholder='Корпус'
+                      defaultValue={homePart}
+                      onChange={(e: any) => setHomePart(e.target.value)}
+                    />
                   </Col>
                   <Col>
-                    <Form.Control placeholder='Квартира' />
+                    <Form.Control
+                      required
+                      placeholder='Квартира'
+                      defaultValue={flat}
+                      onChange={(e: any) => setFlat(e.target.value)}
+                    />
                   </Col>
                 </Row>
               </Form>
@@ -269,17 +325,19 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
             <Button
               variant='outline-warning'
               disabled={
-                !date ||
                 isTimeInvalid ||
+
                 isPaymentInputSkipped
               }
               onClick={
                 (e) => {
                   !paymentMethod && setPaymentInputSkipped(true)
+                  !street && setStreetInputSkipped(true)
 
-                  !isTimeInvalid && setTimeInputSkipped(true)
+                  if (paymentMethod &&
+                    !isTimeInvalid
 
-                  handleSubmit(e)
+                  ) handleSubmit(e)
                 }
               }
             >

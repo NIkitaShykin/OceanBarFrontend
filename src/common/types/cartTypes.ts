@@ -11,3 +11,10 @@ export type TOrderItem = {
   imageURL: string,
   numberOfDishes: number,
 }
+
+export type IOrderType = {
+  date: string;
+  tableSize: string;
+  timeSlot: string;
+  orderType: string;
+}

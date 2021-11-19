@@ -9,7 +9,10 @@ import Spinner from '../../Spinner/Spinner'
 import './search.scss'
 
 type PropsType = {
-  searchValue: (value:string) => void
+  searchValue: (value:string) => void,
+  isInvalid?: boolean,
+  onChange?: (value:string) => void,
+  onBlur?: (value:string) => void,
 }
 
 const SearchField = (props:PropsType) => {
@@ -75,7 +78,7 @@ const SearchField = (props:PropsType) => {
   return (
     <>
       <Form ref={ref}>
-        <input
+        <Form.Control
           style={{borderRadius: '4px'}}
           placeholder={street}
           name='search'
@@ -97,12 +100,11 @@ const SearchField = (props:PropsType) => {
         )}
 
         {isOpen && !isEmpty && !isLoading && (
-          <ul className={'streetLi'}>
+          <ul className={'autocomplete'}>
             {adress.map((adress:any, index: number) => {
               const temp=adress.value.split(' ')
               return (
-                <li className={'streetLi'}
-                  style={{cursor: 'pointer'}}
+                <li className={'autocomplete__item'}
                   key={index}
                   onClick={() => itemClickHandler(temp[1])}
                 >

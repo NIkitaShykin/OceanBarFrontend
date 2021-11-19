@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, createContext} from 'react'
+import React, {ChangeEvent, useState} from 'react'
 import DatePicker from 'react-date-picker'
 import {
   Form,
@@ -6,30 +6,11 @@ import {
   Button
 } from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+
+import {addOrder} from '../../../redux/actions'
 
 import './OrderForms.scss'
-
-// type IdataReservationType = {
-//   // date?: Date,
-//   tableSize: string,
-//   timeSlot: string,
-//   orderType?: string,
-// }
-
-// const dataReservation = {
-//   date: Date,
-//   tableSize: 'на двоих',
-//   timeSlot: '',
-//   orderType: 'бронирование стола'
-// }
-
-// @ts-ignore
-export const ReserveContext = createContext({
-  // date: Date,
-  tableSize: 'на двоих',
-  timeSlot: '15.00-16.00',
-  orderType: 'бронирование стола'
-})
 interface IReserveATableFormProps {
   handleRadioValueClearance: (value: string) => void
 }
@@ -49,8 +30,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     const [isPaymentSkipped, setPaymentSkipped] = useState<boolean>(false)
     const [isPaymentConfirmed, setPaymentConfirmed] = useState<boolean>(false)
-
-    const orderType: string = 'бронирование стола'
 
     const [error, setError] = useState<boolean>(false)
 
@@ -104,16 +83,14 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       '21:00 - 22:00',
     ]
 
-    const handleReservationDataChange = (e: any) => {
-      return {
+    const dispatch = useDispatch()
+    const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
+      dispatch(addOrder({
+        date: date.toLocaleDateString(),
         tableSize: tableSize,
         timeSlot: timeSlot,
-        orderType: 'бронирование стола'
-      }
-    }
-
-    // @ts-ignore
-    const handleSubmit = (e: any) => {
+        orderType: 'Бронирование стола'
+      }))
       history.push('/confirmation')
     }
 
@@ -122,200 +99,188 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
     }
 
     return (
-      <ReserveContext.Provider value={{timeSlot, tableSize, orderType}}
-      >
-        <div className='reserve-a-table-form shadow'>
-          <div className='form-section'>
-            <div className='form-data'>
-              <div className='section-numeration'>
-                <span>1</span>
-              </div>
-
-              <div className='section-header'>
-                <span>Выберите дату</span>
-              </div>
-
-              <div className='section-content'>
-                <DatePicker
-                  clearIcon={null}
-                  format='d-MM-y'
-                  minDate={new Date()}
-                  onChange={(date: Date) => setDate(date)}
-                  value={date}
-                  dayAriaLabel='Day'
-                  monthAriaLabel='Month'
-                  yearAriaLabel='Year'
-                />
-              </div>
+      <div className='reserve-a-table-form shadow'>
+        <div className='form-section'>
+          <div className='form-data'>
+            <div className='section-numeration'>
+              <span>1</span>
             </div>
 
-            <div className='form-separation'></div>
+            <div className='section-header'>
+              <span>Выберите дату</span>
+            </div>
+
+            <div className='section-content'>
+              <DatePicker
+                clearIcon={null}
+                format='d-MM-y'
+                minDate={new Date()}
+                onChange={(date: Date) => setDate(date)}
+                value={date}
+                dayAriaLabel='Day'
+                monthAriaLabel='Month'
+                yearAriaLabel='Year'
+              />
+            </div>
           </div>
 
-          <div className='form-section'>
-            <div className='form-data'>
-              <div className='section-numeration'>
-                <span>2</span>
-              </div>
+          <div className='form-separation'></div>
+        </div>
 
-              <div className='section-header'>
-                <span>Количество гостей</span>
-              </div>
+        <div className='form-section'>
+          <div className='form-data'>
+            <div className='section-numeration'>
+              <span>2</span>
+            </div>
 
-              <div className='section-content'>
-                <FloatingLabel
-                  controlId='floatingSelectGrid'
-                  label='Столик для:'
+            <div className='section-header'>
+              <span>Количество гостей</span>
+            </div>
+
+            <div className='section-content'>
+              <FloatingLabel
+                controlId='floatingSelectGrid'
+                label='Столик для:'
+              >
+                <Form.Select
+                  required
+                  aria-label='Floating label select example'
+                  defaultValue={tableSize}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    setTableSize(e.target.value)
+                    setTableInputSkipped(!e.target.value)
+                    setError(false)
+                  }}
+                  onBlur={(e) => table.onBlur(e)}
+                  isInvalid={isTableInputSkipped}
                 >
-                  <Form.Select
-                    required
-                    aria-label='Floating label select example'
-                    // defaultValue={''}
-                    value={tableSize}
-                    onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                      setTableSize(e.target.value)
-                      setTableInputSkipped(!e.target.value)
-                      setError(false)
-                    }}
-                    onBlur={(e) => table.onBlur(e)}
-                    isInvalid={isTableInputSkipped}
-                  >
-                    <option value=''>Выбрать...</option>
-                    {tableSizes.map((size, idx) => (
-                      <option
-                        value={size}
-                        key={size}
-                      >
-                        {size}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </FloatingLabel>
-              </div>
+                  <option value=''>Выбрать...</option>
+                  {tableSizes.map((size, idx) => (
+                    <option
+                      value={size}
+                      key={size}
+                    >
+                      {size}
+                    </option>
+                  ))}
+                </Form.Select>
+              </FloatingLabel>
             </div>
-
-            <div className='form-separation'></div>
           </div>
 
-          <div className='form-section'>
-            <div className='form-data'>
-              <div className='section-numeration'>
-                <span>3</span>
-              </div>
+          <div className='form-separation'></div>
+        </div>
 
-              <div className='section-header'>
-                <span>Выберите время</span>
-              </div>
+        <div className='form-section'>
+          <div className='form-data'>
+            <div className='section-numeration'>
+              <span>3</span>
+            </div>
 
-              <div className='section-content'>
-                <FloatingLabel
-                  controlId='floatingSelectGrid'
-                  label='Бронь столика доступна с 10:00 до 22:00'
+            <div className='section-header'>
+              <span>Выберите время</span>
+            </div>
+
+            <div className='section-content'>
+              <FloatingLabel
+                controlId='floatingSelectGrid'
+                label='Бронь столика доступна с 10:00 до 22:00'
+              >
+                <Form.Select
+                  aria-label='Floating label select example'
+                  defaultValue={timeSlot}
+                  onChange={(e: ChangeEvent<HTMLSelectElement>) => {
+                    setTimeSlot(e.target.value)
+                    setTimeInputSkipped(!e.target.value)
+                    setError(false)
+                  }}
+                  onBlur={(e) => time.onBlur(e)}
+                  isInvalid={isTimeInputSkipped}
                 >
-                  <Form.Select
-                    aria-label='Floating label select example'
-                    // defaultValue={''}
-                    value={timeSlot}
-                    onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                      setTimeSlot(e.target.value)
-                      setTimeInputSkipped(!e.target.value)
-                      setError(false)
-                    }}
-                    onBlur={(e) => time.onBlur(e)}
-                    isInvalid={isTimeInputSkipped}
-                  >
-                    <option value=''>Выбрать...</option>
-                    {timeSlots.map((time, idx) => (
-                      <option value={time} key={time}>{time}</option>
-                    ))}
-                  </Form.Select>
-                </FloatingLabel>
-              </div>
+                  <option value=''>Выбрать...</option>
+                  {timeSlots.map((time, idx) => (
+                    <option value={time} key={time}>{time}</option>
+                  ))}
+                </Form.Select>
+              </FloatingLabel>
             </div>
-
-            <div className='form-separation'></div>
           </div>
 
-          <div className='form-section'>
-            <div className='form-data'>
-              <div className='section-numeration'>
-                <span>4</span>
-              </div>
+          <div className='form-separation'></div>
+        </div>
 
-              <div className='section-header'>
-                <span>Оплата</span>
-              </div>
+        <div className='form-section'>
+          <div className='form-data'>
+            <div className='section-numeration'>
+              <span>4</span>
+            </div>
 
-              <div className='section-content payment-types'>
-                <Form.Group controlId='formBasicCheckbox'>
-                  <Form.Check
-                    type='checkbox'
-                    label='Я согласен оплатить заказ онлайн'
-                    checked={isPaymentConfirmed}
-                    onChange={
-                      (e: any) => {
-                        if (e.target.checked) {
-                          setPaymentConfirmed(true)
-                          setPaymentSkipped(false)
-                        } else {
-                          setPaymentConfirmed(false)
-                          setPaymentSkipped(true)
-                        }
+            <div className='section-header'>
+              <span>Оплата</span>
+            </div>
+
+            <div className='section-content payment-types'>
+              <Form.Group controlId='formBasicCheckbox'>
+                <Form.Check
+                  type='checkbox'
+                  label='Я согласен оплатить заказ онлайн'
+                  checked={isPaymentConfirmed}
+                  onChange={
+                    (e: any) => {
+                      if (e.target.checked) {
+                        setPaymentConfirmed(true)
+                        setPaymentSkipped(false)
+                      } else {
+                        setPaymentConfirmed(false)
+                        setPaymentSkipped(true)
                       }
                     }
-                    isInvalid={isPaymentSkipped}
-                  />
-                  {
-                    (error && isPaymentSkipped) &&
+                  }
+                  isInvalid={isPaymentSkipped}
+                />
+                {
+                  (error && isPaymentSkipped) &&
                   <div className='error'>
                     Бронь стола доступна только по предварительному заказу
                   </div>
-                  }
-                </Form.Group>
-              </div>
+                }
+              </Form.Group>
             </div>
-
-            <div className='form-separation'></div>
           </div>
 
-          <div className='form-section'>
-            {error &&
-            <div className='error-form'>
+          <div className='form-separation'></div>
+        </div>
+
+        <div className='form-section'>
+          {error &&
+            <div className='error error-form'>
               Все поля формы должны быть заполнены
             </div>
-            }
-            <div className='form-buttons'>
-              <Button
-                variant='outline-secondary mx-2'
-                onClick={() => clearCheckedOrderType('')}
-              >
+          }
+          <div className='form-buttons'>
+            <Button
+              variant='outline-secondary mx-2'
+              onClick={() => clearCheckedOrderType('')}
+            >
               Отмена
-              </Button>
-              <Button
-                variant='outline-warning'
-                onClick={(e: any) => {
-                  if (!isTableInvalid &&
+            </Button>
+            <Button
+              variant='outline-warning'
+              onClick={(e: any) => {
+                if (!isTableInvalid &&
                   !isTimeInvalid &&
                   !isPaymentSkipped &&
                   date &&
                   isPaymentConfirmed) {
-                    handleSubmit(e)
-                    handleReservationDataChange(e)
-                    // setDataReservation({
-                    //   // date: date,
-                    //   tableSize: tableSize,
-                    //   timeSlot: timeSlot,
-                    //   orderType: 'бронирование стола'
-                    // })
-                  } else setError(true)
-                }}
-              >
+                  handleSubmit(e)
+                } else setError(true)
+              }}
+            >
               Далее
-              </Button>
-            </div>
+            </Button>
           </div>
         </div>
-      </ReserveContext.Provider>
+      </div>
     )
   }
 

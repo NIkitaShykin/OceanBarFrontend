@@ -1,12 +1,8 @@
-import {useEffect} from 'react'
 import {Button} from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
 
-import {getUserPersonalDataTC} from '../../redux/reducers/userReducer'
-import {getUserDeliveryDataTC} from
-  '../../redux/reducers/deliveryReducer'
-import OrderDetails from '../../components/confirmationComponents/OrderDetails'
+import OrderDetailsSection from
+  '../../components/confirmationComponents/OrderDetailsSection'
 import ScrollToTop from '../../components/scrollToTop/ScrollToTop'
 
 import './confirmation.scss'
@@ -14,16 +10,10 @@ import './confirmation.scss'
 
 const Confirmation = () => {
   const history = useHistory()
-  const dispatch = useDispatch()
 
   const handleClose = () => {
     history.goBack()
   }
-
-  useEffect(() => {
-    dispatch(getUserPersonalDataTC())
-    dispatch(getUserDeliveryDataTC())
-  }, [])
 
   return (
     <div className='confirmation'>
@@ -40,7 +30,7 @@ const Confirmation = () => {
         <div className='confirm-title'>
           Подтверждение заказа
         </div>
-        <OrderDetails />
+        <OrderDetailsSection />
       </div>
       <div className='confirm-submit-button'>
         <Button
