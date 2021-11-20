@@ -41,85 +41,34 @@ export default class PaymentForm extends React.Component {
   render() {
     return (
       <div
-        className='order-item shadow' id={'1'}
+        // className='order-item shadow' id={'1'}
         style={{height: '150px', margin: '10px'}}
       >
 
-        { !this.preview ?
-          <>
-            <div id='PaymentForm'
-              style={{transform: 'scale(0.3)',
-                width: '100px',
-                paddingLeft: '40px'
-              }} >
-              <Cards
-                cvc={this.state.cvc}
-                expiry={this.state.expiry}
-                focused={this.state.focus}
-                name={this.state.name}
-                number={this.state.number}
-              />
-            </div>
-            <div
-              style={{paddingLeft: '180px', marginTop: '-105px'}}
-              className='order-block'
-            >
-              <div className='order-deletion'
-                // onClick={() => onDeleteHandler()}
-              >
-                <i className='far fa-trash-alt icon-height delete-button'></i>
-              </div>
-            </div>
-          </> :
-          <div id='PaymentForm'
-            style={{display: 'flex', padding: '20px'}}>
-            <Cards
-              cvc={this.state.cvc}
-              expiry={this.state.expiry}
-              focused={this.state.focus}
-              name={this.state.name}
-              number={this.state.number}
-            />
-            <div>
-              <form>
-                <input style={{borderRadius: '5px', margin: '10px'}}
-                  type='tel'
-                  name='number'
-                  placeholder='Card Number'
-                  onChange={this.numberChange}
-                  onFocus={this.fieldFocus}
-                />
-              </form>
-              <form>
-                <input style={{borderRadius: '5px', margin: '10px'}}
-                  type='tel'
-                  name='name'
-                  placeholder='Card Name'
-                  onChange={this.nameChange}
-                  onFocus={this.fieldFocus}
-                />
-              </form>
-              <form>
-                <input style={{borderRadius: '5px', margin: '10px'}}
-                  type='tel'
-                  name='expiry'
-                  placeholder='Expiry time'
-                  onChange={this.expiryChange}
-                  onFocus={this.fieldFocus}
-                />
-              </form>
-              <form>
-                <input style={{borderRadius: '5px', margin: '10px'}}
-                  type='tel'
-                  name='cvc'
-                  placeholder='cvc'
-                  onChange={this.cvcChange}
-                  onFocus={this.fieldFocus}
-                />
-              </form>
-            </div>
+        <div id='PaymentForm'
+          style={{transform: 'scale(0.3)',
+            width: '100px',
+            paddingLeft: '40px'
+          }} >
+          <Cards
+            cvc={this.state.cvc}
+            expiry={this.state.expiry}
+            focused={this.state.focus}
+            name={this.state.name}
+            number={this.state.number}
+          />
+        </div>
+        <div
+          style={{paddingLeft: '180px', marginTop: '-105px'}}
+          className='order-block'
+        >
+          <div className='order-deletion'
+            // onClick={() => onDeleteHandler()}
+          >
+            <i className='far fa-trash-alt icon-height delete-button'></i>
           </div>
-        }
+        </div>
+
       </div>
     )
   }

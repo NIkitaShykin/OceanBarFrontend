@@ -9,7 +9,7 @@ const absentDelivery = (props:PropsType) => {
       <div>
         <br/>
         <div style={{color: '#8d95a1', textAlign: 'center'}}>
-          <b><i>У Вас нет привязанных карт</i></b>
+          <b><i>У вас нет привязанных карт</i></b>
         </div>
         <br/>
         <button

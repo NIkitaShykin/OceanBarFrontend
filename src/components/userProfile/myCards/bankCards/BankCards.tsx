@@ -14,13 +14,14 @@ export default class PaymentForm extends React.Component {
     name: 'Ben Bernanke',
     number: '4245841464354390'
   };
+  card: any;
 
-  fieldFocus = (e: { target: { name: any; }; }) => {
+
+  fieldFocus = (e: any) => {
     this.setState({focus: e.target.name})
   }
 
-
-  numberChange = (e: { target: { name: any; value: any; }; }) => {
+  numberChange = (e: any) => {
     const {name, value} = e.target
     this.setState({[name]: value})
   }
@@ -39,9 +40,18 @@ export default class PaymentForm extends React.Component {
 
 
   render() {
+    console.log(this.props)
     return (
-      <div>
-        <div id='PaymentForm' style={{display: 'flex', padding: '20px'}}>
+      <div
+        // className='order-item shadow' id={'1'}
+        style={{height: '150px', margin: '10px'}}
+      >
+
+        <div id='PaymentForm'
+          style={{transform: 'scale(0.3)',
+            width: '100px',
+            paddingLeft: '40px'
+          }} >
           <Cards
             cvc={this.state.cvc}
             expiry={this.state.expiry}
@@ -49,46 +59,18 @@ export default class PaymentForm extends React.Component {
             name={this.state.name}
             number={this.state.number}
           />
-          <div>
-            <form>
-              <input style={{borderRadius: '5px', margin: '10px'}}
-                type='tel'
-                name='number'
-                placeholder='Card Number'
-                onChange={this.numberChange}
-                onFocus={this.fieldFocus}
-              />
-            </form>
-            <form>
-              <input style={{borderRadius: '5px', margin: '10px'}}
-                type='tel'
-                name='name'
-                placeholder='Card Name'
-                onChange={this.nameChange}
-                onFocus={this.fieldFocus}
-              />
-            </form>
-            <form>
-              <input style={{borderRadius: '5px', margin: '10px'}}
-                type='tel'
-                name='expiry'
-                placeholder='Expiry time'
-                onChange={this.expiryChange}
-                onFocus={this.fieldFocus}
-              />
-            </form>
-            <form>
-              <input style={{borderRadius: '5px', margin: '10px'}}
-                type='tel'
-                name='cvc'
-                placeholder='cvc'
-                onChange={this.cvcChange}
-                onFocus={this.fieldFocus}
-              />
-            </form>
-          </div>
-
         </div>
+        <div
+          style={{paddingLeft: '180px', marginTop: '-105px'}}
+          className='order-block'
+        >
+          <div className='order-deletion'
+            // onClick={() => onDeleteHandler()}
+          >
+            <i className='far fa-trash-alt icon-height delete-button'></i>
+          </div>
+        </div>
+
       </div>
     )
   }
