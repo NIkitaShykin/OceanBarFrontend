@@ -1,4 +1,3 @@
-
 type PropsType = {
   changeAbsent: (status:boolean) => void
 }
@@ -6,13 +5,11 @@ type PropsType = {
 const absentDelivery = (props:PropsType) => {
   return (
     <div className='info-block'>
-      <div>
+      <div style={{color: '#8d95a1', textAlign: 'center',
+        display: 'flex', flexDirection: 'column'}}>
+        <b><i>У вас нет привязанных карт</i></b>
         <br/>
-        <div style={{color: '#8d95a1', textAlign: 'center'}}>
-          <b><i>У вас нет привязанных карт</i></b>
-        </div>
-        <br/>
-        <button
+        <button style={{width: '150px'}}
           className='btn btn-outline-warning offset-md-4'
           onClick={()=>{
             props.changeAbsent(false)
@@ -21,6 +18,7 @@ const absentDelivery = (props:PropsType) => {
         Добавить карту
         </button>
       </div>
+
     </div>
 
   )
