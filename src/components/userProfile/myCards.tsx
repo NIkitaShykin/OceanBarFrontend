@@ -2,32 +2,33 @@ import {useState} from 'react'
 import {useEffect} from 'react'
 import {AppStoreType} from '../../redux/reducers/rootReducer'
 import {useSelector} from 'react-redux'
-import NewBankCard from './myCards/NewBankCard'
+import NewBankCardContainer from './myCards/NewBankCardContainer'
 import PreviewCards from './myCards/previewCards'
 import AbsentBankCard from './myCards/absentCard'
 
 const DeliveryAdress = () => {
-  const delivery =
-  useSelector<AppStoreType, any>((state:any) => state.user)
+  // eslint-disable-next-line max-len
+  const userCards = useSelector<AppStoreType, any>((state) => state.bankCard.userCards)
+  // const dispatch = useDispatch()
 
-  const [isAddedCard, setIsAddedCard] = useState<boolean>(false)
-  const [cardAbsent, setCardAbsent] = useState<boolean>(false)
+  const [isAddingCard, setIsAddingCard] = useState<boolean>(false)
+  const [cardAbsent, setCardAbsent] = useState<boolean>(true)
 
   useEffect(() => {
-    if (delivery.userProfile.street=='') {
-      setCardAbsent(true)
-    } else {
+    if (userCards.length>1) {
       setCardAbsent(false)
-      setIsAddedCard(false)
+    } else {
+      setCardAbsent(true)
+      setIsAddingCard(true)
     }
-  }, [delivery])
-
+  }, [userCards])
 
   const changeAbsent=(status:boolean)=>{
     setCardAbsent(status)
   }
-  const changeStatus=(status:boolean)=>{
-    setIsAddedCard(status)
+
+  const changeIsAddingCard=()=>{
+    setIsAddingCard(!isAddingCard)
   }
 
   return (
@@ -37,11 +38,10 @@ const DeliveryAdress = () => {
       {cardAbsent ?
         <AbsentBankCard changeAbsent={changeAbsent}/> :
         <>
-          {isAddedCard ?
-          // @ts-ignore
-            <NewBankCard test={'hello'} /> :
+          {isAddingCard ?
+            <NewBankCardContainer changeStatus={changeIsAddingCard} /> :
             <PreviewCards
-              changeStatus={changeStatus}
+              changeStatus={changeIsAddingCard}
               changeAbsent={changeAbsent}
             />
           }

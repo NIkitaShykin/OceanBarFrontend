@@ -9,46 +9,28 @@ type PropTypes = {
   card: any
 }
 export default class PaymentForm extends React.Component<PropTypes> {
+  // constructor(props:any) {
+  //   super(props)
+  //   this.state = this.props.card.card
+  // }
+
   [x: string]: any;
   state = {
-    cvc: '345',
-    expiry: '0822',
+    cvc: '',
+    expiry: '',
     focus: '',
-    name: 'Ben Bernanke',
-    number: '4245841464354390'
+    name: '',
+    number: ''
   };
 
-
-  fieldFocus = (e: any) => {
-    this.setState({focus: e.target.name})
+  componentDidMount() {
+    this.setState({...this.state, ...this.props.card
+    })
   }
-
-  numberChange = (e: any) => {
-    const {name, value} = e.target
-    this.setState({[name]: value})
-  }
-  nameChange = (e: any) => {
-    const {name, value} = e.target
-    this.setState({[name]: value})
-  }
-  expiryChange = (e:any) => {
-    const {name, value} = e.target
-    this.setState({[name]: value})
-  }
-  cvcChange = (e:any) => {
-    const {name, value} = e.target
-    this.setState({[name]: value})
-  }
-
 
   render() {
-    // eslint-disable-next-line no-console
-    console.log(this.props)
     return (
-      <div
-        // className='order-item shadow' id={'1'}
-        style={{height: '150px', margin: '10px'}}
-      >
+      <div style={{height: '150px', margin: '10px'}} >
 
         <div id='PaymentForm'
           style={{transform: 'scale(0.5)',
@@ -63,14 +45,13 @@ export default class PaymentForm extends React.Component<PropTypes> {
             number={this.state.number}
           />
         </div>
-        <div
-          style={{paddingLeft: '180px', marginTop: '-105px'}}
+        <div style={{paddingLeft: '250px', marginTop: '-105px'}}
           className='order-block'
         >
-          <div className='order-deletion'
-            // onClick={() => onDeleteHandler()}
+          <div className='order-deletion' // onClick={() => onDeleteHandler()}
           >
             <i className='far fa-trash-alt icon-height delete-button'></i>
+            <i style={{marginLeft: '-30px', fontSize: '15px'}}>удалить карту</i>
           </div>
         </div>
 

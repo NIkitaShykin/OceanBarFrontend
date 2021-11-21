@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 import {userCardsType} from '../../../common/types/bankCardTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 // import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
-import PreviewBankCards from '../myCards/bankCards/BankCards'
+import PreviewCardsItem from '../myCards/previewCardItem'
 
 
 type PropsType = {
@@ -16,7 +16,6 @@ const previewCard = (props:PropsType) => {
   // eslint-disable-next-line max-len
   const userCards = useSelector<AppStoreType, userCardsType>((state) => state.bankCard.userCards)
   // const dispatch = useDispatch()
-  console.log(userCards.card1)
 
   // const userDeliveryData = {
   //   homeNumber: '',
@@ -31,6 +30,7 @@ const previewCard = (props:PropsType) => {
   //   props.changeAbsent(true)
   // }
 
+
   return (
     <div className='info-block' >
       {/* <Row>
@@ -41,10 +41,9 @@ const previewCard = (props:PropsType) => {
         </span>
       </Row> */}
 
-      <PreviewBankCards
-        // card={userCards.card1}
-      />
-
+      {userCards.map((card, i) =>{
+        return ( <div key={i}><PreviewCardsItem card={card}/> </div>)
+      }) }
 
       <br/>
       <button

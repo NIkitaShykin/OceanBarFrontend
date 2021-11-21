@@ -1,21 +1,27 @@
 /* eslint-disable no-invalid-this */
 /* eslint-disable require-jsdoc */
 import React from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppStoreType} from '../../../redux/reducers/rootReducer'
+
 import Cards from 'react-credit-cards'
 import {Button} from 'react-bootstrap'
 import 'react-credit-cards/lib/styles.scss'
 import 'react-credit-cards/es/styles-compiled.css'
 
-export default class PaymentForm extends React.Component {
+type PropTypes = {
+  returnCard: (card: any) => any
+}
+
+export default class PaymentForm extends React.Component<PropTypes> {
 [x: string]: any;
   state = {
-    cvc: '345',
-    expiry: '0822',
+    cvc: '',
+    expiry: '',
     focus: '',
-    name: 'Ben Bernanke',
-    number: '4245841464354390'
+    name: '',
+    number: ''
   };
-  changeStatus: any;
 
   fieldFocus = (e: any) => {
     this.setState({focus: e.target.name})
@@ -38,15 +44,14 @@ export default class PaymentForm extends React.Component {
     this.setState({[name]: value})
   }
 
+
   render() {
-    // eslint-disable-next-line no-console
-    console.log(this.props)
+    const handleSubmit=()=>{
+      this.props.returnCard(this.state)
+    }
 
     return (
-      <div
-        // className='order-item shadow' id={'1'}
-        style={{height: '250px', margin: '10px'}}
-      >
+      <div style={{height: '250px', margin: '10px'}} >
 
         <div id='PaymentForm'
           style={{display: 'flex', padding: '20px'}}>
@@ -99,7 +104,7 @@ export default class PaymentForm extends React.Component {
         <Button className='offset-md-10'
           variant='outline-warning'
           type='submit'
-          // onClick={(e) => handleSubmit(e)}
+          onClick={() => handleSubmit()}
         >
           Готово
         </Button>
