@@ -34,11 +34,11 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const [isPaymentInputSkipped, setPaymentInputSkipped] =
       useState<boolean>(false)
 
-    const [street, setStreet] = useState<string>()
+    const [street, setStreet] = useState<string>('')
     const [isStreetInputSkipped, setStreetInputSkipped] =
       useState<boolean>(false)
 
-    const [homeNumber, setHomeNumber] = useState<string>()
+    const [homeNumber, setHomeNumber] = useState<string>('')
     const [isHomeInputSkipped, setHomeInputSkipped] =
       useState<boolean>(false)
 
@@ -48,7 +48,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const useInput = () => {
       const [isDirty, setDirty] = useState<boolean>(false)
 
-      const onBlur = (e: any) => {
+      const onBlur = (e: ChangeEvent<HTMLSelectElement>) => {
         setDirty(true)
       }
 
