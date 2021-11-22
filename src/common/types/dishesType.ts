@@ -16,8 +16,10 @@ export type DishInCart = {
   price: string
   imageURL: string
   numberOfDishes: number
-  ingredients: string
+  ingredients: IngredientsType
   position: number
+  weight?: string
+  calories?: string
 }
 export type ApiDish = {
   dish: {
@@ -45,4 +47,14 @@ export type UpdatedDish = {
 export type InitialMenuStateType = {
   dishes: DishType[]
   isLoading?: boolean
+}
+
+export interface IUpdQuantity {
+  id: number,
+  numberOfDishes: number
+}
+
+export interface IUpdContent {
+  id: number,
+  ingredients: IngredientsType
 }
