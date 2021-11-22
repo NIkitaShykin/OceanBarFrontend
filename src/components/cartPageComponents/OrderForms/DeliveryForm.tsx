@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent, FocusEvent, useState} from 'react'
 import DatePicker from 'react-date-picker'
 import {
   Form,
@@ -44,7 +44,8 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       const [error, setError] =
       useState<boolean>(false)
 
-      const onBlur = (e: ChangeEvent<HTMLSelectElement>) => {
+      const onBlur = (e: ChangeEvent<HTMLSelectElement> |
+        FocusEvent<HTMLInputElement>) => {
         setDirty(true)
         setError(true)
       }
@@ -209,7 +210,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                       isInvalid={home.isDirty && !homeNumber}
                       onChange={(e: ChangeEvent<HTMLInputElement>) =>
                         setHomeNumber(e.target.value)}
-                      onBlur={(e: any) =>
+                      onBlur={(e: FocusEvent<HTMLInputElement>) =>
                         home.onBlur(e)}
                     />
                   </Col>

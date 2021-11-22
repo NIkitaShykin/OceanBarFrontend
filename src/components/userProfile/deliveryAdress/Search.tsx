@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {ChangeEvent, FocusEvent, useEffect, useState} from 'react'
 import {Form} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
 import {DeliveryAdressType} from '../../../common/types/userTypes'
@@ -12,8 +12,8 @@ type PropsType = {
   required?: boolean,
   searchValue: (value:string) => void,
   isInvalid?: boolean,
-  onChange?: any,
-  onBlur?: any,
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void,
 }
 
 const SearchField = (props:PropsType) => {
