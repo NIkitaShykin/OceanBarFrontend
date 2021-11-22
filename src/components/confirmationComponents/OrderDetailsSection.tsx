@@ -76,7 +76,7 @@ const OrderDetailsSection = () => {
         <div className='details-payment'>
           <div className='row'>
             <div className='col order-type-total text-right'>
-              Оплата онлайн:
+              Оплата:
             </div>
             <div className='col payment-cards'>
               {/* <MyCards/> // сюда вставить компонент

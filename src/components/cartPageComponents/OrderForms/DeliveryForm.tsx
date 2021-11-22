@@ -17,7 +17,6 @@ import {addOrder} from '../../../redux/actions'
 
 import './OrderForms.scss'
 
-
 interface ITakeawayFormProps {
   handleRadioValueClearance: (value: string) => void
 }
@@ -26,7 +25,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
   ({handleRadioValueClearance}) => {
     const history = useHistory()
 
-    const [date, setDate] = useState<Date>(new Date('2015-04-02'))
+    const [date, setDate] = useState<Date>(new Date(''))
     const [timeSlot, setTimeSlot] = useState<string>('')
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
 
@@ -35,12 +34,9 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       useState<boolean>(false)
 
     const [street, setStreet] = useState<string>('')
-    const [streetError, setStreetError] =
-      useState<boolean>(false)
-    const [homeNumber, setHomeNumber] =
-      useState<string>('')
-    const [homeNumberError, setHomeNumberError] =
-      useState<boolean>(false)
+    const [streetError, setStreetError] = useState<boolean>(false)
+    const [homeNumber, setHomeNumber] = useState<string>('')
+    const [homeNumberError, setHomeNumberError] = useState<boolean>(false)
     const [homePart, setHomePart] = useState<string>('')
     const [flat, setFlat] = useState<string>('')
 

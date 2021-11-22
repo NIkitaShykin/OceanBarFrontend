@@ -1,10 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit'
-import {IOrderType} from '../../common/types/cartTypes'
+import {TOrderType} from '../../common/types/cartTypes'
 
 import {DeliveryAdressType} from '../../common/types/userTypes'
 import {addOrder} from '../actions'
 
-const initialState: DeliveryAdressType & IOrderType = {
+const initialState: DeliveryAdressType & TOrderType = {
   city: 'г.Минск',
   street: '',
   homeNumber: '',

@@ -3,7 +3,6 @@ import {useHistory} from 'react-router-dom'
 
 import OrderDetailsSection from
   '../../components/confirmationComponents/OrderDetailsSection'
-import ScrollToTop from '../../components/scrollToTop/ScrollToTop'
 
 import './confirmation.scss'
 
@@ -17,7 +16,6 @@ const Confirmation = () => {
 
   return (
     <div className='confirmation'>
-      <ScrollToTop />
       <div className='container'>
         <Button
           className='justify-content-start go-back'

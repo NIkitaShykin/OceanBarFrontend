@@ -12,7 +12,7 @@ export type TOrderItem = {
   numberOfDishes: number,
 }
 
-export type IOrderType = {
+export type TOrderType = {
   date: string;
   tableSize: string;
   timeSlot: string;
