@@ -9,10 +9,10 @@ type PropsType = {
 }
 
 const completedPersonal = (props:PropsType) => {
-  // eslint-disable-next-line max-len
-  const user = useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
-  // eslint-disable-next-line max-len
-  const loading = useSelector<AppStoreType, boolean>((state) => state.user.isLoading)
+  const user =
+   useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
+  const loading =
+   useSelector<AppStoreType, boolean>((state) => state.user.isLoading)
 
 
   return (

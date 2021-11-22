@@ -69,35 +69,56 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
     const isUserNameInvalid = (userName.firstNameError && userName.isDirty) ||
     (userName.isEmpty && userName.isDirty)
 
-    const tableSizes: Array<string> = [
-      'двоих гостей',
-      'четверых гостей',
-      'шестерых гостей',
-      'восьмерых гостей',
-      'десятерых гостей',
+    // const tableSizes: Array<string> = [
+    //   'двоих гостей',
+    //   'четверых гостей',
+    //   'шестерых гостей',
+    //   'восьмерых гостей',
+    //   'десятерых гостей',
+    // ]
+
+    const tableSizes: Array<{count:string, key: number}> = [
+      {count: 'двоих гостей', key: 2},
+      {count: 'четверых гостей', key: 4},
+      {count: 'шестерых гостей', key: 6},
+      {count: 'восьмерых гостей', key: 7},
+      {count: 'десятерых гостей', key: 10},
     ]
 
     const timeSlots: Array<string> = [
-      '10:00 - 11:00',
-      '11:00 - 12:00',
-      '12:00 - 13:00',
-      '13:00 - 14:00',
-      '14:00 - 15:00',
-      '15:00 - 16:00',
-      '16:00 - 17:00',
-      '17:00 - 18:00',
-      '18:00 - 19:00',
-      '19:00 - 20:00',
-      '20:00 - 21:00',
-      '21:00 - 22:00',
+      '10:00',
+      '10:30',
+      '11:00',
+      '11:30',
+      '12:00',
+      '12:30',
+      '13:00',
+      '13:30',
+      '14:00',
+      '14:30',
+      '15:00',
+      '15:30',
+      '16:00',
+      '16:30',
+      '17:00',
+      '17:30',
+      '18:00',
+      '18:30',
+      '19:00',
+      '19:30',
+      '20:00',
+      '20:30',
+      '21:00',
+      '21:30',
+      '22:00',
     ]
 
     const reservOrder={
       date: date,
-      timeSlot: timeSlot,
-      tableSize: tableSize,
-      userName: userName.value,
-      userPhone: phoneNumber.value
+      time: timeSlot,
+      amountofpeople: tableSize,
+      name: userName.value,
+      phone: phoneNumber.value
     }
 
     return (
@@ -159,10 +180,10 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   <option value=''>Выбрать...</option>
                   {tableSizes.map((size, idx) => (
                     <option
-                      value={size}
-                      key={size}
+                      value={size.key}
+                      key={idx}
                     >
-                      {size}
+                      {size.count}
                     </option>
                   ))}
                 </Form.Select>
@@ -288,21 +309,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               >
               Забронировать
               </Button>
-
-              {/* <div
-                style={{
-                  borderRadius: '4px',
-                  border: '2px solid #fdd008',
-                  color: 'gray',
-                  height: '25px',
-                  width: '80px',
-                  textAlign: 'center',
-                  cursor: 'pointer',
-                  lineHeight: '20px',
-                }}
-                onClick={reserveTable}>
-                    Готово
-              </div> */}
             </Modal.Footer>
           </div>
         </div>

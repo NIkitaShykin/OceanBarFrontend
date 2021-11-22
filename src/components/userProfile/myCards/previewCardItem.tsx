@@ -51,6 +51,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
           <div className='order-deletion' // onClick={() => onDeleteHandler()}
           >
             <i className='far fa-trash-alt icon-height delete-button'></i>
+            {/* &#128465; */}
+            {/* Урна */}
             <i style={{marginLeft: '-30px', fontSize: '15px'}}>удалить карту</i>
           </div>
         </div>

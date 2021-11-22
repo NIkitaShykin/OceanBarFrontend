@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import ReserveATableForm from './ReserveATableForm'
 import ConfirmReservTable from './ConfirmReservTable'
+// import {ApiReserve} from '../../api/ApiBookTable'
 
 type LocalOrderType = {
     date: object,
@@ -15,7 +16,9 @@ const Booking = () => {
 
   const handleBookingData = (bookingOrder: LocalOrderType) => {
     isCompleteToggle()
-    console.log('send order data')
+    console.log(bookingOrder)
+    // ApiReserve.bookTableUnregistred(bookingOrder)
+    // .then((res)=>console.log(res))
   }
 
   const isCompleteToggle = ()=>{

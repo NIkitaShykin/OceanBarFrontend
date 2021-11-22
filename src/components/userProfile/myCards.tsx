@@ -7,9 +7,8 @@ import PreviewCards from './myCards/previewCards'
 import AbsentBankCard from './myCards/absentCard'
 
 const DeliveryAdress = () => {
-  // eslint-disable-next-line max-len
-  const userCards = useSelector<AppStoreType, any>((state) => state.bankCard.userCards)
-  // const dispatch = useDispatch()
+  const userCards =
+   useSelector<AppStoreType, any>((state) => state.bankCard.userCards)
 
   const [isAddingCard, setIsAddingCard] = useState<boolean>(false)
   const [cardAbsent, setCardAbsent] = useState<boolean>(true)

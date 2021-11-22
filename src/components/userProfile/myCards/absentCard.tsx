@@ -7,7 +7,8 @@ const absentDelivery = (props:PropsType) => {
     <div className='info-block'>
       <div style={{color: '#8d95a1', textAlign: 'center',
         display: 'flex', flexDirection: 'column'}}>
-        <b><i>У вас нет привязанных карт</i></b>
+        <b><i>У вас привязанна бонусная карта!</i></b>
+        <b><i>Добавить карту для оплаты?</i></b>
         <br/>
         <button style={{width: '150px'}}
           className='btn btn-outline-warning offset-md-4'
