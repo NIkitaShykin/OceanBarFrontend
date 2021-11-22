@@ -9,6 +9,7 @@ import {DeliveryAdressType} from '../../src/common/types/userTypes'
 const instance = axios.create({
   baseURL
 })
+
 export const ApiUser = {
   getUserPersonalData(userId?:number) {
     {

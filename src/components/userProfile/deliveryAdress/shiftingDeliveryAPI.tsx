@@ -15,10 +15,11 @@ type PropsType = {
 const shiftingDeliveryAPI = (props:PropsType) => {
   const dispatch = useDispatch()
 
-  // eslint-disable-next-line max-len
-  const delivery = useSelector<AppStoreType, DeliveryAdressType>((state) => state.user.userProfile)
-  // eslint-disable-next-line max-len
-  const loading = useSelector<AppStoreType, boolean>((state) => state.user.isLoading)
+  const delivery = useSelector<AppStoreType,
+   DeliveryAdressType>((state) => state.user.userProfile)
+
+  const loading = useSelector<AppStoreType,
+   boolean>((state) => state.user.isLoading)
 
   const [homeNumber, setHome] = useState(delivery.homeNumber)
   const [homePart, setHomePart] = useState(delivery.homePart)
@@ -85,6 +86,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
           <Col >
             <label htmlFor='home'>Дом</label>
             <Form.Control
+              type='number'
               placeholder={homeNumber}
               required
               style={{width: '100%'}}
@@ -96,6 +98,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
           <Col >
             <label htmlFor='homePart'>Корпус</label>
             <Form.Control
+              type='number'
               placeholder={homePart}
               required
               style={{width: '100%'}}
@@ -107,6 +110,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
           <Col >
             <label htmlFor='flat'>Квартира</label>
             <Form.Control
+              type='number'
               placeholder={flat}
               required
               style={{width: '100%'}}

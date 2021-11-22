@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import {useEffect} from 'react'
 import {AppStoreType} from '../../redux/reducers/rootReducer'
+import {CommonUserType} from '../../common/types/userTypes'
 import {useSelector} from 'react-redux'
 import ShiftingDeliveryAPI from
   './deliveryAdress/shiftingDeliveryAPI'
@@ -11,14 +12,13 @@ import AbsentDelivery from
 
 
 const DeliveryAdress = () => {
-  const delivery =
-  useSelector<AppStoreType, any>((state:any) => state.user)
-
+  const delivery = useSelector<AppStoreType,
+   CommonUserType>((state:any) => state.user.userProfile)
   const [isChange, setChangeStatus] = useState<boolean>(true)
   const [adressAbsent, setAdressAbsent] = useState<boolean>(true)
 
   useEffect(() => {
-    if (delivery.userProfile.street=='') {
+    if (delivery.street=='') {
       setAdressAbsent(true)
     } else {
       setAdressAbsent(false)

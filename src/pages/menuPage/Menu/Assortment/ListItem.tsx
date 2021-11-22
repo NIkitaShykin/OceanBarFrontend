@@ -3,6 +3,8 @@ import {Button, Card, Col, Row} from 'react-bootstrap'
 import {useDispatch} from 'react-redux'
 
 import {DishInCart, DishType} from '../../../../common/types/dishesType'
+import {mapDishTypeToDishInCart} from '../../../../utils/typeMappers'
+
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 import {addDishToCart} from '../../../../redux/actions'
 import {ApiCart} from '../../../../api/ApiCart'
@@ -31,14 +33,7 @@ const ListItem = (props: PropsType) => {
           parseString(Dish.ingredients)
         ).then((res) => {})
         dispatch(
-          addDishToCart({
-            id: Dish.id,
-            name: Dish.name,
-            price: Dish.price,
-            imageURL: Dish.imageURL,
-            ingredients: Dish.ingredients,
-            numberOfDishes: 1,
-          })
+          addDishToCart(mapDishTypeToDishInCart(Dish))
         )
         orderedToast(`Блюдо "${Dish.name}" добавлено в корзину`)
       }

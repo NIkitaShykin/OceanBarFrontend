@@ -2,16 +2,19 @@
 /* eslint-disable require-jsdoc */
 import React from 'react'
 import Cards from 'react-credit-cards'
+import {BankCardType} from '../../../common/types/bankCardTypes'
 import 'react-credit-cards/lib/styles.scss'
 import 'react-credit-cards/es/styles-compiled.css'
 
 type PropTypes = {
-  card: any
+  card: BankCardType,
+  cardNumber: number,
+  deleteCard: (cardNumber: number) => void
 }
 export default class PaymentForm extends React.Component<PropTypes> {
-  // constructor(props:any) {
+  // constructor(props:PropTypes) {
   //   super(props)
-  //   this.state = this.props.card.card
+  //   this.state = this.props.card
   // }
 
   [x: string]: any;
@@ -48,12 +51,16 @@ export default class PaymentForm extends React.Component<PropTypes> {
         <div style={{paddingLeft: '250px', marginTop: '-105px'}}
           className='order-block'
         >
-          <div className='order-deletion' // onClick={() => onDeleteHandler()}
+          <div className='order-deletion'
+            key={this.props.cardNumber}
+            style={{display: 'flex'}}
+            onClick={() => this.props.deleteCard(this.props.cardNumber)}
           >
-            <i className='far fa-trash-alt icon-height delete-button'></i>
-            {/* &#128465; */}
-            {/* Урна */}
-            <i style={{marginLeft: '-30px', fontSize: '15px'}}>удалить карту</i>
+            {/* <i className=
+              'far fa-trash-alt icon-height delete-button'></i> */}
+            <h2>&#128465;</h2>
+            <i style=
+              {{marginLeft: '10px', fontSize: '12px'}}>удалить карту</i>
           </div>
         </div>
 

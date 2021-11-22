@@ -8,7 +8,7 @@ interface IUserState {
 
 const initialState: IUserState = {
   user: null,
-  isAuthorized: false
+  isAuthorized: !!localStorage.getItem('token')
 }
 
 const authReducer = createReducer(initialState, (builder) => {

@@ -6,10 +6,11 @@ import {Button} from 'react-bootstrap'
 import 'react-credit-cards/lib/styles.scss'
 import 'react-credit-cards/es/styles-compiled.css'
 import {Row, Col} from 'react-bootstrap'
+import {BankCardType} from '../../../common/types/bankCardTypes'
 import './NewBankCardForm.scss'
 
 type PropTypes = {
-  returnCard: (card: any) => any
+  returnCard: (card: BankCardType) => void
 }
 
 export default class PaymentForm extends React.Component<PropTypes> {
@@ -81,7 +82,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   <span style={{fontSize: '10px'}}>Имя владельца</span>
                   <input style={{borderRadius: '5px', height: '25px',
                     marginTop: '-6px', width: '200px', border: '1px solid'}}
-                  type='tel'
+                  type='text'
                   name='name'
                   placeholder='&hellip;'
                   onChange={this.nameChange}

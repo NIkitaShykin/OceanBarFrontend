@@ -1,24 +1,17 @@
 import {useState} from 'react'
 import ReserveATableForm from './ReserveATableForm'
 import ConfirmReservTable from './ConfirmReservTable'
-// import {ApiReserve} from '../../api/ApiBookTable'
+import {ApiReserve} from '../../api/ApiBookTable'
+import {bookingOrderType} from '../../common/types/bookingTypes'
 
-type LocalOrderType = {
-    date: object,
-    timeSlot: string,
-    tableSize: string,
-    userName: string,
-    userPhone: string
-}
 
 const Booking = () => {
   const [isComplete, setIsComplete] = useState<boolean>(true)
 
-  const handleBookingData = (bookingOrder: LocalOrderType) => {
+  const handleBookingData = (bookingOrder: bookingOrderType) => {
     isCompleteToggle()
-    console.log(bookingOrder)
-    // ApiReserve.bookTableUnregistred(bookingOrder)
-    // .then((res)=>console.log(res))
+    ApiReserve.bookTableUnregistred(bookingOrder)
+      .then((res)=>console.log(res))
   }
 
   const isCompleteToggle = ()=>{
@@ -33,7 +26,7 @@ const Booking = () => {
           <>
             <h1 className='m-3'>Забронируйте стол</h1>
             <ReserveATableForm
-              handleBookingData={(bookingOrder: LocalOrderType) =>
+              handleBookingData={(bookingOrder: bookingOrderType) =>
                 handleBookingData(bookingOrder)
               }/>
           </>

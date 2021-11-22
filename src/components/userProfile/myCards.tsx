@@ -1,14 +1,16 @@
 import {useState} from 'react'
 import {useEffect} from 'react'
 import {AppStoreType} from '../../redux/reducers/rootReducer'
+import {userCardsType} from '../../common/types/bankCardTypes'
 import {useSelector} from 'react-redux'
 import NewBankCardContainer from './myCards/NewBankCardContainer'
 import PreviewCards from './myCards/previewCards'
 import AbsentBankCard from './myCards/absentCard'
 
+
 const DeliveryAdress = () => {
   const userCards =
-   useSelector<AppStoreType, any>((state) => state.bankCard.userCards)
+   useSelector<AppStoreType, userCardsType>((state) => state.bankCard.userCards)
 
   const [isAddingCard, setIsAddingCard] = useState<boolean>(false)
   const [cardAbsent, setCardAbsent] = useState<boolean>(true)

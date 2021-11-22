@@ -4,7 +4,9 @@ import DatePicker from 'react-date-picker'
 import {Form, FloatingLabel, Button, Modal} from 'react-bootstrap'
 import {AppStoreType} from '../../redux/reducers/rootReducer'
 import {useValidation} from '../../utils/validation'
+import {ValidationType} from '../../common/types/userTypes'
 import {UserType} from '../../common/types/userTypes'
+// import {bookingOrderType} from '../../common/types/bookingTypes'
 import './OrderForms.scss'
 
 interface IReserveATableFormProps {
@@ -22,7 +24,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
     const [isTableInputSkipped, setTableInputSkipped] = useState<boolean>(false)
 
-    const useInput = (initialValue: string, validations: any) => {
+    const useInput = (initialValue: string, validations: ValidationType) => {
       const [value, setValue] = useState(initialValue)
       const [isDirty, setDirty] = useState(false)
       const valid = useValidation(value, validations)
@@ -44,8 +46,8 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       }
     }
 
-    const table = useInput('', {})
-    const time = useInput('', {})
+    const table = useInput('', {isEmpty: true})
+    const time = useInput('', {isEmpty: true})
 
     const phoneNumber = useInput(`${user.phone}`, {
       isEmpty: true,
@@ -68,14 +70,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     const isUserNameInvalid = (userName.firstNameError && userName.isDirty) ||
     (userName.isEmpty && userName.isDirty)
-
-    // const tableSizes: Array<string> = [
-    //   'двоих гостей',
-    //   'четверых гостей',
-    //   'шестерых гостей',
-    //   'восьмерых гостей',
-    //   'десятерых гостей',
-    // ]
 
     const tableSizes: Array<{count:string, key: number}> = [
       {count: 'двоих гостей', key: 2},
@@ -113,8 +107,13 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       '22:00',
     ]
 
+    const month = date.getUTCMonth() + 1
+    const day = date.getUTCDate() + 1
+    const year = date.getUTCFullYear()
+    const strDate = `${year}-${month}-${day}`
+
     const reservOrder={
-      date: date,
+      date: strDate,
       time: timeSlot,
       amountofpeople: tableSize,
       name: userName.value,
@@ -247,7 +246,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               <Form.Floating className='mx-1'>
                 <Form.Control
                   id='userName'
-                  disabled={user.name.length>0}
                   type='text'
                   placeholder='userName'
                   value={userName.value}
@@ -269,7 +267,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               <Form.Floating className='mx-1 my-3'>
                 <Form.Control
                   id='userPhones'
-                  disabled={user.phone.length>0}
                   type='phoneNumber'
                   placeholder='phones'
                   value={phoneNumber.value}

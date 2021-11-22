@@ -1,19 +1,20 @@
 
 import {useSelector} from 'react-redux'
+import {useState} from 'react'
+import {Card, Button, Form} from 'react-bootstrap'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {UserType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
-import {Form} from 'react-bootstrap'
-import {useState} from 'react'
+import {ValidationType} from '../../../common/types/userTypes'
 import './BookATable.scss'
-import {Card, Button} from 'react-bootstrap'
+
 
 const BookATable = () => {
   const user =
    useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
   const [needPhoneCall, setNeedPhoneCall] = useState<boolean>(false)
 
-  const useInput = (initialValue: string, validations: any) => {
+  const useInput = (initialValue: string, validations: ValidationType) => {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)

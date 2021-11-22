@@ -1,5 +1,6 @@
 import {useHistory} from 'react-router-dom'
 import {NavDropdown} from 'react-bootstrap'
+import Cookies from 'js-cookie'
 
 import {logOut} from '../../../../redux/actions'
 import {useAppSelector, useAppDispatch} from '../../../../redux/hooks'
@@ -12,6 +13,8 @@ const DropDownNavBar = () => {
   const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
 
   const handleClose = () => {
+    Cookies.remove('token')
+    localStorage.removeItem('token')
     dispatch(logOut())
     history.push('/')
   }
@@ -33,8 +36,7 @@ const DropDownNavBar = () => {
         align={{lg: 'end'}}
         title={<i className='far fa-user icon-height user-signedin'></i>}
         id='navbarScrollingDropdown'
-        // className={isAuthorized ? 'authorized change' : 'authorized'}
-        className={true ? 'authorized change' : 'authorized'}
+        className={isAuthorized ? 'authorized change' : 'authorized'}
       >
         <NavDropdown.Item href='/profile'>Профиль</NavDropdown.Item>
         <NavDropdown.Item href='/' onClick={() => handleClose()}>

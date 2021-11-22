@@ -1,9 +1,8 @@
 import {useSelector} from 'react-redux'
-// import {Row} from 'react-bootstrap'
-// import {useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux'
 import {userCardsType} from '../../../common/types/bankCardTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
-// import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
+import {deleteBankCardTC} from '../../../redux/reducers/bankCardReducer'
 import PreviewCardsItem from '../myCards/previewCardItem'
 
 
@@ -13,36 +12,25 @@ type PropsType = {
 }
 
 const previewCard = (props:PropsType) => {
-  // eslint-disable-next-line max-len
-  const userCards = useSelector<AppStoreType, userCardsType>((state) => state.bankCard.userCards)
-  // const dispatch = useDispatch()
+  const userCards =
+   useSelector<AppStoreType, userCardsType>((state) => state.bankCard.userCards)
+  const dispatch = useDispatch()
 
-  // const userDeliveryData = {
-  //   homeNumber: '',
-  //   homePart: '',
-  //   street: '',
-  //   flat: '',
-  // }
-
-  // const delDelivery=()=>{
-  //   dispatch(setUserPersonalDataTC(userDeliveryData))
-  //   props.changeStatus(true)
-  //   props.changeAbsent(true)
-  // }
-
+  const deleteCard=(cardNumber: number)=>{
+    dispatch(deleteBankCardTC(cardNumber))
+  }
 
   return (
     <div className='info-block' >
-      {/* <Row>
-        <span style={{cursor: 'pointer', color: 'gray', textAlign: 'right'}}
-          onClick={()=>delDelivery()}
-        >
-          Удалить все карты
-        </span>
-      </Row> */}
 
       {userCards.map((card, i) =>{
-        return ( <div key={i}><PreviewCardsItem card={card}/> </div>)
+        return ( <div key={i}>
+          <PreviewCardsItem
+            cardNumber={i}
+            card={card}
+            deleteCard={deleteCard}
+          />
+        </div>)
       }) }
 
       <br/>

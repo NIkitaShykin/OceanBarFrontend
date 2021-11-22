@@ -1,9 +1,9 @@
 export type BankCardType={
-        cvc: number,
+        cvc: string,
         expiry: string,
         focus: string,
         name: string,
-        number: number
+        number: string
         }
 
 export type userCardsType= BankCardType []

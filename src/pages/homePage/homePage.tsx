@@ -6,7 +6,6 @@ import HowItWorks from '../../components/homePageComponents/HowItWorks/HowItWork
 import BookATable from '../../components/homePageComponents/BookATable/BookATable'
 import Slider from '../../components/homePageComponents/Slider/Slider'
 
-
 const Home = () => {
   return (
     <>
