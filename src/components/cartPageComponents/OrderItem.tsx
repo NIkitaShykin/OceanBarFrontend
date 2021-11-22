@@ -129,8 +129,8 @@ const OrderItem: React.FC<TOrderItem> = ({
               className='control'
               onClick={() => {
                 if (counter > 1) {
-                  let readCounterVal = counter
-                  setCounter(--readCounterVal)
+                  const readCounterVal = counter - 1
+                  setCounter(readCounterVal)
                   ApiCart.updateDishInCart(position, readCounterVal, token)
                     .then(
                       () => {
@@ -151,8 +151,8 @@ const OrderItem: React.FC<TOrderItem> = ({
             <button
               className='control'
               onClick={() => {
-                let readCounterVal = counter
-                setCounter(++readCounterVal)
+                const readCounterVal = counter + 1
+                setCounter(readCounterVal)
                 ApiCart.updateDishInCart(position, readCounterVal, token).then(
                   () => {
                     dispatch(plusOneDish({
