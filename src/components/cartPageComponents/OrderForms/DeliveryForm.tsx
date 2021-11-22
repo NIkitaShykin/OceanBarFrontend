@@ -35,25 +35,26 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       useState<boolean>(false)
 
     const [street, setStreet] = useState<string>('')
-    const [homeNumber, setHomeNumber] = useState<string>('')
+    const [streetError, setStreetError] =
+      useState<boolean>(false)
+    const [homeNumber, setHomeNumber] =
+      useState<string>('')
+    const [homeNumberError, setHomeNumberError] =
+      useState<boolean>(false)
     const [homePart, setHomePart] = useState<string>('')
     const [flat, setFlat] = useState<string>('')
 
     const useInput = () => {
       const [isDirty, setDirty] = useState<boolean>(false)
-      const [error, setError] =
-      useState<boolean>(false)
 
       const onBlur = (e: ChangeEvent<HTMLSelectElement> |
         FocusEvent<HTMLInputElement>) => {
         setDirty(true)
-        setError(true)
       }
 
       return {
         onBlur,
-        isDirty,
-        error
+        isDirty
       }
     }
 
@@ -187,18 +188,23 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                       required
                       searchValue={streetSelect}
                       isInvalid={adress.isDirty && !street}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                        setStreet(e.target.value)}
-                      onBlur={(e: any) =>
-                        adress.onBlur(e)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setStreet(e.target.value)
+                        setStreetError(false)
+                      }}
+                      onBlur={(e: FocusEvent<HTMLInputElement>) => {
+                        adress.onBlur(e)
+                        setStreetError(true)
+                      }}
                     />
                   </Col>
                 </Row>
+
                 {
-                  (adress.error) &&
-                  <div className='error error-adress'>
-                    Пожалуйста, укажите адрес доставки
-                  </div>
+                  (streetError && !street) &&
+                <div className='error error-adress'>
+                  Пожалуйста, укажите адрес доставки!
+                </div>
                 }
                 <Row>
                   <Col>
@@ -206,12 +212,18 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                       placeholder='Дом'
                       required
                       name='house'
+                      maxLength={3}
                       defaultValue={homeNumber}
                       isInvalid={home.isDirty && !homeNumber}
-                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                        setHomeNumber(e.target.value)}
-                      onBlur={(e: FocusEvent<HTMLInputElement>) =>
-                        home.onBlur(e)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setHomeNumber(e.target.value)
+                        setHomeNumberError(false)
+                      }
+                      }
+                      onBlur={(e: FocusEvent<HTMLInputElement>) => {
+                        home.onBlur(e)
+                        setHomeNumberError(true)
+                      }}
                     />
                   </Col>
                   <Col>
@@ -225,11 +237,18 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                   <Col>
                     <Form.Control
                       placeholder='Квартира'
+                      maxLength={4}
                       defaultValue={flat}
                       onChange={(e: ChangeEvent<HTMLInputElement>) =>
                         setFlat(e.target.value)}
                     />
                   </Col>
+                  {
+                    (homeNumberError && !homeNumber) &&
+                  <div className='error'>
+                    Поле не может быть пустым!
+                  </div>
+                  }
                 </Row>
               </div>
             </div>
