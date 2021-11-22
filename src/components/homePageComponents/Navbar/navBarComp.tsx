@@ -16,7 +16,7 @@ const NavBarComponent: React.FC = () => {
         fixed='top'
         className='navbar-fixed'
       >
-        <Navbar.Brand href='/' className='navbar-brand-mr'>
+        <Navbar.Brand as={Link} to='/' className='navbar-brand-mr'>
           Ocean Bar
         </Navbar.Brand>
 

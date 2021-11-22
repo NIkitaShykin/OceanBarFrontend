@@ -1,11 +1,11 @@
 
-import ScrollToTop from '../../components/scrollToTop/ScrollToTop'
+import ScrollToTopOnMount from '../../components/scrollToTop/ScrollToTopOnMount'
 import Menu from './Menu/Menu'
 
 const MenuPage = () => (
   <>
+    <ScrollToTopOnMount/>
     <Menu/>
-    <ScrollToTop/>
   </>
 )
 

@@ -6,7 +6,8 @@ const ScrollToTop = () => {
   const routePath = useLocation()
 
   useEffect(() => {
-    () => window.scrollTo(0, 0)
+    window.scrollTo(0, 0)
+    behavior: 'smooth'
   }, [routePath])
 
   return null
