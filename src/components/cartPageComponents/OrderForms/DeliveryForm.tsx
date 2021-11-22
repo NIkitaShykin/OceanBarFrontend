@@ -10,12 +10,12 @@ import {
   ToggleButtonGroup
 } from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 
 import SearchField from '../../userProfile/deliveryAdress/Search'
+import {addOrder} from '../../../redux/actions'
 
 import './OrderForms.scss'
-import {useDispatch} from 'react-redux'
-import {addOrder} from 'src/redux/actions'
 
 
 interface ITakeawayFormProps {
@@ -35,26 +35,24 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       useState<boolean>(false)
 
     const [street, setStreet] = useState<string>('')
-    const [isStreetInputSkipped, setStreetInputSkipped] =
-      useState<boolean>(false)
-
     const [homeNumber, setHomeNumber] = useState<string>('')
-    const [isHomeInputSkipped, setHomeInputSkipped] =
-      useState<boolean>(false)
-
-    const [homePart, setHomePart] = useState<string>()
-    const [flat, setFlat] = useState<string>()
+    const [homePart, setHomePart] = useState<string>('')
+    const [flat, setFlat] = useState<string>('')
 
     const useInput = () => {
       const [isDirty, setDirty] = useState<boolean>(false)
+      const [error, setError] =
+      useState<boolean>(false)
 
       const onBlur = (e: ChangeEvent<HTMLSelectElement>) => {
         setDirty(true)
+        setError(true)
       }
 
       return {
         onBlur,
-        isDirty
+        isDirty,
+        error
       }
     }
 
@@ -69,11 +67,6 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const isTimeInvalid =
       !time.isDirty ||
       time.isDirty && isTimeInputSkipped
-
-    // const isStreetInvalid =
-    //   !street ||
-    //   !adress.isDirty ||
-    //   adress.isDirty && isStreetInputSkipped
 
     const timeSlots: Array<string> = [
       '16:00 - 18:00',
@@ -162,7 +155,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 </Form.Select>
               </FloatingLabel>
               {
-                (time.isDirty && isTimeInputSkipped) &&
+                (time.isDirty && !timeSlot) &&
                   <div className='error'>
                     Пожалуйста, выберите время доставки для текущего заказа
                   </div>
@@ -185,26 +178,23 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
 
             <div className='section-content'>
 
-              <Form>
+              <div>
                 <Row className='mb-3'>
                   <Col>
                     <span className='street-lable'>г.Минск</span>
                     <SearchField
+                      required
                       searchValue={streetSelect}
-                      isInvalid={isStreetInputSkipped}
-                      onChange={(e: any) => {
-                        setStreet(e.target.value)
-                        setStreetInputSkipped(!e.target.value)
-                      }}
-                      onBlur={(e: any) => {
-                        adress.onBlur(e)
-                        setStreetInputSkipped(true)
-                      }}
+                      isInvalid={adress.isDirty && !street}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setStreet(e.target.value)}
+                      onBlur={(e: any) =>
+                        adress.onBlur(e)}
                     />
                   </Col>
                 </Row>
                 {
-                  (adress.isDirty && isStreetInputSkipped) &&
+                  (adress.error) &&
                   <div className='error error-adress'>
                     Пожалуйста, укажите адрес доставки
                   </div>
@@ -216,34 +206,31 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                       required
                       name='house'
                       defaultValue={homeNumber}
-                      isInvalid={isHomeInputSkipped}
-                      onChange={(e: any) => {
-                        setHomeNumber(e.target.value)
-                        setHomeInputSkipped(!e.target.value)
-                      }}
-                      onBlur={(e: any) => {
-                        home.onBlur(e)
-                        setHomeInputSkipped(true)
-                      }}
+                      isInvalid={home.isDirty && !homeNumber}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setHomeNumber(e.target.value)}
+                      onBlur={(e: any) =>
+                        home.onBlur(e)}
                     />
                   </Col>
                   <Col>
                     <Form.Control
                       placeholder='Корпус'
                       defaultValue={homePart}
-                      onChange={(e: any) => setHomePart(e.target.value)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setHomePart(e.target.value)}
                     />
                   </Col>
                   <Col>
                     <Form.Control
-                      required
                       placeholder='Квартира'
                       defaultValue={flat}
-                      onChange={(e: any) => setFlat(e.target.value)}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setFlat(e.target.value)}
                     />
                   </Col>
                 </Row>
-              </Form>
+              </div>
             </div>
           </div>
 
@@ -326,17 +313,18 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
               variant='outline-warning'
               disabled={
                 isTimeInvalid ||
-
+                !street ||
+                !homeNumber ||
                 isPaymentInputSkipped
               }
               onClick={
                 (e) => {
                   !paymentMethod && setPaymentInputSkipped(true)
-                  !street && setStreetInputSkipped(true)
 
                   if (paymentMethod &&
-                    !isTimeInvalid
-
+                    !isTimeInvalid &&
+                    street &&
+                    homeNumber
                   ) handleSubmit(e)
                 }
               }

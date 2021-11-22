@@ -226,7 +226,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   label='Я согласен оплатить заказ онлайн'
                   checked={isPaymentConfirmed}
                   onChange={
-                    (e: any) => {
+                    (e: ChangeEvent<HTMLInputElement>) => {
                       if (e.target.checked) {
                         setPaymentConfirmed(true)
                         setPaymentSkipped(false)
@@ -266,7 +266,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
             </Button>
             <Button
               variant='outline-warning'
-              onClick={(e: any) => {
+              onClick={(e) => {
                 if (!isTableInvalid &&
                   !isTimeInvalid &&
                   !isPaymentSkipped &&

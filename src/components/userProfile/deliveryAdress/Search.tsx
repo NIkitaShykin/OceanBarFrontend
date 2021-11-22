@@ -9,10 +9,11 @@ import Spinner from '../../Spinner/Spinner'
 import './search.scss'
 
 type PropsType = {
+  required?: boolean,
   searchValue: (value:string) => void,
   isInvalid?: boolean,
-  onChange?: (value:string) => void,
-  onBlur?: (value:string) => void,
+  onChange?: any,
+  onBlur?: any,
 }
 
 const SearchField = (props:PropsType) => {
