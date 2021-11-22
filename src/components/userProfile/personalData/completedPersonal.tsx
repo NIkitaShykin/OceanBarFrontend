@@ -13,30 +13,25 @@ const completedPersonal = (props:PropsType) => {
 
   return (
     <div className='info-block'>
-
       <Row>
         <Col sm={2}><div className='user-name'><h5>&#128100;</h5></div></Col>
         <Col sm={10}><div className='user-name'>
           <h5>{user.name}</h5></div></Col>
-        {/* <Col sm={7}></Col> */}
       </Row>
       <Row>
         <Col sm={2}><div className='user-name'><h5> &#128101; </h5></div></Col>
         <Col sm={10}><div className='user-name'>
           <h5>{user.secondname}</h5></div></Col>
-        {/* <Col sm={7}></Col> */}
       </Row>
       <Row>
         <Col sm={2}><div className='user-name'><h5>&#128386; </h5></div></Col>
         <Col sm={10}><div className='user-name'>
           <h5>{user.email}</h5></div></Col>
-        {/* <Col sm={7}></Col> */}
       </Row>
       <Row>
         <Col sm={2}><div className='user-name'><h5>&#9742;</h5></div></Col>
         <Col sm={10}><div className='user-name'>
           <h5>{user.phone}</h5></div></Col>
-        {/* <Col sm={7}></Col> */}
       </Row>
       <br/>
       <button

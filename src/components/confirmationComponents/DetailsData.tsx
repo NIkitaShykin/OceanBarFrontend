@@ -56,7 +56,7 @@ const DetailsData = () => {
           </div>
         </div>
       )}
-      {orderDetails.orderType === 'Навынос' && null}
+
       {orderDetails.orderType === 'Бронирование стола' && (
         <div className='row'>
           <div className='col order-type-header'>

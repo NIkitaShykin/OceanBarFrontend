@@ -28,7 +28,8 @@ const OrderDetailsSection = () => {
             <div className='
               details-item-block
               details-header
-              detail-header-name'>
+              detail-header-name'
+            >
               <span>Название</span>
             </div>
             <div className='details-item-block details-header'>
@@ -38,7 +39,7 @@ const OrderDetailsSection = () => {
               <span>Цена за 1 позицию</span>
             </div>
           </div>
-          <div className='details-devider'></div>
+          <div className='details-devider' />
           {orderedDishes.map((item, id) =>
             <>
               <div className='details-item' id={String(item.id)} key={item.id}>
@@ -56,7 +57,7 @@ const OrderDetailsSection = () => {
                   <span>{Number(item.price) * item.numberOfDishes} BYN</span>
                 </div>
               </div>
-              <div className='details-devider'></div>
+              <div className='details-devider' />
             </>
           )}
 

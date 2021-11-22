@@ -137,7 +137,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 label='Доставка доступна с 16:00 до 22:00'
               >
                 <Form.Select
-                  aria-label='Floating label select example'
+                  aria-label='Select time slot'
                   defaultValue={timeSlot}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setTimeSlot(e.target.value)
