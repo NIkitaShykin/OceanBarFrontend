@@ -6,7 +6,7 @@ import {ApiDelivery} from '../../api/ApiDelivery'
 import useDebounce from '../../utils/useDebounce'
 import Spinner from '../Spinner/Spinner'
 
-import './searchStreetDelivery.scss'
+import './searchStreet.scss'
 
 type PropsType = {
   required?: boolean,

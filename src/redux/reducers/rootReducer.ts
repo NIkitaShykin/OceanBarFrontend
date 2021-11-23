@@ -13,7 +13,6 @@ const rootReducer = combineReducers({
   dish: dishesReducer,
   user: userReducer,
   order: orderReducer,
-  user: userReducer,
   bankCard: bankCardReducer
 })
 
