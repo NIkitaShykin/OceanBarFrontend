@@ -10,6 +10,7 @@ export type TOrderItem = {
   price: string,
   imageURL: string,
   numberOfDishes: number,
+  position: number,
 }
 
 export type TOrderType = {

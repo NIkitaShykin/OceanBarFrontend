@@ -1,12 +1,12 @@
 import {ChangeEvent, FocusEvent, useEffect, useState} from 'react'
 import {Form} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
-import {DeliveryAdressType} from '../../../common/types/userTypes'
-import {ApiDelivery} from '../../../api/ApiDelivery'
-import useDebounce from '../../../utils/useDebounce'
-import Spinner from '../../Spinner/Spinner'
+import {DeliveryAdressType} from '../../common/types/userTypes'
+import {ApiDelivery} from '../../api/ApiDelivery'
+import useDebounce from '../../utils/useDebounce'
+import Spinner from '../Spinner/Spinner'
 
-import './search.scss'
+import './searchStreetDelivery.scss'
 
 type PropsType = {
   required?: boolean,

@@ -43,7 +43,7 @@ const UserCart = (props: PropsType) => {
       id={order.id}
       name={order.name}
       price={order.price}
-      image={order.imageURL}
+      imageURL={order.imageURL}
       numberOfDishes={order.numberOfDishes}
       position={order.position}
     />

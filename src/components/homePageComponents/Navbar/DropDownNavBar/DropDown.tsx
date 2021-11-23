@@ -1,5 +1,6 @@
 import {Link, useHistory} from 'react-router-dom'
 import {NavDropdown} from 'react-bootstrap'
+import Cookies from 'js-cookie'
 
 import {logOut} from '../../../../redux/actions'
 import {useAppSelector, useAppDispatch} from '../../../../redux/hooks'
@@ -12,6 +13,8 @@ const DropDownNavBar = () => {
   const isAuthorized = useAppSelector((state) => state.auth.isAuthorized)
 
   const handleClose = () => {
+    Cookies.remove('token')
+    localStorage.removeItem('token')
     dispatch(logOut())
     history.push('/')
   }

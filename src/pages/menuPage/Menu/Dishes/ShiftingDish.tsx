@@ -1,14 +1,20 @@
 import {useState} from 'react'
-import './Dish.scss'
-import DishIngridients from './DishIngridients'
 import {Row, Col} from 'react-bootstrap'
-import {IngredientType} from '../../../../common/types/dishesType'
-import {IngredientsType} from '../../../../common/types/dishesType'
-import {DishType} from '../../../../common/types/dishesType'
+
+import DishIngridients from './DishIngridients'
+
+import {
+  DishType,
+  DishInCart,
+  IngredientType,
+  IngredientsType
+} from '../../../../common/types/dishesType'
+
+import './Dish.scss'
 
 type PropsType = {
   changeStatus: () => void
-  currentDish: DishType
+  currentDish: DishType | DishInCart
   updateIngredients: (arg0: any) => void
   handleClose?: () => void
 }
@@ -76,11 +82,16 @@ const ShiftingDish = ({
               setIngredient={updateIngridient}
               ingredients={ingredients}
             />
+            {
+              disableIngredientAccept &&
+              <span className='error'>
+                Блюдо должно содержать не менее двух ингредиентов :)
+              </span>
+            }
             <button
-              className={'order-btn-ingredients'}
+              className='btn btn-warning mt-4 w-50'
               onClick={finishSifting}
-              disabled={disableIngredientAccept}
-            >
+              disabled={disableIngredientAccept}>
               Готово
             </button>
             <br /> <br /> <br />

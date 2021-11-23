@@ -1,24 +1,11 @@
-import {useEffect} from 'react'
 import OrderHistory from '../../components/userProfile/orderHistory'
 import DeliveryAdress from '../../components/userProfile/deliveryAdress'
 import MyCreditCards from '../../components/userProfile/myCards'
 import PasswordReset from '../../components/userProfile/passwordReset'
 import PersonalData from '../../components/userProfile/personalData'
-import {getUserPersonalDataTC} from '../../redux/reducers/userReducer'
-
-import {useDispatch} from 'react-redux'
-
 import './profile.scss'
 
-
 const UserProfile = () => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getUserPersonalDataTC())
-  }, [])
-
-
   return (
     <div>
       <div className='container'>
@@ -31,13 +18,13 @@ const UserProfile = () => {
         </div>
 
         <div className='row justify-content-start'>
-          <div className='col-8'>
+          <div className='col-lg-8'>
             <PersonalData />
             <DeliveryAdress/>
             <PasswordReset/>
             <MyCreditCards/>
           </div>
-          <div className='col-4'>
+          <div className='col-lg-4'>
             <OrderHistory/>
           </div>
         </div>

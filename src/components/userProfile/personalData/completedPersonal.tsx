@@ -1,5 +1,6 @@
 import {UserType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
+import Spinner from '../../Spinner/Spinner'
 import {useSelector} from 'react-redux'
 import {Col, Row} from 'react-bootstrap'
 
@@ -9,28 +10,43 @@ type PropsType = {
 
 const completedPersonal = (props:PropsType) => {
   const user =
-  useSelector<AppStoreType, UserType>((state) => state.user)
+   useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
+  const loading =
+   useSelector<AppStoreType, boolean>((state) => state.user.isLoading)
+
 
   return (
     <div className='info-block'>
+      { loading && <Spinner/> }
+      <br/>
       <Row>
-        <Col sm={2}><div className='user-name'><h5>&#128100;</h5></div></Col>
-        <Col sm={10}><div className='user-name'>
-          <h5>{user.name}</h5></div></Col>
+        {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
+          <div className='user-name'><h5>Имя</h5></div>
+        </Col> */}
+        <Col sm={4}>
+          <div className='user-name'>
+            <h5>{user.name}</h5></div></Col>
+        <Col sm={7}></Col>
       </Row>
       <Row>
-        <Col sm={2}><div className='user-name'><h5> &#128101; </h5></div></Col>
-        <Col sm={10}><div className='user-name'>
+        {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
+          <div className='user-name'><h5>Фамилия</h5></div>
+        </Col> */}
+        <Col sm={4}><div className='user-name'>
           <h5>{user.secondname}</h5></div></Col>
       </Row>
       <Row>
-        <Col sm={2}><div className='user-name'><h5>&#128386; </h5></div></Col>
-        <Col sm={10}><div className='user-name'>
+        {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
+          <div className='user-name'><h5>Емейл</h5></div>
+        </Col> */}
+        <Col sm={4}><div className='user-name'>
           <h5>{user.email}</h5></div></Col>
       </Row>
       <Row>
-        <Col sm={2}><div className='user-name'><h5>&#9742;</h5></div></Col>
-        <Col sm={10}><div className='user-name'>
+        {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
+          <div className='user-name'><h5>Телефон</h5></div>
+        </Col> */}
+        <Col sm={4}><div className='user-name'>
           <h5>{user.phone}</h5></div></Col>
       </Row>
       <br/>
