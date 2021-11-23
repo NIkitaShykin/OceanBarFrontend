@@ -12,8 +12,8 @@ type PropsType = {
 }
 
 const completedDelivery = (props:PropsType) => {
-  // eslint-disable-next-line max-len
-  const delivery = useSelector<AppStoreType, DeliveryAdressType>((state) => state.user.userProfile)
+  const delivery = useSelector<AppStoreType,
+   DeliveryAdressType>((state) => state.user.userProfile)
   const dispatch = useDispatch()
 
   const userDeliveryData = {
@@ -40,38 +40,21 @@ const completedDelivery = (props:PropsType) => {
       </Row>
       <Row>
         <Col sm={4} md={3} lg={3}><div className='user-name'>
-          {/* <h5>&#127984;&nbsp;Город</h5></div></Col> */}
           <h5>г.Минск</h5></div></Col>
-        {/* <Col sm={3} md={3} lg={3}><div className='user-name'>
-          <h5>{delivery.city}</h5></div>
-        </Col> */}
       </Row>
       <Row>
-        {/* <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#10153;&nbsp;&nbsp;Улица</h5>
-          <h5>Улица</h5></div>
-        </Col> */}
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>Улица&nbsp;{delivery.street}</h5></div></Col>
       </Row>
       <Row>
-        {/* <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#10153;&nbsp;&nbsp;Дом</h5></div>
-          <h5>Дом</h5></div></Col> */}
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>Дом&nbsp;{delivery.homeNumber}</h5></div></Col>
       </Row>
       <Row>
-        {/* <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#10153;&nbsp;&nbsp;Корпус</h5></div>
-          <h5>Корпус</h5></div></Col> */}
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>Корпус&nbsp;{delivery.homePart}</h5></div></Col>
       </Row>
       <Row>
-        {/* <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>&#10153;&nbsp;&nbsp;Квартира</h5></div>
-          <h5>Квартира</h5></div></Col> */}
         <Col sm={3} md={3} lg={3}><div className='user-name'>
           <h5>Квартира&nbsp;{delivery.flat}</h5></div></Col>
       </Row>
