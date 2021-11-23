@@ -44,6 +44,12 @@ i:hover {
   margin-left: 40px;
   flex-direction: column;
   line-height: 0.5;
+  .error {
+    font-size: smaller;
+    color: red;
+    margin-top: 15px;
+    line-height: normal;
+  }
 }
 
 .changing{

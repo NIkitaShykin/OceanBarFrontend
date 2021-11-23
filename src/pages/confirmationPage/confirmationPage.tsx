@@ -1,12 +1,15 @@
 import {Button} from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
-import OrderDetails from '../../components/confirmationComponents/OrderDetails'
+
+import OrderDetailsSection from
+  '../../components/confirmationComponents/OrderDetailsSection'
 
 import './confirmation.scss'
 
 
 const Confirmation = () => {
   const history = useHistory()
+
   const handleClose = () => {
     history.goBack()
   }
@@ -25,7 +28,7 @@ const Confirmation = () => {
         <div className='confirm-title'>
           Подтверждение заказа
         </div>
-        <OrderDetails numberOfDishes={undefined}/>
+        <OrderDetailsSection />
       </div>
       <div className='confirm-submit-button'>
         <Button

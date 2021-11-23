@@ -1,80 +1,93 @@
-/* eslint-disable max-len */
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {useDispatch} from 'react-redux'
 import {Image} from 'react-bootstrap'
+import Cookies from 'js-cookie'
+
+import {orderedToast} from '../OrderToast/OrderedToast'
+import ShiftingDish from '../../pages/menuPage/Menu/Dishes/ShiftingDish'
+
+import {parseString} from '../../common/parceInString'
+import {
+  DishInCart,
+  IngredientType,
+  IngredientsType,
+} from '../../common/types/dishesType'
+import {TOrderItem} from '../../common/types/cartTypes'
+
 import {
   minusOneDish,
   plusOneDish,
   removeDishFromCart,
+  updateDishInCart,
 } from '../../redux/actions'
-import {orderedToast} from '../OrderToast/OrderedToast'
+import {useAppSelector} from '../../redux/hooks'
+import {ApiCart} from '../../api/ApiCart'
 
 import './Cart.scss'
-import {ApiCart} from '../../api/ApiCart'
-import Cookies from 'js-cookie'
-import ShiftingDish from '../../pages/menuPage/Menu/Dishes/ShiftingDish'
-import {DishType, IngredientsType} from '../../common/types/dishesType'
-import {useAppSelector} from '../../redux/hooks'
-import {parseString} from '../../common/parceInString'
 
-interface IOrderItemProps {
-  id: number
-  name: string
-  price: string
-  image: string
-  numberOfDishes: number
-  position: number
-}
-
-const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
+const OrderItem: React.FC<TOrderItem> = ({
   id,
   name,
   price,
-  image,
+  imageURL,
   numberOfDishes,
   position,
 }) => {
-  const allDishes = useAppSelector((state) => state.dish.dishes)
-  const currentDish = allDishes.find((el: DishType) => el.id == id)
-  const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
-  // @ts-ignore
-  const [ingredients, setIngredients] = useState(currentDish.ingredients)
+  const token = Cookies.get('token')
 
-  useEffect(() => {
-    setIngredients(ingredients)
-  }, [currentDish])
+  const cartDishes: DishInCart[] =
+    useAppSelector((state) => state.cart.dishes)
+  const currentDish = cartDishes.find((el: DishInCart) => el.id === id)
+
+  const [counter, setCounter] = useState<number>(numberOfDishes)
+  const [show, setShow] = useState<boolean>(false)
+  const [dishСhangeStatus, setDishСhangeStatus] = useState<boolean>(false)
+  const [ingredients, setIngredients] =
+    useState<IngredientsType>(currentDish ? currentDish.ingredients : [])
+
+  const dispatch = useDispatch()
+
+  const getRemovedIngredients = (ingredients: IngredientType[]) => {
+    const removedIngredientsArr: Array<string> = []
+
+    ingredients.forEach((ingredient) => {
+      if (ingredient.isAdded === false) {
+        removedIngredientsArr.push(ingredient.name)
+      }
+    })
+
+    return removedIngredientsArr.join(', ')
+  }
+
+  const showIngredientsList = () => setShow(true)
 
   const updateIngredients = (updIngridients: IngredientsType) => {
     setIngredients(updIngridients)
   }
+
   const changeStatus = () => {
     setDishСhangeStatus(!dishСhangeStatus)
   }
-  const dispatch = useDispatch()
-  let [counter, setCounter] = useState(numberOfDishes)
-  const [show, setShow] = useState(false)
-  const token = Cookies.get('token')
-  const handleClose = () => {
+
+  const closeIngredientsList = () => {
     ApiCart.updateDishInCart(
       position,
       numberOfDishes,
       token,
       parseString(ingredients)
-    ).then((resp) => {
-      orderedToast(
-        `Добавленные игредиенты :
-      ${resp.data.updatedPosition.ingredients}`,
-        5000
-      )
+    ).then(() => {
+      dispatch(updateDishInCart({id: id, ingredients: ingredients}))
+      setShow(false)
     })
-    setShow(false)
   }
-  const handleShow = () => setShow(true)
+
   const onDeleteHandler = () => {
-    ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {})
-    dispatch(removeDishFromCart(id))
-    orderedToast(`Блюдо "${name}" удалено из корзины`)
+    ApiCart.deleteDishFromCart(position, Cookies.get('token')).then(() => {
+      dispatch(removeDishFromCart(id))
+      orderedToast(`Блюдо "${name}" удалено из корзины`)
+    })
   }
+
   return (
     <>
       {show && currentDish ? (
@@ -85,31 +98,48 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
             ingredients,
           }}
           updateIngredients={updateIngredients}
-          handleClose={handleClose}
+          handleClose={closeIngredientsList}
         />
       ) : (
         <div className='order-item shadow' id={String(id)}>
           <div className='order-block order-img'>
-            <Image className='rounded-3' src={image} width={80} height={80} />
+            <Image
+              className='rounded-3'
+              src={imageURL}
+              width={80}
+              height={80}
+            />
           </div>
 
           <div className='order-block order-details'>
             <span className='order-title bold'>{name}</span>
             <span>{Number(price) * numberOfDishes} BYN</span>
-            <a onClick={handleShow} style={{cursor: 'pointer'}}>
+            <a onClick={showIngredientsList} style={{cursor: 'pointer'}}>
               Изменить состав
             </a>
+            {
+              getRemovedIngredients(ingredients) &&
+              <span className='short-notice'>
+                без добавления ингредиента: {getRemovedIngredients(ingredients)}
+              </span>
+            }
           </div>
           <div className='order-block order-counter'>
             <button
               className='control'
               onClick={() => {
                 if (counter > 1) {
-                  setCounter(--counter)
-                  ApiCart.updateDishInCart(position, counter, token).then(
-                    () => {}
-                  )
-                  dispatch(minusOneDish({id: id, numberOfDishes: counter}))
+                  const readCounterVal = counter - 1
+                  setCounter(readCounterVal)
+                  ApiCart.updateDishInCart(position, readCounterVal, token)
+                    .then(
+                      () => {
+                        dispatch(minusOneDish({
+                          id: id,
+                          numberOfDishes: readCounterVal
+                        }))
+                      }
+                    )
                 } else {
                   onDeleteHandler()
                 }
@@ -121,11 +151,16 @@ const OrderItem: React.FunctionComponent<IOrderItemProps> = ({
             <button
               className='control'
               onClick={() => {
-                setCounter(++counter)
-                ApiCart.updateDishInCart(position, counter, token).then(
-                  (resp) => {}
+                const readCounterVal = counter + 1
+                setCounter(readCounterVal)
+                ApiCart.updateDishInCart(position, readCounterVal, token).then(
+                  () => {
+                    dispatch(plusOneDish({
+                      id: id,
+                      numberOfDishes: readCounterVal
+                    }))
+                  }
                 )
-                dispatch(plusOneDish({id: id, numberOfDishes: counter}))
               }}
             >
               +

@@ -1,6 +1,7 @@
 $mainColor: #ff9e05;
 
 .details-block {
+  min-width: 990px;
   margin: 30px 0;
   box-shadow: 0px 12px 40px rgba(96, 96, 96, 0.16);
   padding: 25px;
@@ -10,10 +11,6 @@ $mainColor: #ff9e05;
     font-size: 2rem;
     font-weight: bold;
   }
-}
-
-.details-shadow {
-  box-shadow: 0px 12px 40px rgba(96, 96, 96, 0.16);
 }
 
 .details-border {
@@ -33,17 +30,17 @@ $mainColor: #ff9e05;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 22rem;
   }
   .details-img > img{
-    width: 85px;
-    height: 70px;
+    width: 8rem;
+    height: 8rem;
   }
-  .details-details {
+  .details-dish-name {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding-left: 3rem;
+    width: 55rem;
     .details-name {
       text-align: left;
       font-weight: bold;
@@ -57,14 +54,23 @@ $mainColor: #ff9e05;
   .details-counter {
     margin: 0 6rem;
     font-weight: bold;
-    width: 20rem;
+    width: 10rem;
     height: 9rem;
+  }
+  .details-sum {
+    width: 60rem;
   }
 }
 
-.details-header span{
-  font-style: italic;
-  text-align: center;
+.details-header {
+  width: 20rem;
+  span {
+    font-style: italic;
+    text-align: center;
+  }
+}
+.detail-header-name {
+  width: 30rem;
 }
 
 .details-devider {

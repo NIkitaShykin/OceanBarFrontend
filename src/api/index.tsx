@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const url = 'http://13.51.76.107/api'
+export const url = 'http://13.51.130.234/api'
 
 
 export const instance = axios.create({

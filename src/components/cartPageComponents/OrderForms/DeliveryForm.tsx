@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react'
+import React, {ChangeEvent, FocusEvent, useState} from 'react'
 import DatePicker from 'react-date-picker'
 import {
   Form,
@@ -9,11 +9,13 @@ import {
   ToggleButton,
   ToggleButtonGroup
 } from 'react-bootstrap'
-import {AddressSuggestions, DaDataSuggestion, DaDataAddress} from 'react-dadata'
 import {useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+
+import SearchField from '../SearchStreetDelivery'
+import {addOrder} from '../../../redux/actions'
 
 import './OrderForms.scss'
-import 'react-dadata/dist/react-dadata.css'
 
 interface ITakeawayFormProps {
   handleRadioValueClearance: (value: string) => void
@@ -22,6 +24,7 @@ interface ITakeawayFormProps {
 const DeliveryForm: React.FC<ITakeawayFormProps> =
   ({handleRadioValueClearance}) => {
     const history = useHistory()
+    const city = 'г.Минск'
 
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
@@ -31,15 +34,18 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const [isPaymentInputSkipped, setPaymentInputSkipped] =
       useState<boolean>(false)
 
-    const [adress, setAdress] =
-      useState<DaDataSuggestion<DaDataAddress> | undefined>()
-
-    const token = '9ca4903b39a3e857c09d921ee7bd29a41e495a09'
+    const [street, setStreet] = useState<string>('')
+    const [streetError, setStreetError] = useState<boolean>(false)
+    const [homeNumber, setHomeNumber] = useState<string>('')
+    const [homeNumberError, setHomeNumberError] = useState<boolean>(false)
+    const [homePart, setHomePart] = useState<string>('')
+    const [flat, setFlat] = useState<string>('')
 
     const useInput = () => {
       const [isDirty, setDirty] = useState<boolean>(false)
 
-      const onBlur = (e: ChangeEvent<HTMLSelectElement>) => {
+      const onBlur = (e: ChangeEvent<HTMLSelectElement> |
+        FocusEvent<HTMLInputElement>) => {
         setDirty(true)
       }
 
@@ -49,11 +55,17 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       }
     }
 
-    const time = useInput()
+    const timeValidation = useInput()
+    const streetValidation = useInput()
+    const homeValidation = useInput()
+
+    const streetSelect = (value:string) => {
+      setStreet(value)
+    }
 
     const isTimeInvalid =
-      !time.isDirty ||
-      time.isDirty && isTimeInputSkipped
+      !timeValidation.isDirty ||
+      timeValidation.isDirty && isTimeInputSkipped
 
     const timeSlots: Array<string> = [
       '16:00 - 18:00',
@@ -65,8 +77,20 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       handleRadioValueClearance(checkedValue)
     }
 
-    // @ts-ignore
-    const handleSubmit = ((e)=> history.push('/confirmation'))
+    const dispatch = useDispatch()
+    const handleSubmit = ((e: React.MouseEvent<Element, MouseEvent>)=> {
+      dispatch(addOrder({
+        city: city,
+        street: street,
+        homeNumber: homeNumber,
+        homePart: homePart,
+        flat: flat,
+        date: date.toLocaleDateString(),
+        timeSlot: timeSlot,
+        orderType: 'Доставка'
+      }))
+      history.push('/confirmation')
+    })
 
     return (
       <div className='delivery-form shadow'>
@@ -83,7 +107,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
             <div className='section-content'>
               <DatePicker
                 clearIcon={null}
-                format='d-MM-y'
+                format='dd.MM.y'
                 minDate={new Date()}
                 onChange={(date: Date) => setDate(date)}
                 required
@@ -114,14 +138,13 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 label='Доставка доступна с 16:00 до 22:00'
               >
                 <Form.Select
-                  name='time'
-                  aria-label='Floating label select example'
+                  aria-label='Select time slot'
                   defaultValue={timeSlot}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setTimeSlot(e.target.value)
-                    setTimeInputSkipped(false)
+                    setTimeInputSkipped(!e.target.value)
                   }}
-                  onBlur={(e) => time.onBlur(e)}
+                  onBlur={(e) => timeValidation.onBlur(e)}
                   isInvalid={isTimeInputSkipped}
                 >
                   <option value={''}>Выбрать...</option>
@@ -131,7 +154,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 </Form.Select>
               </FloatingLabel>
               {
-                (time.isDirty && isTimeInputSkipped) &&
+                (timeValidation.isDirty && !timeSlot) &&
                   <div className='error'>
                     Пожалуйста, выберите время доставки для текущего заказа
                   </div>
@@ -154,40 +177,77 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
 
             <div className='section-content'>
 
-              <Form>
+              <div>
                 <Row className='mb-3'>
                   <Col>
-                    <AddressSuggestions
-                      token={token}
-                      value={adress}
-                      onChange={setAdress}
-                      filterLocations={[
-                        {'country': 'Беларусь',
-                          'city': 'Минск',
-                          'restrict_value': true}
-                      ]}
-                      hintText='Выберите вариант или продолжите ввод'
-                      count={8}
-                      delay={500}
+                    <span className='street-lable'>{city}</span>
+                    <SearchField
+                      required
+                      searchValue={streetSelect}
+                      isInvalid={streetValidation.isDirty && !streetValidation}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setStreet(e.target.value)
+                        setStreetError(false)
+                      }}
+                      onBlur={(e: FocusEvent<HTMLInputElement>) => {
+                        streetValidation.onBlur(e)
+                        setStreetError(true)
+                      }}
                     />
                   </Col>
                 </Row>
+
+                {
+                  (streetError && !street) &&
+                <div className='error error-adress'>
+                  Пожалуйста, укажите адрес доставки!
+                </div>
+                }
                 <Row>
                   <Col>
                     <Form.Control
                       placeholder='Дом'
                       required
                       name='house'
+                      maxLength={3}
+                      defaultValue={homeNumber}
+                      isInvalid={homeValidation.isDirty && !homeNumber}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        setHomeNumber(e.target.value)
+                        setHomeNumberError(false)
+                      }
+                      }
+                      onBlur={(e: FocusEvent<HTMLInputElement>) => {
+                        homeValidation.onBlur(e)
+                        setHomeNumberError(true)
+                      }}
                     />
                   </Col>
                   <Col>
-                    <Form.Control placeholder='Корпус' />
+                    <Form.Control
+                      placeholder='Корпус'
+                      defaultValue={homePart}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setHomePart(e.target.value)}
+                    />
                   </Col>
                   <Col>
-                    <Form.Control placeholder='Квартира' />
+                    <Form.Control
+                      placeholder='Квартира'
+                      maxLength={4}
+                      defaultValue={flat}
+                      onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                        setFlat(e.target.value)}
+                    />
                   </Col>
+                  {
+                    (homeNumberError && !homeNumber) &&
+                  <div className='error'>
+                    Поле не может быть пустым!
+                  </div>
+                  }
                 </Row>
-              </Form>
+              </div>
             </div>
           </div>
 
@@ -269,17 +329,20 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
             <Button
               variant='outline-warning'
               disabled={
-                !date ||
                 isTimeInvalid ||
+                !street ||
+                !homeNumber ||
                 isPaymentInputSkipped
               }
               onClick={
                 (e) => {
                   !paymentMethod && setPaymentInputSkipped(true)
 
-                  !isTimeInvalid && setTimeInputSkipped(true)
-
-                  handleSubmit(e)
+                  if (paymentMethod &&
+                    !isTimeInvalid &&
+                    street &&
+                    homeNumber
+                  ) handleSubmit(e)
                 }
               }
             >

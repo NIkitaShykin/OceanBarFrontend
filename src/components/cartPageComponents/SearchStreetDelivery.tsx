@@ -1,15 +1,19 @@
-import {useEffect, useState} from 'react'
+import {ChangeEvent, FocusEvent, useEffect, useState} from 'react'
 import {Form} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
-import {DeliveryAdressType} from '../../../common/types/userTypes'
-import {ApiDelivery} from '../../../api/ApiDelivery'
-import useDebounce from '../../../utils/useDebounce'
-import Spinner from '../../Spinner/Spinner'
+import {DeliveryAdressType} from '../../common/types/userTypes'
+import {ApiDelivery} from '../../api/ApiDelivery'
+import useDebounce from '../../utils/useDebounce'
+import Spinner from '../Spinner/Spinner'
 
-import './search.scss'
+import './searchStreet.scss'
 
 type PropsType = {
-  searchValue: (value:string) => void
+  required?: boolean,
+  searchValue: (value:string) => void,
+  isInvalid?: boolean,
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void,
 }
 
 const SearchField = (props:PropsType) => {
@@ -75,7 +79,7 @@ const SearchField = (props:PropsType) => {
   return (
     <>
       <Form ref={ref}>
-        <input
+        <Form.Control
           style={{borderRadius: '4px'}}
           placeholder={street}
           name='search'
@@ -97,12 +101,11 @@ const SearchField = (props:PropsType) => {
         )}
 
         {isOpen && !isEmpty && !isLoading && (
-          <ul className={'streetLi'}>
+          <ul className={'autocomplete'}>
             {adress.map((adress:any, index: number) => {
               const temp=adress.value.split(' ')
               return (
-                <li className={'streetLi'}
-                  style={{cursor: 'pointer'}}
+                <li className={'autocomplete__item'}
                   key={index}
                   onClick={() => itemClickHandler(temp[1])}
                 >
