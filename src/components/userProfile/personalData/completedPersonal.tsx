@@ -20,32 +20,20 @@ const completedPersonal = (props:PropsType) => {
       { loading && <Spinner/> }
       <br/>
       <Row>
-        {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
-          <div className='user-name'><h5>Имя</h5></div>
-        </Col> */}
         <Col sm={4}>
           <div className='user-name'>
             <h5>{user.name}</h5></div></Col>
         <Col sm={7}></Col>
       </Row>
       <Row>
-        {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
-          <div className='user-name'><h5>Фамилия</h5></div>
-        </Col> */}
         <Col sm={4}><div className='user-name'>
           <h5>{user.secondname}</h5></div></Col>
       </Row>
       <Row>
-        {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
-          <div className='user-name'><h5>Емейл</h5></div>
-        </Col> */}
         <Col sm={4}><div className='user-name'>
           <h5>{user.email}</h5></div></Col>
       </Row>
       <Row>
-        {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
-          <div className='user-name'><h5>Телефон</h5></div>
-        </Col> */}
         <Col sm={4}><div className='user-name'>
           <h5>{user.phone}</h5></div></Col>
       </Row>
