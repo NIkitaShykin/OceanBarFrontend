@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom'
 
 import Menu from '../pages/menuPage/menuPage'
+import Admin from '../pages/adminPage/adminPage'
 import Booking from '../pages/bookingPage/bookingPage'
 import Login from '../pages/loginPage/loginPage'
 import Page404 from '../pages/page404/page404'
@@ -24,6 +25,9 @@ const SwitchPager = () => (
       <Route path='/menu'>
         <Menu/>
       </Route>
+      <Route path='/admin'>
+        <Admin/>
+      </Route>
       <Route path='/cart'>
         <UserCart />
       </Route>
@@ -42,7 +46,7 @@ const SwitchPager = () => (
       <Route path='/profile'>
         <UserProfile />
       </Route>
-      <Route path='/dish'>
+      <Route path='/dishes'>
       </Route>
       <Route path='/cart'>
       </Route>
