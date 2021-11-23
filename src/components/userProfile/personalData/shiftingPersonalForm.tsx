@@ -8,10 +8,13 @@ import {useValidation} from '../../../utils/validation'
 import {setUserPersonalDataTC} from '../../../redux/reducers/userReducer'
 import Cookies from 'js-cookie'
 
+type PropsType = {
+  changeStatus: (status:boolean) => void
+}
 
-const shiftingPersonalForm = (props:any) => {
-  // eslint-disable-next-line max-len
-  const userData = useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
+const shiftingPersonalForm = (props:PropsType) => {
+  const userData =
+   useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
 
   const token = Cookies.get('token')
 
