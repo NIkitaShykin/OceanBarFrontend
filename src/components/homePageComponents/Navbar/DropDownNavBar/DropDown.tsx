@@ -1,4 +1,4 @@
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 import {NavDropdown} from 'react-bootstrap'
 import Cookies from 'js-cookie'
 
@@ -38,8 +38,8 @@ const DropDownNavBar = () => {
         id='navbarScrollingDropdown'
         className={isAuthorized ? 'authorized change' : 'authorized'}
       >
-        <NavDropdown.Item href='/profile'>Профиль</NavDropdown.Item>
-        <NavDropdown.Item href='/' onClick={() => handleClose()}>
+        <NavDropdown.Item as={Link} to='/profile'>Профиль</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to='/' onClick={() => handleClose()}>
           Выйти из профиля
         </NavDropdown.Item>
       </NavDropdown>

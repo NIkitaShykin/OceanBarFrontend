@@ -6,10 +6,11 @@ import {
   Button
 } from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+
+import {addOrder} from '../../../redux/actions'
 
 import './OrderForms.scss'
-
-
 interface IReserveATableFormProps {
   handleRadioValueClearance: (value: string) => void
 }
@@ -17,19 +18,27 @@ interface IReserveATableFormProps {
 const ReserveATableForm: React.FC<IReserveATableFormProps> =
   ({handleRadioValueClearance}) => {
     const history = useHistory()
+
     const [date, setDate] = useState<Date>(new Date())
+
     const [timeSlot, setTimeSlot] = useState<string>('')
-    const [tableSize, setTableSize] = useState<string>('')
-    const [ispaymentConfirmed, setPaymentConfirmed] = useState<boolean>(false)
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
-    const [isTableInputSkipped, setTableInputSkipped] = useState<boolean>(false)
+
+    const [tableSize, setTableSize] = useState<string>('')
+    const [isTableInputSkipped, setTableInputSkipped]=
+    useState<boolean>(false)
+
     const [isPaymentSkipped, setPaymentSkipped] = useState<boolean>(false)
+    const [isPaymentConfirmed, setPaymentConfirmed] = useState<boolean>(false)
+
+    const [error, setError] = useState<boolean>(false)
 
     const useInput = () => {
       const [isDirty, setDirty] = useState<boolean>(false)
 
       const onBlur = (e: ChangeEvent<HTMLSelectElement>) => {
         setDirty(true)
+        setError(false)
       }
 
       return {
@@ -43,11 +52,13 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     const isTimeInvalid =
       !time.isDirty ||
-      time.isDirty && isTimeInputSkipped
+      (time.isDirty &&
+      isTimeInputSkipped)
 
     const isTableInvalid =
       !table.isDirty ||
-      table.isDirty && isTableInputSkipped
+      (table.isDirty &&
+      isTableInputSkipped)
 
     const tableSizes: Array<string> = [
       'двоих гостей',
@@ -72,9 +83,16 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       '21:00 - 22:00',
     ]
 
-    const handleSubmit =
-      ((e: any) =>
-        history.push('/confirmation'))
+    const dispatch = useDispatch()
+    const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
+      dispatch(addOrder({
+        date: date.toLocaleDateString(),
+        tableSize: tableSize,
+        timeSlot: timeSlot,
+        orderType: 'Бронирование стола'
+      }))
+      history.push('/confirmation')
+    }
 
     const clearCheckedOrderType = (checkedValue: string) => {
       handleRadioValueClearance(checkedValue)
@@ -125,11 +143,13 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                 label='Столик для:'
               >
                 <Form.Select
+                  required
                   aria-label='Floating label select example'
                   defaultValue={tableSize}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setTableSize(e.target.value)
                     setTableInputSkipped(!e.target.value)
+                    setError(false)
                   }}
                   onBlur={(e) => table.onBlur(e)}
                   isInvalid={isTableInputSkipped}
@@ -172,6 +192,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                     setTimeSlot(e.target.value)
                     setTimeInputSkipped(!e.target.value)
+                    setError(false)
                   }}
                   onBlur={(e) => time.onBlur(e)}
                   isInvalid={isTimeInputSkipped}
@@ -203,9 +224,9 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                 <Form.Check
                   type='checkbox'
                   label='Я согласен оплатить заказ онлайн'
-                  checked={ispaymentConfirmed}
+                  checked={isPaymentConfirmed}
                   onChange={
-                    (e: any) => {
+                    (e: ChangeEvent<HTMLInputElement>) => {
                       if (e.target.checked) {
                         setPaymentConfirmed(true)
                         setPaymentSkipped(false)
@@ -217,6 +238,12 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   }
                   isInvalid={isPaymentSkipped}
                 />
+                {
+                  (error && isPaymentSkipped) &&
+                  <div className='error'>
+                    Бронь стола доступна только по предварительному заказу
+                  </div>
+                }
               </Form.Group>
             </div>
           </div>
@@ -225,6 +252,11 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
         </div>
 
         <div className='form-section'>
+          {error &&
+            <div className='error error-form'>
+              Все поля формы должны быть заполнены
+            </div>
+          }
           <div className='form-buttons'>
             <Button
               variant='outline-secondary mx-2'
@@ -233,15 +265,16 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               Отмена
             </Button>
             <Button
-              onClick={(e) => handleSubmit(e)}
               variant='outline-warning'
-              disabled={
-                isTableInvalid ||
-                isTimeInvalid ||
-                isPaymentSkipped ||
-                !date ||
-                !ispaymentConfirmed
-              }
+              onClick={(e) => {
+                if (!isTableInvalid &&
+                  !isTimeInvalid &&
+                  !isPaymentSkipped &&
+                  date &&
+                  isPaymentConfirmed) {
+                  handleSubmit(e)
+                } else setError(true)
+              }}
             >
               Далее
             </Button>

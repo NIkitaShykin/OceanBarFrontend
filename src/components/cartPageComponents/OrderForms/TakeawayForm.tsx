@@ -8,9 +8,10 @@ import {
   ToggleButtonGroup
 } from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import {addOrder} from '../../../redux/actions'
 
 import './OrderForms.scss'
-
 interface ITakeawayFormProps {
   handleRadioValueClearance: (value: string) => void
 }
@@ -56,8 +57,16 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
     const clearCheckedOrderType = (checkedValue: string) => {
       handleRadioValueClearance(checkedValue)
     }
-    // @ts-ignore
-    const handleSubmit = ((e)=> history.push('/confirmation'))
+
+    const dispatch = useDispatch()
+    const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
+      dispatch(addOrder({
+        date: date.toLocaleDateString(),
+        timeSlot: timeSlot,
+        orderType: 'Навынос'
+      }))
+      history.push('/confirmation')
+    }
 
     return (
       <div className='takeaway-form shadow'>
@@ -120,6 +129,12 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
                   ))}
                 </Form.Select>
               </FloatingLabel>
+              {
+                (time.isDirty && isTimeInputSkipped) &&
+                  <div className='error'>
+                    Пожалуйста, выберите время доставки для текущего заказа
+                  </div>
+              }
             </div>
           </div>
 
@@ -207,10 +222,8 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
               }
               onClick={
                 (e) => {
-                  if (!paymentMethod) {
-                    setPaymentInputSkipped(true)
-                  }
-                  handleSubmit(e)
+                  !paymentMethod && setPaymentInputSkipped(true)
+                  if (paymentMethod && !isTimeInvalid) handleSubmit(e)
                 }
               }
             >

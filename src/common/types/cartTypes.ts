@@ -12,3 +12,10 @@ export type TOrderItem = {
   numberOfDishes: number,
   position: number,
 }
+
+export type TOrderType = {
+  date: string;
+  tableSize: string;
+  timeSlot: string;
+  orderType: string;
+}

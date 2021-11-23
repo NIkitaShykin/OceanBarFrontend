@@ -5,11 +5,14 @@ import cartReducer from './cartReducer'
 import dishesReducer from './dishesReducer'
 import userReducer from './userReducer'
 import bankCardReducer from './bankCardReducer'
+import orderReducer from './orderReducer'
 
 const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
   dish: dishesReducer,
+  user: userReducer,
+  order: orderReducer,
   user: userReducer,
   bankCard: bankCardReducer
 })

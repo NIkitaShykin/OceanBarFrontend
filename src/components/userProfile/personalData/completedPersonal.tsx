@@ -34,7 +34,6 @@ const completedPersonal = (props:PropsType) => {
         </Col> */}
         <Col sm={4}><div className='user-name'>
           <h5>{user.secondname}</h5></div></Col>
-        <Col sm={7}></Col>
       </Row>
       <Row>
         {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
@@ -42,7 +41,6 @@ const completedPersonal = (props:PropsType) => {
         </Col> */}
         <Col sm={4}><div className='user-name'>
           <h5>{user.email}</h5></div></Col>
-        <Col sm={7}></Col>
       </Row>
       <Row>
         {/* <Col xs={'auto'} sm={3} md={3} lg={3}>
@@ -50,7 +48,6 @@ const completedPersonal = (props:PropsType) => {
         </Col> */}
         <Col sm={4}><div className='user-name'>
           <h5>{user.phone}</h5></div></Col>
-        <Col sm={7}></Col>
       </Row>
       <br/>
       <button

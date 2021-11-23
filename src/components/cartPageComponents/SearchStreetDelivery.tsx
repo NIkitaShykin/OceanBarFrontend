@@ -1,25 +1,29 @@
 import {ChangeEvent, FocusEvent, useEffect, useState} from 'react'
 import {Form} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
-import {DeliveryAdressType} from '../../../common/types/userTypes'
-import {ApiDelivery} from '../../../api/ApiDelivery'
-import useDebounce from '../../../utils/useDebounce'
-import Spinner from '../../Spinner/Spinner'
-import './searchDelivery.scss'
+import {DeliveryAdressType} from '../../common/types/userTypes'
+import {ApiDelivery} from '../../api/ApiDelivery'
+import useDebounce from '../../utils/useDebounce'
+import Spinner from '../Spinner/Spinner'
+
+import './searchStreetDelivery.scss'
 
 type PropsType = {
-  searchValue: (value:string) => void
-  currentValue:string
+  required?: boolean,
+  searchValue: (value:string) => void,
+  isInvalid?: boolean,
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void,
 }
 
-const SearchDelivery = (props:PropsType) => {
+const SearchField = (props:PropsType) => {
   const [ref, isClickedOutside] = useClickOutside()
 
   const [adress, setAdress] = useState<DeliveryAdressType[]>([])
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
+  const [street, setStreet] = useState('Улица')
 
   const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !adress || adress.length === 0
@@ -67,47 +71,41 @@ const SearchDelivery = (props:PropsType) => {
 
   const itemClickHandler = (value: string) => {
     props.searchValue(value)
+    setStreet(value)
     setSearchQuery('')
     setIsOpen(false)
   }
 
   return (
     <>
-      <Form className='mx-6 d-flex-pos justify-content-end' ref={ref}>
-        <label htmlFor='search'>Улица</label>
+      <Form ref={ref}>
         <Form.Control
-          placeholder={props.currentValue}
-          required
+          style={{borderRadius: '4px'}}
+          placeholder={street}
           name='search'
+          type='text'
           value={searchQuery}
-          onChange={(e)=>setSearchQuery(e.target.value)}
-        />
+          onChange={(e)=>setSearchQuery(e.target.value)} />
 
         {isLoading && <Spinner />}
         {noQuery && isEmpty && isOpen && (
-          <ul className='autocomplete_delivery autocomplete-warn'>
+          <ul className='autocomplete autocomplete-warn'>
             Начните вводить название улицы
           </ul>
         )}
 
         {isOpen && isEmpty && !isLoading && (
-          <ul className='autocomplete_delivery autocomplete-warn'>
+          <ul className='autocomplete autocomplete-warn'>
             Совпадений не найдено для &quot;{debouncedSearchQuery}&quot;
           </ul>
         )}
 
         {isOpen && !isEmpty && !isLoading && (
-          <ul
-            className='autocomplete_delivery'
-          //  className={'streetLi'}
-          >
+          <ul className={'autocomplete'}>
             {adress.map((adress:any, index: number) => {
               const temp=adress.value.split(' ')
               return (
-                <li
-                  // className={'streetLi'}
-                  // style={{cursor: 'pointer'}}
-                  className='autocomplete__item_delivery'
+                <li className={'autocomplete__item'}
                   key={index}
                   onClick={() => itemClickHandler(temp[1])}
                 >
@@ -122,4 +120,4 @@ const SearchDelivery = (props:PropsType) => {
   )
 }
 
-export default SearchDelivery
+export default SearchField
