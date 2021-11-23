@@ -1,10 +1,10 @@
-.autocomplete {
+.autocomplete_delivery {
   position: absolute;
-  top: 78%;
-  left: 105px;
+  top: 100%;
+  left: 10px;
   margin-top: 0.125rem;
   background-color: #fff;
-  width: 350px;
+  width: 97%;
   padding: 0.5rem 0;
   font-size: 1rem;
   color: #212529;
@@ -14,22 +14,22 @@
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
   z-index: 10;
-  max-height: 240px;
+  max-height: 180px;
   overflow: auto;
 }
 
 .autocomplete-warn {
-  padding: 5px 10px;
+  padding: 50px 10px;
   font-size: 1rem;
   color: gray;
 }
 
-.autocomplete__item {
+.autocomplete__item_delivery {
   cursor: pointer;
-  padding: 5px;
+  padding-left: 10px;
 }
 
-.autocomplete__item:hover {
+.autocomplete__item_delivery:hover {
   background: rgba(0, 0, 0, 0.15);
   transition: cubic-bezier(1, 0.82, 0.165, 1) 0.3s all;
 }

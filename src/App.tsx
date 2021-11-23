@@ -12,6 +12,7 @@ import MenuRoutes from './pages/menuPage/Menu/MenuRoutes'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Footer from './components/homePageComponents/Footer/Footer'
 import {getDishesFromApiTC} from '../src/redux/reducers/dishesReducer'
+import {getUserPersonalDataTC} from '../src/redux/reducers/userReducer'
 import ScrollToTop from './components/scrollToTop/ScrollToTop'
 
 import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css'
@@ -22,6 +23,7 @@ const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getDishesFromApiTC())
+    dispatch(getUserPersonalDataTC())
   }, [])
 
   return (

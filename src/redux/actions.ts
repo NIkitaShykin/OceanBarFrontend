@@ -26,3 +26,11 @@ export const toggleLoading =
 export const getUserPersonalDataTC = createAction<any>('GET_USER_DATA')
 export const setPersonalUsersData = createAction<any>('SET_USER_DATA')
 export const getUserAC = createAction<any>('SET_USER')
+
+export const setBankCardTC = createAction<any>('SET_BANKCARD')
+export const addBankCardAC = createAction<any>('STORE_BANKCARD')
+export const deleteBankCardTC = createAction<any>('DEL_BANKCARD')
+export const deleteBankCardAC = createAction<any>('DELETE_BANKCARD')
+
+export const toggleLoadingUser =
+  createAction<boolean, 'TOGGLE_LOADING_USER'>('TOGGLE_LOADING_USER')

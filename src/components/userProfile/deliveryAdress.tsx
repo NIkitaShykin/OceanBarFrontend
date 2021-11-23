@@ -1,14 +1,10 @@
 import {useState} from 'react'
 import {useEffect} from 'react'
 import {AppStoreType} from '../../redux/reducers/rootReducer'
+import {CommonUserType} from '../../common/types/userTypes'
 import {useSelector} from 'react-redux'
-// import {DeliveryAdressType} from '../../common/types/userTypes'
-// import ShiftingDelivery from
-//   './deliveryAdress/shiftingDelivery'
 import ShiftingDeliveryAPI from
   './deliveryAdress/shiftingDeliveryAPI'
-// import ShiftingDeliveryR from
-//   './deliveryAdress/shiftingDeliveryR'
 import CompletedDelivery from
   './deliveryAdress/completedDelivery'
 import AbsentDelivery from
@@ -16,14 +12,13 @@ import AbsentDelivery from
 
 
 const DeliveryAdress = () => {
-  const delivery =
-  useSelector<AppStoreType, any>((state:any) => state.user)
-
+  const delivery = useSelector<AppStoreType,
+   CommonUserType>((state:any) => state.user.userProfile)
   const [isChange, setChangeStatus] = useState<boolean>(true)
   const [adressAbsent, setAdressAbsent] = useState<boolean>(true)
 
   useEffect(() => {
-    if (delivery.street==='') {
+    if (delivery.street=='') {
       setAdressAbsent(true)
     } else {
       setAdressAbsent(false)
@@ -40,7 +35,7 @@ const DeliveryAdress = () => {
   }
 
   return (
-    <div className='profile-block justify-content-start'>
+    <div className='profile-block ml-md-auto' >
       <h2>Адрес доставки</h2>
 
       {adressAbsent ?

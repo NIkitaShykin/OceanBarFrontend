@@ -6,12 +6,13 @@ import {useSelector} from 'react-redux'
 import {Form, Button, Modal} from 'react-bootstrap'
 import {ValidationType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
+import Spinner from '../../Spinner/Spinner'
 import Cookies from 'js-cookie'
 
 const passwordResetForm = () => {
   const token = Cookies.get('token')
   const userPersonal =
-  useSelector<AppStoreType, UserType>((state) => state.user)
+   useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
 
   const [authFailed, setAuthFailed] = useState(false)
   const [oldPassword, setOldPassword] = useState('')
@@ -21,6 +22,7 @@ const passwordResetForm = () => {
   const [newPassIsEqual, setNewPassIsEqual] = useState(false)
   const [showEqualPassError, setShowEqualPassError] = useState(false)
   const [passSuccessChanged, setPassSuccessChanged] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
 
   const oldPassChange = (e: any) => {
@@ -30,6 +32,7 @@ const passwordResetForm = () => {
 
   const oldPassCheck = (e: any) => {
     e.preventDefault()
+    setIsLoading(true)
     ApiUser.checkUserPassword(
       token,
       {password: oldPassword, email: userPersonal.email}
@@ -42,9 +45,11 @@ const passwordResetForm = () => {
           setOldPassCorrect(true)
           setShowOldPassError(false)
         }
+        setIsLoading(false)
       })
       .catch((error) => {
         console.log(error.response)
+        setIsLoading(false)
         setOldPassCorrect(false)
         setShowOldPassError(true)
       })
@@ -55,8 +60,8 @@ const passwordResetForm = () => {
       setShowEqualPassError(true)
       return
     }
-
     e.preventDefault()
+    setIsLoading(true)
     ApiUser.changeUserPassword(
       token, userPersonal.id, {password: newUserPassword.password}
     )
@@ -65,7 +70,6 @@ const passwordResetForm = () => {
           throw new Error(resp.statusText)
         }
         if (resp.statusText=='OK') {
-          // orderedToast(`Пароль изменен`)
           setPassSuccessChanged(true)
           setOldPassword('')
           setOldPassCorrect(false)
@@ -74,8 +78,10 @@ const passwordResetForm = () => {
           // или задиспатчить запрос за данными =>
           // перерисовать всю страницу ???
         }
+        setIsLoading(false)
       })
       .catch((error) => {
+        setIsLoading(false)
         console.log(error.response)
       })
   }
@@ -132,6 +138,7 @@ const passwordResetForm = () => {
 
   return (
     <div className='login-form'>
+      { isLoading && <Spinner/> }
       <div className='container'>
         <Modal.Dialog className='shadow p-3 mb-5 bg-body rounded'>
 
@@ -178,6 +185,7 @@ const passwordResetForm = () => {
 
                   { !oldPassCorrect && <>
                     <Modal.Footer className='justify-content-center border-0'>
+                      <br/><br/><br/>
                       <Button
                         className='btn btn-outline-warning offset-md-4'
                         variant='outline-warning'
