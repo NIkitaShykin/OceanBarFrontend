@@ -6456,11 +6456,6 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.npmjs.org/hex-color-regex/-/hex-color-regex-1.1.0.tgz"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
-highlight-words@^1.0.6:
-  version "1.2.0"
-  resolved "https://registry.npmjs.org/highlight-words/-/highlight-words-1.2.0.tgz"
-  integrity sha512-Oz1v8z10MzF8x/G5llSVv4sNBSE4SFLXglohGKZf/8gNydRGD+vZJWssfXwivCpqD8PpWq1YBVwKgq0iLh5NzA==
-
 history@^4.9.0:
   version "4.10.1"
   resolved "https://registry.npmjs.org/history/-/history-4.10.1.tgz"
@@ -10563,15 +10558,6 @@ react-credit-cards@^0.8.3:
   integrity sha512-88XJErkkdDjeFevOxfWYV2dUs4ddNNXJMIgutqTlUH2pYfcaDeFv9MXNGCcJKvBv4+6GEnxbCToymNRNbEt/uw==
   dependencies:
     payment "^2.3.0"
-
-react-dadata@^2.13.0:
-  version "2.13.0"
-  resolved "https://registry.npmjs.org/react-dadata/-/react-dadata-2.13.0.tgz"
-  integrity sha512-DKI0bLrsQ+RyIIfoiBDAgAQW7PJYV8HT5e/je/rLvIl9A0Zpg6HuyFgqGQCYm8+zkhU5jCLVfnjwLQyNMEQUZQ==
-  dependencies:
-    highlight-words "^1.0.6"
-    lodash.debounce "^4.0.8"
-    shallowequal "^1.1.0"
 
 react-date-picker@^8.3.5:
   version "8.3.5"
