@@ -24,8 +24,9 @@ interface ITakeawayFormProps {
 const DeliveryForm: React.FC<ITakeawayFormProps> =
   ({handleRadioValueClearance}) => {
     const history = useHistory()
+    const city = 'г.Минск'
 
-    const [date, setDate] = useState<Date>(new Date(''))
+    const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
 
@@ -54,17 +55,17 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       }
     }
 
-    const time = useInput()
-    const adress = useInput()
-    const home = useInput()
+    const timeValidation = useInput()
+    const streetValidation = useInput()
+    const homeValidation = useInput()
 
     const streetSelect = (value:string) => {
       setStreet(value)
     }
 
     const isTimeInvalid =
-      !time.isDirty ||
-      time.isDirty && isTimeInputSkipped
+      !timeValidation.isDirty ||
+      timeValidation.isDirty && isTimeInputSkipped
 
     const timeSlots: Array<string> = [
       '16:00 - 18:00',
@@ -79,7 +80,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const dispatch = useDispatch()
     const handleSubmit = ((e: React.MouseEvent<Element, MouseEvent>)=> {
       dispatch(addOrder({
-        city: 'г.Минск',
+        city: city,
         street: street,
         homeNumber: homeNumber,
         homePart: homePart,
@@ -143,7 +144,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                     setTimeSlot(e.target.value)
                     setTimeInputSkipped(!e.target.value)
                   }}
-                  onBlur={(e) => time.onBlur(e)}
+                  onBlur={(e) => timeValidation.onBlur(e)}
                   isInvalid={isTimeInputSkipped}
                 >
                   <option value={''}>Выбрать...</option>
@@ -153,7 +154,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 </Form.Select>
               </FloatingLabel>
               {
-                (time.isDirty && !timeSlot) &&
+                (timeValidation.isDirty && !timeSlot) &&
                   <div className='error'>
                     Пожалуйста, выберите время доставки для текущего заказа
                   </div>
@@ -179,17 +180,17 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
               <div>
                 <Row className='mb-3'>
                   <Col>
-                    <span className='street-lable'>г.Минск</span>
+                    <span className='street-lable'>{city}</span>
                     <SearchField
                       required
                       searchValue={streetSelect}
-                      isInvalid={adress.isDirty && !street}
+                      isInvalid={streetValidation.isDirty && !streetValidation}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         setStreet(e.target.value)
                         setStreetError(false)
                       }}
                       onBlur={(e: FocusEvent<HTMLInputElement>) => {
-                        adress.onBlur(e)
+                        streetValidation.onBlur(e)
                         setStreetError(true)
                       }}
                     />
@@ -210,14 +211,14 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                       name='house'
                       maxLength={3}
                       defaultValue={homeNumber}
-                      isInvalid={home.isDirty && !homeNumber}
+                      isInvalid={homeValidation.isDirty && !homeNumber}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         setHomeNumber(e.target.value)
                         setHomeNumberError(false)
                       }
                       }
                       onBlur={(e: FocusEvent<HTMLInputElement>) => {
-                        home.onBlur(e)
+                        homeValidation.onBlur(e)
                         setHomeNumberError(true)
                       }}
                     />
