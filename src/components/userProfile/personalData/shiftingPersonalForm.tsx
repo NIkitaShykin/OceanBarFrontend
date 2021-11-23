@@ -10,8 +10,8 @@ import Cookies from 'js-cookie'
 
 
 const shiftingPersonalForm = (props:any) => {
-  const userData =
-  useSelector<AppStoreType, UserType>((state) => state.user)
+  // eslint-disable-next-line max-len
+  const userData = useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
 
   const token = Cookies.get('token')
 
