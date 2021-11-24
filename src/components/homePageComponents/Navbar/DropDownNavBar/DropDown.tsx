@@ -4,7 +4,7 @@ import Cookies from 'js-cookie'
 
 import {ApiAuth} from '../../../../api/ApiAuth'
 
-import {logOut} from '../../../../redux/actions'
+import {logOut, removeUser} from '../../../../redux/actions'
 import {useAppSelector, useAppDispatch} from '../../../../redux/hooks'
 
 import './dropDown.scss'
@@ -18,6 +18,7 @@ const DropDownNavBar = () => {
     ApiAuth.logout()
     Cookies.remove('token')
     dispatch(logOut())
+    dispatch(removeUser())
     history.push('/')
   }
 

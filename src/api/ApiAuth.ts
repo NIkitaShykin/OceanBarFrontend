@@ -1,21 +1,23 @@
-import {IAuthResponse} from '../common/types/authResponseTypes'
-import axios, {AxiosResponse} from 'axios'
+import axios, {AxiosResponse, AxiosRequestConfig} from 'axios'
 import Cookies from 'js-cookie'
 
-// export const API_URL = 'http://13.51.224.150:3000/api'
-export const API_URL = 'http://localhost:3001/api'
+import {url as API_URL} from './index'
+import {IAuthResponse} from '../common/types/authResponseTypes'
 
 export const $api = axios.create({
   // withCredentials: true,
   baseURL: API_URL
 })
 
-$api.interceptors.request.use((config: any) => { // AxiosRequestConfig
-  config.headers.Authorization = `Bearer ${Cookies.get('token')}`
+
+$api.interceptors.request.use((config: AxiosRequestConfig) => {
+  if (config.headers) {
+    config.headers.Authorization = `Bearer ${Cookies.get('token')}`
+  }
   return config
 })
 
-$api.interceptors.response.use((config: any) => {
+$api.interceptors.response.use((config: AxiosRequestConfig) => {
   return config
 }, (async (error) => {
   const originalRequest = error.config
@@ -37,17 +39,21 @@ $api.interceptors.response.use((config: any) => {
 )
 
 export const ApiAuth = {
-  // eslint-disable-next-line max-len
-  async login(email: string, password: string): Promise<AxiosResponse<IAuthResponse>> {
+  async login(
+    email: string,
+    password: string
+  ): Promise<AxiosResponse<IAuthResponse>> {
     return $api.post<IAuthResponse>('/users/auth', {
       email,
       password
     })
   },
 
-  // eslint-disable-next-line max-len
-  async register(email: string, password: string): Promise<AxiosResponse<IAuthResponse>> {
-    return $api.post<IAuthResponse>('/users/registration', {
+  async register(
+    email: string,
+    password: string
+  ): Promise<AxiosResponse<IAuthResponse>> {
+    return $api.post<IAuthResponse>('/users/register', {
       email,
       password
     })

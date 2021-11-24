@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, ChangeEvent} from 'react'
 import {useHistory} from 'react-router-dom'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
@@ -12,6 +12,8 @@ import {ValidationType} from '../../common/types/userTypes'
 
 import './SignUpForm.scss'
 
+type FormControlElement = HTMLInputElement | HTMLTextAreaElement
+
 const SignUp = () => {
   const history = useHistory()
 
@@ -23,12 +25,12 @@ const SignUp = () => {
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)
 
-    const onChange = (e: any) => {
+    const onChange = (e: ChangeEvent<FormControlElement>) => {
       setValue(e.target.value)
       setAuthFailed(false)
     }
 
-    const onBlur = (e: any) => {
+    const onBlur = (e: ChangeEvent<FormControlElement>) => {
       setDirty(true)
     }
 

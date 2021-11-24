@@ -27,6 +27,7 @@ export const toggleLoading =
 export const getUserPersonalDataTC = createAction<any>('GET_USER_DATA')
 export const setPersonalUsersData = createAction<any>('SET_USER_DATA')
 export const getUserAC = createAction<any>('SET_USER')
+export const removeUser = createAction('REMOVE_USER')
 
 export const addOrder = createAction<any>('ADD_ORDER')
 
