@@ -1,13 +1,12 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import axios from 'axios'
 import Cookies from 'js-cookie'
 import {Button, CloseButton, Form, Modal} from 'react-bootstrap'
 
 import Spinner from '../Spinner/Spinner'
 
-import {url} from '../../api'
+import {ApiAuth} from '../../api/ApiAuth'
 import {ApiCart} from '../../api/ApiCart'
 
 import {addDishToCart, logIn, getUserAC} from '../../redux/actions'
@@ -90,12 +89,11 @@ const LogInForm = () => {
   const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault()
     setIsLoading(true)
-    axios
-      .post<{token: string; data: {}}>(`${url}/users/auth`, user)
-      .then((response) => {
+
+    ApiAuth.login(user.email, user.password).then((response) => {
+      try {
         if (response.status >= 200 && response.status < 300) {
-          Cookies.set('token', response.data.token, {expires: 30})
-          localStorage.setItem('token', response.data.token) //
+          Cookies.set('token', response.data.accessToken, {expires: 30})
           setIsLoading(false)
           dispatch(logIn(response.data.data))
           dispatch(getUserAC(response.data.data))
@@ -104,7 +102,10 @@ const LogInForm = () => {
           setIsLoading(false)
           throw new Error(response.statusText)
         }
-      })
+      } catch (error) {
+        console.log(error)
+      }
+    })
       .catch((error) => {
         setIsLoading(false)
         setAuthFailed(true)

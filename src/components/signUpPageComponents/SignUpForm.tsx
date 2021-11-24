@@ -1,12 +1,14 @@
 import {useState} from 'react'
 import {useHistory} from 'react-router-dom'
-import axios from 'axios'
 import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 
-import {ValidationType} from '../../common/types/userTypes'
-import {url} from '../../api'
-import {useValidation} from '../../utils/validation'
 import Spinner from '../../components/Spinner/Spinner'
+
+import {ApiAuth} from '../../api/ApiAuth'
+
+import {useValidation} from '../../utils/validation'
+
+import {ValidationType} from '../../common/types/userTypes'
 
 import './SignUpForm.scss'
 
@@ -119,15 +121,15 @@ const SignUp = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault()
     setIsLoading(true)
-    axios
-      .post(`${url}/users/register`, user)
-      .then((response: any) => {
-        if (response.status > 400) {
-          setIsLoading(false)
-          throw new Error(response.statusText)
-        } else setIsLoading(false)
-      })
 
+    ApiAuth.register(user.email, user.password).then((response) => {
+      if (response.status > 400) {
+        setIsLoading(false)
+        throw new Error(response.statusText)
+      } else {
+        setIsLoading(false)
+      }
+    })
       .then(() => history.push('/signup-success'))
       .catch((error) => {
         setIsLoading(false)

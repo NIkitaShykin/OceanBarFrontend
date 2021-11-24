@@ -8,6 +8,7 @@ import {
 
 export const logIn = createAction<any>('SET_LOG_IN')
 export const logOut = createAction('SET_LOG_OUT')
+export const checkAuth = createAction('CHECK_AUTH')
 
 export const addDishToCart = createAction<DishInCart>('ADD_DISH_TO_CART')
 export const removeDishFromCart = createAction<number>('REMOVE_DISH_FROM_CART')

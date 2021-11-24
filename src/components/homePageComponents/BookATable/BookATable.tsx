@@ -1,17 +1,20 @@
-
-import {useSelector} from 'react-redux'
 import {useState} from 'react'
+import {useSelector} from 'react-redux'
 import {Card, Button, Form} from 'react-bootstrap'
+import Cookies from 'js-cookie'
+
+import {UserType, ValidationType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
-import {UserType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
-import {ValidationType} from '../../../common/types/userTypes'
+
 import './BookATable.scss'
 
-
 const BookATable = () => {
+  const token = Cookies.get('token')
+
   const user =
    useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
+
   const [needPhoneCall, setNeedPhoneCall] = useState<boolean>(false)
 
   const useInput = (initialValue: string, validations: ValidationType) => {
@@ -92,7 +95,7 @@ const BookATable = () => {
                 id='userName'
                 type='text'
                 placeholder={user.name}
-                value={userName.value}
+                value={token ? userName.value : ''}
                 isInvalid={isUserNameInvalid}
                 onChange={(e) => userName.onChange(e)}
                 onBlur={(e) => userName.onBlur(e)}
@@ -114,7 +117,7 @@ const BookATable = () => {
                 id='userPhones'
                 type='phoneNumber'
                 placeholder={user.phone}
-                value={phoneNumber.value}
+                value={token ? phoneNumber.value : ''}
                 isInvalid={isPhoneNumberInvalid}
                 onChange={(e) => phoneNumber.onChange(e)}
                 onBlur={(e) => phoneNumber.onBlur(e)}
