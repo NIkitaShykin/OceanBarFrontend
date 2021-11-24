@@ -99,14 +99,11 @@ const SearchDelivery = (props:PropsType) => {
         {isOpen && !isEmpty && !isLoading && (
           <ul
             className='autocomplete_delivery'
-          //  className={'streetLi'}
           >
             {adress.map((adress:any, index: number) => {
               const temp=adress.value.split(' ')
               return (
                 <li
-                  // className={'streetLi'}
-                  // style={{cursor: 'pointer'}}
                   className='autocomplete__item_delivery'
                   key={index}
                   onClick={() => itemClickHandler(temp[1])}

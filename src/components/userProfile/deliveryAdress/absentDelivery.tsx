@@ -20,21 +20,6 @@ const absentDelivery = (props:PropsType) => {
         >
         Добавить адрес доставки
         </button>
-        {/* <div
-          style={{color: 'black',
-            width: '150px',
-            fontSize: '15px',
-            textAlign: 'center',
-            margin: 'auto',
-            cursor: 'pointer',
-            border: '3px solid #ff9e05',
-            borderRadius: '10px'
-          }}
-          onClick={()=>{
-            props.changeStatus(false)
-          }}>
-          Добавить адрес доставки
-        </div> */}
       </div>
     </div>
 

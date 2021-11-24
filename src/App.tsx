@@ -14,6 +14,8 @@ import Footer from './components/homePageComponents/Footer/Footer'
 import {getDishesFromApiTC} from '../src/redux/reducers/dishesReducer'
 import {getUserPersonalDataTC} from '../src/redux/reducers/userReducer'
 import ScrollToTop from './components/scrollToTop/ScrollToTop'
+import AdminRoutes from './pages/adminPage/Admin/AdminRoutes'
+
 
 import '!style-loader!css-loader!react-toastify/dist/ReactToastify.css'
 
@@ -51,6 +53,7 @@ const App = () => {
             <ScrollToTop />
             <Container>
               <MenuRoutes />
+              <AdminRoutes />
             </Container>
           </main>
           <ContactsCard />

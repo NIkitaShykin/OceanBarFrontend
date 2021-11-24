@@ -4,6 +4,7 @@ export type BankCardType={
         focus: string,
         name: string,
         number: string
+        id?: number
         }
 
 export type userCardsType= BankCardType []

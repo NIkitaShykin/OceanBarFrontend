@@ -10,6 +10,7 @@ type PropTypes = {
   card: BankCardType,
   cardNumber: number,
   deleteCard: (cardNumber: number) => void
+  preview: boolean
 }
 export default class PaymentForm extends React.Component<PropTypes> {
   // constructor(props:PropTypes) {
@@ -17,7 +18,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
   //   this.state = this.props.card
   // }
 
-  [x: string]: any;
+  // [x: string]: any;
   state = {
     cvc: '',
     expiry: '',
@@ -27,7 +28,11 @@ export default class PaymentForm extends React.Component<PropTypes> {
   };
 
   componentDidMount() {
-    this.setState({...this.state, ...this.props.card
+    this.setState({...this.state, ...this.props.card,
+      // preview: this.props.preview
+      calback: (...args:any[]) => {
+        console.log(args)
+      }
     })
   }
 
@@ -36,7 +41,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
       <div style={{height: '150px', margin: '10px'}} >
 
         <div id='PaymentForm'
-          style={{transform: 'scale(0.5)',
+          style={{transform: 'scale(0.6)',
             width: '100px',
             paddingLeft: '40px'
           }} >
@@ -56,11 +61,11 @@ export default class PaymentForm extends React.Component<PropTypes> {
             style={{display: 'flex'}}
             onClick={() => this.props.deleteCard(this.props.cardNumber)}
           >
-            {/* <i className=
-              'far fa-trash-alt icon-height delete-button'></i> */}
-            <h2>&#128465;</h2>
-            <i style=
-              {{marginLeft: '10px', fontSize: '12px'}}>удалить карту</i>
+            <i className=
+              'far fa-trash-alt icon-height delete-button'></i>
+            {/* <h2>&#128465;</h2> */}
+            {/* <i style=
+              {{marginLeft: '10px', fontSize: '12px'}}>удалить карту</i> */}
           </div>
         </div>
 
