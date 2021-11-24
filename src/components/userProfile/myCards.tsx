@@ -13,19 +13,19 @@ const DeliveryAdress = () => {
    useSelector<AppStoreType, userCardsType>((state) => state.bankCard.userCards)
 
   const [isAddingCard, setIsAddingCard] = useState<boolean>(false)
-  const [cardAbsent, setCardAbsent] = useState<boolean>(true)
+  const [cardAbsent, setCardAbsent] = useState<boolean>(false)
 
   useEffect(() => {
-    if (userCards.length>1) {
+    if (userCards.length<1) {
       setCardAbsent(false)
     } else {
-      setCardAbsent(true)
-      setIsAddingCard(true)
+      setCardAbsent(false)
+      setIsAddingCard(false)
     }
   }, [userCards])
 
   const changeAbsent=(status:boolean)=>{
-    setCardAbsent(status)
+    setCardAbsent(false)
   }
 
   const changeIsAddingCard=()=>{

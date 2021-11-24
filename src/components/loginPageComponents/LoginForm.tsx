@@ -10,7 +10,7 @@ import Spinner from '../Spinner/Spinner'
 import {url} from '../../api'
 import {ApiCart} from '../../api/ApiCart'
 
-import {addDishToCart, logIn} from '../../redux/actions'
+import {addDishToCart, logIn, getUserAC} from '../../redux/actions'
 
 import {useValidation} from '../../utils/validation'
 import {mapApiDishToDishInCart} from '../../utils/typeMappers'
@@ -98,6 +98,7 @@ const LogInForm = () => {
           localStorage.setItem('token', response.data.token) //
           setIsLoading(false)
           dispatch(logIn(response.data.data))
+          dispatch(getUserAC(response.data.data))
           history.push('/')
         } else {
           setIsLoading(false)

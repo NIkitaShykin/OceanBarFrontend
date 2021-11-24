@@ -62,7 +62,7 @@ const ListItem = (props: PropsType) => {
               }
           }
         >
-          <NavLink to={'/dish/' + dish.id}>
+          <NavLink to={'/dishes/' + dish.id}>
             <div
               key={dish.id}
               style={

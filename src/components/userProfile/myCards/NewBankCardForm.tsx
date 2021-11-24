@@ -10,7 +10,7 @@ import {BankCardType} from '../../../common/types/bankCardTypes'
 import './NewBankCardForm.scss'
 
 type PropTypes = {
-  returnCard: (card: BankCardType) => void
+  returnCard: (card: BankCardType ) => void
 }
 
 export default class PaymentForm extends React.Component<PropTypes> {
@@ -47,7 +47,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   render() {
     const handleSubmit=()=>{
-      this.props.returnCard(this.state)
+      const id=Date.now()
+      this.props.returnCard({...this.state, id})
     }
 
     return (
@@ -81,7 +82,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   flexDirection: 'column'}}>
                   <span style={{fontSize: '10px'}}>Имя владельца</span>
                   <input style={{borderRadius: '5px', height: '25px',
-                    marginTop: '-6px', width: '200px', border: '1px solid'}}
+                    marginTop: '-6px', width: '200px', border: '1px solid',
+                    fontSize: '10px'}}
                   type='text'
                   name='name'
                   placeholder='&hellip;'
@@ -93,7 +95,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
                 <form style={{display: 'flex', flexDirection: 'column'}}>
                   <span style={{fontSize: '10px'}}>Номер карты</span>
                   <input style={{borderRadius: '5px', height: '25px',
-                    marginTop: '-5px', width: '200px', border: '1px solid'}}
+                    marginTop: '-5px', width: '200px', border: '1px solid',
+                    fontSize: '10px'}}
                   type='number'
                   name='number'
                   placeholder='&hellip;'
@@ -115,7 +118,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   >
                     <span style={{fontSize: '10px'}}>Срок действия</span>
                     <input style={{borderRadius: '5px', height: '25px',
-                      marginTop: '-5px', width: '70px', border: '1px solid'}}
+                      marginTop: '-5px', width: '70px', border: '1px solid',
+                      fontSize: '10px'}}
                     type='number'
                     name='expiry'
                     placeholder='мм/гг'
@@ -133,7 +137,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   >
                     <span style={{fontSize: '10px'}}>CVV</span>
                     <input style={{borderRadius: '5px', height: '25px',
-                      marginTop: '-5px', width: '50px', border: '1px solid'}}
+                      marginTop: '-5px', width: '50px', border: '1px solid',
+                      fontSize: '10px'}}
                     type='number'
                     name='cvc'
                     placeholder='***'
