@@ -14,8 +14,13 @@ type PropTypes = {
 }
 
 export default class PaymentForm extends React.Component<PropTypes> {
-[x: string]: any;
   state = {cvc: '', expiry: '', focus: '', name: '', number: ''}
+
+
+  expiryStyle='red'
+  focusStyle='red'
+  nameStyle='red'
+  numberStyle='red'
 
   fieldFocus = (e: any) => {
     this.setState({focus: e.target.name})
@@ -23,18 +28,28 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   numberChange = (e: any) => {
     const {name, value} = e.target
-
     if ( e.target.value.length<17) {
       this.setState({[name]: value})
     }
   }
+
+  // err=true
+  // style = this.err ? 'red' : 'green'
+
   nameChange = (e: any) => {
     const {name, value} = e.target
-    this.setState({[name]: value})
+    if (isNaN(+e.target.value)==false) {
+      // this.cvcStyle='green'
+      // this.err=false
+      // console.log('поменял')
+    } else {
+      this.setState({[name]: value})
+    }
   }
+
   expiryChange = (e:any) => {
     const {name, value} = e.target
-    if ( e.target.value.length<5) {
+    if ( e.target.value.length<5 && e.target.value<1226 ) {
       this.setState({[name]: value})
     }
   }
@@ -50,6 +65,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
       const id=Date.now()
       this.props.returnCard({...this.state, id})
     }
+    // console.log(this.style)
 
     return (
       <div style={{height: '100%', margin: '10px'}} >
@@ -83,9 +99,13 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   <span style={{fontSize: '10px'}}>Имя владельца</span>
                   <input style={{borderRadius: '5px', height: '25px',
                     marginTop: '-6px', width: '200px', border: '1px solid',
-                    fontSize: '10px'}}
+                    fontSize: '10px',
+                    // borderColor: this.style
+                    // ------------------------------
+                  }}
                   type='text'
                   name='name'
+                  value={this.state.name}
                   placeholder='&hellip;'
                   onChange={this.nameChange}
                   onFocus={this.fieldFocus}
@@ -99,6 +119,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
                     fontSize: '10px'}}
                   type='number'
                   name='number'
+                  value={this.state.number}
                   placeholder='&hellip;'
                   onChange={this.numberChange}
                   onFocus={this.fieldFocus}
@@ -123,6 +144,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
                     type='number'
                     name='expiry'
                     placeholder='мм/гг'
+                    value={this.state.expiry}
                     onChange={this.expiryChange}
                     onFocus={this.fieldFocus}
                     className='testtt'
@@ -135,13 +157,14 @@ export default class PaymentForm extends React.Component<PropTypes> {
                       flexDirection: 'column',
                     }}
                   >
-                    <span style={{fontSize: '10px'}}>CVV</span>
+                    <span style={{fontSize: '10px'}}>CVC</span>
                     <input style={{borderRadius: '5px', height: '25px',
                       marginTop: '-5px', width: '50px', border: '1px solid',
                       fontSize: '10px'}}
                     type='number'
                     name='cvc'
                     placeholder='***'
+                    value={this.state.cvc}
                     onChange={this.cvcChange}
                     onFocus={this.fieldFocus}
                     />

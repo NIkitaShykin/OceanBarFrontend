@@ -1,3 +1,7 @@
+import {useHistory} from 'react-router-dom'
+import Cookies from 'js-cookie'
+import {useAppDispatch} from '../../redux/hooks'
+import {logOut} from '../../redux/actions'
 import OrderHistory from '../../components/userProfile/orderHistory'
 import DeliveryAdress from '../../components/userProfile/deliveryAdress'
 import MyCreditCards from '../../components/userProfile/myCards'
@@ -6,6 +10,18 @@ import PersonalData from '../../components/userProfile/personalData'
 import './profile.scss'
 
 const UserProfile = () => {
+  const history = useHistory()
+  const dispatch = useAppDispatch()
+
+
+  const handleClose = () => {
+    Cookies.remove('token')
+    localStorage.removeItem('token')
+    dispatch(logOut())
+    history.push('/')
+  }
+
+
   return (
     <div>
       <div className='container'>
@@ -14,7 +30,7 @@ const UserProfile = () => {
             Профиль
           </h1>
           <div className='profile-line'></div>
-          <button className='btn-exit btn '>Выйти</button>
+          <button className='btn-exit btn' onClick={handleClose}>Выйти</button>
         </div>
 
         <div className='row justify-content-start'>

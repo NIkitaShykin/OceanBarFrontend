@@ -16,7 +16,6 @@ const ConfirmReservTable = (props:any) => {
           <Card.Body>
             <Card.Title><h2>Столик забронирован!</h2></Card.Title>
             <Card.Text className='mb-5'>
-              {/* <h4>Администратор свяжется с вами в течение 10 минут</h4> */}
             </Card.Text>
             <Button
               variant='outline-warning'

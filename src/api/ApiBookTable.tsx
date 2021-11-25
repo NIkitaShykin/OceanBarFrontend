@@ -9,7 +9,7 @@ export const ApiReserve = {
   bookTableUnregistred(order:bookingOrderType) {
     {
       return Promise.resolve(
-        instance.post(`booking`, order )
+        instance.post('booking/', order )
       )
     }
   }

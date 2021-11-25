@@ -13,8 +13,16 @@ const AdminHeader = () => (
           <NavLink
             className={'menuLinkStyle'}
             activeClassName={'menuActiveLink'}
-            to={'/admin/dishes'}>
-            <h5>Блюда</h5>
+            to={'/admin/dishes/new'}>
+            <h5>Добавить блюдо</h5>
+          </NavLink>
+        </Col>
+        <Col xs={'auto'}>
+          <NavLink
+            className={'menuLinkStyle'}
+            activeClassName={'menuActiveLink'}
+            to={'/admin/dishes/delete'}>
+            <h5>Удалить блюдо</h5>
           </NavLink>
         </Col>
         <Col xs={'auto'}>
@@ -22,7 +30,15 @@ const AdminHeader = () => (
             className={'menuLinkStyle'}
             activeClassName={'menuActiveLink'}
             to={'/admin/tables'}>
-            <h5>Столы</h5>
+            <h5>Забронированные столы</h5>
+          </NavLink>
+        </Col>
+        <Col>
+          <NavLink
+            className={'menuLinkStyle'}
+            activeClassName={'menuActiveLink'}
+            to={'/admin/orders'}>
+            <h5>Заказы</h5>
           </NavLink>
         </Col>
 

@@ -6,11 +6,11 @@ import {AppStoreType} from '../../redux/reducers/rootReducer'
 import {useValidation} from '../../utils/validation'
 import {ValidationType} from '../../common/types/userTypes'
 import {UserType} from '../../common/types/userTypes'
-// import {bookingOrderType} from '../../common/types/bookingTypes'
+import {bookingOrderType} from '../../common/types/bookingTypes'
 import './OrderForms.scss'
 
 interface IReserveATableFormProps {
-  handleBookingData: (bookingOrder: any) => void
+  handleBookingData: (reservOrder: bookingOrderType) => void
 }
 
 const ReserveATableForm: React.FC<IReserveATableFormProps> =
@@ -20,7 +20,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
-    const [tableSize, setTableSize] = useState<string>('')
+    const [tableSize, setTableSize] = useState<number>(2)
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
     const [isTableInputSkipped, setTableInputSkipped] = useState<boolean>(false)
 
@@ -75,7 +75,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       {count: 'двоих гостей', key: 2},
       {count: 'четверых гостей', key: 4},
       {count: 'шестерых гостей', key: 6},
-      {count: 'восьмерых гостей', key: 7},
+      {count: 'восьмерых гостей', key: 8},
       {count: 'десятерых гостей', key: 10},
     ]
 
@@ -114,11 +114,27 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     const reservOrder={
       date: strDate,
-      time: timeSlot,
-      amountofpeople: tableSize,
       name: userName.value,
-      phone: phoneNumber.value
+      phone: phoneNumber.value,
+      time: timeSlot,
+      amountofpeople: tableSize
     }
+
+    // -------------------------------------------------------
+
+    //  const data={date: strDate,
+    //   name: userName.value,
+    //   phone: phoneNumber.value,
+    //   time: timeSlot}
+
+    // let reservOrder: any ={}
+    // if (tableSize==2) {
+    //   reservOrder = {...data, amountofpeople: 2, forTwoPerson: 1}
+    // }
+    // if (tableSize==4) {
+    //   reservOrder = {...data, amountofpeople: 4, forFourPerson: 1}
+    // }
+    // -------------------------------------------------------
 
     return (
       <div className='reserve-a-table-form-booking shadow'>
@@ -170,7 +186,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                   aria-label='Floating label select example'
                   defaultValue={tableSize}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                    setTableSize(e.target.value)
+                    setTableSize(+ e.target.value)
                     setTableInputSkipped(!e.target.value)
                   }}
                   onBlur={(e) => table.onBlur(e)}

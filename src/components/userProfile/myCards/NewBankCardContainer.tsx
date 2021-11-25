@@ -1,5 +1,5 @@
-// import {useSelector} from 'react-redux'
 import {useDispatch} from 'react-redux'
+import {CloseButton, Modal} from 'react-bootstrap'
 import {BankCardType} from '../../../common/types/bankCardTypes'
 import {setBankCardTC} from '../../../redux/reducers/bankCardReducer'
 import NewBankCardForm from './NewBankCardForm'
@@ -10,10 +10,6 @@ type PropsType = {
 }
 
 const previewCard = (props:PropsType) => {
-  // const userCards = useSelector<AppStoreType, any>((state) => state.bankCard)
-  // console.log(userCards)
-
-
   const dispatch = useDispatch()
 
   const returnCard=(card: BankCardType)=>{
@@ -21,8 +17,15 @@ const previewCard = (props:PropsType) => {
     props.changeStatus()
   }
 
+  const handleClose = () => {
+    props.changeStatus()
+  }
+
   return (
     <div className='info-block' >
+      <Modal.Header className='border-0'>
+        <CloseButton onClick={() => handleClose()} />
+      </Modal.Header>
       <NewBankCardForm returnCard={returnCard}/>
       <br/>
     </div>
