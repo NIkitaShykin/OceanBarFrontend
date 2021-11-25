@@ -125,7 +125,7 @@ const SignUp = () => {
     setIsLoading(true)
 
     ApiAuth.register(user.email, user.password).then((response) => {
-      if (response.status > 400) {
+      if (response.status >= 400) {
         setIsLoading(false)
         throw new Error(response.statusText)
       } else {

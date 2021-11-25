@@ -22,7 +22,7 @@ import {checkAuth} from './redux/actions'
 import {getDishesFromApiTC} from '../src/redux/reducers/dishesReducer'
 import {getUserPersonalDataTC} from '../src/redux/reducers/userReducer'
 
-import {$api as url, inThirtyMinutes} from './api/ApiAuth'
+import {$api as url, TOKEN_EXPIRATION_TIME} from './api/ApiAuth'
 
 import SwitchPager from './utils/swich'
 
@@ -35,9 +35,12 @@ const App = () => {
   const handleAuthCheck = async () => {
     const response = await axios.get<IAuthResponse>(
       `${url}/users/refreshUser`,
-      // {withCredentials: true}
     )
-    Cookies.set('token', response.data.accessToken, {expires: inThirtyMinutes})
+    Cookies.set(
+      'token',
+      response.data.accessToken,
+      {expires: TOKEN_EXPIRATION_TIME}
+    )
     dispatch(checkAuth())
     dispatch(getUserPersonalDataTC())
   }

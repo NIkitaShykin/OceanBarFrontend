@@ -6,7 +6,7 @@ import {Button, CloseButton, Form, Modal} from 'react-bootstrap'
 
 import Spinner from '../Spinner/Spinner'
 
-import {ApiAuth, inThirtyMinutes} from '../../api/ApiAuth'
+import {ApiAuth, TOKEN_EXPIRATION_TIME} from '../../api/ApiAuth'
 import {ApiCart} from '../../api/ApiCart'
 
 import {addDishToCart, logIn, getUserAC} from '../../redux/actions'
@@ -98,7 +98,7 @@ const LogInForm = () => {
           Cookies.set(
             'token',
             response.data.accessToken,
-            {expires: inThirtyMinutes}
+            {expires: TOKEN_EXPIRATION_TIME}
           )
           setIsLoading(false)
           dispatch(logIn(response.data.data))

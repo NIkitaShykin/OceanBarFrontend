@@ -1,6 +1,7 @@
 import {useState, ChangeEvent} from 'react'
 import {useSelector} from 'react-redux'
 import {Card, Button, Form} from 'react-bootstrap'
+import Cookies from 'js-cookie'
 
 import {UserType, ValidationType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
@@ -11,6 +12,8 @@ import './BookATable.scss'
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement
 
 const BookATable = () => {
+  const token = Cookies.get('token')
+
   const user =
     useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
 
@@ -66,7 +69,7 @@ const BookATable = () => {
   return (
     <>
       {
-        needPhoneCall ?
+        needPhoneCall ? (
           <div className='registration-form'>
             <div className='container'>
               <Card className='shadow p-3 my-5 bg-body rounded'>
@@ -85,7 +88,8 @@ const BookATable = () => {
                 </Card.Body>
               </Card>
             </div>
-          </div> :
+          </div>
+        ) : (
           <div className='book-a-table'>
             <h2 className='bookTable'>Забронируйте стол по телефону</h2>
             <div className='order-form'>
@@ -95,7 +99,7 @@ const BookATable = () => {
                     id='userName'
                     type='text'
                     placeholder={user.name}
-                    value={userName.value}
+                    value={token ? userName.value : ''}
                     isInvalid={isUserNameInvalid}
                     onChange={(e) => userName.onChange(e)}
                     onBlur={(e) => userName.onBlur(e)}
@@ -117,7 +121,7 @@ const BookATable = () => {
                     id='userPhones'
                     type='phoneNumber'
                     placeholder={user.phone}
-                    value={phoneNumber.value}
+                    value={token ? phoneNumber.value : ''}
                     isInvalid={isPhoneNumberInvalid}
                     onChange={(e) => phoneNumber.onChange(e)}
                     onBlur={(e) => phoneNumber.onBlur(e)}
@@ -151,6 +155,7 @@ const BookATable = () => {
               </button>
             </div>
           </div>
+        )
       }
     </>
   )
