@@ -26,6 +26,10 @@ export default class PaymentForm extends React.Component<PropTypes> {
     this.setState({focus: e.target.name})
   }
 
+   cvcOnBlur = (e: any) => {
+     this.setState({focus: 'number'})
+   }
+
   numberChange = (e: any) => {
     const {name, value} = e.target
     if ( e.target.value.length<17) {
@@ -65,7 +69,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
       const id=Date.now()
       this.props.returnCard({...this.state, id})
     }
-    // console.log(this.style)
+
 
     return (
       <div style={{height: '100%', margin: '10px'}} >
@@ -105,8 +109,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   }}
                   type='text'
                   name='name'
-                  value={this.state.name}
-                  placeholder='&hellip;'
+                  // value={this.state.name}
+                  placeholder='Ivan Ivanov'
                   onChange={this.nameChange}
                   onFocus={this.fieldFocus}
                   />
@@ -120,7 +124,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   type='number'
                   name='number'
                   value={this.state.number}
-                  placeholder='&hellip;'
+                  placeholder='xxxx xxxx xxxx xxxx'
                   onChange={this.numberChange}
                   onFocus={this.fieldFocus}
                   />
@@ -143,7 +147,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
                       fontSize: '10px'}}
                     type='number'
                     name='expiry'
-                    placeholder='мм/гг'
+                    placeholder='месяц/год'
                     value={this.state.expiry}
                     onChange={this.expiryChange}
                     onFocus={this.fieldFocus}
@@ -167,6 +171,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
                     value={this.state.cvc}
                     onChange={this.cvcChange}
                     onFocus={this.fieldFocus}
+                    onBlur={this.cvcOnBlur}
                     />
                   </form>
 

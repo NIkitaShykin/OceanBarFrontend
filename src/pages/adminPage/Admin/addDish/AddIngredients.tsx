@@ -1,14 +1,15 @@
 // import {useState} from 'react'
-// import {Col, Row} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 
-import {IngredientType} from '../../../../common/types/dishesType'
+// import {IngredientType} from '../../../../common/types/dishesType'
 
 type PropsType = {
   // setIngredient: (arg0: any) => void
-  ingredients: Array<IngredientType>
+  ingredients: Array<string>
+  inputDishIngredients:(e:any, id: number)=>void
 }
 
-const ShowIngridients = (props:PropsType) => {
+const AddIngredients = (props:PropsType) => {
   // const [ingredients, setIngredients] = useState<Array<IngredientType>>(
   //   props.ingredients
   // )
@@ -24,20 +25,22 @@ const ShowIngridients = (props:PropsType) => {
 
   const ingridientsItem = props.ingredients.map((ingredient, i) => {
     return (
-
       <>
-        <li style={{
-          lineHeight: '15px',
-          paddingLeft: '0px'
-        }}>
-          {ingredient.name}
-        </li>
+        <Form.Control
+          key={i}
+          style={{width: '300px'}}
+          id='userName'
+          type='text'
+          placeholder={`ингридиет ${i+1}`}
+          value={ingredient}
+          onChange={(e) => props.inputDishIngredients(e, i)}
+          // onBlur={(e) => userName.onBlur(e)}
+        />
       </>
-
     )
   })
 
   return <ul>{ingridientsItem}</ul>
 }
 
-export default ShowIngridients
+export default AddIngredients

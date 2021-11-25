@@ -7,7 +7,7 @@ import {useValidation} from '../../utils/validation'
 import {ValidationType} from '../../common/types/userTypes'
 import {UserType} from '../../common/types/userTypes'
 import {bookingOrderType} from '../../common/types/bookingTypes'
-import './OrderForms.scss'
+import './BookingForms.scss'
 
 interface IReserveATableFormProps {
   handleBookingData: (reservOrder: bookingOrderType) => void
