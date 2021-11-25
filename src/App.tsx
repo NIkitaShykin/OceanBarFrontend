@@ -1,9 +1,9 @@
 import {useEffect} from 'react'
 import {BrowserRouter as Router} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import axios from 'axios'
 import {ToastContainer} from 'react-toastify'
 import {Container} from 'react-bootstrap'
+import axios from 'axios'
 import Cookies from 'js-cookie'
 
 import NavBarComponent from './components/homePageComponents/Navbar/navBarComp'
@@ -11,19 +11,18 @@ import ContactsCard from
   './components/homePageComponents/ContactsCard/ContactsCard'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import Footer from './components/homePageComponents/Footer/Footer'
-import {getDishesFromApiTC} from '../src/redux/reducers/dishesReducer'
-import {getUserPersonalDataTC} from '../src/redux/reducers/userReducer'
 
 import MenuRoutes from './pages/menuPage/Menu/MenuRoutes'
 import ScrollToTop from './components/scrollToTop/ScrollToTop'
 import AdminRoutes from './pages/adminPage/Admin/AdminRoutes'
 
-
 import {IAuthResponse} from './common/types/authResponseTypes'
 
-import {url} from './api/index'
-
 import {checkAuth} from './redux/actions'
+import {getDishesFromApiTC} from '../src/redux/reducers/dishesReducer'
+import {getUserPersonalDataTC} from '../src/redux/reducers/userReducer'
+
+import {$api as url, inThirtyMinutes} from './api/ApiAuth'
 
 import SwitchPager from './utils/swich'
 
@@ -35,11 +34,12 @@ const App = () => {
 
   const handleAuthCheck = async () => {
     const response = await axios.get<IAuthResponse>(
-      `${url}/refreshUser`,
-      {withCredentials: true}
+      `${url}/users/refreshUser`,
+      // {withCredentials: true}
     )
-    Cookies.set('token', response.data.accessToken, {expires: 30})
+    Cookies.set('token', response.data.accessToken, {expires: inThirtyMinutes})
     dispatch(checkAuth())
+    dispatch(getUserPersonalDataTC())
   }
 
   useEffect(() => {
@@ -48,7 +48,6 @@ const App = () => {
     }
 
     dispatch(getDishesFromApiTC())
-    dispatch(getUserPersonalDataTC())
   }, [])
 
   return (

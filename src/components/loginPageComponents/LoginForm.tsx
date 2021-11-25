@@ -6,7 +6,7 @@ import {Button, CloseButton, Form, Modal} from 'react-bootstrap'
 
 import Spinner from '../Spinner/Spinner'
 
-import {ApiAuth} from '../../api/ApiAuth'
+import {ApiAuth, inThirtyMinutes} from '../../api/ApiAuth'
 import {ApiCart} from '../../api/ApiCart'
 
 import {addDishToCart, logIn, getUserAC} from '../../redux/actions'
@@ -95,7 +95,11 @@ const LogInForm = () => {
     ApiAuth.login(user.email, user.password).then((response) => {
       try {
         if (response.status >= 200 && response.status < 300) {
-          Cookies.set('token', response.data.accessToken, {expires: 30})
+          Cookies.set(
+            'token',
+            response.data.accessToken,
+            {expires: inThirtyMinutes}
+          )
           setIsLoading(false)
           dispatch(logIn(response.data.data))
           dispatch(getUserAC(response.data.data))

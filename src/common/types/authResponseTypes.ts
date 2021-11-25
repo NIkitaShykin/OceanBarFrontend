@@ -1,7 +1,7 @@
 export interface IAuthResponse {
   accessToken: string,
   refreshToken: string,
-  data: IUser
+  data?: IUser
 }
 
 export interface IUser {

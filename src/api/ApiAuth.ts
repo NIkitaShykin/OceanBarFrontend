@@ -9,6 +9,7 @@ export const $api = axios.create({
   baseURL: API_URL
 })
 
+export const inThirtyMinutes = new Date(new Date().getTime() + 30 * 60 * 1000)
 
 $api.interceptors.request.use((config: AxiosRequestConfig) => {
   if (config.headers) {
@@ -25,10 +26,14 @@ $api.interceptors.response.use((config: AxiosRequestConfig) => {
     originalRequest._isRetry = true
     try {
       const response = await axios.get<IAuthResponse>(
-        `${API_URL}/refresh`,
-        {withCredentials: true}
+        `${API_URL}/users/refreshUser`,
+        // {withCredentials: true}
       )
-      Cookies.set('token', response.data.accessToken, {expires: 30})
+      Cookies.set(
+        'token',
+        response.data.accessToken,
+        {expires: inThirtyMinutes}
+      )
       return $api.request(originalRequest)
     } catch (error) {
       console.log('is not authorized!')
