@@ -7,19 +7,16 @@ import {clearCart} from '../../redux/actions'
 import ScrollToTop from '../../components/scrollToTop/ScrollToTop'
 import {ApiCart} from '../../api/ApiCart'
 import {useAppSelector} from '../../redux/hooks'
-import {fetchOrder} from '../../api/ApiOrder'
 
 import './confirmation.scss'
 
+// type PropsType = {
+//   orderID: number
+// }
 
 const Message = () => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const orderID = fetchOrder()
-  // .then((responce: any) => {
-  //   console.log(responce.data.order.id)
-  // })
-  console.log(orderID)
 
   const handleClose = () => {
     history.push('/')
@@ -41,7 +38,7 @@ const Message = () => {
           <Card.Body>
             <Card.Title><h2>Спасибо за ваш заказ!</h2></Card.Title>
             <Card.Text className='mb-5 message-text'>
-              Номер вашего заказа : XXXX от {date} г.
+              Номер вашего заказа : 36 от {date} г.
             </Card.Text>
             <Button
               variant='outline-warning'

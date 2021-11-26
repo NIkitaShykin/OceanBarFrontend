@@ -6,7 +6,6 @@ import Cookies from 'js-cookie'
 import {createOrder} from '../../api/ApiOrder'
 import {useAppSelector} from '../../redux/hooks'
 import Message from './Message'
-// import {FetchedOrderType} from '../../common/types/orderType'
 import OrderDetailsSection from
   '../../components/confirmationComponents/OrderDetailsSection'
 
@@ -16,6 +15,7 @@ import './confirmation.scss'
 const Confirmation = () => {
   const history = useHistory()
   const [success, setSuccess] = useState<boolean>(false)
+  // const [orderID, setOrderID] = useState<number>(0)
 
   const orderCompleted = useAppSelector(
     (state) => state.order
@@ -26,9 +26,10 @@ const Confirmation = () => {
   }
   const handleSubmit = () => {
     createOrder(orderCompleted, Cookies.get('token'))
-    // .then((responce: any) => {
-    //   console.log(responce.data.order.id)
-    // })
+      .then((responce: any) => {
+        // console.log(responce.data.id)
+        // setOrderID(responce.data.id)
+      })
     setSuccess(!success)
   }
 
