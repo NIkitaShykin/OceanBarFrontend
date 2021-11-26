@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit'
 import {AnyAction} from 'redux'
 import {RootState} from '../store'
 import {ThunkAction} from 'redux-thunk'
-import {getUserAC, toggleLoadingUser} from '../actions'
+import {getUserAC, toggleLoadingUser, removeUser} from '../actions'
 import {ApiUser} from '../../api/ApiUser'
 import {UserType} from '../../common/types/userTypes'
 import {DeliveryAdressType} from '../../common/types/userTypes'
@@ -41,6 +41,9 @@ const userReducer = createReducer(initialState, (builder) => {
         ...state,
         isLoading: action.payload,
       }
+    })
+    .addCase(removeUser, (state, action) => {
+      return initialState
     })
 })
 
