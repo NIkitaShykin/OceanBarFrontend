@@ -5,7 +5,7 @@ $mainColor: #ff9e05;
   gap: 1rem;
   font-size: 48px;
   line-height: 55px;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 80px;
   color: $mainColor;
 }
@@ -30,10 +30,13 @@ $mainColor: #ff9e05;
 }
 
 .profile-block {
+  width: 100%;
   margin-top: 30px;
   margin-bottom: 30px;
   background: #ffffff;
   box-shadow: 0px 12px 40px rgba(96, 96, 96, 0.16);
+  border: 1px solid lightgrey;
+  border-radius: 5px;
   padding: 25px;
   text-align: left;
 }
@@ -46,4 +49,10 @@ $mainColor: #ff9e05;
 
 .history {
   height: 1040px;
+}
+
+.my-cards {
+  display: flex;
+  font-size: 18px;
+  flex-wrap: wrap;
 }

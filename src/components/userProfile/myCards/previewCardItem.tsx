@@ -13,12 +13,6 @@ type PropTypes = {
   preview: boolean
 }
 export default class PaymentForm extends React.Component<PropTypes> {
-  // constructor(props:PropTypes) {
-  //   super(props)
-  //   this.state = this.props.card
-  // }
-
-  // [x: string]: any;
   state = {
     cvc: '',
     expiry: '',
@@ -29,7 +23,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   componentDidMount() {
     this.setState({...this.state, ...this.props.card,
-      // preview: this.props.preview
+
       calback: (...args:any[]) => {
         console.log(args)
       }
@@ -62,13 +56,10 @@ export default class PaymentForm extends React.Component<PropTypes> {
             onClick={() => this.props.deleteCard(this.props.cardNumber)}
           >
             <i className=
-              'far fa-trash-alt icon-height delete-button'></i>
-            {/* <h2>&#128465;</h2> */}
-            {/* <i style=
-              {{marginLeft: '10px', fontSize: '12px'}}>удалить карту</i> */}
+              'far fa-trash-alt icon-height delete-button'>
+            </i>
           </div>
         </div>
-
       </div>
     )
   }

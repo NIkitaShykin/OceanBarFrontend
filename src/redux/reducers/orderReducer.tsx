@@ -1,20 +1,21 @@
 import {createReducer} from '@reduxjs/toolkit'
-import {TOrderType} from '../../common/types/cartTypes'
-
-import {DeliveryAdressType} from '../../common/types/userTypes'
+import {CommonOrderType} from '../../common/types/orderType'
 import {addOrder} from '../actions'
 
-const initialState: DeliveryAdressType & TOrderType = {
-  city: 'г.Минск',
-  street: '',
-  homeNumber: '',
-  homePart: '',
-  flat: '',
+const initialState: CommonOrderType = {
+  address: {
+    city: '',
+    street: '',
+    homeNumber: '',
+    homePart: '',
+    flat: '',
+  },
 
   date: '',
   tableSize: '',
-  timeSlot: '',
-  orderType: ''
+  time: '',
+  paymentType: '',
+  price: ''
 }
 
 const orderReducer = createReducer(initialState, (builder) => {

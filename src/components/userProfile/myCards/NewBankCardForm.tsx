@@ -73,11 +73,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
     return (
       <div style={{height: '100%', margin: '10px'}} >
-
         <div id='PaymentForm' >
           <Row>
-            <Col xs={'auto'} sm={1} md={6} lg={6}>
-            </Col>
             <Col xs={'auto'} sm={7} md={5} lg={6}>
               Введите реквизиты карты
             </Col>
@@ -130,12 +127,13 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   />
                 </form>
 
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  width: '200px'
-                }}>
-
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    width: '200px'
+                  }}
+                >
                   <form
                     style={{display: 'flex',
                       flexDirection: 'column',
@@ -154,7 +152,6 @@ export default class PaymentForm extends React.Component<PropTypes> {
                     className='testtt'
                     />
                   </form>
-
 
                   <form
                     style={{display: 'flex',
@@ -188,14 +185,11 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   type='submit'
                   onClick={() => handleSubmit()}
                 >
-          Готово
+                  Готово
                 </Button>
-
               </div>
             </Col>
           </Row>
-
-
         </div>
         <br/>
       </div>

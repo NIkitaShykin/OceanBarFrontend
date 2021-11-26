@@ -1,6 +1,12 @@
+import {useState} from 'react'
 import {Button} from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
+import Cookies from 'js-cookie'
 
+import {createOrder} from '../../api/ApiOrder'
+import {useAppSelector} from '../../redux/hooks'
+import Message from './Message'
+// import {FetchedOrderType} from '../../common/types/orderType'
 import OrderDetailsSection from
   '../../components/confirmationComponents/OrderDetailsSection'
 
@@ -9,39 +15,56 @@ import './confirmation.scss'
 
 const Confirmation = () => {
   const history = useHistory()
+  const [success, setSuccess] = useState<boolean>(false)
+
+  const orderCompleted = useAppSelector(
+    (state) => state.order
+  )
 
   const handleClose = () => {
     history.goBack()
   }
+  const handleSubmit = () => {
+    createOrder(orderCompleted, Cookies.get('token'))
+    // .then((responce: any) => {
+    //   console.log(responce.data.order.id)
+    // })
+    setSuccess(!success)
+  }
 
   return (
-    <div className='confirmation'>
-      <div className='container'>
-        <Button
-          className='justify-content-start go-back'
-          variant='link'
-          type='button'
-          onClick={() => handleClose()}
-        >
+    <>
+      {success ?
+        <Message /> :
+        <div className='confirmation'>
+          <div className='container'>
+            <Button
+              className='justify-content-start go-back'
+              variant='link'
+              type='button'
+              onClick={() => handleClose()}
+            >
           Вернуться назад
-        </Button>
-        <div className='confirm-title'>
+            </Button>
+            <div className='confirm-title'>
           Подтверждение заказа
-        </div>
-        <OrderDetailsSection />
-      </div>
-      <div className='confirm-submit-button'>
-        <Button
-          type='submit'
-          className='btn'
-          variant='warning'
-          size='lg'
-          disabled
-        >
+            </div>
+            <OrderDetailsSection />
+          </div>
+          <div className='confirm-submit-button'>
+            <Button
+              type='submit'
+              className='btn'
+              variant='warning'
+              size='lg'
+              onClick={() => handleSubmit()}
+            >
           Подтвердить
-        </Button>{' '}
-      </div>
-    </div>
+            </Button>{' '}
+          </div>
+        </div>
+      }
+    </>
   )
 }
 

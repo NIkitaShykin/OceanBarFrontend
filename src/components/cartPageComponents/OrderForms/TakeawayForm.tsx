@@ -10,8 +10,10 @@ import {
 import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {addOrder} from '../../../redux/actions'
+import totalSum from '../totalSum'
 
 import './OrderForms.scss'
+
 interface ITakeawayFormProps {
   handleRadioValueClearance: (value: string) => void
 }
@@ -58,12 +60,15 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
       handleRadioValueClearance(checkedValue)
     }
 
+    const sum = totalSum()
     const dispatch = useDispatch()
     const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
       dispatch(addOrder({
         date: date.toLocaleDateString(),
-        timeSlot: timeSlot,
-        orderType: 'Навынос'
+        time: timeSlot,
+        type: 'Навынос',
+        paymentType: paymentMethod,
+        price: sum
       }))
       history.push('/confirmation')
     }

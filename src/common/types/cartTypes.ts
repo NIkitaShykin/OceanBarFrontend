@@ -14,8 +14,12 @@ export type TOrderItem = {
 }
 
 export type TOrderType = {
-  date: string;
-  tableSize: string;
-  timeSlot: string;
-  orderType: string;
+  date: string
+  tableSize: string
+  time: string
+  type?: string
+  paymentType?: string
+  price: string
+  id?: string
 }
+
