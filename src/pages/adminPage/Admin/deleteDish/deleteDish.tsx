@@ -1,7 +1,7 @@
 import {Button, Col, Row} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
 
-// import DishItem from './DishItem'
+import ShowIngridients from './showIngridients'
 import {useAppSelector} from '../../../../redux/hooks'
 
 const AdminDishes = () => {
@@ -13,7 +13,8 @@ const AdminDishes = () => {
     return (
       <div
         key={dish.id}
-        style={{position: 'relative',
+        style={{
+          // position: 'relative',
           border: '1px solid black',
           margin: '10px'
         }}
@@ -21,38 +22,31 @@ const AdminDishes = () => {
 
         <Row>
 
-          <Col>
-            <Col style={{margin: '20px'}}>
-              <NavLink to={'/dish/' + dish.id}>
-                <div
-                  key={dish.id}
-                  style={
-                    true ?
-                      {
-                        height: '150px',
-                        width: '100%',
-                        backgroundImage: `url(${dish.imageURL})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                      } :
-                      {
-                        height: '200px',
-                        width: '100%',
-                        backgroundImage: `url(${dish.imageURL})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                      }
-                  }
-                />
-              </NavLink>
-            </Col>
-
+          <Col style={{margin: '20px'}}>
+            <h3 style={{
+              display: 'flex',
+              textAlign: 'left'}}>
+              {dish.name}</h3>
+            <NavLink to={'/dishes/' + dish.id}>
+              <div
+                key={dish.id}
+                style={{
+                  height: '180px',
+                  width: '80%',
+                  backgroundImage: `url(${dish.imageURL})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                } }
+              />
+            </NavLink>
           </Col>
-
 
           <Col>
             <Row>
-              <h3>{dish.name}</h3>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
               <Col>
                 <span style={{fontSize: '25px'}}>
                   <strong>{dish.price}</strong>
@@ -66,14 +60,20 @@ const AdminDishes = () => {
                   </span>
                 </p>
               </Col>
-              <Col>
-                <ul>
-                  <li>Ингридиенты</li>
-                  <li>Ингридиенты</li>
-                  <li>Ингридиенты</li>
-                  <li>Ингридиенты</li>
-                  <li>Ингридиенты</li>
-                </ul>
+              <Col
+              //  xs={'auto'} sm={6} md={4} lg={4}
+              >
+                <div className={'ingredients'}>
+                  {/* <div className={'changing-shifting'}> */}
+                  <span
+                  // className={'composition'}
+                  >Состав</span>
+                  {/* </div> */}
+                  <ShowIngridients
+                  // setIngredient={updateIngridient}
+                    ingredients={dish.ingredients}
+                  />
+                </div>
               </Col>
 
               {/* console.log(dish.ingredients) */}
@@ -93,7 +93,6 @@ const AdminDishes = () => {
           </Col>
 
         </Row>
-
       </div>
     )
   })
