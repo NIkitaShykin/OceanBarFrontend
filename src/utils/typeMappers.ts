@@ -22,12 +22,13 @@ export const mapApiDishToDishInCart = (apiDish: ApiDish): DishInCart => {
     imageURL: apiDish.dish.imageURL,
     numberOfDishes: apiDish.quantity,
     ingredients:
-      apiDish.ingredients.slice(1, -1).split(';').map((i: string) => ({
+      apiDish.dish.ingredients.split(';').map((i: string) =>({
         name: i,
-        isAdded: true,
+        isAdded: apiDish.ingredients.indexOf(i) !== -1 ? true : false,
       })),
     position: apiDish.id,
     weight: apiDish.dish.weight,
     calories: apiDish.dish.calories,
+    addedIngredients: apiDish.ingredients.slice(1, -1),
   }
 }
