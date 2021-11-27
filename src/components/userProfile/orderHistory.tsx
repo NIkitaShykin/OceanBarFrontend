@@ -18,7 +18,7 @@ const orderHistory = () => {
         <div className='history-order-title'>
          Заказ №36 от 27.11.2021:
         </div>
-        <div className='shadow'>
+        <div className='shadow border'>
           <div className='history-order-item'>
             <div className='history-header-name'>
              Название
@@ -100,6 +100,15 @@ const orderHistory = () => {
               25 BYN
             </div>
           </div>
+          <div className='details-devider'/>
+          <div className='row'>
+            <div className='col order-type-header mb'>
+               Cтатус заказа:
+            </div>
+            <div className='col order-type-text mb'>
+               в процессе
+            </div>
+          </div>
         </div>
       </div>
 
@@ -107,7 +116,7 @@ const orderHistory = () => {
         <div className='history-order-title'>
          Заказ №40 от 28.11.2021:
         </div>
-        <div className='shadow'>
+        <div className='shadow border'>
           <div className='history-order-item'>
             <div className='history-header-name'>
              Название
@@ -180,13 +189,22 @@ const orderHistory = () => {
             </div>
           </div>
 
-          <div className='details-devider'></div>
+          <div className='details-devider'/>
           <div className='row mb-3'>
             <div className='col history-total text-right'>
               Итого:
             </div>
             <div className='col history-total'>
               50 BYN
+            </div>
+          </div>
+          <div className='details-devider'/>
+          <div className='row'>
+            <div className='col order-type-header mb'>
+               Cтатус заказа:
+            </div>
+            <div className='col order-type-text mb'>
+               в процессе
             </div>
           </div>
         </div>
