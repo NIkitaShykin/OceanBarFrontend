@@ -48,14 +48,17 @@ $mainColor: #ff9e05;
 }
 
 .history {
-  min-height: 1425px;
+  height: 1425px;
+  .fs {
+    font-size: 28px;
+    font-weight: 600 !important;
+  }
   .history-order-title {
     font-size: 18px;
     font-weight: bold;
   }
   .history-order-block {
-    min-width: 585px;
-    margin: 30px 0;
+    min-width: 540px;
     overflow: auto;
   }
   .history-order-item {
@@ -105,6 +108,12 @@ $mainColor: #ff9e05;
     font-size: 18px;
   }
 }
+.nav.nav-tabs .nav-link.active {
+  color: black;
+}
+.nav.nav-tabs .nav-link {
+  color: #495057;
+}
 
 .border {
   border: 1px solid lightgrey;
@@ -114,6 +123,10 @@ $mainColor: #ff9e05;
   margin-bottom: 10px;
 }
 
+.accordion-button:not(.collapsed) {
+  color: black !important;
+  background-color: #efeeee !important;
+}
 
 .my-cards {
   display: flex;
