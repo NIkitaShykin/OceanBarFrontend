@@ -17,7 +17,8 @@ const DeliveryAdress = () => {
 
   useEffect(() => {
     if (userCards.length<1) {
-      setCardAbsent(false)
+      setCardAbsent(true)
+      setIsAddingCard(true)
     } else {
       setCardAbsent(false)
       setIsAddingCard(false)

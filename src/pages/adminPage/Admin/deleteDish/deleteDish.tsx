@@ -1,38 +1,37 @@
 import {Button, Col, Row} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
-
+import {ApiAdmin} from '../../../../api/ApiAdmin'
 import ShowIngridients from './showIngridients'
 import {useAppSelector} from '../../../../redux/hooks'
 
 const AdminDishes = () => {
   const allDishes = useAppSelector((state) => state.dish.dishes)
 
-  // const dishIngredients=props.data
+  const deleteDish=(dishId: number)=>{
+    ApiAdmin.deleteDish(dishId)
+      .then((res)=>console.log(res))
+  }
 
   const arrayDishes = allDishes.map((dish) => {
     return (
       <div
         key={dish.id}
-        style={{
-          // position: 'relative',
-          border: '1px solid black',
-          margin: '10px'
-        }}
+        style={{border: '1px solid black', margin: '10px'}}
       >
 
         <Row>
+          <h4> {dish.name} </h4>
 
-          <Col style={{margin: '20px'}}>
-            <h3 style={{
-              display: 'flex',
-              textAlign: 'left'}}>
-              {dish.name}</h3>
+          <Col xs={'auto'} sm={5} md={4} lg={3}
+            style={{marginLeft: '10px'}}
+          >
             <NavLink to={'/dishes/' + dish.id}>
               <div
                 key={dish.id}
                 style={{
                   height: '180px',
-                  width: '80%',
+                  width: '200px',
+                  marginBottom: '5px',
                   backgroundImage: `url(${dish.imageURL})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
@@ -41,57 +40,62 @@ const AdminDishes = () => {
             </NavLink>
           </Col>
 
-          <Col>
-            <Row>
-              <br/>
-              <br/>
-              <br/>
-              <br/>
-              <Col>
-                <span style={{fontSize: '25px'}}>
-                  <strong>{dish.price}</strong>
-                </span>
-                <span style={{fontSize: '14px', marginLeft: '2px'}}>
-                  <strong> BYN</strong>
-                </span>
-                <p>
-                  <span style={{fontSize: '25px'}}>
-                    {dish.weight}
-                  </span>
-                </p>
-              </Col>
-              <Col
-              //  xs={'auto'} sm={6} md={4} lg={4}
+          <Col xs={'auto'} sm={7} md={6} lg={6}>
+            <div >
+              <div style=
+                {{display: 'flex', alignItems: 'baseline', height: '22px'}}
               >
-                <div className={'ingredients'}>
-                  {/* <div className={'changing-shifting'}> */}
-                  <span
-                  // className={'composition'}
-                  >Состав</span>
-                  {/* </div> */}
-                  <ShowIngridients
-                  // setIngredient={updateIngridient}
-                    ingredients={dish.ingredients}
-                  />
-                </div>
-              </Col>
+                <span style={{fontSize: '15px'}}>
+                  <h5>Стоимость:</h5>
+                </span>
+                <span style={{fontSize: '20px', marginLeft: '3px'}}>
+                  {dish.price}
+                </span>
+                <span style={{fontSize: '18px', marginLeft: '2px'}}>BYN</span>
+              </div>
+              <div style=
+                {{display: 'flex', alignItems: 'baseline', height: '22px'}}
+              >
+                <span style={{fontSize: '15px'}}>
+                  <h5>Вес:</h5>
+                </span>
+                <span style={{fontSize: '20px', marginLeft: '3px'}}>
+                  {dish.weight}
+                </span>
+              </div>
+              <div style=
+                {{display: 'flex', alignItems: 'baseline', height: '22px'}}
+              >
+                <span style={{fontSize: '15px'}}>
+                  <h5>Калории:</h5>
+                </span>
+                <span style={{fontSize: '20px', marginLeft: '3px'}}>
+                  {dish.calories}
+                </span>
+              </div>
+            </div>
 
-              {/* console.log(dish.ingredients) */}
-            </Row>
+            <br/>
+
+            <div style={{
+              display: 'flex',
+              justifyContent: 'flex-start'
+            }}
+            >
+              <ShowIngridients
+                ingredients={dish.ingredients}
+              />
+            </div>
           </Col>
-
-
           <Col>
             <Button
               variant='outline-warning'
-              // onClick={() => orderDish(dish)}
-              key={dish.id}
-              style={{marginTop: '20px', marginLeft: '-4px'}}
+              onClick={() => deleteDish(dish.id)}
+              style={{margin: '20px', marginLeft: '-4px'}}
             >
                 Удалить
             </Button>
           </Col>
-
         </Row>
       </div>
     )
@@ -100,16 +104,9 @@ const AdminDishes = () => {
 
   return (
     <>
-
       <div>
-        {/* <Col className='row my-3'> */}
         {arrayDishes}
-        {/* </Col> */}
       </div>
-
-      {/* <DishItem data={allDishes} isIntresting={false} /> */}
-
-
     </>
   )
 }

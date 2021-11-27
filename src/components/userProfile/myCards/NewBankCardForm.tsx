@@ -14,13 +14,8 @@ type PropTypes = {
 }
 
 export default class PaymentForm extends React.Component<PropTypes> {
-  state = {cvc: '', expiry: '', focus: '', name: '', number: ''}
-
-
-  expiryStyle='red'
-  focusStyle='red'
-  nameStyle='red'
-  numberStyle='red'
+  state =
+   {cvc: '', expiry: '', focus: '', name: '', number: '', disableStatus: false}
 
   fieldFocus = (e: any) => {
     this.setState({focus: e.target.name})
@@ -37,15 +32,9 @@ export default class PaymentForm extends React.Component<PropTypes> {
     }
   }
 
-  // err=true
-  // style = this.err ? 'red' : 'green'
-
   nameChange = (e: any) => {
     const {name, value} = e.target
     if (isNaN(+e.target.value)==false) {
-      // this.cvcStyle='green'
-      // this.err=false
-      // console.log('поменял')
     } else {
       this.setState({[name]: value})
     }
@@ -66,14 +55,18 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   render() {
     const handleSubmit=()=>{
-      const id=Date.now()
-      this.props.returnCard({...this.state, id})
+      if (this.state.cvc.length===3 && this.state.expiry.length===4 &&
+        this.state.number.length===16 && this.state.name.length>1) {
+        const id=Date.now()
+        this.props.returnCard({...this.state, id})
+        this.setState({...this.state, disableStatus: false})
+      } else {
+        this.setState({...this.state, disableStatus: true})
+      }
     }
-
 
     return (
       <div style={{height: '100%', margin: '10px'}} >
-
         <div id='PaymentForm' >
           <Row>
             <Col xs={'auto'} sm={1} md={6} lg={6}>
@@ -85,31 +78,34 @@ export default class PaymentForm extends React.Component<PropTypes> {
             <br/>
           </Row>
           <Row>
-            <Col xs={'auto'} sm={9} md={7} lg={6}>
-              <Cards
-                cvc={this.state.cvc}
-                expiry={this.state.expiry}
-                focused={this.state.focus}
-                name={this.state.name}
-                number={this.state.number}
-              />
+            <Col xs={'auto'} sm={7} md={5} lg={5}>
+              <div style={{transform: 'scale(0.8)'}} >
+                <Cards
+                  cvc={this.state.cvc}
+                  expiry={this.state.expiry}
+                  focused={this.state.focus}
+                  name={this.state.name}
+                  number={this.state.number}
+                />
+              </div>
             </Col>
 
-            <Col xs={'auto'} sm={4} md={4} lg={6}>
+            <Col xs={'auto'} sm={6} md={6} lg={6}>
               <div style={{marginLeft: '50px'}}>
-
+                {this.state.disableStatus ?
+                  <div style={{color: 'red', fontSize: '12px'}}>
+                    не все данные заполнены
+                  </div>:
+                  null}
                 <form style={{display: 'flex',
                   flexDirection: 'column'}}>
                   <span style={{fontSize: '10px'}}>Имя владельца</span>
                   <input style={{borderRadius: '5px', height: '25px',
                     marginTop: '-6px', width: '200px', border: '1px solid',
                     fontSize: '10px',
-                    // borderColor: this.style
-                    // ------------------------------
                   }}
                   type='text'
                   name='name'
-                  // value={this.state.name}
                   placeholder='Ivan Ivanov'
                   onChange={this.nameChange}
                   onFocus={this.fieldFocus}

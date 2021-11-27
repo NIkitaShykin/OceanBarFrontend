@@ -9,10 +9,8 @@ $mainColor: #ff9e05;
 }
 
 .reserve-a-table-form-booking {
-  // width: 80%;
-  // margin: 0 auto;
   .form-sectionAdmin {
-    height: 100%;
+    height: 60px;
     display: flex;
     flex-direction: column;
     .form-adminField {
@@ -33,7 +31,7 @@ $mainColor: #ff9e05;
         display: flex;
         flex-direction: column;
         width: 24rem;
-        form,
+        // form,
         .form-floating {
           width: 100%;
         }
