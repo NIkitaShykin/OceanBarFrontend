@@ -71,7 +71,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
 
     return (
-      <div style={{height: '100%', margin: '10px'}} >
+      <div style={{height: '100%', margin: '5px'}} >
         <div id='PaymentForm' >
           <Row>
             <Col xs={'auto'} sm={7} md={5} lg={6}>
@@ -81,7 +81,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
             <br/>
           </Row>
           <Row>
-            <Col xs={'auto'} sm={9} md={7} lg={6}>
+            <Col xs={'auto'} sm={9} md={7} lg={6}
+              style={{'transform': 'scale(0.9)'}}>
               <Cards
                 cvc={this.state.cvc}
                 expiry={this.state.expiry}
