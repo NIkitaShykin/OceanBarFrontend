@@ -65,10 +65,16 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
     const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
       dispatch(addOrder({
         date: date.toLocaleDateString(),
+<<<<<<< Updated upstream
         time: timeSlot,
         type: 'Навынос',
         paymentType: paymentMethod,
         price: sum
+=======
+        timeSlot: timeSlot,
+        orderType: 'Навынос',
+        paymentMethod: paymentMethod
+>>>>>>> Stashed changes
       }))
       history.push('/confirmation')
     }

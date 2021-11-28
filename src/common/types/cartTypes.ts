@@ -14,6 +14,7 @@ export type TOrderItem = {
 }
 
 export type TOrderType = {
+<<<<<<< Updated upstream
   date: string
   tableSize: string
   time: string
@@ -21,5 +22,12 @@ export type TOrderType = {
   paymentType?: string
   price: string
   id?: string
+=======
+  date: string;
+  tableSize: string;
+  timeSlot: string;
+  orderType?: string;
+  paymentMethod?: string;
+>>>>>>> Stashed changes
 }
 
