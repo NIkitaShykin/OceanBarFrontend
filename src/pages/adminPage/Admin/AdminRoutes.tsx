@@ -1,12 +1,9 @@
 import React from 'react'
-import {
-  // Redirect,
-  Switch, Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import AllDishes from './deleteDish/deleteDish'
 import NewDish from './addDish/addDish'
 import OrderedTables from './tables/Tables'
 import Orders from './orders/Orders'
-
 
 const AdminRoutes: React.FC = () => {
   return (

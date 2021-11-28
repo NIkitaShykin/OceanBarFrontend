@@ -3,7 +3,7 @@ import {
   DishInCart,
   DishType,
   IUpdQuantity,
-  IUpdContent
+  IUpdContent,
 } from 'src/common/types/dishesType'
 
 export const logIn = createAction<any>('SET_LOG_IN')
@@ -17,17 +17,20 @@ export const clearCart = createAction('CLEAR_CART')
 export const plusOneDish = createAction<IUpdQuantity>('PLUS_ONE_DISH')
 export const minusOneDish = createAction<IUpdQuantity>('MINUS_ONE_DISH')
 
-export const getDishesFromApiTC =
-  createAction<DishType[]>('GET_DISHES')
-export const addDishesAC =
-  createAction<any>('SET_DISHES')
-export const toggleLoading =
-  createAction<boolean, 'TOGGLE_LOADING'>('TOGGLE_LOADING')
+export const getDishesFromApiTC = createAction<DishType[]>('GET_DISHES')
+export const addDishesAC = createAction<any>('SET_DISHES')
+export const toggleLoading = createAction<boolean, 'TOGGLE_LOADING'>(
+  'TOGGLE_LOADING'
+)
 
 export const getUserPersonalDataTC = createAction<any>('GET_USER_DATA')
 export const setPersonalUsersData = createAction<any>('SET_USER_DATA')
 export const getUserAC = createAction<any>('SET_USER')
 export const removeUser = createAction('REMOVE_USER')
+
+export const setUsersBookingTables = createAction<any>(
+  'SET_USERS_BOOKING-TABLES'
+)
 
 export const addOrder = createAction<any>('ADD_ORDER')
 
@@ -36,5 +39,6 @@ export const addBankCardAC = createAction<any>('STORE_BANKCARD')
 export const deleteBankCardTC = createAction<any>('DEL_BANKCARD')
 export const deleteBankCardAC = createAction<any>('DELETE_BANKCARD')
 
-export const toggleLoadingUser =
-  createAction<boolean, 'TOGGLE_LOADING_USER'>('TOGGLE_LOADING_USER')
+export const toggleLoadingUser = createAction<boolean, 'TOGGLE_LOADING_USER'>(
+  'TOGGLE_LOADING_USER'
+)
