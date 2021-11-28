@@ -6,7 +6,7 @@ import {useAppSelector} from '../../redux/hooks'
 import {DishInCart} from '../../common/types/dishesType'
 import DetailsData from './DetailsData'
 import totalSum from '../cartPageComponents/totalSum'
-import MyCreditCards from '../userProfile/myCards'
+import ChoosePaymentCart from './ChoosePaymentCart'
 
 import './orderDetails.scss'
 
@@ -108,13 +108,9 @@ const OrderDetailsSection = () => {
               <div className='col order-type-total text-right'>
                 Оплата:
               </div>
-              <div className='col text'>
-                Укажите карту для оплаты онлайн
+              <div className='col'>
+                <ChoosePaymentCart />
               </div>
-
-            </div>
-            <div className='cards-block'>
-              <MyCreditCards />
             </div>
           </>
         )}

@@ -2,7 +2,6 @@
 /* eslint-disable require-jsdoc */
 import React from 'react'
 import Cards from 'react-credit-cards'
-import {Button} from 'react-bootstrap'
 import 'react-credit-cards/lib/styles.scss'
 import 'react-credit-cards/es/styles-compiled.css'
 import {Row, Col} from 'react-bootstrap'
@@ -174,19 +173,14 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
                 </div>
                 <br/>
-                <Button
-                  style={{
-                    borderRadius: '10px',
-                    width: '200px',
-                    color: 'white',
-                    backgroundColor: '#ff9e05'
-                  }}
-                  variant='outline-warning'
+                <button
+                  className='btn btn-outline-warning'
+                  style={{width: '200px'}}
                   type='submit'
                   onClick={() => handleSubmit()}
                 >
                   Готово
-                </Button>
+                </button>
               </div>
             </Col>
           </Row>
