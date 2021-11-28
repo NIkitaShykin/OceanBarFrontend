@@ -90,16 +90,10 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       dispatch(addOrder({
         date: date.toLocaleDateString(),
         tableSize: tableSize,
-<<<<<<< Updated upstream
         time: timeSlot,
         type: 'Бронирование стола',
         paymentType: 'card-online',
         price: sum
-=======
-        timeSlot: timeSlot,
-        orderType: 'Бронирование стола',
-        paymentMethod: 'card-online'
->>>>>>> Stashed changes
       }))
       history.push('/confirmation')
     }

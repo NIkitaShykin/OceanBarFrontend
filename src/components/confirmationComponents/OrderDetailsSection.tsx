@@ -5,12 +5,8 @@ import {Image} from 'react-bootstrap'
 import {useAppSelector} from '../../redux/hooks'
 import {DishInCart} from '../../common/types/dishesType'
 import DetailsData from './DetailsData'
-<<<<<<< Updated upstream
 import totalSum from '../cartPageComponents/totalSum'
 import MyCreditCards from '../userProfile/myCards'
-=======
-// import {url} from '../../api'
->>>>>>> Stashed changes
 
 import './orderDetails.scss'
 
@@ -22,14 +18,6 @@ const OrderDetailsSection = () => {
   )
   const orderCompleted = useAppSelector(
     (state) => state.order
-<<<<<<< Updated upstream
-=======
-  )
-  const totalSum = orderedDishes.reduce(
-    (sum: number, current) =>
-      sum + Number(current.price) * current.numberOfDishes,
-    0
->>>>>>> Stashed changes
   )
   // useEffect(() => {
   //   axios.post(`${url}/api/order`, orderCompleted)
@@ -103,7 +91,6 @@ const OrderDetailsSection = () => {
                   На месте наличными
               </div>
             </div>
-<<<<<<< Updated upstream
           )}
           {orderCompleted.paymentType === 'card-at-the-restaurant' && (
             <div className='row'>
@@ -114,24 +101,6 @@ const OrderDetailsSection = () => {
               </div>
             </div>
           )}
-=======
-            {orderCompleted.paymentMethod === 'cash' && (
-              <div className='col text'>
-                наличными
-              </div>
-            )}
-            {orderCompleted.paymentMethod === 'card-at-the-restaurant' && (
-              <div className='col text'>
-                оплата картой на месте
-              </div>
-            )}
-            {orderCompleted.paymentMethod === 'card-online' && (
-              <div className='col text'>
-               картой онлайн
-              </div>
-            )}
-          </div>
->>>>>>> Stashed changes
         </div>
         {orderCompleted.paymentType === 'card-online' && (
           <>

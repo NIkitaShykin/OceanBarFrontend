@@ -98,16 +98,10 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       dispatch(addOrder({
         address: adressValues,
         date: date.toLocaleDateString(),
-<<<<<<< Updated upstream
         time: timeSlot,
         type: 'Доставка',
         paymentType: paymentMethod,
         price: sum
-=======
-        timeSlot: timeSlot,
-        orderType: 'Доставка',
-        paymentMethod: paymentMethod
->>>>>>> Stashed changes
       }))
       history.push('/confirmation')
     })
