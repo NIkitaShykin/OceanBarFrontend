@@ -38,10 +38,12 @@ const passwordResetForm = () => {
       {password: oldPassword, email: userPersonal.email}
     )
       .then((resp: any) =>{
+        console.log(resp)
         if (resp.status > 400) {
           throw new Error(resp.statusText)
         }
-        if (resp.data.token) {
+        // if (resp.data.token) {
+        if (resp.data.accessToken) {
           setOldPassCorrect(true)
           setShowOldPassError(false)
         }

@@ -8,7 +8,7 @@ const instance = axios.create({
 })
 
 export const ApiAdmin = {
-  getNewDishImgFileUrl(file?:any) {
+  getNewDishImgFileUrl(file?: string) {
     {
       return Promise.resolve(
         instance.post('menu/image', file,
