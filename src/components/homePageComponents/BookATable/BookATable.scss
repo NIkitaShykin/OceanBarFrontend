@@ -14,11 +14,12 @@
 
 .order-form{
   display: flex;
+  flex-direction: column;
+  margin: 0 auto;
   justify-content: center;
-}
-Form{
   width: 500px;
 }
+
 .form-item{
   height: 50px;
 }

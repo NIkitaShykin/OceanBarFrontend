@@ -92,8 +92,8 @@ const BookATable = () => {
         ) : (
           <div className='book-a-table'>
             <h2 className='bookTable'>Забронируйте стол по телефону</h2>
-            <div className='order-form'>
-              <Form>
+            <div >
+              <Form className='order-form'>
                 <Form.Floating className='mx-1'>
                   <Form.Control
                     id='userName'
