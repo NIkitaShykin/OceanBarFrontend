@@ -1,7 +1,8 @@
 export type bookingOrderType = {
     date: string,
-    timeSlot: string,
-    tableSize: string,
-    userName: string,
-    userPhone: string
+    name: string,
+    phone: string,
+    time: string,
+    amountofpeople: number
 }
+

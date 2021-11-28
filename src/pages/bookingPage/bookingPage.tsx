@@ -8,9 +8,9 @@ import {bookingOrderType} from '../../common/types/bookingTypes'
 const Booking = () => {
   const [isComplete, setIsComplete] = useState<boolean>(true)
 
-  const handleBookingData = (bookingOrder: bookingOrderType) => {
+  const handleBookingData = (reservOrder: bookingOrderType) => {
     isCompleteToggle()
-    ApiReserve.bookTableUnregistred(bookingOrder)
+    ApiReserve.bookTableUnregistred(reservOrder)
       .then((res)=>console.log(res))
   }
 
@@ -26,8 +26,8 @@ const Booking = () => {
           <>
             <h1 className='m-3'>Забронируйте стол</h1>
             <ReserveATableForm
-              handleBookingData={(bookingOrder: bookingOrderType) =>
-                handleBookingData(bookingOrder)
+              handleBookingData={(reservOrder: bookingOrderType) =>
+                handleBookingData(reservOrder)
               }/>
           </>
         }

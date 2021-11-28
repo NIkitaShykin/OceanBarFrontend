@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
-import {Form, Button, Modal} from 'react-bootstrap'
+import {Form, Button, Modal, CloseButton} from 'react-bootstrap'
 import {ValidationType} from '../../../common/types/userTypes'
 import {UserType} from '../../../common/types/userTypes'
 import {useValidation} from '../../../utils/validation'
@@ -96,12 +96,17 @@ const shiftingPersonalForm = (props:PropsType) => {
     dispatch(setUserPersonalDataTC(userPersonalData, token))
   }
 
+  const handleClose = () => {
+    props.changeStatus(true)
+  }
+
   return (
     <div className='registration-form'>
       <div className='container'>
         <Modal.Dialog className='shadow p-3 mb-5 bg-body rounded'>
           <Modal.Header className='border-0'>
             <Modal.Title className='form-title'>Измените данные</Modal.Title>
+            <CloseButton onClick={() => handleClose()} />
           </Modal.Header>
 
           {

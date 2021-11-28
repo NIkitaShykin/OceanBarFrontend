@@ -1,0 +1,98 @@
+$mainColor: #ff9e05;
+
+%input-common-style {
+  padding: 6px;
+  color: #212529;
+  background-color: #fff;
+  border: thin solid #ced4da;
+  border-radius: 5px;
+}
+
+.reserve-a-table-form-booking {
+  .form-sectionAdmin {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    .form-adminField {
+      display: flex;
+      font-size: 1rem;
+      margin: 2rem 0;
+      padding: 0 2rem;
+     
+      .section-header {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        width: 15rem;
+        font-size: 1.2rem;
+        margin: 0 1.5rem;
+      }
+      .section-content {
+        display: flex;
+        flex-direction: column;
+        width: 24rem;
+        // form,
+        .form-floating {
+          width: 100%;
+        }
+        .react-date-picker__wrapper,
+        .react-time-picker__wrapper {
+          @extend %input-common-style;
+          svg {
+            stroke: #808080;
+            &:hover {
+              stroke: $mainColor;
+            }
+          }
+        }
+        // .react-calendar {
+        //   @extend %input-common-style;
+        //   padding: 0;
+        //   .react-calendar__tile--active {
+        //     &:enabled {
+        //       background-color: $mainColor;
+        //     }
+        //   }
+        // }
+        // .react-time-picker__clock {
+        //   border-radius: 5px;
+        // }
+        &.payment-types {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          .form-check {
+            text-align: left;
+          }
+          .btn-outline-warning {
+            &:active {
+              background-color: $mainColor;
+            }
+          }
+        }
+      }
+      .btn-outline-warning {
+        color: black;
+      }
+    }
+    .form-separation {
+      width: 80%;
+      border-bottom: 1px solid #ccc;
+      align-self: center;
+    }
+    .form-buttons {
+      text-align: right;
+      margin: 2rem 0;
+      padding: 0 2rem;
+      button {
+        width: 6rem;
+      }
+    }
+  }
+
+  .error {
+    font-size: smaller;
+    color: #dc3545;
+    margin-top: 4px;
+  }
+}

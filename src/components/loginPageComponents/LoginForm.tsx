@@ -1,13 +1,12 @@
-import React, {useState} from 'react'
+import React, {useState, ChangeEvent} from 'react'
 import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import axios from 'axios'
 import Cookies from 'js-cookie'
 import {Button, CloseButton, Form, Modal} from 'react-bootstrap'
 
 import Spinner from '../Spinner/Spinner'
 
-import {url} from '../../api'
+import {ApiAuth, TOKEN_EXPIRATION_TIME} from '../../api/ApiAuth'
 import {ApiCart} from '../../api/ApiCart'
 
 import {addDishToCart, logIn, getUserAC} from '../../redux/actions'
@@ -20,24 +19,26 @@ import {ApiDish} from '../../common/types/dishesType'
 
 import './LoginForm.scss'
 
+type FormControlElement = HTMLInputElement | HTMLTextAreaElement
+
 const LogInForm = () => {
   const history = useHistory()
   const dispatch = useDispatch()
 
-  const [authFailed, setAuthFailed] = useState(false)
+  const [authFailed, setAuthFailed] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const useInput = (initialValue: string, validations: ValidationType) => {
-    const [value, setValue] = useState(initialValue)
-    const [isDirty, setDirty] = useState(false)
+    const [value, setValue] = useState<string>(initialValue)
+    const [isDirty, setDirty] = useState<boolean>(false)
     const valid = useValidation(value, validations)
 
-    const onChange = (e: any) => {
+    const onChange = (e: ChangeEvent<FormControlElement>) => {
       setValue(e.target.value)
       setAuthFailed(false)
     }
 
-    const onBlur = (e: any) => {
+    const onBlur = (e: ChangeEvent<FormControlElement>) => {
       setDirty(true)
     }
 
@@ -90,12 +91,15 @@ const LogInForm = () => {
   const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault()
     setIsLoading(true)
-    axios
-      .post<{token: string; data: {}}>(`${url}/users/auth`, user)
-      .then((response) => {
+
+    ApiAuth.login(user.email, user.password).then((response) => {
+      try {
         if (response.status >= 200 && response.status < 300) {
-          Cookies.set('token', response.data.token, {expires: 30})
-          localStorage.setItem('token', response.data.token) //
+          Cookies.set(
+            'token',
+            response.data.accessToken,
+            {expires: TOKEN_EXPIRATION_TIME}
+          )
           setIsLoading(false)
           dispatch(logIn(response.data.data))
           dispatch(getUserAC(response.data.data))
@@ -104,7 +108,10 @@ const LogInForm = () => {
           setIsLoading(false)
           throw new Error(response.statusText)
         }
-      })
+      } catch (error) {
+        console.log(error)
+      }
+    })
       .catch((error) => {
         setIsLoading(false)
         setAuthFailed(true)
