@@ -45,5 +45,13 @@ export const ApiAdmin = {
         return resp
       })
     }
+  }, updateBookedTables(newData:any, id:number) {
+    {
+      return Promise.resolve<{data: {bookedUsers: bookingTablesType[]}}>(
+        instance.patch(`http://localhost:3001/api/booking/usersbooking/?id=${id}`, newData)
+      ).then((resp) => {
+        return resp
+      })
+    }
   },
 }

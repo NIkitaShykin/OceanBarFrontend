@@ -32,6 +32,10 @@ export const setUsersBookingTables = createAction<any>(
   'SET_USERS_BOOKING-TABLES'
 )
 
+export const updateUsersBookingTables = createAction<any>(
+  'UPDATE_USERS_BOOKING-TABLES'
+)
+
 export const addOrder = createAction<any>('ADD_ORDER')
 
 export const setBankCardTC = createAction<any>('SET_BANKCARD')
