@@ -24,20 +24,25 @@ const ShowIngridients = (props:PropsType) => {
 
   const ingridientsItem = props.ingredients.map((ingredient, i) => {
     return (
-
-      <>
-        <li style={{
-          lineHeight: '15px',
-          paddingLeft: '0px'
-        }}>
-          {ingredient.name}
-        </li>
-      </>
-
+      <span
+        key={i}
+        style={{paddingRight: '13px'}}
+      >
+        {ingredient.name};
+      </span>
     )
   })
 
-  return <ul>{ingridientsItem}</ul>
+  return (
+    <div
+      style={{
+        textAlign: 'left',
+        // display: 'flex',
+        lineHeight: '15px',
+      }}
+    >
+      {ingridientsItem}
+    </div>)
 }
 
 export default ShowIngridients

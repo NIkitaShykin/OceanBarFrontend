@@ -1,74 +1,38 @@
 import React, {useState, ChangeEvent} from 'react'
-import {useSelector} from 'react-redux'
+// import {useSelector} from 'react-redux'
 // import DatePicker from 'react-date-picker'
-import {Form, Button, Modal, FloatingLabel} from 'react-bootstrap'
-import {AppStoreType} from '../../../../redux/reducers/rootReducer'
-import {ValidationType} from '../../../../common/types/userTypes'
-import {useValidation} from '../../../../utils/validation'
-import {UserType} from '../../../../common/types/userTypes'
+import {Form, Button, FloatingLabel,
+  // Row, Col
+} from 'react-bootstrap'
+// import {AppStoreType} from '../../../../redux/reducers/rootReducer'
+// import {ValidationType} from '../../../../common/types/userTypes'
+// import {useValidation} from '../../../../utils/validation'
+// import {UserType} from '../../../../common/types/userTypes'
 import AddIngridients from './AddIngredients'
+import FilesOperations from './FilesOperations'
 // import {bookingOrderType} from '../../../../common/types/bookingTypes'
 import './newDishForms.scss'
 
 
 interface IReserveATableFormProps {
   handleNewDishData: (newDish: any) => void
+  handleNewDishImgFile: (dishImageFile: any ) => void
 }
 
 const ReserveATableForm: React.FC<IReserveATableFormProps> =
-  ({handleNewDishData}) => {
-    const user =
-     useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
+  ({handleNewDishData, handleNewDishImgFile}) => {
+    // const user =
+    //  useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
 
     const [dishName, setDishName] = useState<string>('')
     const [dishPrice, setDishPrice] = useState<number>()
     const [dishWeight, setDishWeight] = useState<number>()
     const [dishCalories, setDishCalories] = useState<number>()
     const [dishIngredients, setDishIngredients] =
-     useState<Array<string>>(['', '', '', ''])
+     useState<Array<string>>(['', ''])
     const [dishCategory, setDishCategory] = useState<string>('')
-    // const [tableSize, setTableSize] = useState<number>(2)
-    // const [isTimeInputSkipped,
-    // setTimeInputSkipped] = useState<boolean>(false)
-    // const [isTableInputSkipped,
-    // setTableInputSkipped] = useState<boolean>(false)
-
-    const useInput = (initialValue: string, validations: ValidationType) => {
-      const [value, setValue] = useState(initialValue)
-      const [isDirty, setDirty] = useState(false)
-      const valid = useValidation(value, validations)
-
-      const onChange = (e: any) => {
-        setValue(e.target.value)
-      }
-
-      const onBlur = (e: any) => {
-        setDirty(true)
-      }
-
-      return {
-        value,
-        onChange,
-        onBlur,
-        isDirty,
-        ...valid
-      }
-    }
-
-    // const table = useInput('', {isEmpty: true})
-    // const time = useInput('', {isEmpty: true})
-
-    const phoneNumber = useInput(`${user.phone}`, {
-      isEmpty: true,
-      phoneNumberError: true,
-    })
-
-    const userName = useInput(`${user.name}`, {
-      isEmpty: true,
-      firstNameError: true,
-      minLengthError: 2,
-      maxLengthError: 30,
-    })
+    const [dishURL, setDishURL] = useState<string>('')
+    // const [dishImgFile, setDishImgFile]=useState<any>({})
 
     const inputDishName=(e: any)=>{
       setDishName(e.target.value)
@@ -98,59 +62,54 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       setDishIngredients(copyIngredients)
     }
 
+    const inputDishURL=(e: any)=>{
+      setDishURL(e.target.value)
+    }
+
+    const inputDishFile=(dishImageFile: any)=>{
+      // setDishImgFile(dishImageFile)
+      handleNewDishImgFile(dishImageFile)
+    }
+
     const dishCategoryArray: Array<string> = [
       'Плато', 'Салаты', 'Супы', 'Запеченные устрицы', 'Десерты'
     ]
 
-    const isPhoneNumberInvalid = phoneNumber.isDirty &&
-    (phoneNumber.isEmpty || phoneNumber.phoneNumberError)
-
-    const isUserNameInvalid = (userName.firstNameError && userName.isDirty) ||
-    (userName.isEmpty && userName.isDirty)
-
     const newDish={
-      name2: dishName,
-      price2: dishPrice,
-      weight2: dishWeight,
-      calories2: dishCalories,
-      imageURL: 'https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%A3%D1%81%D1%82%D1%80%D0%B8%D1%86.jpg',
-      ingredients2: dishIngredients,
-      dishCategory2: dishCategory,
-      name: userName.value,
-      phone: phoneNumber.value,
+      name: dishName,
+      price: dishPrice,
+      weight: dishWeight,
+      calories: dishCalories,
+      imageURL: dishURL,
+      // imageURL: 'https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%A3%D1%81%D1%82%D1%80%D0%B8%D1%86.jpg',
+      ingredients: dishIngredients,
+      dishCategory: dishCategory,
     }
-    // ---------------------return-----------------------------------
+
     return (
       <div className='reserve-a-table-form-booking shadow'>
 
         <div className='form-sectionAdmin'>
           <div className='form-adminField'>
-
             <div className='section-header'>
               <span>Название блюда</span>
             </div>
-
             <Form.Control
               style={{width: '400px'}}
               id='userName'
               type='text'
               placeholder='введите название'
               value={dishName}
-              // isInvalid={isUserNameInvalid}
               onChange={(e) => inputDishName(e)}
-              // onBlur={(e) => userName.onBlur(e)}
             />
-
           </div>
         </div>
 
         <div className='form-sectionAdmin'>
           <div className='form-adminField'>
-
             <div className='section-header'>
               <span>Стоимость (рубли)</span>
             </div>
-
             <Form.Control
               style={{width: '400px'}}
               id='userName'
@@ -159,9 +118,8 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               value={dishPrice}
               // isInvalid={isUserNameInvalid}
               onChange={(e) => inputDishPrice(e)}
-              onBlur={(e) => userName.onBlur(e)}
+              // onBlur={(e) => userName.onBlur(e)}
             />
-
           </div>
         </div>
 
@@ -178,7 +136,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               value={dishWeight}
               // isInvalid={isUserNameInvalid}
               onChange={(e) => inputDishWeight(e)}
-              onBlur={(e) => userName.onBlur(e)}
+              // onBlur={(e) => userName.onBlur(e)}
             />
           </div>
         </div>
@@ -196,11 +154,89 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               value={dishCalories}
               // isInvalid={isUserNameInvalid}
               onChange={(e) => inputDishCalories(e)}
-              onBlur={(e) => userName.onBlur(e)}
+              // onBlur={(e) => userName.onBlur(e)}
             />
           </div>
         </div>
 
+        <div className='form-sectionAdmin'>
+          <div className='form-adminField'>
+            <div className='section-header'>
+              <span>Фотография блюда</span>
+            </div>
+            <div>
+              <Form.Control
+                style={{width: '250px'}}
+                id='userName'
+                type='text'
+                placeholder={'по URL адрессу'}
+                value={dishURL}
+                onChange={(e) => inputDishURL(e)}
+              />
+            </div>
+          </div>
+        </div>
+
+        { dishURL.length>1 ?<>
+          <div className='form-sectionAdmin' style={{height: '210px'}}>
+            <div className='form-adminField'>
+              <div className='section-header'>
+                <span> Миниатюра изображения</span>
+              </div>
+              <div
+                style={{
+                  height: '200px',
+                  width: '250px',
+                  backgroundImage: `url(${dishURL})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              >
+              </div>
+            </div>
+          </div>
+        </>:null}
+
+        <FilesOperations inputDishFile={inputDishFile}/>
+
+        {/* <div className='form-sectionAdmin'>
+          <div className='form-adminField'>
+            <div className='section-header'>
+              <span>Фотография блюда</span>
+            </div>
+            <div>
+              <Form.Control
+                style={{width: '250px'}}
+                id='userName'
+                type='text'
+                placeholder={'по URL адрессу'}
+                value={dishURL}
+                // isInvalid={isUserNameInvalid}
+                onChange={(e) => inputDishURL(e)}
+              // onBlur={(e) => userName.onBlur(e)}
+              />
+              <Button
+                onClick={()=>handleNewDishData(newDish)}
+                style={{
+                  width: '250px',
+                  background: '#FFFAFA',
+                  color: 'gray',
+                  display: 'flex',
+                  alignItems: 'center',
+                  height: '30px',
+                  lineHeight: '30px',
+                  justifyContent: 'space-around',
+                  fontSize: '12px',
+                  marginTop: '10px'
+                }}
+                variant='outline-warning'
+              >
+              загрузка изображене с диска <h4>&#8635;</h4>
+              </Button>
+            </div>
+          </div>
+        </div>
+        <br/> */}
 
         <div className='form-sectionAdmin'>
           <div className='form-adminField'>
@@ -213,21 +249,19 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
             >
               <Form.Select
                 aria-label='Floating label select example'
-                defaultValue='дефолт'
+                defaultValue={dishCategory}
+                style={{width: '250px'}}
                 onChange={(e: ChangeEvent<HTMLSelectElement>) => {
                   setDishCategory(e.target.value)
-                  // setTableInputSkipped(!e.target.value)
                 }}
-                // onBlur={(e) => table.onBlur(e)}
-                // isInvalid={isTableInputSkipped}
               >
-                {/* <option value=''></option> */}
-                {dishCategoryArray.map((size, idx) => (
+                <option value=''>Выбрать...</option>
+                {dishCategoryArray.map((category, idx) => (
                   <option
-                    value={size}
+                    value={category}
                     key={idx}
                   >
-                    {size}
+                    {category}
                   </option>
                 ))}
               </Form.Select>
@@ -235,16 +269,29 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
           </div>
         </div>
 
-
-        {/* -------------Ингридиенты---------------------- */}
-        <div className='form-sectionAdmin'>
+        <br/>
+        <div className='form-sectionAdmin' style={{height: '100%'}}>
           <div className='form-adminField'>
             <div className='section-header'>
               <div>
-                <span>Введите ингридиенты</span>
+                <span>Добавьте ингридиенты</span>
                 <br/>
-                <br/>
-                <button onClick={addIngredientsField}>...больше</button>
+
+                <Button
+                  onClick={addIngredientsField}
+                  style={{
+                    width: '10px',
+                    background: '#FFFAFA',
+                    color: 'gray',
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: '20px',
+                    justifyContent: 'space-around',
+                  }}
+                  variant='outline-warning'
+                >
+                  +
+                </Button>
               </div>
             </div>
 
@@ -254,13 +301,12 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
             />
           </div>
         </div>
-        {/* --------------------------------------------- */}
-
-
         <div className='form-sectionAdmin'>
           <div className='form-separation'></div>
         </div>
 
+        {/* ---------------------контактные данные----------------------- */}
+        {/*
         <div className='form-sectionAdmin'>
           <div className='form-adminField'>
 
@@ -315,23 +361,28 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
           </div>
 
           <div className='form-separation'></div>
-        </div>
+        </div> */}
+        {/* ---------------------контактные данные----------------------- */}
 
-        <div className='form-section'>
-          <div className='form-buttons'>
-            <Modal.Footer className='justify-content-center border-0'>
-              <Button
-                onClick={()=>handleNewDishData(newDish)}
-                style={{width: '160px'}}
-                variant='outline-warning'
-                // disabled={!isUserNameInvalid || !isPhoneNumberInvalid
-                // }
-              >
+        {/* <div className='form-section'> */}
+        {/* <div className='form-buttons'> */}
+        {/* <Modal.Footer className='justify-content-center border-0'> */}
+        <Button
+          onClick={()=>handleNewDishData(newDish)}
+          style={{width: '160px'}}
+          variant='outline-warning'
+          // disabled={!isUserNameInvalid || !isPhoneNumberInvalid
+          // }
+        >
               Добавить блюдо
-              </Button>
-            </Modal.Footer>
-          </div>
-        </div>
+        </Button>
+        {/* </Modal.Footer> */}
+        {/* </div> */}
+        {/* </div> */}
+        <br/>
+        <br/>
+        <br/>
+        <br/>
       </div>
     )
   }

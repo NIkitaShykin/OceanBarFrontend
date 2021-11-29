@@ -10,7 +10,6 @@ type PropTypes = {
   card: BankCardType,
   cardNumber: number,
   deleteCard: (cardNumber: number) => void
-  preview: boolean
 }
 export default class PaymentForm extends React.Component<PropTypes> {
   state = {
@@ -32,7 +31,9 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   render() {
     return (
-      <div style={{height: '150px', margin: '10px'}} >
+      <div style={{height: '150px', margin: '10px'}}
+        key={this.props.card.id}
+      >
 
         <div id='PaymentForm'
           style={{transform: 'scale(0.6)',
@@ -51,13 +52,10 @@ export default class PaymentForm extends React.Component<PropTypes> {
           className='order-block'
         >
           <div className='order-deletion'
-            key={this.props.cardNumber}
             style={{display: 'flex'}}
             onClick={() => this.props.deleteCard(this.props.cardNumber)}
           >
-            <i className=
-              'far fa-trash-alt icon-height delete-button'>
-            </i>
+            <i className='far fa-trash-alt icon-height delete-button'></i>
           </div>
         </div>
       </div>
