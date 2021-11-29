@@ -17,6 +17,7 @@ const DropDownNavBar = () => {
   const handleClose = () => {
     ApiAuth.logout()
     Cookies.remove('token')
+    Cookies.remove('refreshToken')
     dispatch(logOut())
     dispatch(removeUser())
     history.push('/')

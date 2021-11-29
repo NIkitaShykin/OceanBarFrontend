@@ -23,20 +23,32 @@ $api.interceptors.response.use(
     return config
   },
   async (error) => {
-    const {config, response: {status}} = error
-    if (status === 401 && config && !config._isRetry) {
-      config._isRetry = true
+    const originalRequest = error.config
+    if (
+      error.response.status === 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originalRequest._isRetry = true
       try {
         const response = await axios.get<IAuthResponse>(
           `${API_URL}/users/refreshUser`,
+          {
+            withCredentials: true
+          }
         )
         Cookies.set(
           'token',
           response.data.accessToken,
           {expires: TOKEN_EXPIRATION_TIME}
         )
-        return $api.request(config)
-      } catch (error) {
+        Cookies.set(
+          'refreshToken',
+          response.data.refreshToken,
+          {expires: TOKEN_EXPIRATION_TIME}
+        )
+        return $api.request(originalRequest)
+      } catch (e) {
         console.log('is not authorized!')
       }
     }
