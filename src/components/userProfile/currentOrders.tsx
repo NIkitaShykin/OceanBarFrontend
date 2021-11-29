@@ -1,8 +1,39 @@
+import {useEffect} from 'react'
+// import {useDispatch} from 'react-redux'
 import {Accordion} from 'react-bootstrap'
+import Cookies from 'js-cookie'
+
 import {DishInCart} from '../../common/types/dishesType'
 import {useAppSelector} from '../../redux/hooks'
+import {fetchOrder} from '../../api/ApiOrder'
+// import {IOrderResponse} from '../../common/types/orderType'
+// import {addOrder, clearOrders} from '../../redux/actions'
 
 const currentOrders = () => {
+  // const dispatch = useDispatch()
+
+  const isAuthorized: boolean =
+    useAppSelector((state) => state.auth.isAuthorized)
+
+  const handleLoad = () => {
+    fetchOrder(Cookies.get('token'))
+      .then((resp) => console.log(resp))
+      .catch((error) => {
+        throw new Error(error)
+      })
+    //   .then((resp: <{order: [IOrderResponse]}>) => {
+    //     resp.data.order.forEach((order: IOrderResponse) => {
+    //       dispatch(addOrder(order))
+    //   })
+    // })
+  }
+
+  useEffect(() => {
+    if (isAuthorized) {
+      // dispatch(clearOrders())
+      handleLoad()
+    }
+  }, [])
   const orderedDishes = useAppSelector<DishInCart[]>(
     (state) => state.cart.dishes
   )
@@ -228,3 +259,4 @@ const currentOrders = () => {
 }
 
 export default currentOrders
+

@@ -1,6 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit'
 import {CommonOrderType} from '../../common/types/orderType'
-import {addOrder} from '../actions'
+import {addOrder, clearOrders} from '../actions'
 
 const initialState: CommonOrderType = {
   address: {
@@ -21,6 +21,9 @@ const initialState: CommonOrderType = {
 const orderReducer = createReducer(initialState, (builder) => {
   builder.addCase(addOrder, (state, action) => {
     return action.payload
+  })
+  builder.addCase(clearOrders, (state, action) => {
+    return initialState
   })
 })
 

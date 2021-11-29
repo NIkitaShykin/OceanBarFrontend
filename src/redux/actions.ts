@@ -30,6 +30,7 @@ export const getUserAC = createAction<any>('SET_USER')
 export const removeUser = createAction('REMOVE_USER')
 
 export const addOrder = createAction<any>('ADD_ORDER')
+export const clearOrders = createAction<any>('CLEAR_ORDERS')
 
 export const setBankCardTC = createAction<any>('SET_BANKCARD')
 export const addBankCardAC = createAction<any>('STORE_BANKCARD')

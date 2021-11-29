@@ -10,10 +10,12 @@ import OrderDetailsSection from
   '../../components/confirmationComponents/OrderDetailsSection'
 
 import './confirmation.scss'
+// import {useDispatch} from 'react-redux'
 
 
 const Confirmation = () => {
   const history = useHistory()
+  // const dispatch = useDispatch()
   const [success, setSuccess] = useState<boolean>(false)
   // const [orderID, setOrderID] = useState<number>(0)
 
@@ -25,12 +27,22 @@ const Confirmation = () => {
     history.goBack()
   }
   const handleSubmit = () => {
-    createOrder(orderCompleted, Cookies.get('token'))
-      .then((responce: any) => {
-        // console.log(responce.data.id)
-        // setOrderID(responce.data.id)
-      })
-    setSuccess(!success)
+    return new Promise<void>((resolve, reject) => {
+      return createOrder(orderCompleted, Cookies.get('token'))
+        .then((res) => {
+          resolve(res)
+          console.log(res)
+          // dispatch(orderSubmitSucess(res.data))
+        }).catch((error) => {
+          resolve()
+        })
+    })
+    // const orderID = await createOrder(orderCompleted, Cookies.get('token'))
+    // .then(() => console.log(response.data.id))
+    //
+    // setOrderID(response.data.id)
+
+    // setSuccess(!success)
   }
 
   return (
@@ -58,7 +70,10 @@ const Confirmation = () => {
               className='btn'
               variant='warning'
               size='lg'
-              onClick={() => handleSubmit()}
+              onClick={() => {
+                handleSubmit()
+                setSuccess(!success)
+              }}
             >
           Подтвердить
             </Button>{' '}
@@ -71,4 +86,5 @@ const Confirmation = () => {
 
 
 export default Confirmation
+
 

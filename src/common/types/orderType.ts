@@ -23,7 +23,7 @@ export type FetchedOrderType = {
 
 export interface IOrderResponse {
   price: number,
-  state: string,
+  state: string, // order state: done/in progress
   type: string,
   date: string,
   time: string,
