@@ -23,7 +23,11 @@ const authReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(logOut, (state, action) => {
-      return initialState
+      return {
+        ...state,
+        user: null,
+        isAuthorized: false
+      }
     })
     .addCase(checkAuth, (state, action) => {
       return {

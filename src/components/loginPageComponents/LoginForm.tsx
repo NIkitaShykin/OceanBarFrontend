@@ -100,6 +100,11 @@ const LogInForm = () => {
             response.data.accessToken,
             {expires: TOKEN_EXPIRATION_TIME}
           )
+          Cookies.set(
+            'refreshToken',
+            response.data.refreshToken,
+            {expires: TOKEN_EXPIRATION_TIME}
+          )
           setIsLoading(false)
           dispatch(logIn(response.data.data))
           dispatch(getUserAC(response.data.data))
