@@ -37,19 +37,19 @@ const currentOrders = () => {
                 <div className='details-devider' />
                 {/* {orderedDishes.map((item, id) => */}
                 <div
-                  className='history-item'>
+                  className='history-order-item'>
                   {/* // id={id)}
                       // key={item.id}> */}
-                  <div className='details-item-block'>
-                    <span className='details-name'>Суп с лососем</span>
+                  <div className='history-header-name'>
+                    <span className='details-name'>
+                      Суп с лососем и другими ингидиентами</span>
                   </div>
-                  <div className='details-item-block'>
+                  <div className='history-header-quant'>
                     <span className='counter'>2</span>
                   </div>
-                  <div className='details-item-block'>
+                  <div className='history-header-price'>
                     <span>25 BYN</span>
                   </div>
-                  <div className='details-devider' />
                 </div>
                 {/* )} */}
 
@@ -96,7 +96,6 @@ const currentOrders = () => {
                   </div>
                 </div>
 
-                <div className='details-devider'></div>
                 <div className='row mb-3'>
                   <div className='col history-total text-right'>
                     Итого:
@@ -202,7 +201,6 @@ const currentOrders = () => {
                   </div>
                 </div>
 
-                <div className='details-devider'></div>
                 <div className='row mb-3'>
                   <div className='col history-total text-right'>
                       Итого:

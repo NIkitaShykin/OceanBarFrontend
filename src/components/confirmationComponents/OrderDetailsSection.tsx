@@ -1,6 +1,4 @@
 import {Image} from 'react-bootstrap'
-// import {useEffect} from 'react'
-// import axios from 'axios'
 
 import {useAppSelector} from '../../redux/hooks'
 import {DishInCart} from '../../common/types/dishesType'
@@ -19,9 +17,7 @@ const OrderDetailsSection = () => {
   const orderCompleted = useAppSelector(
     (state) => state.order
   )
-  // useEffect(() => {
-  //   axios.post(`${url}/api/order`, orderCompleted)
-  // }, [])
+
 
   return (
     <>
@@ -96,7 +92,8 @@ const OrderDetailsSection = () => {
             <div className='row'>
               <div className='col order-type-total text-right'>
                 Оплата:
-              </div><div className='col text'>
+              </div>
+              <div className='col text'>
                   На месте картой
               </div>
             </div>
@@ -104,11 +101,11 @@ const OrderDetailsSection = () => {
         </div>
         {orderCompleted.paymentType === 'card-online' && (
           <>
-            <div className='row'>
-              <div className='col order-type-total text-right'>
+            <div className='online-payment'>
+              <div className=' order-type-total'>
                 Оплата:
               </div>
-              <div className='col'>
+              <div className=''>
                 <ChoosePaymentCart />
               </div>
             </div>

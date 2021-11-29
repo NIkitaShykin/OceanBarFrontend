@@ -133,12 +133,28 @@ $mainColor: #ff9e05;
 }
 .choose-cards-select {
   display: flex;
-  width: 32rem;
+  width: 36rem;
 }
 .add-btn {
   font-size: 18px;
-  width: 222px;
+  width: 224px;
   height: inherit;
+  margin-left: 10px;
+}
+
+.online-payment {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.new-card {
+  background-color: #fff;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
 }
 
 

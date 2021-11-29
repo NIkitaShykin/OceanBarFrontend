@@ -32,19 +32,18 @@ const CompletedOrders =() => {
                 <div className='details-devider' />
                 {/* {orderedDishes.map((item, id) => */}
                 <div
-                  className='history-item'>
+                  className='history-order-item'>
                   {/* // id={id)}
                       // key={item.id}> */}
-                  <div className='details-item-block'>
+                  <div className='history-header-name'>
                     <span className='details-name'>Суп с лососем</span>
                   </div>
-                  <div className='details-item-block'>
+                  <div className='history-header-quant'>
                     <span className='counter'>2</span>
                   </div>
-                  <div className='details-item-block'>
+                  <div className='history-header-price'>
                     <span>25 BYN</span>
                   </div>
-                  <div className='details-devider' />
                 </div>
                 {/* )} */}
 
@@ -106,7 +105,7 @@ const CompletedOrders =() => {
                     Cтатус заказа:
                   </div>
                   <div className='col order-type-text mb'>
-                    в процессе
+                    выполнено
                   </div>
                 </div>
               </div>

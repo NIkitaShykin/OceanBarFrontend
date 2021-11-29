@@ -21,7 +21,9 @@ const ChoosePaymentCart = () => {
   return (
     <div className='choose-cards-select'>
       {isAddingCard ?
-        <NewBankCardContainer changeStatus={changeIsAddingCard}/> :
+        <div className='shadow new-card'>
+          <NewBankCardContainer changeStatus={changeIsAddingCard}/>
+        </div> :
         <>
           <FloatingLabel
             className='choose-cards-select'
@@ -46,7 +48,7 @@ const ChoosePaymentCart = () => {
                     value={card.number}
                     key={card.id}
                   >
-                card No{card.number}
+                карта No {card.number}
                   </option>
                 </>
               ))}

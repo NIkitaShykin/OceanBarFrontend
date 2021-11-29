@@ -48,7 +48,7 @@ $mainColor: #ff9e05;
 }
 
 .history {
-  height: 1425px;
+  height: 96.5%;
   .fs {
     font-size: 28px;
     font-weight: 600 !important;
@@ -67,6 +67,7 @@ $mainColor: #ff9e05;
     margin: 1rem;
     padding: 10px 5px;
     font-size: 18px;
+    gap: 1rem;
   }
   .history-details-item {
     display: flex;
@@ -89,14 +90,16 @@ $mainColor: #ff9e05;
     font-size: 18px;
   }
   .history-header-name {
-    width: 37rem;
+    width: 29rem;
     margin-left: 5px;
   }
   .history-header-quant {
     width: 20rem;
+    text-align: center;
   }
   .history-header-price {
     width: 13rem;
+    text-align: center;
   }
   .history-total {
     font-size: 18px;
@@ -110,9 +113,11 @@ $mainColor: #ff9e05;
 }
 .nav.nav-tabs .nav-link.active {
   color: black;
+  border-color: #ff9e05 #ff9e05 #fff;
 }
 .nav.nav-tabs .nav-link {
   color: #495057;
+  border-color: #fff #fff #ff9e05;
 }
 
 .border {
@@ -133,3 +138,5 @@ $mainColor: #ff9e05;
   font-size: 18px;
   flex-wrap: wrap;
 }
+
+
