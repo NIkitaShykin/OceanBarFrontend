@@ -1,14 +1,13 @@
 import axios from 'axios'
-import {url as baseURL} from './index'
+import {url} from './index'
 import Cookies from 'js-cookie'
-import {bookingTablesType} from '../common/types/bookingTypes'
+import {BookingTablesType} from '../common/types/bookingTypes'
 
 const token = Cookies.get('token')
 
 const instance = axios.create({
-  baseURL,
+  url,
 })
-
 export const ApiAdmin = {
   getNewDishImgFileUrl(newDishImgFile?: any) {
     {
@@ -39,16 +38,32 @@ export const ApiAdmin = {
   },
   getBookedTables() {
     {
-      return Promise.resolve<{data: {bookedUsers: bookingTablesType[]}}>(
-        instance.get(`http://localhost:3001/api/booking/usersbooking`)
+      return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
+        instance.get(`${url}/booking/usersbooking`)
       ).then((resp) => {
         return resp
       })
     }
-  }, updateBookedTables(newData:any, id:number) {
+  },
+  updateBookedTables(newData: any, id: string) {
     {
-      return Promise.resolve<{data: {bookedUsers: bookingTablesType[]}}>(
-        instance.patch(`http://localhost:3001/api/booking/usersbooking/?id=${id}`, newData)
+      return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
+        instance.patch(`${url}/booking/usersbooking/?id=${id}`, {
+          name: newData?.name,
+          phone: newData?.phone,
+          date: newData?.date,
+          time: newData?.time,
+          amountofpeople: newData?.amountofpeople,
+        })
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
+  deleteBookedTable(id:string) {
+    {
+      return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
+        instance.delete(`${url}/booking/usersbooking/?id=${id}`)
       ).then((resp) => {
         return resp
       })

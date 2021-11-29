@@ -5,7 +5,7 @@ export type bookingOrderType = {
     time: string,
     amountofpeople: number
 }
-export type bookingTablesType = {
+export type BookingTablesType = {
     id:number,
     date: string,
     name: string,
@@ -15,5 +15,5 @@ export type bookingTablesType = {
 }
 
 export type InitialTablesType = {
-    tables: bookingTablesType[]
+    tables: BookingTablesType[]
 }

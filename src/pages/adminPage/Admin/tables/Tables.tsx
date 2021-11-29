@@ -1,16 +1,20 @@
 import {useDispatch} from 'react-redux'
-import {setUsersBookingTables} from '../../../../redux/actions'
+import {
+  deleteUserBookingTable,
+  setUsersBookingTables,
+} from '../../../../redux/actions'
 import {ApiAdmin} from '../../../../api/ApiAdmin'
 import {useEffect, useState} from 'react'
 import {useAppSelector} from '../../../../redux/hooks'
 import './Tables.scss'
 import {Button, FormControl, Modal, Table} from 'react-bootstrap'
-import {bookingTablesType} from '../../../../common/types/bookingTypes'
+import {BookingTablesType} from '../../../../common/types/bookingTypes'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 
 const OrderedTables = () => {
   const dispatch = useDispatch()
   const [show, setShow] = useState(false)
+  const [deleteTable, setDeleteTable] = useState(false)
   const [target, setTarget] = useState('')
   const [id, setId] = useState('')
   const tables = useAppSelector((state) => state.tables.tables)
@@ -23,15 +27,24 @@ const OrderedTables = () => {
       dispatch(setUsersBookingTables(el.data.bookedUsers))
     })
   }
-  const handleClose = () => setShow(false)
+  const handleClose = () => {
+    setShow(false)
+    setDeleteTable(false)
+  }
   const handleShow = (target: any) => {
     setTarget(target.innerText)
     setShow(true)
   }
+  const handleDelete = (id: any) => {
+    ApiAdmin.deleteBookedTable('298').then((el) => {
+      dispatch(deleteUserBookingTable('298'))
+      handleClose()
+    })
+  }
 
   // how to get id
   const handleSave = (target: any) => {
-    ApiAdmin.updateBookedTables(target, 300).then((el) => {
+    ApiAdmin.updateBookedTables(target, '300').then((el) => {
       // dispatch(
       //   updateUsersBookingTables({
       //     booking: el.data.bookedUsers,
@@ -53,7 +66,7 @@ const OrderedTables = () => {
             <th>Количество гостей</th>
           </tr>
         </thead>
-        {tables.map((el: bookingTablesType) => (
+        {tables.map((el: BookingTablesType) => (
           <tbody key={el.id}>
             <tr
               onClick={(e: any) => {
@@ -74,7 +87,24 @@ const OrderedTables = () => {
               <td>{el.phone}</td>
               <td>{el.date}</td>
               <td>{el.time}</td>
-              <td>{el.amountofpeople}</td>
+              <td width={'14%'}>{el.amountofpeople}</td>
+              <td
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
+                width={'10%'}
+              >
+                <Button
+                  onClick={(e) => {
+                    setShow(true)
+                    setDeleteTable(true)
+                  }}
+                  variant='danger'
+                  size={'sm'}
+                >
+                  Удалить
+                </Button>
+              </td>
             </tr>
           </tbody>
         ))}
@@ -87,24 +117,34 @@ const OrderedTables = () => {
         <>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Изменение данных{id}</Modal.Title>
+              <Modal.Title>Изменение данных {id}</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-              <FormControl
-                aria-label='Small'
-                defaultValue={target}
-                onChange={(e) => {
-                  setTarget(e.target.value)
-                }}
-                aria-describedby='inputGroup-sizing-sm'
-              />
-            </Modal.Body>
+            {deleteTable ? (
+              <div>Уверены что хотите удалить стол с ID: {id}</div>
+            ) : (
+              <Modal.Body>
+                <FormControl
+                  aria-label='Small'
+                  defaultValue={target}
+                  onChange={(e) => {
+                    setTarget(e.target.value)
+                  }}
+                  aria-describedby='inputGroup-sizing-sm'
+                />
+              </Modal.Body>
+            )}
+
             <Modal.Footer>
               <Button variant='secondary' onClick={handleClose}>
                 Закрыть
               </Button>
-              <Button variant='primary' onClick={() => handleSave(target)}>
-                Сохранить
+              <Button
+                variant='primary'
+                onClick={() => {
+                  deleteTable ? handleDelete(id) : handleSave(target)
+                }}
+              >
+                {deleteTable ? <div>Удалить</div> : <div>Сохранить</div>}
               </Button>
             </Modal.Footer>
           </Modal>

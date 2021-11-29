@@ -1,6 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit'
 import {InitialTablesType} from '../../common/types/bookingTypes'
-import {setUsersBookingTables, updateUsersBookingTables} from '../actions'
+import {
+  deleteUserBookingTable,
+  setUsersBookingTables,
+  updateUsersBookingTables,
+} from '../actions'
 
 const initialState: InitialTablesType = {
   tables: [],
@@ -19,7 +23,12 @@ const usersBookingTablesReducer = createReducer(initialState, (builder) => {
       )
       state.tables[id] = action.payload.booking
     })
+    .addCase(deleteUserBookingTable, (state, action) => {
+      const id = action.payload
+      const updState = {...state}
+      updState.tables = updState.tables.filter((table) => table.id != id)
+      return updState
+    })
 })
 
 export default usersBookingTablesReducer
-
