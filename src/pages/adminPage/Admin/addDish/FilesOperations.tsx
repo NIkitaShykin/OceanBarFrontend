@@ -15,7 +15,7 @@ export default function FilesOperations(props:any) {
   const buttonRef=useRef<HTMLInputElement>(null)
 
   const formData = new FormData()
-  formData.append('name', 'Kasha')
+  formData.append('name', `${props.dishName}`)
   formData.append('category', `${props.dishCategory}`)
 
   const [fileURI, setFile]=useState<any>()

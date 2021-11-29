@@ -21,7 +21,6 @@ export const ApiAdmin = {
     }
   },
   setNewDish(newDish:any) {
-    console.log(newDish)
     {
       return Promise.resolve(
         instance.post('menu/', newDish,

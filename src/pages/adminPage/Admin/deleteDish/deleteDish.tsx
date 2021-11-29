@@ -14,11 +14,12 @@ const AdminDishes = () => {
   const deleteDish=(dishId: number)=>{
     ApiAdmin.deleteDish(dishId)
       .then((res)=>{
-        if (res.status=204) {
+        // @ts-ignore
+        if (res.data.error) {
+          orderedToast(`Блюдо удалить не удалось`)
+        } else if (res.status=204) {
           orderedToast(`Блюдо удалено`)
           dispatch(getDishesFromApiTC())
-        } else {
-          orderedToast(`Блюдо удалить не удалось`)
         }
       })
   }

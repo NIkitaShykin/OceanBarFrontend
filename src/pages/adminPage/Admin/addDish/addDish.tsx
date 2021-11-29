@@ -7,8 +7,14 @@ const AddDish = () => {
   const handleNewDishData=(newDish:any)=>{
     ApiAdmin.setNewDish(newDish)
       .then((res)=>{
-        if (res.status=200) {
+        // @ts-ignore
+        if (res.data.error) {
+          orderedToast(`Ошибка добавления блюда`)
+        } else if (res.status=200) {
           orderedToast(`Блюдо добавлено`)
+        } else {
+          (console.log(res)
+          )
         }
       })
   }
