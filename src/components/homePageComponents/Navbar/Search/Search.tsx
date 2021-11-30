@@ -88,7 +88,7 @@ const SearchField = () => {
     dishes.find((dish: Dish) => dish.id === id)
     setSearchQuery('')
     setIsOpen(false)
-    history.push(`/dish/${id} `)
+    history.push(`/dishes/${id} `)
   }
 
   return (
