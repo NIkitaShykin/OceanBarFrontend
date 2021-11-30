@@ -4,6 +4,7 @@ export const baseURL = 'http://localhost:3001/api'
 export const instance = axios.create({
   baseURL
 })
+// ------------------------------------------------------------
 
 import {ChangeEvent, useRef} from 'react'
 import {useState} from 'react'
@@ -13,7 +14,6 @@ import {Button} from 'react-bootstrap'
 export default function FilesOperations(props:any) {
   const buttonRef=useRef<HTMLInputElement>(null)
 
-
   const formData = new FormData()
   formData.append('name', `${props.dishName}`)
   formData.append('category', `${props.dishCategory}`)
@@ -22,13 +22,13 @@ export default function FilesOperations(props:any) {
   const [file64, setFileURL]=useState({})
   const [file, setFileData]=useState({})
 
+
   const upLoad=(e:ChangeEvent<HTMLInputElement>)=>{
     const newFile= e.target.files && e.target.files[0]
 
     if (newFile) {
       setFile(newFile)
       setFileURL(window.URL.createObjectURL(newFile))
-
       formData.append('file', newFile)
       setFileData(formData)
     }
@@ -45,10 +45,8 @@ export default function FilesOperations(props:any) {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-
       }).then((res: any)=>sendImgDeplUrl(res.data.url)
     )
-
   }
 
   const returnFileSize=(size:number)=>{
@@ -75,7 +73,6 @@ export default function FilesOperations(props:any) {
                           buttonRef.current.click() }
               style={{
                 width: '250px',
-
                 color: 'gray',
                 display: 'flex',
                 alignItems: 'center',
@@ -87,7 +84,6 @@ export default function FilesOperations(props:any) {
               variant='outline-warning'
             >
               загрузка с диска <h4>&#8635;</h4>
-
             </Button>
           </div>
         </div>

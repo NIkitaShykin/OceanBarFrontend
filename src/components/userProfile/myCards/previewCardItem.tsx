@@ -29,6 +29,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
     return (
       <div style={{height: '150px', margin: '10px'}}
         key={this.props.card.id}
+        test-key={this.props.card.id}
+      >
         <div id='PaymentForm'
           style={{transform: 'scale(0.6)',
             width: '100px',

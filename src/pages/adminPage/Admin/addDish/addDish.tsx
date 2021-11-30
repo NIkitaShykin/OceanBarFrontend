@@ -23,7 +23,6 @@ const AddDish = () => {
       })
   }
 
-
   return (
     <div>
       <h3>заполните поля:</h3>
@@ -31,7 +30,6 @@ const AddDish = () => {
         handleNewDishData={handleNewDishData }
         setClearForm={setClearForm}
         clearForm={clearForm}
-
       />
     </div>
 
