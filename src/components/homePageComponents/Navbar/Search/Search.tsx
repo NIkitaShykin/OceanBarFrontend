@@ -93,7 +93,7 @@ const SearchField = () => {
 
   return (
     <>
-      <Form className='d-flex mx-6 d-flex-pos justify-content-end' ref={ref}>
+      <Form className='d-flex mx-6 d-flex-pos' ref={ref}>
         <FormControl
           type='text'
           placeholder='Search...'

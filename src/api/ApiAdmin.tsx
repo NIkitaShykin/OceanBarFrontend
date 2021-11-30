@@ -8,13 +8,17 @@ const instance = axios.create({
 })
 
 export const ApiAdmin = {
-  getNewDishImgFileUrl(newDishImgFile?:any) {
+
+  getNewDishImgFileUrl(file?: string) {
     {
-      console.log(newDishImgFile)
       return Promise.resolve(
-        instance.post('menu/image', newDishImgFile,
-          {headers: {Authorization: `Bearer ${token}`}}
-        )
+        instance.post('menu/image', file,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+
       )
     }
   },

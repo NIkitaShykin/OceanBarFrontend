@@ -2,20 +2,22 @@ import {Image} from 'react-bootstrap'
 
 import {useAppSelector} from '../../redux/hooks'
 import {DishInCart} from '../../common/types/dishesType'
+import DetailsData from './DetailsData'
+import totalSum from '../cartPageComponents/totalSum'
+import ChoosePaymentCart from './ChoosePaymentCart'
 
 import './orderDetails.scss'
-import DetailsData from './DetailsData'
 
 
 const OrderDetailsSection = () => {
+  const total = totalSum()
   const orderedDishes = useAppSelector<DishInCart[]>(
     (state) => state.cart.dishes
   )
-  const totalSum = orderedDishes.reduce(
-    (sum: number, current) =>
-      sum + Number(current.price) * current.numberOfDishes,
-    0
+  const orderCompleted = useAppSelector(
+    (state) => state.order
   )
+
 
   return (
     <>
@@ -41,7 +43,7 @@ const OrderDetailsSection = () => {
           </div>
           <div className='details-devider' />
           {orderedDishes.map((item, id) =>
-            <>
+            <div key={item.id}>
               <div className='details-item' id={String(item.id)} key={item.id}>
                 <div className='details-item-block details-img'>
                   <Image className='rounded-3' src={item.imageURL} />
@@ -58,7 +60,7 @@ const OrderDetailsSection = () => {
                 </div>
               </div>
               <div className='details-devider' />
-            </>
+            </div>
           )}
 
           <DetailsData />
@@ -69,23 +71,46 @@ const OrderDetailsSection = () => {
               Итого:
             </div>
             <div className='col order-type-total'>
-              {totalSum} BYN
+              {total} BYN
             </div>
           </div>
         </div>
 
         <div className='details-payment'>
-          <div className='row'>
-            <div className='col order-type-total text-right'>
-              Оплата:
+
+          {orderCompleted.paymentType === 'cash' && (
+            <div className='row'>
+              <div className='col order-type-total text-right'>
+                  Оплата:
+              </div>
+              <div className='col text'>
+                  На месте наличными
+              </div>
             </div>
-            <div className='col payment-cards'>
-              {/* <MyCards/> // сюда вставить компонент
-              с сохраненными кароточками из профайла вместо картинки ниже */}
-              <Image className='rounded-3' src='https://mockups-design.com/wp-content/uploads/2020/04/Free_Credit_Card_Mockup_4.jpg' width={100} />
+          )}
+          {orderCompleted.paymentType === 'card-at-the-restaurant' && (
+            <div className='row'>
+              <div className='col order-type-total text-right'>
+                Оплата:
+              </div>
+              <div className='col text'>
+                  На месте картой
+              </div>
             </div>
-          </div>
+          )}
         </div>
+        {orderCompleted.paymentType === 'card-online' && (
+          <>
+            <div className='online-payment'>
+              <div className=' order-type-total'>
+                Оплата:
+              </div>
+              <div className=''>
+                <ChoosePaymentCart />
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </>
   )

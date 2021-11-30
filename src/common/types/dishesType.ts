@@ -20,6 +20,7 @@ export type DishInCart = {
   position: number
   weight?: string
   calories?: string
+  addedIngredients?: string
 }
 export type ApiDish = {
   dish: {

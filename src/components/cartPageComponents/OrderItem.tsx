@@ -76,6 +76,7 @@ const OrderItem: React.FC<TOrderItem> = ({
       token,
       parseString(ingredients)
     ).then(() => {
+      getRemovedIngredients(ingredients)
       dispatch(updateDishInCart({id: id, ingredients: ingredients}))
       setShow(false)
     })

@@ -28,10 +28,12 @@ const authReducer = createReducer(initialState, (builder) => {
         user: null,
         isAuthorized: false
       }
+      // return initialState
     })
     .addCase(checkAuth, (state, action) => {
       return {
         ...state,
+        user: action.payload,
         isAuthorized: true
       }
     })

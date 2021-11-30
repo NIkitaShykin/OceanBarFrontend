@@ -16,7 +16,8 @@ const UserProfile = () => {
 
   const handleClose = () => {
     Cookies.remove('token')
-    localStorage.removeItem('token')
+    Cookies.remove('refreshToken') //
+    // localStorage.removeItem('token')
     dispatch(logOut())
     history.push('/')
   }
@@ -29,18 +30,18 @@ const UserProfile = () => {
           <h1 className='profile-title'>
             Профиль
           </h1>
-          <div className='profile-line'></div>
+          <div className='profile-line'/>
           <button className='btn-exit btn' onClick={handleClose}>Выйти</button>
         </div>
 
         <div className='row justify-content-start'>
-          <div className='col-lg-8'>
+          <div className='col-lg-6'>
             <PersonalData />
             <DeliveryAdress/>
             <PasswordReset/>
             <MyCreditCards/>
           </div>
-          <div className='col-lg-4'>
+          <div className='col-lg-6'>
             <OrderHistory/>
           </div>
         </div>

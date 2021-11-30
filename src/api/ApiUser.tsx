@@ -3,10 +3,11 @@ import Cookies from 'js-cookie'
 import {DeliveryAdressType} from '../../src/common/types/userTypes'
 import {$api} from './ApiAuth'
 
-const token = Cookies.get('token')
+// const token = Cookies.get('token')
 
 export const ApiUser = {
   getUserPersonalData(userId?:number) {
+    const token = Cookies.get('token')
     {
       return Promise.resolve(
         $api.get(`users/${userId}`,
@@ -21,6 +22,7 @@ export const ApiUser = {
   },
 
   setUserPersonalData(userData:any, tokenOld:any) {
+    const token = Cookies.get('token')
     return Promise.resolve(
       $api.patch( 'users/1', userData,
         {headers: {Authorization: `Bearer ${token}`}}

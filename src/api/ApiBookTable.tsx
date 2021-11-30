@@ -1,15 +1,18 @@
-import axios from 'axios'
-import {url as baseURL} from './index'
+// import axios from 'axios'
+// import {url as baseURL} from './index'
 import {bookingOrderType} from '../common/types/bookingTypes'
 
-const instance = axios.create({
-  baseURL
-})
+import {$api} from './ApiAuth'
+
+// const instance = axios.create({
+//   baseURL
+// })
+
 export const ApiReserve = {
   bookTableUnregistred(order:bookingOrderType) {
     {
       return Promise.resolve(
-        instance.post('booking/', order )
+        $api.post('booking/', order )
       )
     }
   }

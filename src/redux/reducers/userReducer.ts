@@ -15,7 +15,7 @@ type InitialStateType={
 const initialState: InitialStateType = {
 
   userProfile: {
-    'id': 10000,
+    'id': 1,
     'name': '',
     'secondname': '',
     'email': '',
@@ -56,7 +56,7 @@ export const getUserPersonalDataTC =
       try {
         const asyncResp = await ApiUser.getUserPersonalData()
         // @ts-ignore
-        const userData = asyncResp.data.data.user
+        const userData = asyncResp.data.data //
         dispatch(getUserAC(userData))
         dispatch(toggleLoadingUser(false))
       } catch (err) {
@@ -73,7 +73,7 @@ export const setUserPersonalDataTC =
       try {
         const asyncResp: any =
          await ApiUser.setUserPersonalData(userData, token)
-        const response = asyncResp.data.data.user
+        const response = asyncResp.data.data //
         dispatch(getUserAC(response))
         dispatch(toggleLoadingUser(false))
       } catch (err) {

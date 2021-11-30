@@ -23,8 +23,8 @@ const Cart = () => {
     useAppSelector((state) => state.cart.dishes)
 
   const handleLoad = () => {
-    ApiCart.getCart(Cookies.get('token')).then((resp) => {
-      resp.data.cart.forEach((dish: ApiDish) => {
+    ApiCart.getCart(Cookies.get('token')).then((response) => {
+      response.data.cart.forEach((dish: ApiDish) => {
         dispatch(
           addDishToCart(mapApiDishToDishInCart(dish))
         )

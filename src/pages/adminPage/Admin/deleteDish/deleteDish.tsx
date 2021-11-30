@@ -1,15 +1,27 @@
 import {Button, Col, Row} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
+import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
+import {getDishesFromApiTC} from '../../../../redux/reducers/dishesReducer'
 import {ApiAdmin} from '../../../../api/ApiAdmin'
 import ShowIngridients from './showIngridients'
 import {useAppSelector} from '../../../../redux/hooks'
+import {useDispatch} from 'react-redux'
 
 const AdminDishes = () => {
   const allDishes = useAppSelector((state) => state.dish.dishes)
+  const dispatch = useDispatch()
 
   const deleteDish=(dishId: number)=>{
     ApiAdmin.deleteDish(dishId)
-      .then((res)=>console.log(res))
+      .then((res)=>{
+        // @ts-ignore
+        if (res.data.error) {
+          orderedToast(`Блюдо удалить не удалось`)
+        } else if (res.status=204) {
+          orderedToast(`Блюдо удалено`)
+          dispatch(getDishesFromApiTC())
+        }
+      })
   }
 
   const arrayDishes = allDishes.map((dish) => {

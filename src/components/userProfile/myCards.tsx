@@ -7,8 +7,10 @@ import NewBankCardContainer from './myCards/NewBankCardContainer'
 import PreviewCards from './myCards/previewCards'
 import AbsentBankCard from './myCards/absentCard'
 
+import '../../pages/profilePage/profile.scss'
 
-const DeliveryAdress = () => {
+
+const MyCreditCards = () => {
   const userCards =
    useSelector<AppStoreType, userCardsType>((state) => state.bankCard.userCards)
 
@@ -41,7 +43,9 @@ const DeliveryAdress = () => {
         <AbsentBankCard changeAbsent={changeAbsent}/> :
         <>
           {isAddingCard ?
-            <NewBankCardContainer changeStatus={changeIsAddingCard} /> :
+            <NewBankCardContainer
+              changeStatus={changeIsAddingCard}
+            /> :
             <PreviewCards
               changeStatus={changeIsAddingCard}
               changeAbsent={changeAbsent}
@@ -53,4 +57,4 @@ const DeliveryAdress = () => {
   )
 }
 
-export default DeliveryAdress
+export default MyCreditCards
