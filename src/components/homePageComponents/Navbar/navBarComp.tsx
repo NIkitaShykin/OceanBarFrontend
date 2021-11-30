@@ -29,7 +29,7 @@ const NavBarComponent: React.FC = () => {
             <Nav.Link as={Link} to={'/menu'} className='nav-link-mr'>
               Меню
             </Nav.Link>
-            <Nav.Link as={Link} to={'/bookings-table'} className='nav-link-mr'>
+            <Nav.Link as={Link} to={'/booking-table'} className='nav-link-mr'>
               Забронировать стол
             </Nav.Link>
           </Nav>
