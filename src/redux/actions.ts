@@ -31,6 +31,9 @@ export const removeUser = createAction('REMOVE_USER')
 export const setUsersBookingTables = createAction<any>(
   'SET_USERS_BOOKING-TABLES'
 )
+export const setUsersOrders = createAction<any>(
+  'SET_USERS_ORDERS'
+)
 
 export const updateUsersBookingTables = createAction<any>(
   'UPDATE_USERS_BOOKING-TABLES'

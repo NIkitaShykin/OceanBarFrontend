@@ -14,6 +14,24 @@ export type BookingTablesType = {
     amountofpeople: number
 }
 
+export type OrdersType = {
+    id:number,
+    date: string,
+    price:number,
+    time: string,
+    type:string,
+    state:string,
+    tableSize:string | null,
+    paymentType:string | null,
+    address:string | null
+
+
+}
+
 export type InitialTablesType = {
     tables: BookingTablesType[]
+}
+
+export type InitialOrdersType = {
+    orders: OrdersType[]
 }

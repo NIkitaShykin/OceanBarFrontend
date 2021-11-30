@@ -45,6 +45,15 @@ export const ApiAdmin = {
       })
     }
   },
+  getAllOrders() {
+    {
+      return Promise.resolve<{data: {orders: []}}>(
+        instance.get(`${url}/order/orders`)
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
   updateBookedTables(newData: any, id: string) {
     {
       return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
@@ -60,7 +69,7 @@ export const ApiAdmin = {
       })
     }
   },
-  deleteBookedTable(id:string) {
+  deleteBookedTable(id: string) {
     {
       return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
         instance.delete(`${url}/booking/usersbooking/?id=${id}`)
