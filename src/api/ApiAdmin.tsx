@@ -54,15 +54,11 @@ export const ApiAdmin = {
       })
     }
   },
-  updateBookedTables(newData: any, id: string) {
+  updateBookedTables(fieldValue: any, id: string, fieldName:any) {
     {
       return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
         instance.patch(`${url}/booking/usersbooking/?id=${id}`, {
-          name: newData?.name,
-          phone: newData?.phone,
-          date: newData?.date,
-          time: newData?.time,
-          amountofpeople: newData?.amountofpeople,
+          [fieldName]: fieldValue
         })
       ).then((resp) => {
         return resp

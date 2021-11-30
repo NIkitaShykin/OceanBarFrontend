@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   order: orderReducer,
   bankCard: bankCardReducer,
-  tables: usersBookingTablesReducer,
+  bookings: usersBookingTablesReducer,
   orders: usersOrdersReducer
 })
 

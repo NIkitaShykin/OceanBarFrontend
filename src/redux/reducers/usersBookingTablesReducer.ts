@@ -7,26 +7,26 @@ import {
 } from '../actions'
 
 const initialState: InitialTablesType = {
-  tables: [],
+  bookings: [],
 }
 
 const usersBookingTablesReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setUsersBookingTables, (state, action) => {
       return {
-        tables: action.payload,
+        bookings: action.payload,
       }
     })
     .addCase(updateUsersBookingTables, (state, action) => {
-      const id = state.tables.findIndex(
+      const id = state.bookings.findIndex(
         (table) => table.id === action.payload.id
       )
-      state.tables[id] = action.payload.booking
+      state.bookings[id] = action.payload.booking
     })
     .addCase(deleteUserBookingTable, (state, action) => {
       const id = action.payload
       const updState = {...state}
-      updState.tables = updState.tables.filter((table) => table.id != id)
+      updState.bookings = updState.bookings.filter((table) => table.id != id)
       return updState
     })
 })

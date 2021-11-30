@@ -29,7 +29,7 @@ export type OrdersType = {
 }
 
 export type InitialTablesType = {
-    tables: BookingTablesType[]
+    bookings: BookingTablesType[]
 }
 
 export type InitialOrdersType = {

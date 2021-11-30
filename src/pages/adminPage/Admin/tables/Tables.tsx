@@ -1,7 +1,7 @@
 import {useDispatch} from 'react-redux'
 import {
   deleteUserBookingTable,
-  setUsersBookingTables,
+  setUsersBookingTables, updateUsersBookingTables
 } from '../../../../redux/actions'
 import {ApiAdmin} from '../../../../api/ApiAdmin'
 import {useEffect, useState} from 'react'
@@ -13,11 +13,12 @@ import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 
 const OrderedTables = () => {
   const dispatch = useDispatch()
-  const [show, setShow] = useState(false)
-  const [deleteTable, setDeleteTable] = useState(false)
-  const [target, setTarget] = useState('')
-  const [id, setId] = useState('')
-  const tables = useAppSelector((state) => state.tables.tables)
+  const [isShowModal, setShowModal] = useState(false)
+  const [isDeleteButton, setIsDeleteButton] = useState(false)
+  const [changingFieldValue, setChangingFieldValue] = useState('')
+  const [fieldName, setFieldName] = useState('')
+  const [selectedRowId, setSelectedRowId] = useState('')
+  const bookings = useAppSelector((state) => state.bookings.bookings)
 
   useEffect(() => {
     handleLoad()
@@ -27,30 +28,41 @@ const OrderedTables = () => {
       dispatch(setUsersBookingTables(el.data.bookedUsers))
     })
   }
-  const handleClose = () => {
-    setShow(false)
-    setDeleteTable(false)
+  const closeEditModal = () => {
+    setShowModal(false)
+    setIsDeleteButton(false)
   }
-  const handleShow = (target: any) => {
-    setTarget(target.innerText)
-    setShow(true)
+  const openEditModal = (id: any, value: any, name: any) => {
+    setFieldName(name)
+    setChangingFieldValue(value)
+    setSelectedRowId(id)
+    setShowModal(true)
   }
-  const handleDelete = (id: any) => {
-    ApiAdmin.deleteBookedTable('298').then((el) => {
-      dispatch(deleteUserBookingTable('298'))
-      handleClose()
+  const openDeleteModal = (id: any) => {
+    setSelectedRowId(id)
+    setIsDeleteButton(true)
+    setShowModal(true)
+  }
+  const onClickDeleteButtonEditModal = () => {
+    ApiAdmin.deleteBookedTable(selectedRowId).then(() => {
+      dispatch(deleteUserBookingTable(selectedRowId))
+      closeEditModal()
     })
   }
 
-  // how to get id
-  const handleSave = (target: any) => {
-    ApiAdmin.updateBookedTables(target, '300').then((el) => {
-      // dispatch(
-      //   updateUsersBookingTables({
-      //     booking: el.data.bookedUsers,
-      //     id: el.data.bookedUsers.id,
-      //   })
-      // )
+  const onClickSaveButtonEditModal = () => {
+    ApiAdmin.updateBookedTables(
+      changingFieldValue,
+      selectedRowId,
+      fieldName
+    ).then((el: any) => {
+      dispatch(
+        updateUsersBookingTables({
+          booking: el.data.updatedBooking,
+          id: selectedRowId
+        })
+      )
+      closeEditModal()
     })
   }
   const arrayTables = () => {
@@ -66,68 +78,97 @@ const OrderedTables = () => {
             <th>Количество гостей</th>
           </tr>
         </thead>
-        {tables.map((el: BookingTablesType) => (
-          <tbody key={el.id}>
-            <tr
+        {bookings.map((booking: BookingTablesType) => (
+          <tr key={booking.id}>
+            <td
               onClick={(e: any) => {
-                handleShow(e.target)
+                e.stopPropagation()
+                orderedToast('Нельзя изменить ID')
               }}
-              key={el.id}
             >
-              <td
-                onClick={(e: any) => {
-                  setId(e.target.innerText)
-                  e.stopPropagation()
-                  orderedToast('Нельзя изменить ID')
+              {booking.id}
+            </td>
+            <td
+              onClick={() => {
+                openEditModal(booking.id, booking.name, 'name')
+              }}
+            >
+              {booking.name}
+            </td>
+            <td
+              onClick={() => {
+                openEditModal(booking.id, booking.phone, 'phone')
+              }}
+            >
+              {booking.phone}
+            </td>
+            <td
+              onClick={() => {
+                openEditModal(booking.id, booking.date, 'date')
+              }}
+            >
+              {booking.date}
+            </td>
+            <td
+              onClick={() => {
+                openEditModal(booking.id, booking.time, 'time')
+              }}
+            >
+              {booking.time}
+            </td>
+            <td
+              onClick={() => {
+                openEditModal(
+                  booking.id,
+                  booking.amountofpeople,
+                  'amountofpeople'
+                )
+              }}
+              width={'14%'}
+            >
+              {booking.amountofpeople}
+            </td>
+            <td
+              onClick={(e) => {
+                e.stopPropagation()
+              }}
+              width={'10%'}
+            >
+              <Button
+                onClick={() => {
+                  openDeleteModal(booking.id)
                 }}
+                style={{backgroundColor: '#ff2828'}}
+                variant='danger'
+                size={'sm'}
               >
-                {el.id}
-              </td>
-              <td>{el.name}</td>
-              <td>{el.phone}</td>
-              <td>{el.date}</td>
-              <td>{el.time}</td>
-              <td width={'14%'}>{el.amountofpeople}</td>
-              <td
-                onClick={(e) => {
-                  e.stopPropagation()
-                }}
-                width={'10%'}
-              >
-                <Button
-                  onClick={(e) => {
-                    setShow(true)
-                    setDeleteTable(true)
-                  }}
-                  variant='danger'
-                  size={'sm'}
-                >
-                  Удалить
-                </Button>
-              </td>
-            </tr>
-          </tbody>
+                Удалить
+              </Button>
+            </td>
+          </tr>
         ))}
       </Table>
     )
   }
   return (
     <div>
-      {show ? (
+      {isShowModal ? (
         <>
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={isShowModal} onHide={closeEditModal}>
             <Modal.Header closeButton>
-              <Modal.Title>Изменение данных {id}</Modal.Title>
+              <Modal.Title>
+                Изменение данных для ID: {selectedRowId}
+              </Modal.Title>
             </Modal.Header>
-            {deleteTable ? (
-              <div>Уверены что хотите удалить стол с ID: {id}</div>
+            {isDeleteButton ? (
+              <div>Уверены что хотите удалить стол с ID: {selectedRowId}</div>
             ) : (
               <Modal.Body>
                 <FormControl
                   aria-label='Small'
-                  defaultValue={target}
+                  defaultValue={changingFieldValue}
                   onChange={(e) => {
-                    setTarget(e.target.value)
+                    setChangingFieldValue(e.target.value)
                   }}
                   aria-describedby='inputGroup-sizing-sm'
                 />
@@ -135,16 +176,18 @@ const OrderedTables = () => {
             )}
 
             <Modal.Footer>
-              <Button variant='secondary' onClick={handleClose}>
+              <Button variant='secondary' onClick={closeEditModal}>
                 Закрыть
               </Button>
               <Button
                 variant='primary'
                 onClick={() => {
-                  deleteTable ? handleDelete(id) : handleSave(target)
+                  isDeleteButton ?
+                    onClickDeleteButtonEditModal() :
+                    onClickSaveButtonEditModal()
                 }}
               >
-                {deleteTable ? <div>Удалить</div> : <div>Сохранить</div>}
+                {isDeleteButton ? <div>Удалить</div> : <div>Сохранить</div>}
               </Button>
             </Modal.Footer>
           </Modal>

@@ -31,7 +31,7 @@ const SwitchPager = () => (
       <Route path='/cart'>
         <UserCart />
       </Route>
-      <Route path='/booking-table'>
+      <Route path='/bookings-table'>
         <Booking />
       </Route>
       <Route path='/login'>

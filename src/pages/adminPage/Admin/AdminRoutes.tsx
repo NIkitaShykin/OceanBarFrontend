@@ -11,7 +11,7 @@ const AdminRoutes: React.FC = () => {
       <Switch>
         <Route path={'/admin/dishes/delete'} render={() => <AllDishes />} />
         <Route path={'/admin/dishes/new'} render={() => <NewDish />} />
-        <Route path={'/admin/tables'} render={() => <OrderedTables />} />
+        <Route path={'/admin/bookings'} render={() => <OrderedTables />} />
         <Route path={'/admin/orders'} render={() => <Orders />} />
       </Switch>
     </div>
