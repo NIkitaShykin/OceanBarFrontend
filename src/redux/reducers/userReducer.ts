@@ -15,7 +15,7 @@ type InitialStateType={
 const initialState: InitialStateType = {
 
   userProfile: {
-    'id': 10000,
+    'id': 1,
     'name': '',
     'secondname': '',
     'email': '',

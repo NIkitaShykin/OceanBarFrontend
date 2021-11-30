@@ -1,15 +1,19 @@
-import React, {useState, ChangeEvent} from 'react'
+import React, {useState, ChangeEvent, useEffect} from 'react'
 import {Form, Button, FloatingLabel} from 'react-bootstrap'
 import AddIngridients from './AddIngredients'
 import FilesOperations from './FilesOperations'
 import './newDishForms.scss'
-interface IReserveATableFormProps {
-  handleNewDishData: (newDish: any) => void
-  handleNewDishImgFile: (dishImageFile: any ) => void
+import {DishType} from './../../../../common/types/dishesType'
+
+interface newDishType {
+  handleNewDishData: (newDish: DishType) => void
+  setClearForm: (status: boolean) => void
+  clearForm: boolean
+  // handleNewDishImgFile: (dishImageFile: any ) => void
 }
 
-const ReserveATableForm: React.FC<IReserveATableFormProps> =
-  ({handleNewDishData, handleNewDishImgFile}) => {
+const newDish: React.FC<newDishType> =
+  ({handleNewDishData, clearForm, setClearForm}) => {
     const [dishName, setDishName] = useState<string>('')
     const [dishPrice, setDishPrice] = useState<number>()
     const [dishWeight, setDishWeight] = useState<number>()
@@ -21,35 +25,60 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
     const [fileImgIsLoaded, setFileImgIsLoaded]=useState<boolean>(false)
     const [dishDataErr, setDishDataErr]=useState<boolean>(false)
 
+    const handleCLearFrom=()=>{
+      setClearForm(false)
+      setDishName('')
+      setDishPrice(0)
+      setDishWeight(0)
+      setDishCalories(0)
+      setDishIngredients(['', ''])
+      setDishCategory('')
+      setDishURL('')
+      setFileImgIsLoaded(false)
+      setDishDataErr(false)
+    }
+
+    useEffect(() => {
+      if (clearForm) {
+        handleCLearFrom()
+      }
+    }, [clearForm])
+
     const inputDishName=(e: any)=>{
       setDishName(e.target.value)
     }
 
     const inputDishPrice=(e: any)=>{
+      e.preventDefault()
       setDishPrice(+e.target.value)
     }
 
     const inputDishWeight=(e: any)=>{
+      e.preventDefault()
       setDishWeight(+e.target.value)
     }
 
     const inputDishCalories=(e: any)=>{
+      e.preventDefault()
       setDishCalories(+e.target.value)
     }
 
     const inputDishIngredients=(e: any, id: number)=>{
+      e.preventDefault()
       const copyIngredients=[...dishIngredients]
       copyIngredients[id]=e.target.value
       setDishIngredients(copyIngredients)
     }
 
     const addIngredientsField=(e: any)=>{
+      e.preventDefault()
       const copyIngredients=[...dishIngredients]
       copyIngredients.push('')
       setDishIngredients(copyIngredients)
     }
 
     const inputDishURL=(e: any)=>{
+      e.preventDefault()
       setDishURL(e.target.value)
     }
 
@@ -63,19 +92,21 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
     ]
     const ingredientsStr: string=dishIngredients.join(';')
 
-    const newDish={
+    const newDish: any ={
       name: dishName,
       price: dishPrice,
       weight: dishWeight,
       calories: dishCalories,
-      imageURL: dishURL, // 'https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%A3%D1%81%D1%82%D1%80%D0%B8%D1%86.jpg',
+      imageURL: dishURL,
       ingredients: `${ingredientsStr}`,
-      dishCategory: dishCategory,
+      dishCategory: dishCategory
     }
 
-    const checkDataForSend=(newDish: any)=>{
+    const checkDataForSend=(newDish: DishType)=>{
       if (dishIngredients.length<2 || dishIngredients[0]=='' ||
-      dishIngredients[1]=='' || dishName.length<1 || dishCategory.length<1) {
+      dishIngredients[1]=='' || dishName.length<1 || dishCategory.length<1 ||
+      dishPrice==undefined || dishWeight==undefined ||
+       dishCalories==undefined ) {
         setDishDataErr(true)
       } else {
         setDishDataErr(false)
@@ -85,11 +116,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     return (
       <div className='reserve-a-table-form-booking shadow'>
-
-        {dishDataErr ?
-          <div style={{color: 'red', fontSize: '16px', marginTop: '10px'}}>
-                    некорректно заполнены данные
-          </div>: null}
 
         <div className='form-sectionAdmin'>
           <div className='form-adminField'>
@@ -263,9 +289,20 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
             />
           </div>
         </div>
-        <div className='form-sectionAdmin'>
+
+        <div className='form-sectionAdmin' style={{height: '20px'}}>
           <div className='form-separation'></div>
         </div>
+
+        {dishDataErr ?
+          <div style={{
+            color: 'red',
+            fontSize: '16px',
+            marginTop: '10px',
+            marginBottom: '20px',
+          }}>
+                    некорректно заполнены данные
+          </div>: null}
 
         <Button
           onClick={()=>checkDataForSend(newDish)}
@@ -282,4 +319,4 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
     )
   }
 
-export default ReserveATableForm
+export default newDish

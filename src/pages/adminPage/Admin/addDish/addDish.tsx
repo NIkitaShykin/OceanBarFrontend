@@ -1,10 +1,13 @@
-// import {useState} from 'react'
+import {useState} from 'react'
 import {ApiAdmin} from '../../../../api/ApiAdmin'
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
+import {DishType} from './../../../../common/types/dishesType'
 import NewDish from './newDish'
 
 const AddDish = () => {
-  const handleNewDishData=(newDish:any)=>{
+  const [clearForm, setClearForm]=useState<boolean>(false)
+
+  const handleNewDishData=(newDish:DishType)=>{
     ApiAdmin.setNewDish(newDish)
       .then((res)=>{
         // @ts-ignore
@@ -12,6 +15,7 @@ const AddDish = () => {
           orderedToast(`Ошибка добавления блюда`)
         } else if (res.status=200) {
           orderedToast(`Блюдо добавлено`)
+          setClearForm(true)
         } else {
           (console.log(res)
           )
@@ -19,18 +23,13 @@ const AddDish = () => {
       })
   }
 
-  const handleNewDishImgFile=(newDishImgFormData:any)=>{
-    ApiAdmin.getNewDishImgFileUrl(newDishImgFormData)
-      .then((res)=>console.log(res))
-  }
-
-
   return (
     <div>
       <h3>заполните поля:</h3>
       <NewDish
         handleNewDishData={handleNewDishData }
-        handleNewDishImgFile={handleNewDishImgFile }
+        setClearForm={setClearForm}
+        clearForm={clearForm}
       />
     </div>
 

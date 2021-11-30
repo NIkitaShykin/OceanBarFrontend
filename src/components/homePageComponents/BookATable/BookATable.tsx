@@ -41,12 +41,12 @@ const BookATable = () => {
     }
   }
 
-  const phoneNumber = useInput(`${user.phone}`, {
+  const phoneNumber = useInput('', {
     isEmpty: true,
     phoneNumberError: true,
   })
 
-  const userName = useInput(`${user.name}`, {
+  const userName = useInput('', {
     isEmpty: true,
     firstNameError: true,
     minLengthError: 2,

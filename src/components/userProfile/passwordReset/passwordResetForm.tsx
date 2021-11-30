@@ -38,7 +38,6 @@ const passwordResetForm = () => {
       {password: oldPassword, email: userPersonal.email}
     )
       .then((resp: any) =>{
-        console.log(resp)
         if (resp.status > 400) {
           throw new Error(resp.statusText)
         }

@@ -14,7 +14,6 @@ const completedPersonal = (props:PropsType) => {
   const loading =
    useSelector<AppStoreType, boolean>((state) => state.user.isLoading)
 
-
   return (
     <div className='info-block'>
       { loading && <Spinner/> }
@@ -22,20 +21,20 @@ const completedPersonal = (props:PropsType) => {
       <Row>
         <Col sm={4}>
           <div className='user-name'>
-            <h5>{user.name}</h5></div></Col>
+            <h5>{user && user.name}</h5></div></Col>
         <Col sm={7}></Col>
       </Row>
       <Row>
         <Col sm={4}><div className='user-name'>
-          <h5>{user.secondname}</h5></div></Col>
+          <h5>{user && user.secondname}</h5></div></Col>
       </Row>
       <Row>
         <Col sm={4}><div className='user-name'>
-          <h5>{user.email}</h5></div></Col>
+          <h5>{user && user.email}</h5></div></Col>
       </Row>
       <Row>
         <Col sm={4}><div className='user-name'>
-          <h5>{user.phone}</h5></div></Col>
+          <h5>{user && user.phone}</h5></div></Col>
       </Row>
       <br/>
       <button
