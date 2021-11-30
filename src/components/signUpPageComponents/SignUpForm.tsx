@@ -124,7 +124,13 @@ const SignUp = () => {
     e.preventDefault()
     setIsLoading(true)
 
-    ApiAuth.register(user.email, user.password).then((response) => {
+    ApiAuth.register(
+      user.name,
+      user.secondname,
+      user.email,
+      user.password,
+      user.phone
+    ).then((response) => {
       if (response.status >= 400) {
         setIsLoading(false)
         throw new Error(response.statusText)

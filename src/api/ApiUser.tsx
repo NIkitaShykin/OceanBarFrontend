@@ -3,8 +3,6 @@ import Cookies from 'js-cookie'
 import {DeliveryAdressType} from '../../src/common/types/userTypes'
 import {$api} from './ApiAuth'
 
-// const token = Cookies.get('token')
-
 export const ApiUser = {
   getUserPersonalData(userId?:number) {
     const token = Cookies.get('token')
