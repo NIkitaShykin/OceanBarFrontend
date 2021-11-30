@@ -1,11 +1,13 @@
 import {Form} from 'react-bootstrap'
 
 type PropsType = {
+
   ingredients: Array<string>
   inputDishIngredients:(e:any, id: number)=>void
 }
 
 const AddIngredients = (props:PropsType) => {
+
   const ingridientsItem = props.ingredients.map((ingredient, i) => {
     return (
       <Form.Control

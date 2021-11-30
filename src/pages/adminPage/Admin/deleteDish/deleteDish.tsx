@@ -1,5 +1,6 @@
 import {Button, Col, Row} from 'react-bootstrap'
 import {NavLink} from 'react-router-dom'
+
 import {orderedToast} from '../../../../components/OrderToast/OrderedToast'
 import {getDishesFromApiTC} from '../../../../redux/reducers/dishesReducer'
 import {ApiAdmin} from '../../../../api/ApiAdmin'
@@ -22,6 +23,7 @@ const AdminDishes = () => {
           dispatch(getDishesFromApiTC())
         }
       })
+
   }
 
   const arrayDishes = allDishes.map((dish) => {

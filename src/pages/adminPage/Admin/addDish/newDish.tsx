@@ -1,3 +1,4 @@
+
 import React, {useState, ChangeEvent, useEffect} from 'react'
 import {Form, Button, FloatingLabel} from 'react-bootstrap'
 import AddIngridients from './AddIngredients'
@@ -14,6 +15,7 @@ interface newDishType {
 
 const newDish: React.FC<newDishType> =
   ({handleNewDishData, clearForm, setClearForm}) => {
+
     const [dishName, setDishName] = useState<string>('')
     const [dishPrice, setDishPrice] = useState<number>()
     const [dishWeight, setDishWeight] = useState<number>()
@@ -49,29 +51,37 @@ const newDish: React.FC<newDishType> =
     }
 
     const inputDishPrice=(e: any)=>{
+
       e.preventDefault()
+
       setDishPrice(+e.target.value)
     }
 
     const inputDishWeight=(e: any)=>{
       e.preventDefault()
+
       setDishWeight(+e.target.value)
     }
 
     const inputDishCalories=(e: any)=>{
       e.preventDefault()
+
       setDishCalories(+e.target.value)
     }
 
     const inputDishIngredients=(e: any, id: number)=>{
+
       e.preventDefault()
+
       const copyIngredients=[...dishIngredients]
       copyIngredients[id]=e.target.value
       setDishIngredients(copyIngredients)
     }
 
     const addIngredientsField=(e: any)=>{
+
       e.preventDefault()
+
       const copyIngredients=[...dishIngredients]
       copyIngredients.push('')
       setDishIngredients(copyIngredients)
@@ -90,14 +100,17 @@ const newDish: React.FC<newDishType> =
     const dishCategoryArray: Array<string> = [
       'Плато', 'Салаты', 'Супы', 'Запеченные устрицы', 'Десерты'
     ]
+
     const ingredientsStr: string=dishIngredients.join(';')
 
     const newDish: any ={
+
       name: dishName,
       price: dishPrice,
       weight: dishWeight,
       calories: dishCalories,
       imageURL: dishURL,
+
       ingredients: `${ingredientsStr}`,
       dishCategory: dishCategory
     }
@@ -112,6 +125,7 @@ const newDish: React.FC<newDishType> =
         setDishDataErr(false)
         handleNewDishData(newDish)
       }
+
     }
 
     return (
@@ -160,7 +174,9 @@ const newDish: React.FC<newDishType> =
               type='number'
               placeholder='укажите вес блюда'
               value={dishWeight}
+
               onChange={(e) => inputDishWeight(e)}
+
             />
           </div>
         </div>
@@ -176,10 +192,13 @@ const newDish: React.FC<newDishType> =
               type='number'
               placeholder={'укажите калории'}
               value={dishCalories}
+
               onChange={(e) => inputDishCalories(e)}
+
             />
           </div>
         </div>
+
 
         <div className='form-sectionAdmin' style={{height: '100px'}}>
           <div className='form-adminField'>
@@ -232,6 +251,7 @@ const newDish: React.FC<newDishType> =
 
 
         { dishURL.length>1 && !fileImgIsLoaded ?<>
+
           <div className='form-sectionAdmin' style={{height: '210px'}}>
             <div className='form-adminField'>
               <div className='section-header'>
@@ -251,12 +271,14 @@ const newDish: React.FC<newDishType> =
           </div>
         </>:null}
 
+
         {dishCategory.length>1 && dishName.length>0 ?
           <FilesOperations
             inputDishImage={inputDishImage}
             dishCategory={dishCategory}
             dishName={dishName}
           />:null}
+
 
         <br/>
         <div className='form-sectionAdmin' style={{height: '100%'}}>
@@ -265,6 +287,7 @@ const newDish: React.FC<newDishType> =
               <div>
                 <span>Добавьте ингридиенты</span>
                 <br/>
+
                 <Button
                   onClick={addIngredientsField}
                   style={{
@@ -290,6 +313,7 @@ const newDish: React.FC<newDishType> =
           </div>
         </div>
 
+
         <div className='form-sectionAdmin' style={{height: '20px'}}>
           <div className='form-separation'></div>
         </div>
@@ -311,6 +335,7 @@ const newDish: React.FC<newDishType> =
         >
               Добавить блюдо
         </Button>
+
         <br/>
         <br/>
         <br/>
@@ -319,4 +344,6 @@ const newDish: React.FC<newDishType> =
     )
   }
 
+
 export default newDish
+

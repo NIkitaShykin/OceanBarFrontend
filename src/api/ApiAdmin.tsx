@@ -8,6 +8,7 @@ const instance = axios.create({
 })
 
 export const ApiAdmin = {
+
   getNewDishImgFileUrl(file?: string) {
     {
       return Promise.resolve(
@@ -17,6 +18,7 @@ export const ApiAdmin = {
               'Content-Type': 'multipart/form-data'
             }
           })
+
       )
     }
   },
