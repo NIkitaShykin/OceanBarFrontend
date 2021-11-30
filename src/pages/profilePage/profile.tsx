@@ -16,7 +16,8 @@ const UserProfile = () => {
 
   const handleClose = () => {
     Cookies.remove('token')
-    localStorage.removeItem('token')
+    Cookies.remove('refreshToken') //
+    // localStorage.removeItem('token')
     dispatch(logOut())
     history.push('/')
   }

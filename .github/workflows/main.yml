@@ -7,6 +7,8 @@ on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
         # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -48,3 +50,19 @@ jobs:
           docker tag deploy:latest 960126265874.dkr.ecr.eu-north-1.amazonaws.com/oceanbarfrontend:v1
           docker push 960126265874.dkr.ecr.eu-north-1.amazonaws.com/oceanbarfrontend:v1
           echo "::set-output name=image::960126265874.dkr.ecr.eu-north-1.amazonaws.com/oceanbarfrontend:v1"
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
