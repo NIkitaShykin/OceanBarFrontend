@@ -14,6 +14,7 @@ import {useDispatch} from 'react-redux'
 
 import SearchField from '../SearchStreetDelivery'
 import {addOrder} from '../../../redux/actions'
+import totalSum from '../totalSum'
 
 import './OrderForms.scss'
 
@@ -77,17 +78,30 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       handleRadioValueClearance(checkedValue)
     }
 
+    const sum = totalSum()
+
     const dispatch = useDispatch()
     const handleSubmit = ((e: React.MouseEvent<Element, MouseEvent>)=> {
+      const adress = {
+        city,
+        street,
+        homeNumber,
+        homePart,
+        flat
+      }
+
+      const adressValues = Object.values(adress)
+        .toString()
+        .replace(/[,\s]*,[,\s]*/g, ', ')
+        .replace(/^,/, '').replace(/,$/, '')
+
       dispatch(addOrder({
-        city: city,
-        street: street,
-        homeNumber: homeNumber,
-        homePart: homePart,
-        flat: flat,
+        address: adressValues,
         date: date.toLocaleDateString(),
-        timeSlot: timeSlot,
-        orderType: 'Доставка'
+        time: timeSlot,
+        type: 'Доставка',
+        paymentType: paymentMethod,
+        price: sum
       }))
       history.push('/confirmation')
     })

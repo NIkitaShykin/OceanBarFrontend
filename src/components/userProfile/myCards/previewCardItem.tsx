@@ -9,7 +9,8 @@ import 'react-credit-cards/es/styles-compiled.css'
 type PropTypes = {
   card: BankCardType,
   cardNumber: number,
-  deleteCard: (cardNumber: number) => void
+  deleteCard: (cardNumber: number) => void,
+  preview: boolean
 }
 export default class PaymentForm extends React.Component<PropTypes> {
   state = {
@@ -22,6 +23,10 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   componentDidMount() {
     this.setState({...this.state, ...this.props.card,
+
+      calback: (...args:any[]) => {
+        console.log(args)
+      }
     })
   }
 
@@ -51,11 +56,9 @@ export default class PaymentForm extends React.Component<PropTypes> {
             style={{display: 'flex'}}
             onClick={() => this.props.deleteCard(this.props.cardNumber)}
           >
-            <i className=
-              'far fa-trash-alt icon-height delete-button'></i>
+            <i className='far fa-trash-alt icon-height delete-button'></i>
           </div>
         </div>
-
       </div>
     )
   }

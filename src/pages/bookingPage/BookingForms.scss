@@ -11,8 +11,6 @@ $mainColor: #ff9e05;
 .delivery-form,
 .takeaway-form,
 .reserve-a-table-form-booking {
-  // width: 80%;
-  // margin: 0 auto;
   .form-section {
     display: flex;
     flex-direction: column;
@@ -33,7 +31,7 @@ $mainColor: #ff9e05;
       }
       .section-header {
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         width: 15rem;
         font-size: 1.2rem;
