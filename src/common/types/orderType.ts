@@ -1,25 +1,19 @@
-import {TOrderType} from './cartTypes'
 import {ApiDish} from './dishesType'
 import {DeliveryAdressType, UserType} from './userTypes'
 
 type OrderAdressType = {
   address: DeliveryAdressType
 }
-export type CommonOrderType = OrderAdressType & TOrderType
-
-export type FetchedOrderType = {
-  id: number,
-  price?: number | string,
-  state?: string,
-  user: UserType,
-  dishes: ApiDish[],
-  type?: string,
-  date: string,
-  time: string,
-  tableSize?: string,
-  paymentType?: string,
-  address?: string
+export type TOrderType = {
+  date: string
+  tableSize: string
+  time: string
+  type?: string
+  paymentType?: string
+  price: string
+  id?: string
 }
+export type CommonOrderType = OrderAdressType & TOrderType
 
 export interface IOrderResponse {
   price: number,
@@ -29,9 +23,9 @@ export interface IOrderResponse {
   time: string,
   tableSize: string,
   paymentType: string,
-  address: string,
-  user: number, // user id
-  dishes: IDish[],
+  address: string | OrderAdressType,
+  user: UserType & DeliveryAdressType, // user id
+  dishes: ApiDish[],
   id: number | string, // order id
 }
 interface IDish {
@@ -43,8 +37,8 @@ interface IDish {
   imageURL: string,
   imgredients: string,
   dishCategory: dishCategory,
-  cartPosition: CartPosition,
-  order: FetchedOrderType
+  cartPosition?: CartPosition,
+  order?: IOrderResponse
 }
 
 type dishCategory =

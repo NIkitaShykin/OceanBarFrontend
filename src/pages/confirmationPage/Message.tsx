@@ -10,9 +10,6 @@ import {useAppSelector} from '../../redux/hooks'
 
 import './confirmation.scss'
 
-// type PropsType = {
-//   orderID: number
-// }
 
 const Message = () => {
   const history = useHistory()
@@ -38,7 +35,7 @@ const Message = () => {
           <Card.Body>
             <Card.Title><h2>Спасибо за ваш заказ!</h2></Card.Title>
             <Card.Text className='mb-5 message-text'>
-              Номер вашего заказа : 36 от {date} г.
+              Номер вашего заказа : XXX от {date} г.
             </Card.Text>
             <Button
               variant='outline-warning'

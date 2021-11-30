@@ -26,8 +26,8 @@ export type DeliveryAdressType={
   city: string
   street: string
   homeNumber: string
-  homePart: string
-  flat: string
+  homePart?: string
+  flat?: string
 }
 
 export type CommonUserType=DeliveryAdressType & UserType

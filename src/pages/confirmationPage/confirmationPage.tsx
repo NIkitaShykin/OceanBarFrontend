@@ -41,8 +41,6 @@ const Confirmation = () => {
     // .then(() => console.log(response.data.id))
     //
     // setOrderID(response.data.id)
-
-    // setSuccess(!success)
   }
 
   return (

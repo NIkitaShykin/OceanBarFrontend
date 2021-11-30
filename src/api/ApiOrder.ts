@@ -1,6 +1,5 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
-// import {addOrder} from 'src/redux/actions'
 
 import {url} from '../api'
 import {CommonOrderType, IOrderResponse} from '../common/types/orderType'
@@ -16,7 +15,7 @@ export const createOrder =
        })
        .then((response) => {
          console.log('New order: ', response.data)
-         console.log(response.data.order.id)
+         console.log('New order ID: ', response.data.order.id)
        })
        .catch((error) => {
          throw new Error(error)
@@ -41,7 +40,7 @@ export const fetchOrder = async (token: string | undefined) => {
   }
 }
 
-export const fetchReposData = () => {
+export const fetchReponsData = () => {
   return function() {
     // dispatch(getOrders())
     axios.get(`${url}/order`,
@@ -60,7 +59,3 @@ export const fetchReposData = () => {
       })
   }
 }
-
-// fetchOrder(Cookies.get('token')).then((resp) => console.log(resp.data.order))
-
-

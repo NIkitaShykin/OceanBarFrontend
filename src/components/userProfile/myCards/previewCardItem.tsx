@@ -9,7 +9,8 @@ import 'react-credit-cards/es/styles-compiled.css'
 type PropTypes = {
   card: BankCardType,
   cardNumber: number,
-  deleteCard: (cardNumber: number) => void
+  deleteCard: (cardNumber: number) => void,
+  preview: boolean
 }
 export default class PaymentForm extends React.Component<PropTypes> {
   state = {

@@ -13,13 +13,3 @@ export type TOrderItem = {
   position: number,
 }
 
-export type TOrderType = {
-  date: string
-  tableSize: string
-  time: string
-  type?: string
-  paymentType?: string
-  price: string
-  id?: string
-}
-
