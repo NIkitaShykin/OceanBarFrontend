@@ -1,7 +1,7 @@
+/* eslint-disable max-len */
 import axios from 'axios'
 import {url as baseURL} from './index'
 import Cookies from 'js-cookie'
-const token = Cookies.get('token')
 
 import {DeliveryAdressType} from '../../src/common/types/userTypes'
 
@@ -11,6 +11,7 @@ const instance = axios.create({
 
 export const ApiUser = {
   getUserPersonalData(userId?:number) {
+    const token = Cookies.get('token')
     {
       return Promise.resolve(
         instance.get(`users/${userId}`,
@@ -25,6 +26,7 @@ export const ApiUser = {
   },
 
   setUserPersonalData(userData:any, tokenOld:any) {
+    const token = Cookies.get('token')
     return Promise.resolve(
       instance.patch( 'users/1', userData,
         {
@@ -37,7 +39,8 @@ export const ApiUser = {
   },
 
   setUserDeliveryData(deliveryData:DeliveryAdressType) {
-    return instance.patch('users/', {deliveryData})
+    return instance.patch('users/', {deliveryData},
+    )
   },
   checkUserPassword(token: string | undefined,
     body?: {password: string, email: string}

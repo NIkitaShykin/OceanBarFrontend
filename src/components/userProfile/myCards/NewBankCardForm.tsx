@@ -42,7 +42,8 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   expiryChange = (e:any) => {
     const {name, value} = e.target
-    if ( e.target.value.length<5 && e.target.value<1226 ) {
+
+    if ( e.target.value.length<5 && e.target.value<1230 ) {
       this.setState({[name]: value})
     }
   }

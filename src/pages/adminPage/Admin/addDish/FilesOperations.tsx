@@ -1,12 +1,9 @@
 /* eslint-disable require-jsdoc */
 import axios from 'axios'
-// export const baseURL = 'https://dry-forest-56016.herokuapp.com/'
 export const baseURL = 'http://localhost:3001/api'
-
 export const instance = axios.create({
   baseURL
 })
-// ------------------------------------------------------------
 
 import {ChangeEvent, useRef} from 'react'
 import {useState} from 'react'
@@ -16,49 +13,42 @@ import {Button} from 'react-bootstrap'
 export default function FilesOperations(props:any) {
   const buttonRef=useRef<HTMLInputElement>(null)
 
+
+  const formData = new FormData()
+  formData.append('name', `${props.dishName}`)
+  formData.append('category', `${props.dishCategory}`)
+
   const [fileURI, setFile]=useState<any>()
   const [file64, setFileURL]=useState({})
   const [file, setFileData]=useState({})
 
   const upLoad=(e:ChangeEvent<HTMLInputElement>)=>{
     const newFile= e.target.files && e.target.files[0]
-    const formData = new FormData()
 
     if (newFile) {
       setFile(newFile)
       setFileURL(window.URL.createObjectURL(newFile))
-      // formData.append('myFile', newFile, newFile.name)
+
       formData.append('file', newFile)
-      formData.append('name', 'Kasha')
-      formData.append('category', 'Плато')
       setFileData(formData)
-      // console.log(formData)
-      // props.inputDishFile(formData)
     }
   }
 
+  const sendImgDeplUrl=(ImgDeplUrl: any)=>{
+    props.inputDishImage(ImgDeplUrl)
+  }
+
+
   const send = () => {
-    // const response = instance.post('/file', file)
-
-
-    // const name= 'каша'
-    // const category ='Плато'
-    // console.log(file)
-    // const response = instance.post('menu/image', {file, name, category})
-    const response = instance.post('menu/image', file,
+    instance.post('menu/image', file,
       {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      })
 
+      }).then((res: any)=>sendImgDeplUrl(res.data.url)
+    )
 
-    // const response = instance.post('menu/image', fileData, {
-    //   'headers': formData.getHeaders(),
-    //   'Content-Length': formData.getLengthSync()
-    // })
-
-    console.log(response)
   }
 
   const returnFileSize=(size:number)=>{
@@ -85,28 +75,26 @@ export default function FilesOperations(props:any) {
                           buttonRef.current.click() }
               style={{
                 width: '250px',
-                background: '#FFFAFA',
+
                 color: 'gray',
                 display: 'flex',
                 alignItems: 'center',
                 height: '30px',
                 lineHeight: '30px',
                 justifyContent: 'space-around',
-                fontSize: '12px',
                 marginTop: '10px'
               }}
               variant='outline-warning'
             >
-              загрузка изображене с диска <h4>&#8635;</h4>
+              загрузка с диска <h4>&#8635;</h4>
+
             </Button>
           </div>
         </div>
       </div>
-      <button onClick={()=>send()
-      }>send</button>
 
       { fileURI ?<>
-        <div className='form-sectionAdmin' style={{height: '100%'}}>
+        <div className='form-sectionAdmin' style={{height: '220px'}}>
           <div className='form-adminField'>
             <div className='section-header'>
               <span> Миниатюра изображения</span>
@@ -134,6 +122,36 @@ export default function FilesOperations(props:any) {
         <div><i>type: {fileURI && fileURI.type}</i></div>
       </div>
       }
+
+      { fileURI ?<>
+        <div className='form-sectionAdmin' /* style={{height: '0px'}} */>
+          <div className='form-adminField'>
+            <div className='section-header'>
+              {/* <span>Сохранить фото</span> */}
+            </div>
+            <div>
+              <Button
+                onClick={() => send() }
+                style={{
+                  width: '250px',
+                  background: '#FFFAFA',
+                  color: 'gray',
+                  display: 'flex',
+                  alignItems: 'center',
+                  height: '30px',
+                  lineHeight: '30px',
+                  justifyContent: 'space-around',
+                  fontSize: '12px',
+                  marginTop: '10px'
+                }}
+                variant='outline-warning'
+              >
+              загрузить изображене в облако <h5>&#8593;</h5>
+              </Button>
+            </div>
+          </div>
+        </div></>:null}
+
       <div>
         <input type='file'
           ref={buttonRef}
