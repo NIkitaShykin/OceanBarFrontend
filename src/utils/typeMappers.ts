@@ -24,7 +24,7 @@ export const mapApiDishToDishInCart = (apiDish: ApiDish): DishInCart => {
     ingredients:
       apiDish.dish.ingredients.split(';').map((i: string) =>({
         name: i,
-        isAdded: apiDish.ingredients.indexOf(i) !== -1 ? true : false,
+        isAdded: apiDish.ingredients.indexOf(i) !== -1,
       })),
     position: apiDish.id,
     weight: apiDish.dish.weight,
