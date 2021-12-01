@@ -16,6 +16,7 @@ export type TOrderType = {
 export type CommonOrderType = OrderAdressType & TOrderType
 
 export interface IOrderResponse {
+  orders: any
   price: number,
   state: string, // order state: 'В процессе'/'Выполнен'
   type: string,

@@ -1,13 +1,15 @@
-import axios from 'axios'
+import axios, {AxiosResponse} from 'axios'
 import Cookies from 'js-cookie'
 
 import {url} from '../api'
 import {CommonOrderType, IOrderResponse} from '../common/types/orderType'
+import {$api} from './ApiAuth'
 
 
 export const createOrder =
-   (order: CommonOrderType, token: string | undefined) => {
-     const data = axios.post<{order: IOrderResponse}>(`${url}/order`, order,
+   async (order: CommonOrderType, token: string | undefined) => {
+     const data = await axios.post<{order: IOrderResponse}>(`${url}/order`,
+       order,
        {
          headers: {
            Authorization: `Bearer ${token}`,
@@ -26,7 +28,7 @@ export const createOrder =
 export const fetchOrder = async (token: string | undefined) => {
   try {
     const response =
-      await axios.get<{order: [IOrderResponse]}>(`${url}/order`,
+      await axios.get<{orders: IOrderResponse[]}>(`${url}/order`,
         {
           headers: {
             Authorization: `Bearer ${Cookies.get('token')}`
@@ -40,22 +42,10 @@ export const fetchOrder = async (token: string | undefined) => {
   }
 }
 
-export const fetchReponsData = () => {
-  return function() {
-    // dispatch(getOrders())
-    axios.get(`${url}/order`,
-      {
-        headers: {
-          Authorization: `Bearer ${Cookies.get('token')}`
-        }
-      })
-      .then((response) => {
-        console.log(response.data)
-        // dispatch(receiveData(response.data))
-      })
-      .catch((response) => {
-        console.log(response.data)
-        // dispatch(receiveError(response))
-      })
+export const ApiOrder = {
+  async getOrders(
+    token: string | undefined
+  ) : Promise<AxiosResponse<IOrderResponse>> {
+    return await $api.get<IOrderResponse>('/order')
   }
 }
