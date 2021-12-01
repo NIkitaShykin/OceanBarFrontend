@@ -22,19 +22,18 @@ const CompletedOrders = () => {
     handleLoad()
   }, [])
 
-  const orderCodes = doneOrders?.map((o) =>
+  const orderCodes = doneOrders?.map((order) =>
     <OrderView
-      key={o.id}
-      price={o.price}
-      state={o.state}
-      type={o.type}
-      date={o.date}
-      time={o.time}
-      tableSize={o.tableSize}
-      paymentType={o.paymentType}
-      address={o.address}
-      dishes={o.dishes}
-      id={String(o.id)}
+      key={order.id}
+      price={order.price}
+      state={order.state}
+      type={order.type}
+      date={order.date}
+      time={order.time}
+      tableSize={order.tableSize}
+      paymentType={order.paymentType}
+      address={order.address}
+      id={String(order.id)}
     />
   )
 

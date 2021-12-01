@@ -92,6 +92,10 @@ $mainColor: #ff9e05;
   .history-header-name {
     width: 29rem;
     margin-left: 5px;
+    .details-notice {
+      font-size: smaller;
+      font-style: italic;
+    }
   }
   .history-header-quant {
     width: 20rem;
@@ -130,6 +134,10 @@ $mainColor: #ff9e05;
 .mb {
   margin-bottom: 10px;
 }
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
 
 .accordion-button:not(.collapsed) {
   color: black !important;
@@ -141,5 +149,3 @@ $mainColor: #ff9e05;
   font-size: 18px;
   flex-wrap: wrap;
 }
-
-

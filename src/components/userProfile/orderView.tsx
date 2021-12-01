@@ -1,8 +1,11 @@
 /* eslint-disable react/prop-types */
+import {useEffect, useState} from 'react'
 import {Accordion} from 'react-bootstrap'
+import Cookies from 'js-cookie'
 
 import DishView from './dishView'
-import {ApiDish} from '../../common/types/dishesType'
+import {ApiOrder} from '../../api/ApiGetUserOrders'
+import {IOrderDishesResponse} from '../../common/types/orderType'
 
 interface OrderViewProps {
   price: number,
@@ -13,7 +16,6 @@ interface OrderViewProps {
   tableSize: string,
   paymentType: string,
   address: string,
-  dishes: ApiDish[],
   id: string,
 }
 
@@ -26,20 +28,36 @@ const OrderView: React.FC<OrderViewProps> = ({
   tableSize,
   paymentType,
   address,
-  dishes,
   id
 }) => {
-  const dishesCodes = dishes.map((d: any) =>
+  const [orderDishes, setOrderDishes] = useState<IOrderDishesResponse[]>([])
+  const token = Cookies.get('token')
+
+  const getOrderDishes = () => {
+    ApiOrder.getOrderDishes(token, Number(id)).then((response) => {
+      const apiOrderDishes: IOrderDishesResponse[] = response.data.dishes
+      setOrderDishes(apiOrderDishes)
+    })
+  }
+
+  useEffect(() => {
+    getOrderDishes()
+  }, [])
+
+  const dishesCodes = orderDishes.map((dish) =>
     <DishView
-      key={d.index}
-      name={d.name}
-      price={d.price}
+      key={dish.id}
+      name={dish.dish.name}
+      quantity={dish.quantity}
+      price={dish.dish.price}
+      defaultIngredients={dish.dish.ingredients}
+      addedIngredients={dish.ingredients}
     />
   )
 
   return (
     <>
-      <Accordion.Item eventKey={id}>
+      <Accordion.Item eventKey={id} key={id}>
         <Accordion.Header>
           <div className='history-order-title'>
               Заказ №{id} от {date}г
@@ -51,6 +69,9 @@ const OrderView: React.FC<OrderViewProps> = ({
               <div className='history-order-item'>
                 <div className='history-header-name'>
                   Название
+                </div>
+                <div className='history-header-quant'>
+                  Количество
                 </div>
                 <div className='history-header-price'>
                   Цена за 1 позицию

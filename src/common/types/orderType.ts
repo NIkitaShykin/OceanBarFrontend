@@ -25,8 +25,8 @@ export interface IOrderResponse {
   tableSize: string,
   paymentType: string,
   address: string,
-  user: UserType & DeliveryAdressType, // user id
-  dishes: ApiDish[],
+  user?: UserType & DeliveryAdressType, // user id
+  dishes?: ApiDish[],
   id: number, // order id
 }
 
@@ -37,7 +37,7 @@ interface IDish {
   weight: string,
   calories: string,
   imageURL: string,
-  imgredients: string,
+  ingredients: string,
   dishCategory: dishCategory,
   cartPosition?: CartPosition,
   order?: IOrderResponse
@@ -60,4 +60,16 @@ type CartPosition = {
 
 export interface IGetOrdersResponse {
   orders: IOrderResponse[]
+}
+
+export interface IOrderDishesResponse {
+  id: number,
+  ingredients: string,
+  quantity: number,
+  dish: IDish,
+  order: IOrderResponse
+}
+
+export interface IGetOrderDishesResponse {
+  dishes: IOrderDishesResponse[]
 }
