@@ -41,6 +41,13 @@ export const updateUsersBookingTables = createAction<any>(
 export const deleteUserBookingTable = createAction<any>(
   'DELETE_USER_BOOKING-TABLE'
 )
+export const deleteUserOrder = createAction<any>(
+  'DELETE_USER_ORDER'
+)
+
+export const updateUserOrder = createAction<any>(
+  'UPDATE_USER_ORDER'
+)
 
 export const addOrder = createAction<any>('ADD_ORDER')
 

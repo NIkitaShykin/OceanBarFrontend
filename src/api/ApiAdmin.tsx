@@ -48,7 +48,7 @@ export const ApiAdmin = {
   getAllOrders() {
     {
       return Promise.resolve<{data: {orders: []}}>(
-        instance.get(`${url}/order/orders`)
+        instance.get(`${url}/admin/order/`)
       ).then((resp) => {
         return resp
       })
@@ -69,6 +69,26 @@ export const ApiAdmin = {
     {
       return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
         instance.delete(`${url}/booking/usersbooking/?id=${id}`)
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
+  deleteOrder(id: string) {
+    {
+      return Promise.resolve(
+        instance.delete(`${url}/admin/order/${id}`)
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
+  updateOrder(id: string, orderState:string) {
+    {
+      return Promise.resolve(
+        instance.patch(`${url}/admin/order/${id}`, {
+          state: orderState
+        })
       ).then((resp) => {
         return resp
       })
