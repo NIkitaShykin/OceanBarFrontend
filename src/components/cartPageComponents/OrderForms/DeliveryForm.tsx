@@ -10,13 +10,16 @@ import {
   ToggleButtonGroup
 } from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 import SearchField from '../SearchStreetDelivery'
 import {addOrder} from '../../../redux/actions'
 import totalSum from '../totalSum'
+import {AppStoreType} from '../../../redux/reducers/rootReducer'
+import {DeliveryAdressType, UserType} from '../../../common/types/userTypes'
 
 import './OrderForms.scss'
+
 
 interface ITakeawayFormProps {
   handleRadioValueClearance: (value: string) => void
@@ -26,6 +29,9 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
   ({handleRadioValueClearance}) => {
     const history = useHistory()
     const city = 'г.Минск'
+
+    const user = useSelector<AppStoreType, UserType & DeliveryAdressType>(
+      (state) => state.user.userProfile)
 
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
@@ -37,10 +43,10 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
 
     const [street, setStreet] = useState<string>('')
     const [streetError, setStreetError] = useState<boolean>(false)
-    const [homeNumber, setHomeNumber] = useState<string>('')
+    const [homeNumber, setHomeNumber] = useState<string>(`${user.homeNumber}`)
     const [homeNumberError, setHomeNumberError] = useState<boolean>(false)
-    const [homePart, setHomePart] = useState<string>('')
-    const [flat, setFlat] = useState<string>('')
+    const [homePart, setHomePart] = useState<string>(`${user.homePart}`)
+    const [flat, setFlat] = useState<string>(`${user.flat}`)
 
     const useInput = () => {
       const [isDirty, setDirty] = useState<boolean>(false)

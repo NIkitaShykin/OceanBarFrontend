@@ -1,12 +1,16 @@
 import {ChangeEvent, FocusEvent, useEffect, useState} from 'react'
 import {Form} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
-import {DeliveryAdressType} from '../../common/types/userTypes'
+import {useSelector} from 'react-redux'
+
+import {DeliveryAdressType, UserType} from '../../common/types/userTypes'
+import {AppStoreType} from '../../redux/reducers/rootReducer'
 import {ApiDelivery} from '../../api/ApiDelivery'
 import useDebounce from '../../utils/useDebounce'
 import Spinner from '../Spinner/Spinner'
 
 import './searchStreet.scss'
+
 
 type PropsType = {
   required?: boolean,
@@ -19,15 +23,19 @@ type PropsType = {
 const SearchField = (props:PropsType) => {
   const [ref, isClickedOutside] = useClickOutside()
 
+  const user = useSelector<AppStoreType, UserType & DeliveryAdressType>(
+    (state) => state.user.userProfile)
+
   const [adress, setAdress] = useState<DeliveryAdressType[]>([])
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [street, setStreet] = useState('Улица')
 
-  const noQuery = searchQuery && searchQuery.length === 0
+  const noQuery = !searchQuery && searchQuery.length === 0
   const isEmpty = !adress || adress.length === 0
-
+  const [street, setStreet] = useState(
+    noQuery ? `${user.street}` : searchQuery
+  )
   const debouncedSearchQuery = useDebounce(searchQuery, 1000)
 
   useEffect(() => {
