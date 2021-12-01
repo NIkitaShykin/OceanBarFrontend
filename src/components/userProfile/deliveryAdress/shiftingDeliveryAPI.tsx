@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {ChangeEvent, useState} from 'react'
 import {Row, Col, Form, Button} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
@@ -12,7 +12,7 @@ type PropsType = {
   changeStatus: (status:boolean) => void
 }
 
-const shiftingDeliveryAPI = (props:PropsType) => {
+const ShiftingDeliveryAPI = (props:PropsType) => {
   const dispatch = useDispatch()
 
   const delivery = useSelector<AppStoreType,
@@ -38,17 +38,17 @@ const shiftingDeliveryAPI = (props:PropsType) => {
     flat: flat,
   }
 
-  const streetSelect=(value:string)=>{
+  const streetSelect=(value: string)=>{
     setStreet(value)
   }
-  const homeSelect=(e:any)=>{
+  const homeSelect=(e: ChangeEvent<HTMLInputElement>)=>{
     setHome(e.target.value)
   }
 
-  const homePartSelect=(e:any)=>{
+  const homePartSelect=(e: ChangeEvent<HTMLInputElement>)=>{
     setHomePart(e.target.value)
   }
-  const flatSelect=(e:any)=>{
+  const flatSelect=(e: ChangeEvent<HTMLInputElement>)=>{
     setFlat(e.target.value)
   }
 
@@ -61,7 +61,7 @@ const shiftingDeliveryAPI = (props:PropsType) => {
         <Col xs={'auto'} sm={12} md={2} lg={2}>
           <h5 style={{cursor: 'pointer', color: 'gray'}}
             onClick={() => props.changeStatus(false)}>
-                    Oтмена
+              Oтмена
           </h5>
         </Col>
       </Row>
@@ -137,4 +137,4 @@ const shiftingDeliveryAPI = (props:PropsType) => {
   )
 }
 
-export default shiftingDeliveryAPI
+export default ShiftingDeliveryAPI

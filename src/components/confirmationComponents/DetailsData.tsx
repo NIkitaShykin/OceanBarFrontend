@@ -1,8 +1,8 @@
-import {useAppSelector} from 'src/redux/hooks'
+import {useAppSelector} from '../../redux/hooks'
 
 const DetailsData = () => {
   const orderingUser = useAppSelector(
-    (state) => state.auth.user
+    (state) => state.user.userProfile
   )
   const orderDetails = useAppSelector(
     (state) => state.order
@@ -15,7 +15,7 @@ const DetailsData = () => {
           Тип заказа:
         </div>
         <div className='col order-type-text'>
-          {orderDetails.orderType}
+          {orderDetails.type}
         </div>
       </div>
       <div className='row'>
@@ -31,7 +31,7 @@ const DetailsData = () => {
           Время:
         </div>
         <div className='col order-type-text'>
-          {orderDetails.timeSlot}
+          {orderDetails.time}
         </div>
       </div>
       <div className='row'>
@@ -42,22 +42,18 @@ const DetailsData = () => {
           {orderingUser.name},  {orderingUser.phone}
         </div>
       </div>
-      {orderDetails.orderType === 'Доставка' && (
+      {orderDetails.type === 'Доставка' && (
         <div className='row'>
           <div className='col order-type-header'>
             Адрес доставки:
           </div>
           <div className='col order-type-text'>
-            {orderDetails.city}&nbsp;
-            ул.{orderDetails.street}&nbsp;
-            д.{orderDetails.homeNumber}&nbsp;
-            к.{orderDetails.homePart}&nbsp;
-            кв.{orderDetails.flat}
+            {orderDetails.address}
           </div>
         </div>
       )}
 
-      {orderDetails.orderType === 'Бронирование стола' && (
+      {orderDetails.type === 'Бронирование стола' && (
         <div className='row'>
           <div className='col order-type-header'>
             Стол на:

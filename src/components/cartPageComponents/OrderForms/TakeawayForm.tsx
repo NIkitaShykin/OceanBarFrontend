@@ -10,8 +10,10 @@ import {
 import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import {addOrder} from '../../../redux/actions'
+import totalSum from '../totalSum'
 
 import './OrderForms.scss'
+
 interface ITakeawayFormProps {
   handleRadioValueClearance: (value: string) => void
 }
@@ -58,12 +60,15 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
       handleRadioValueClearance(checkedValue)
     }
 
+    const sum = totalSum()
     const dispatch = useDispatch()
     const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
       dispatch(addOrder({
         date: date.toLocaleDateString(),
-        timeSlot: timeSlot,
-        orderType: 'Навынос'
+        time: timeSlot,
+        type: 'Навынос',
+        paymentType: paymentMethod,
+        price: sum
       }))
       history.push('/confirmation')
     }
@@ -161,7 +166,7 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
               >
                 <ToggleButton
                   id='tbg-radio-1'
-                  value='cash'
+                  value='Наличными'
                   variant='outline-warning'
                   onChange={(e) => {
                     setPaymentMethod(e.currentTarget.value)
@@ -172,7 +177,7 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
                 </ToggleButton>
                 <ToggleButton
                   id='tbg-radio-2'
-                  value='card-online'
+                  value='Картой онлайн'
                   variant='outline-warning'
                   onChange={(e) => {
                     setPaymentMethod(e.currentTarget.value)
@@ -183,7 +188,7 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
                 </ToggleButton>
                 <ToggleButton
                   id='tbg-radio-3'
-                  value='card-at-the-restaurant'
+                  value='Картой на месте'
                   variant='outline-warning'
                   onChange={(e) => {
                     setPaymentMethod(e.currentTarget.value)

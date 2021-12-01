@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import {UserType, ValidationType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {useValidation} from '../../../utils/validation'
+import {ApiReserve} from '../../../api/ApiBookTable'
 
 import './BookATable.scss'
 
@@ -41,12 +42,12 @@ const BookATable = () => {
     }
   }
 
-  const phoneNumber = useInput(`${user.phone}`, {
+  const phoneNumber = useInput('', {
     isEmpty: true,
     phoneNumberError: true,
   })
 
-  const userName = useInput(`${user.name}`, {
+  const userName = useInput('', {
     isEmpty: true,
     firstNameError: true,
     minLengthError: 2,
@@ -61,9 +62,18 @@ const BookATable = () => {
     (userName.firstNameError && userName.isDirty) ||
     (userName.isEmpty && userName.isDirty)
 
+  const reservOrder={
+    date: 'уточнить',
+    name: userName.value,
+    phone: phoneNumber.value,
+    time: 'уточнить',
+    amountofpeople: 4
+  }
 
   const handleClose = () => {
     setNeedPhoneCall(!needPhoneCall)
+    ApiReserve.bookTableUnregistred(reservOrder)
+      .then((res)=>console.log(res))
   }
 
   return (
@@ -92,8 +102,8 @@ const BookATable = () => {
         ) : (
           <div className='book-a-table'>
             <h2 className='bookTable'>Забронируйте стол по телефону</h2>
-            <div className='order-form'>
-              <Form>
+            <div >
+              <Form className='order-form'>
                 <Form.Floating className='mx-1'>
                   <Form.Control
                     id='userName'

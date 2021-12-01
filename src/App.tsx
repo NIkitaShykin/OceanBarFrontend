@@ -49,13 +49,15 @@ const App = () => {
       response.data.refreshToken,
       {expires: TOKEN_EXPIRATION_TIME}
     )
-    dispatch(checkAuth())
+    const user = response.data.data
+    dispatch(checkAuth(user))
     dispatch(getUserPersonalDataTC())
   }
 
   useEffect(() => {
     if (Cookies.get('token')) {
       handleAuthCheck()
+      dispatch(getUserPersonalDataTC())
     }
 
     dispatch(getDishesFromApiTC())

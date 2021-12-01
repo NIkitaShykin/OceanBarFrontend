@@ -42,7 +42,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   expiryChange = (e:any) => {
     const {name, value} = e.target
-    if ( e.target.value.length<5 && e.target.value<1226 ) {
+    if ( e.target.value.length<5 && e.target.value<1230 ) {
       this.setState({[name]: value})
     }
   }
@@ -69,16 +69,16 @@ export default class PaymentForm extends React.Component<PropTypes> {
       <div style={{height: '100%', margin: '10px'}} >
         <div id='PaymentForm' >
           <Row>
-            <Col xs={'auto'} sm={1} md={6} lg={6}>
+            <Col xs={'auto'} sm={1} md={6} lg={1} xl={6}>
             </Col>
-            <Col xs={'auto'} sm={7} md={5} lg={6}>
+            <Col xs={'auto'} sm={7} md={5} lg={8} xl={6}>
               Введите реквизиты карты
             </Col>
             <br/>
             <br/>
           </Row>
           <Row>
-            <Col xs={'auto'} sm={7} md={5} lg={5}>
+            <Col xs={'auto'} sm={7} md={5} lg={5} xl={5} >
               <div style={{transform: 'scale(0.8)'}} >
                 <Cards
                   cvc={this.state.cvc}
@@ -90,7 +90,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
               </div>
             </Col>
 
-            <Col xs={'auto'} sm={6} md={6} lg={6}>
+            <Col xs={'auto'} sm={6} md={6} lg={8} xl={7}>
               <div style={{marginLeft: '50px'}}>
                 {this.state.disableStatus ?
                   <div style={{color: 'red', fontSize: '12px'}}>

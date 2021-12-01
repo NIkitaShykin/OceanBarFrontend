@@ -13,9 +13,3 @@ export type TOrderItem = {
   position: number,
 }
 
-export type TOrderType = {
-  date: string;
-  tableSize: string;
-  timeSlot: string;
-  orderType: string;
-}

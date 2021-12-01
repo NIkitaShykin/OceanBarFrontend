@@ -16,6 +16,7 @@ $mainColor: #ff9e05;
 .details-border {
   margin: 2rem 7rem;
   padding: 1rem;
+  background: #ffffff;
   border: 1px solid lightgrey;
   border-radius: 5px;
 }
@@ -109,13 +110,53 @@ $mainColor: #ff9e05;
 
 .details-payment {
   margin-top: 50px;
+  font-size: 2rem;
 }
+.text {
+  font-size: 1.5rem;
+  padding-top: 6px;
+}
+
 
 .btn-outline-warning {
   &:active {
     background-color: $mainColor;
   }
 }
+
+.cards-block {
+  margin: 0 auto;
+  width: 835px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.choose-cards-select {
+  display: flex;
+  width: 36rem;
+}
+.add-btn {
+  font-size: 18px;
+  width: 224px;
+  height: inherit;
+  margin-left: 10px;
+}
+
+.online-payment {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.new-card {
+  background-color: #fff;
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
 
 
 

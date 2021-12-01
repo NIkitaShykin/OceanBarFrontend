@@ -1,29 +1,18 @@
-import React, {useState, ChangeEvent} from 'react'
-// import {useSelector} from 'react-redux'
-// import DatePicker from 'react-date-picker'
-import {Form, Button, FloatingLabel,
-  // Row, Col
-} from 'react-bootstrap'
-// import {AppStoreType} from '../../../../redux/reducers/rootReducer'
-// import {ValidationType} from '../../../../common/types/userTypes'
-// import {useValidation} from '../../../../utils/validation'
-// import {UserType} from '../../../../common/types/userTypes'
+import React, {useState, ChangeEvent, useEffect} from 'react'
+import {Form, Button, FloatingLabel} from 'react-bootstrap'
 import AddIngridients from './AddIngredients'
 import FilesOperations from './FilesOperations'
-// import {bookingOrderType} from '../../../../common/types/bookingTypes'
 import './newDishForms.scss'
+import {DishType} from './../../../../common/types/dishesType'
 
-
-interface IReserveATableFormProps {
-  handleNewDishData: (newDish: any) => void
-  handleNewDishImgFile: (dishImageFile: any ) => void
+interface newDishType {
+  handleNewDishData: (newDish: DishType) => void
+  setClearForm: (status: boolean) => void
+  clearForm: boolean
 }
 
-const ReserveATableForm: React.FC<IReserveATableFormProps> =
-  ({handleNewDishData, handleNewDishImgFile}) => {
-    // const user =
-    //  useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
-
+const newDish: React.FC<newDishType> =
+  ({handleNewDishData, clearForm, setClearForm}) => {
     const [dishName, setDishName] = useState<string>('')
     const [dishPrice, setDishPrice] = useState<number>()
     const [dishWeight, setDishWeight] = useState<number>()
@@ -32,58 +21,102 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
      useState<Array<string>>(['', ''])
     const [dishCategory, setDishCategory] = useState<string>('')
     const [dishURL, setDishURL] = useState<string>('')
-    // const [dishImgFile, setDishImgFile]=useState<any>({})
+    const [fileImgIsLoaded, setFileImgIsLoaded]=useState<boolean>(false)
+    const [dishDataErr, setDishDataErr]=useState<boolean>(false)
+
+    const handleCLearFrom=()=>{
+      setClearForm(false)
+      setDishName('')
+      setDishPrice(0)
+      setDishWeight(0)
+      setDishCalories(0)
+      setDishIngredients(['', ''])
+      setDishCategory('')
+      setDishURL('')
+      setFileImgIsLoaded(false)
+      setDishDataErr(false)
+    }
+
+    useEffect(() => {
+      if (clearForm) {
+        handleCLearFrom()
+      }
+    }, [clearForm])
 
     const inputDishName=(e: any)=>{
       setDishName(e.target.value)
     }
 
     const inputDishPrice=(e: any)=>{
+      e.preventDefault()
       setDishPrice(+e.target.value)
     }
 
     const inputDishWeight=(e: any)=>{
+      e.preventDefault()
       setDishWeight(+e.target.value)
     }
 
     const inputDishCalories=(e: any)=>{
+      e.preventDefault()
       setDishCalories(+e.target.value)
     }
 
     const inputDishIngredients=(e: any, id: number)=>{
+      e.preventDefault()
       const copyIngredients=[...dishIngredients]
       copyIngredients[id]=e.target.value
       setDishIngredients(copyIngredients)
     }
 
     const addIngredientsField=(e: any)=>{
+      e.preventDefault()
       const copyIngredients=[...dishIngredients]
       copyIngredients.push('')
       setDishIngredients(copyIngredients)
     }
 
+    const deleteDishIngredients=(ingredientId: number)=>{
+      const copyIngredients=[...dishIngredients]
+      copyIngredients.splice(ingredientId, 1)
+      setDishIngredients(copyIngredients)
+    }
+
     const inputDishURL=(e: any)=>{
+      e.preventDefault()
       setDishURL(e.target.value)
     }
 
-    const inputDishFile=(dishImageFile: any)=>{
-      // setDishImgFile(dishImageFile)
-      handleNewDishImgFile(dishImageFile)
+    const inputDishImage=(ImgDeplUrl: any)=>{
+      setDishURL(ImgDeplUrl)
+      setFileImgIsLoaded(true)
     }
 
     const dishCategoryArray: Array<string> = [
       'Плато', 'Салаты', 'Супы', 'Запеченные устрицы', 'Десерты'
     ]
+    const ingredientsStr: string=dishIngredients.join(';')
 
-    const newDish={
+    const newDish: any ={
       name: dishName,
       price: dishPrice,
-      weight: dishWeight,
-      calories: dishCalories,
+      weight: `${dishWeight} гр`,
+      calories: `${dishCalories} ккал`,
       imageURL: dishURL,
-      // imageURL: 'https://oceanbarmenu.s3.eu-north-1.amazonaws.com/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%A3%D1%81%D1%82%D1%80%D0%B8%D1%86.jpg',
-      ingredients: dishIngredients,
-      dishCategory: dishCategory,
+      ingredients: `${ingredientsStr}`,
+      dishCategory: dishCategory
+    }
+
+    const checkDataForSend=(newDish: DishType)=>{
+      if (dishIngredients.length<2 || dishIngredients[0]=='' ||
+      dishIngredients[1]=='' || dishName.length<1 || dishCategory.length<1 ||
+      dishPrice==undefined || dishWeight==undefined ||
+       dishCalories==undefined ) {
+        setDishDataErr(true)
+      } else {
+        setDishDataErr(false)
+        handleNewDishData(newDish)
+      }
     }
 
     return (
@@ -116,9 +149,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               type='number'
               placeholder='укажите стоимость блюда'
               value={dishPrice}
-              // isInvalid={isUserNameInvalid}
               onChange={(e) => inputDishPrice(e)}
-              // onBlur={(e) => userName.onBlur(e)}
             />
           </div>
         </div>
@@ -134,9 +165,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               type='number'
               placeholder='укажите вес блюда'
               value={dishWeight}
-              // isInvalid={isUserNameInvalid}
               onChange={(e) => inputDishWeight(e)}
-              // onBlur={(e) => userName.onBlur(e)}
             />
           </div>
         </div>
@@ -152,93 +181,12 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               type='number'
               placeholder={'укажите калории'}
               value={dishCalories}
-              // isInvalid={isUserNameInvalid}
               onChange={(e) => inputDishCalories(e)}
-              // onBlur={(e) => userName.onBlur(e)}
             />
           </div>
         </div>
 
-        <div className='form-sectionAdmin'>
-          <div className='form-adminField'>
-            <div className='section-header'>
-              <span>Фотография блюда</span>
-            </div>
-            <div>
-              <Form.Control
-                style={{width: '250px'}}
-                id='userName'
-                type='text'
-                placeholder={'по URL адрессу'}
-                value={dishURL}
-                onChange={(e) => inputDishURL(e)}
-              />
-            </div>
-          </div>
-        </div>
-
-        { dishURL.length>1 ?<>
-          <div className='form-sectionAdmin' style={{height: '210px'}}>
-            <div className='form-adminField'>
-              <div className='section-header'>
-                <span> Миниатюра изображения</span>
-              </div>
-              <div
-                style={{
-                  height: '200px',
-                  width: '250px',
-                  backgroundImage: `url(${dishURL})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-              </div>
-            </div>
-          </div>
-        </>:null}
-
-        <FilesOperations inputDishFile={inputDishFile}/>
-
-        {/* <div className='form-sectionAdmin'>
-          <div className='form-adminField'>
-            <div className='section-header'>
-              <span>Фотография блюда</span>
-            </div>
-            <div>
-              <Form.Control
-                style={{width: '250px'}}
-                id='userName'
-                type='text'
-                placeholder={'по URL адрессу'}
-                value={dishURL}
-                // isInvalid={isUserNameInvalid}
-                onChange={(e) => inputDishURL(e)}
-              // onBlur={(e) => userName.onBlur(e)}
-              />
-              <Button
-                onClick={()=>handleNewDishData(newDish)}
-                style={{
-                  width: '250px',
-                  background: '#FFFAFA',
-                  color: 'gray',
-                  display: 'flex',
-                  alignItems: 'center',
-                  height: '30px',
-                  lineHeight: '30px',
-                  justifyContent: 'space-around',
-                  fontSize: '12px',
-                  marginTop: '10px'
-                }}
-                variant='outline-warning'
-              >
-              загрузка изображене с диска <h4>&#8635;</h4>
-              </Button>
-            </div>
-          </div>
-        </div>
-        <br/> */}
-
-        <div className='form-sectionAdmin'>
+        <div className='form-sectionAdmin' style={{height: '100px'}}>
           <div className='form-adminField'>
             <div className='section-header'>
               <span>Категория блюда</span>
@@ -269,6 +217,52 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
           </div>
         </div>
 
+        <div className='form-sectionAdmin'>
+          <div className='form-adminField'>
+            <div className='section-header'>
+              <span>Фотография блюда</span>
+            </div>
+            <div>
+              <Form.Control
+                style={{width: '250px'}}
+                id='userName'
+                type='text'
+                placeholder={'по URL адрессу'}
+                value={dishURL}
+                onChange={(e) => inputDishURL(e)}
+              />
+            </div>
+          </div>
+        </div>
+
+
+        { dishURL.length>1 && !fileImgIsLoaded ?<>
+          <div className='form-sectionAdmin' style={{height: '210px'}}>
+            <div className='form-adminField'>
+              <div className='section-header'>
+                <span> Миниатюра изображения</span>
+              </div>
+              <div
+                style={{
+                  height: '200px',
+                  width: '250px',
+                  backgroundImage: `url(${dishURL})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              >
+              </div>
+            </div>
+          </div>
+        </>:null}
+
+        {dishCategory.length>1 && dishName.length>0 ?
+          <FilesOperations
+            inputDishImage={inputDishImage}
+            dishCategory={dishCategory}
+            dishName={dishName}
+          />:null}
+
         <br/>
         <div className='form-sectionAdmin' style={{height: '100%'}}>
           <div className='form-adminField'>
@@ -276,7 +270,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
               <div>
                 <span>Добавьте ингридиенты</span>
                 <br/>
-
                 <Button
                   onClick={addIngredientsField}
                   style={{
@@ -297,88 +290,33 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
             <AddIngridients
               inputDishIngredients={inputDishIngredients}
+              deleteDishIngredients={deleteDishIngredients}
               ingredients={dishIngredients}
             />
           </div>
         </div>
-        <div className='form-sectionAdmin'>
+
+        <div className='form-sectionAdmin' style={{height: '20px'}}>
           <div className='form-separation'></div>
         </div>
 
-        {/* ---------------------контактные данные----------------------- */}
-        {/*
-        <div className='form-sectionAdmin'>
-          <div className='form-adminField'>
+        {dishDataErr ?
+          <div style={{
+            color: 'red',
+            fontSize: '16px',
+            marginTop: '10px',
+            marginBottom: '20px',
+          }}>
+                    некорректно заполнены данные
+          </div>: null}
 
-            <div className='section-header'>
-              <span>Контактные данные</span>
-            </div>
-
-            <div >
-
-
-              <Form.Control
-                style={{width: '400px'}}
-                id='userName'
-                type='text'
-                placeholder='userName'
-                value={userName.value}
-                isInvalid={isUserNameInvalid}
-                onChange={(e) => userName.onChange(e)}
-                onBlur={(e) => userName.onBlur(e)}
-              />
-
-              {
-                isUserNameInvalid &&
-                  <div className='error'>
-                   Имя обязательно
-                  </div>
-              }
-
-
-              <Form.Control
-                style={{width: '400px'}}
-                id='userPhones'
-                type='phoneNumber'
-                placeholder='phones'
-                value={phoneNumber.value}
-                isInvalid={isPhoneNumberInvalid}
-                onChange={(e) => phoneNumber.onChange(e)}
-                onBlur={(e) => phoneNumber.onBlur(e)}
-              />
-
-              {
-                isPhoneNumberInvalid &&
-                  <div className='error'>
-                    Телефон должен содержать код в формате
-                    +375 (+ опционально) либо 80 и 9 цифр основного номера.
-                    Обязательно к заполнению.
-                  </div>
-              }
-
-
-            </div>
-          </div>
-
-          <div className='form-separation'></div>
-        </div> */}
-        {/* ---------------------контактные данные----------------------- */}
-
-        {/* <div className='form-section'> */}
-        {/* <div className='form-buttons'> */}
-        {/* <Modal.Footer className='justify-content-center border-0'> */}
         <Button
-          onClick={()=>handleNewDishData(newDish)}
+          onClick={()=>checkDataForSend(newDish)}
           style={{width: '160px'}}
           variant='outline-warning'
-          // disabled={!isUserNameInvalid || !isPhoneNumberInvalid
-          // }
         >
               Добавить блюдо
         </Button>
-        {/* </Modal.Footer> */}
-        {/* </div> */}
-        {/* </div> */}
         <br/>
         <br/>
         <br/>
@@ -387,4 +325,4 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
     )
   }
 
-export default ReserveATableForm
+export default newDish

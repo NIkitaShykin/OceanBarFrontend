@@ -88,12 +88,12 @@ const SearchField = () => {
     dishes.find((dish: Dish) => dish.id === id)
     setSearchQuery('')
     setIsOpen(false)
-    history.push(`/dish/${id} `)
+    history.push(`/dishes/${id} `)
   }
 
   return (
     <>
-      <Form className='d-flex mx-6 d-flex-pos justify-content-end' ref={ref}>
+      <Form className='d-flex mx-6 d-flex-pos' ref={ref}>
         <FormControl
           type='text'
           placeholder='Search...'

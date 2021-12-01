@@ -41,7 +41,8 @@ const passwordResetForm = () => {
         if (resp.status > 400) {
           throw new Error(resp.statusText)
         }
-        if (resp.data.token) {
+        // if (resp.data.token) {
+        if (resp.data.accessToken) {
           setOldPassCorrect(true)
           setShowOldPassError(false)
         }
