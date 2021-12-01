@@ -55,7 +55,7 @@ const currentOrders = () => {
                     </div>
                   </div>
                   <div className='details-devider' />
-                  {order.dishes.map((dish: any, id: number) =>
+                  {order.dishes?.map((dish: any, id: number) =>
                     <div
                       className='history-order-item'
                       key={dish.id}>
