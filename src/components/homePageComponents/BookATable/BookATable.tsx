@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import {UserType, ValidationType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {useValidation} from '../../../utils/validation'
+import {ApiReserve} from '../../../api/ApiBookTable'
 
 import './BookATable.scss'
 
@@ -61,9 +62,18 @@ const BookATable = () => {
     (userName.firstNameError && userName.isDirty) ||
     (userName.isEmpty && userName.isDirty)
 
+  const reservOrder={
+    date: 'уточнить',
+    name: userName.value,
+    phone: phoneNumber.value,
+    time: 'уточнить',
+    amountofpeople: 4
+  }
 
   const handleClose = () => {
     setNeedPhoneCall(!needPhoneCall)
+    ApiReserve.bookTableUnregistred(reservOrder)
+      .then((res)=>console.log(res))
   }
 
   return (

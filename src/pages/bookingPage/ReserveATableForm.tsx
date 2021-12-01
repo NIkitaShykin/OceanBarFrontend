@@ -20,9 +20,10 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
-    const [tableSize, setTableSize] = useState<number>(2)
+    const [tableSize, setTableSize] = useState<any>()
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
     const [isTableInputSkipped, setTableInputSkipped] = useState<boolean>(false)
+    const [orderDataError, setOrderDataError] = useState<boolean>(false)
 
     const useInput = (initialValue: string, validations: ValidationType) => {
       const [value, setValue] = useState(initialValue)
@@ -60,6 +61,17 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       minLengthError: 2,
       maxLengthError: 30,
     })
+
+
+    const checkBookingData=(reservOrder: any)=>{
+      if (isTableInvalid || isTimeInvalid || !date ||
+        isUserNameInvalid || isPhoneNumberInvalid) {
+        setOrderDataError(true)
+      } else {
+        handleBookingData(reservOrder)
+        setOrderDataError(false)
+      }
+    }
 
     const isTimeInvalid = !time.isDirty || time.isDirty && isTimeInputSkipped
 
@@ -182,6 +194,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                 controlId='floatingSelectGrid'
                 label='Столик для:'
               >
+                {/* -------------------------------------- */}
                 <Form.Select
                   aria-label='Floating label select example'
                   defaultValue={tableSize}
@@ -309,16 +322,26 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
           <div className='form-separation'></div>
         </div>
 
+        { orderDataError ?
+          <div style={{
+            color: 'red',
+            fontSize: '16px',
+            marginTop: '10px',
+            marginBottom: '20px',
+          }}>
+                    некорректно заполнены данные
+          </div>: null}
+
         <div className='form-section'>
           <div className='form-buttons'>
             <Modal.Footer className='justify-content-center border-0'>
               <Button
-                onClick={()=>handleBookingData(reservOrder)}
+                onClick={()=>checkBookingData(reservOrder)}
                 style={{width: '140px'}}
                 variant='outline-warning'
-                disabled={ isTableInvalid || isTimeInvalid || !date ||
-                  isUserNameInvalid || isPhoneNumberInvalid
-                }
+                // disabled={ isTableInvalid || isTimeInvalid || !date ||
+                //   isUserNameInvalid || isPhoneNumberInvalid
+                // }
               >
               Забронировать
               </Button>
