@@ -12,7 +12,8 @@ import {
 import {useHistory} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 
-import SearchField from '../SearchStreetDelivery'
+import SearchDelivery from
+  '../../../components/userProfile/deliveryAdress/SearchDelivery'
 import {addOrder} from '../../../redux/actions'
 import totalSum from '../totalSum'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
@@ -41,7 +42,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const [isPaymentInputSkipped, setPaymentInputSkipped] =
       useState<boolean>(false)
 
-    const [street, setStreet] = useState<string>('')
+    const [street, setStreet] = useState<string>(user.street)
     const [streetError, setStreetError] = useState<boolean>(false)
     const [homeNumber, setHomeNumber] = useState<string>(`${user.homeNumber}`)
     const [homeNumberError, setHomeNumberError] = useState<boolean>(false)
@@ -201,9 +202,10 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 <Row className='mb-3'>
                   <Col>
                     <span className='street-lable'>{city}</span>
-                    <SearchField
+                    <SearchDelivery
                       required
                       searchValue={streetSelect}
+                      currentValue={street}
                       isInvalid={streetValidation.isDirty && !streetValidation}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         setStreet(e.target.value)
