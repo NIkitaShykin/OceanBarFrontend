@@ -92,7 +92,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
         tableSize: tableSize,
         time: timeSlot,
         type: 'Бронирование стола',
-        paymentType: 'card-online',
+        paymentType: 'Картой онлайн',
         price: sum
       }))
       history.push('/confirmation')

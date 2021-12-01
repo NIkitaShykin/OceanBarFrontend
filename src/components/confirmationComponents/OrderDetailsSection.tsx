@@ -78,7 +78,7 @@ const OrderDetailsSection = () => {
 
         <div className='details-payment'>
 
-          {orderCompleted.paymentType === 'cash' && (
+          {orderCompleted.paymentType === 'Наличными' && (
             <div className='row'>
               <div className='col order-type-total text-right'>
                   Оплата:
@@ -88,7 +88,7 @@ const OrderDetailsSection = () => {
               </div>
             </div>
           )}
-          {orderCompleted.paymentType === 'card-at-the-restaurant' && (
+          {orderCompleted.paymentType === 'Картой на месте' && (
             <div className='row'>
               <div className='col order-type-total text-right'>
                 Оплата:
@@ -99,7 +99,7 @@ const OrderDetailsSection = () => {
             </div>
           )}
         </div>
-        {orderCompleted.paymentType === 'card-online' && (
+        {orderCompleted.paymentType === 'Картой онлайн' && (
           <>
             <div className='online-payment'>
               <div className=' order-type-total'>
