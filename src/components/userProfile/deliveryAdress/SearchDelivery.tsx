@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useState, ChangeEvent, FocusEvent} from 'react'
 import {Form} from 'react-bootstrap'
 import {useClickOutside} from 'react-click-outside-hook'
 import {DeliveryAdressType} from '../../../common/types/userTypes'
@@ -10,6 +10,10 @@ import './searchDelivery.scss'
 type PropsType = {
   searchValue: (value:string) => void
   currentValue:string
+  required?: boolean,
+  isInvalid?: boolean,
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void,
 }
 
 const SearchDelivery = (props:PropsType) => {
@@ -20,8 +24,6 @@ const SearchDelivery = (props:PropsType) => {
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-
-  const noQuery = searchQuery && searchQuery.length === 0
   const isEmpty = !adress || adress.length === 0
 
   const debouncedSearchQuery = useDebounce(searchQuery, 1000)
@@ -46,11 +48,6 @@ const SearchDelivery = (props:PropsType) => {
     if (searchQuery) {
       setIsOpen(true)
       setIsLoading(true)
-      const filteredAdress = adress.filter((adress: any) =>
-        adress.value.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-
-      setAdress(filteredAdress)
     } else {
       setIsOpen(false)
       setIsLoading(false)
@@ -74,7 +71,7 @@ const SearchDelivery = (props:PropsType) => {
   return (
     <>
       <Form className='mx-6 d-flex-pos justify-content-end' ref={ref}>
-        <label htmlFor='search'>Улица</label>
+        <label htmlFor='search' className='street-lable'>Улица</label>
         <Form.Control
           placeholder={props.currentValue}
           required
@@ -84,7 +81,7 @@ const SearchDelivery = (props:PropsType) => {
         />
 
         {isLoading && <Spinner />}
-        {noQuery && isEmpty && isOpen && (
+        {isEmpty && isOpen && (
           <ul className='autocomplete_delivery autocomplete-warn'>
             Начните вводить название улицы
           </ul>

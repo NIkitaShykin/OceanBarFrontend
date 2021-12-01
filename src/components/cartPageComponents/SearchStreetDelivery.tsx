@@ -33,9 +33,7 @@ const SearchField = (props:PropsType) => {
 
   const noQuery = !searchQuery && searchQuery.length === 0
   const isEmpty = !adress || adress.length === 0
-  const [street, setStreet] = useState(
-    noQuery ? `${user.street}` : searchQuery
-  )
+  const [street, setStreet] = useState(`${user.street}`)
   const debouncedSearchQuery = useDebounce(searchQuery, 1000)
 
   useEffect(() => {
@@ -88,11 +86,10 @@ const SearchField = (props:PropsType) => {
     <>
       <Form ref={ref}>
         <Form.Control
-          style={{borderRadius: '4px'}}
           placeholder={street}
           name='search'
           type='text'
-          value={searchQuery}
+          defaultValue={searchQuery}
           onChange={(e)=>setSearchQuery(e.target.value)} />
 
         {isLoading && <Spinner />}
