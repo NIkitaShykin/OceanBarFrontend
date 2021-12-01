@@ -73,7 +73,7 @@ export const setUserPersonalDataTC =
       try {
         const asyncResp: any =
          await ApiUser.setUserPersonalData(userData, token)
-        const response = asyncResp.data.data
+        const response = asyncResp.data.data.user
         dispatch(getUserAC(response))
         dispatch(toggleLoadingUser(false))
       } catch (err) {

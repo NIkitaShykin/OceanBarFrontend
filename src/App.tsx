@@ -57,6 +57,7 @@ const App = () => {
   useEffect(() => {
     if (Cookies.get('token')) {
       handleAuthCheck()
+      dispatch(getUserPersonalDataTC())
     }
 
     dispatch(getDishesFromApiTC())

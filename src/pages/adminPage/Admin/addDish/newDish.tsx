@@ -77,6 +77,12 @@ const newDish: React.FC<newDishType> =
       setDishIngredients(copyIngredients)
     }
 
+    const deleteDishIngredients=(ingredientId: number)=>{
+      const copyIngredients=[...dishIngredients]
+      copyIngredients.splice(ingredientId, 1)
+      setDishIngredients(copyIngredients)
+    }
+
     const inputDishURL=(e: any)=>{
       e.preventDefault()
       setDishURL(e.target.value)
@@ -285,6 +291,7 @@ const newDish: React.FC<newDishType> =
 
             <AddIngridients
               inputDishIngredients={inputDishIngredients}
+              deleteDishIngredients={deleteDishIngredients}
               ingredients={dishIngredients}
             />
           </div>
