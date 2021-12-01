@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch} from 'react-redux'
 import Cookies from 'js-cookie'
 
@@ -12,9 +12,11 @@ import {useAppSelector} from '../../redux/hooks'
 import {ApiCart} from '../../api/ApiCart'
 
 import {mapApiDishToDishInCart} from '../../utils/typeMappers'
+import Spinner from 'src/components/Spinner/Spinner'
 
 const Cart = () => {
   const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const isAuthorized: boolean =
     useAppSelector((state) => state.auth.isAuthorized)
@@ -23,7 +25,9 @@ const Cart = () => {
     useAppSelector((state) => state.cart.dishes)
 
   const handleLoad = () => {
+    setIsLoading(true)
     ApiCart.getCart(Cookies.get('token')).then((response) => {
+      setIsLoading(false)
       response.data.cart.forEach((dish: ApiDish) => {
         dispatch(
           addDishToCart(mapApiDishToDishInCart(dish))
@@ -40,7 +44,10 @@ const Cart = () => {
   }, [])
 
   return (
-    <UserCart dishes={dishes} />
+    <>
+      {isLoading && <Spinner />}
+      <UserCart dishes={dishes} />
+    </>
   )
 }
 
