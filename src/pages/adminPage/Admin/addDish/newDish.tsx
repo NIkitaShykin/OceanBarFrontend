@@ -9,7 +9,6 @@ interface newDishType {
   handleNewDishData: (newDish: DishType) => void
   setClearForm: (status: boolean) => void
   clearForm: boolean
-  // handleNewDishImgFile: (dishImageFile: any ) => void
 }
 
 const newDish: React.FC<newDishType> =
@@ -101,8 +100,8 @@ const newDish: React.FC<newDishType> =
     const newDish: any ={
       name: dishName,
       price: dishPrice,
-      weight: dishWeight,
-      calories: dishCalories,
+      weight: `${dishWeight} гр`,
+      calories: `${dishCalories} ккал`,
       imageURL: dishURL,
       ingredients: `${ingredientsStr}`,
       dishCategory: dishCategory
