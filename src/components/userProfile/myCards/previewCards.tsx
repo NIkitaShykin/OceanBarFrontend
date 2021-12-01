@@ -21,13 +21,12 @@ const previewCard = (props:PropsType) => {
   }
 
   return (
-    <div className='my-cards' >
+    <div className='info-block' >
 
       {userCards.map((card, i) =>{
         return (
-          <div key={i}>
+          <div key={card.id}>
             <PreviewCardsItem
-              preview={true}
               cardNumber={i}
               card={card}
               deleteCard={deleteCard}

@@ -4,7 +4,6 @@ import {BankCardType} from '../../../common/types/bankCardTypes'
 import {setBankCardTC} from '../../../redux/reducers/bankCardReducer'
 import NewBankCardForm from './NewBankCardForm'
 
-import '../../../pages/profilePage/profile.scss'
 
 type PropsType = {
   changeStatus: () => void
@@ -30,6 +29,7 @@ const previewCard = (props:PropsType) => {
       <NewBankCardForm returnCard={returnCard}/>
       <br/>
     </div>
+
   )
 }
 

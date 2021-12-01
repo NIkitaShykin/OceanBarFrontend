@@ -2,6 +2,7 @@
 /* eslint-disable require-jsdoc */
 import React from 'react'
 import Cards from 'react-credit-cards'
+import {Button} from 'react-bootstrap'
 import 'react-credit-cards/lib/styles.scss'
 import 'react-credit-cards/es/styles-compiled.css'
 import {Row, Col} from 'react-bootstrap'
@@ -41,7 +42,6 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   expiryChange = (e:any) => {
     const {name, value} = e.target
-
     if ( e.target.value.length<5 && e.target.value<1230 ) {
       this.setState({[name]: value})
     }
@@ -66,30 +66,31 @@ export default class PaymentForm extends React.Component<PropTypes> {
     }
 
     return (
-
-      <div style={{height: '100%', margin: '5px'}} >
+      <div style={{height: '100%', margin: '10px'}} >
         <div id='PaymentForm' >
           <Row>
-            <Col xs={'auto'} sm={7} md={5} lg={6}>
+            <Col xs={'auto'} sm={1} md={6} lg={1} xl={6}>
+            </Col>
+            <Col xs={'auto'} sm={7} md={5} lg={8} xl={6}>
               Введите реквизиты карты
             </Col>
             <br/>
             <br/>
           </Row>
           <Row>
-            <Col xs={'auto'} sm={9} md={7} lg={6}
-              style={{'transform': 'scale(0.9)'}}>
-              <Cards
-                cvc={this.state.cvc}
-                expiry={this.state.expiry}
-                focused={this.state.focus}
-                name={this.state.name}
-                number={this.state.number}
-              />
-
+            <Col xs={'auto'} sm={7} md={5} lg={5} xl={5} >
+              <div style={{transform: 'scale(0.8)'}} >
+                <Cards
+                  cvc={this.state.cvc}
+                  expiry={this.state.expiry}
+                  focused={this.state.focus}
+                  name={this.state.name}
+                  number={this.state.number}
+                />
+              </div>
             </Col>
 
-            <Col xs={'auto'} sm={6} md={6} lg={6}>
+            <Col xs={'auto'} sm={6} md={6} lg={8} xl={7}>
               <div style={{marginLeft: '50px'}}>
                 {this.state.disableStatus ?
                   <div style={{color: 'red', fontSize: '12px'}}>
@@ -125,13 +126,12 @@ export default class PaymentForm extends React.Component<PropTypes> {
                   />
                 </form>
 
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    width: '200px'
-                  }}
-                >
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  width: '200px'
+                }}>
+
                   <form
                     style={{display: 'flex',
                       flexDirection: 'column',
@@ -150,6 +150,7 @@ export default class PaymentForm extends React.Component<PropTypes> {
                     className='testtt'
                     />
                   </form>
+
 
                   <form
                     style={{display: 'flex',
@@ -172,17 +173,25 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
                 </div>
                 <br/>
-                <button
-                  className='btn btn-outline-warning'
-                  style={{width: '200px'}}
+                <Button
+                  style={{
+                    borderRadius: '10px',
+                    width: '200px',
+                    color: 'white',
+                    backgroundColor: '#ff9e05'
+                  }}
+                  variant='outline-warning'
                   type='submit'
                   onClick={() => handleSubmit()}
                 >
-                  Готово
-                </button>
+          Готово
+                </Button>
+
               </div>
             </Col>
           </Row>
+
+
         </div>
         <br/>
       </div>
