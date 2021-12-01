@@ -34,7 +34,7 @@ const Admin = () => {
         null :
         <>
           <h4 style={{padding: '20px', color: 'black'}}>
-             для входа введите пароль админисратора
+             для входа введите пароль администратора
           </h4>
           <div style={{display: 'flex', justifyContent: 'center'}}>
             <Form.Control
@@ -56,7 +56,7 @@ const Admin = () => {
 
       {passIsWrong? <div
         style={{color: 'red', marginTop: '40px'}}>
-        <h3>пароль не верный</h3>
+        <h3>пароль неверный</h3>
       </div> : null }
 
       {isAdmin ?
