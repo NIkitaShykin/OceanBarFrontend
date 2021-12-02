@@ -1,18 +1,14 @@
-import axios from 'axios'
-import {url} from './index'
 import Cookies from 'js-cookie'
 import {BookingTablesType} from '../common/types/bookingTypes'
+import {$api} from './ApiAuth'
 
 const token = Cookies.get('token')
 
-const instance = axios.create({
-  url,
-})
 export const ApiAdmin = {
   getNewDishImgFileUrl(newDishImgFile?: any) {
     {
       return Promise.resolve(
-        instance.post('menu/image', newDishImgFile, {
+        $api.post('menu/image', newDishImgFile, {
           headers: {Authorization: `Bearer ${token}`},
         })
       )
@@ -21,7 +17,7 @@ export const ApiAdmin = {
   setNewDish(newDish: any) {
     {
       return Promise.resolve(
-        instance.post('menu/', newDish, {
+        $api.post('menu/', newDish, {
           headers: {Authorization: `Bearer ${token}`},
         })
       )
@@ -30,7 +26,7 @@ export const ApiAdmin = {
   deleteDish(dishId: number) {
     {
       return Promise.resolve(
-        instance.delete(`menu/${dishId}`, {
+        $api.delete(`menu/${dishId}`, {
           headers: {Authorization: `Bearer ${token}`},
         })
       )
@@ -39,7 +35,7 @@ export const ApiAdmin = {
   getBookedTables() {
     {
       return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
-        instance.get(`${url}/booking/usersbooking`)
+        $api.get(`booking/usersbooking`)
       ).then((resp) => {
         return resp
       })
@@ -48,16 +44,14 @@ export const ApiAdmin = {
   getAllOrders() {
     {
       return Promise.resolve<{data: {orders: []}}>(
-        instance.get(`${url}/admin/order/`)
-      ).then((resp) => {
-        return resp
-      })
+        $api.get('admin/order/')
+      )
     }
   },
   updateBookedTables(fieldValue: any, id: string, fieldName:any) {
     {
       return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
-        instance.patch(`${url}/booking/usersbooking/?id=${id}`, {
+        $api.patch(`booking/usersbooking/?id=${id}`, {
           [fieldName]: fieldValue
         })
       ).then((resp) => {
@@ -68,7 +62,7 @@ export const ApiAdmin = {
   deleteBookedTable(id: string) {
     {
       return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
-        instance.delete(`${url}/booking/usersbooking/?id=${id}`)
+        $api.delete(`booking/usersbooking/?id=${id}`)
       ).then((resp) => {
         return resp
       })
@@ -77,7 +71,7 @@ export const ApiAdmin = {
   deleteOrder(id: string) {
     {
       return Promise.resolve(
-        instance.delete(`${url}/admin/order/${id}`)
+        $api.delete(`admin/order/${id}`)
       ).then((resp) => {
         return resp
       })
@@ -86,7 +80,7 @@ export const ApiAdmin = {
   updateOrder(id: string, orderState:string) {
     {
       return Promise.resolve(
-        instance.patch(`${url}/admin/order/${id}`, {
+        $api.patch(`admin/order/${id}`, {
           state: orderState
         })
       ).then((resp) => {
