@@ -6,6 +6,8 @@ import dishesReducer from './dishesReducer'
 import userReducer from './userReducer'
 import bankCardReducer from './bankCardReducer'
 import orderReducer from './orderReducer'
+import usersBookingTablesReducer from './usersBookingTablesReducer'
+import usersOrdersReducer from './usersOrdersReducer'
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -13,7 +15,9 @@ const rootReducer = combineReducers({
   dish: dishesReducer,
   user: userReducer,
   order: orderReducer,
-  bankCard: bankCardReducer
+  bankCard: bankCardReducer,
+  bookings: usersBookingTablesReducer,
+  orders: usersOrdersReducer
 })
 
 export type AppStoreType = ReturnType<typeof rootReducer>

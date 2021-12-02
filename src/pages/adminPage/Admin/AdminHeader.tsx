@@ -29,7 +29,7 @@ const AdminHeader = () => (
           <NavLink
             className={'menuLinkStyle'}
             activeClassName={'menuActiveLink'}
-            to={'/admin/tables'}>
+            to={'/admin/bookings'}>
             <span style={{fontSize: '16px'}}>Забронированные столы</span>
           </NavLink>
         </Col>
