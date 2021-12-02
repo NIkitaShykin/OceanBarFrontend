@@ -1,7 +1,7 @@
 import {useState, ChangeEvent} from 'react'
 import {useSelector} from 'react-redux'
 import {Card, Button, Form} from 'react-bootstrap'
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 
 import {UserType, ValidationType} from '../../../common/types/userTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
@@ -13,7 +13,7 @@ import './BookATable.scss'
 type FormControlElement = HTMLInputElement | HTMLTextAreaElement
 
 const BookATable = () => {
-  const token = Cookies.get('token')
+  // const token = Cookies.get('token')
 
   const user =
     useSelector<AppStoreType, UserType>((state) => state.user.userProfile)
@@ -73,7 +73,7 @@ const BookATable = () => {
   const handleClose = () => {
     setNeedPhoneCall(!needPhoneCall)
     ApiReserve.bookTableUnregistred(reservOrder)
-      .then((res)=>console.log(res))
+    // .then((res)=>console.log(res))
   }
 
   return (
@@ -109,7 +109,7 @@ const BookATable = () => {
                     id='userName'
                     type='text'
                     placeholder={user.name}
-                    value={token ? userName.value : ''}
+                    value={userName.value}
                     isInvalid={isUserNameInvalid}
                     onChange={(e) => userName.onChange(e)}
                     onBlur={(e) => userName.onBlur(e)}
@@ -131,7 +131,7 @@ const BookATable = () => {
                     id='userPhones'
                     type='phoneNumber'
                     placeholder={user.phone}
-                    value={token ? phoneNumber.value : ''}
+                    value={phoneNumber.value}
                     isInvalid={isPhoneNumberInvalid}
                     onChange={(e) => phoneNumber.onChange(e)}
                     onBlur={(e) => phoneNumber.onBlur(e)}
