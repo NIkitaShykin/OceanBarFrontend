@@ -75,8 +75,11 @@ export const ApiAuth = {
     phone: string
   ): Promise<AxiosResponse<IAuthResponse>> {
     return $api.post<IAuthResponse>('/users/register', {
+      name,
+      secondname,
       email,
-      password
+      password,
+      phone
     })
   },
 

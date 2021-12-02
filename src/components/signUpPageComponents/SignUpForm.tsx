@@ -120,7 +120,7 @@ const SignUp = () => {
     history.push('/')
   }
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault()
     setIsLoading(true)
 
