@@ -11,7 +11,7 @@ const absentDelivery = (props:PropsType) => {
         <b><i>Добавить карту?</i></b>
         <br/>
         <button style={{width: '150px'}}
-          className='btn btn-outline-warning offset-md-4'
+          className='btn btn-outline-warning offset-md-9'
           onClick={()=>{
             props.changeAbsent(false)
           }}

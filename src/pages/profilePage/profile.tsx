@@ -24,8 +24,8 @@ const UserProfile = () => {
 
 
   return (
-    <div>
-      <div className='container'>
+    <>
+      <div className='container-md'>
         <div className='title-group'>
           <h1 className='profile-title'>
             Профиль
@@ -41,12 +41,12 @@ const UserProfile = () => {
             <PasswordReset/>
             <MyCreditCards/>
           </div>
-          <div className='col-lg-6'>
+          <div className='col-lg-6 profile-block history ml-md-auto'>
             <OrderHistory/>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

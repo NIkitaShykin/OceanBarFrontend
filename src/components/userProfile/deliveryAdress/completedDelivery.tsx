@@ -60,7 +60,7 @@ const completedDelivery = (props:PropsType) => {
       </Row>
       <br/>
       <button
-        className='btn btn-outline-warning offset-md-10'
+        className='btn btn-outline-warning offset-md-9'
         onClick={()=>{
           props.changeStatus(true)
         }}

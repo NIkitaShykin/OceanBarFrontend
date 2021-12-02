@@ -9,7 +9,7 @@ import '../../pages/profilePage/profile.scss'
 
 const orderHistory = () => {
   return (
-    <div className='profile-block history ml-md-auto'>
+    <>
       <Tabs
         defaultActiveKey='current'
         id='uncontrolled-tab'
@@ -28,7 +28,7 @@ const orderHistory = () => {
           <CompletedOrders />
         </Tab>
       </Tabs>
-    </div>
+    </>
   )
 }
 
