@@ -10,12 +10,17 @@ import {
   ToggleButtonGroup
 } from 'react-bootstrap'
 import {useHistory} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
-import SearchField from '../SearchStreetDelivery'
+import SearchDelivery from
+  '../../../components/userProfile/deliveryAdress/SearchDelivery'
 import {addOrder} from '../../../redux/actions'
+import totalSum from '../totalSum'
+import {AppStoreType} from '../../../redux/reducers/rootReducer'
+import {DeliveryAdressType, UserType} from '../../../common/types/userTypes'
 
 import './OrderForms.scss'
+
 
 interface ITakeawayFormProps {
   handleRadioValueClearance: (value: string) => void
@@ -26,6 +31,9 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const history = useHistory()
     const city = 'г.Минск'
 
+    const user = useSelector<AppStoreType, UserType & DeliveryAdressType>(
+      (state) => state.user.userProfile)
+
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
@@ -34,12 +42,12 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
     const [isPaymentInputSkipped, setPaymentInputSkipped] =
       useState<boolean>(false)
 
-    const [street, setStreet] = useState<string>('')
+    const [street, setStreet] = useState<string>(user.street)
     const [streetError, setStreetError] = useState<boolean>(false)
-    const [homeNumber, setHomeNumber] = useState<string>('')
+    const [homeNumber, setHomeNumber] = useState<string>(`${user.homeNumber}`)
     const [homeNumberError, setHomeNumberError] = useState<boolean>(false)
-    const [homePart, setHomePart] = useState<string>('')
-    const [flat, setFlat] = useState<string>('')
+    const [homePart, setHomePart] = useState<string>(`${user.homePart}`)
+    const [flat, setFlat] = useState<string>(`${user.flat}`)
 
     const useInput = () => {
       const [isDirty, setDirty] = useState<boolean>(false)
@@ -77,17 +85,30 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
       handleRadioValueClearance(checkedValue)
     }
 
+    const sum = totalSum()
+
     const dispatch = useDispatch()
     const handleSubmit = ((e: React.MouseEvent<Element, MouseEvent>)=> {
+      const adress = {
+        city,
+        street,
+        homeNumber,
+        homePart,
+        flat
+      }
+
+      const adressValues = Object.values(adress)
+        .toString()
+        .replace(/[,\s]*,[,\s]*/g, ', ')
+        .replace(/^,/, '').replace(/,$/, '')
+
       dispatch(addOrder({
-        city: city,
-        street: street,
-        homeNumber: homeNumber,
-        homePart: homePart,
-        flat: flat,
+        address: adressValues,
         date: date.toLocaleDateString(),
-        timeSlot: timeSlot,
-        orderType: 'Доставка'
+        time: timeSlot,
+        type: 'Доставка',
+        paymentType: paymentMethod,
+        price: sum
       }))
       history.push('/confirmation')
     })
@@ -181,9 +202,10 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 <Row className='mb-3'>
                   <Col>
                     <span className='street-lable'>{city}</span>
-                    <SearchField
+                    <SearchDelivery
                       required
                       searchValue={streetSelect}
+                      currentValue={street}
                       isInvalid={streetValidation.isDirty && !streetValidation}
                       onChange={(e: ChangeEvent<HTMLInputElement>) => {
                         setStreet(e.target.value)
@@ -274,7 +296,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
               >
                 <ToggleButton
                   id='tbg-radio-1'
-                  value='cash'
+                  value='Наличными'
                   variant='outline-warning'
                   onChange={(e) => {
                     setPaymentMethod(e.currentTarget.value)
@@ -285,7 +307,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 </ToggleButton>
                 <ToggleButton
                   id='tbg-radio-2'
-                  value='card-online'
+                  value='Картой онлайн'
                   variant='outline-warning'
                   onChange={(e) => {
                     setPaymentMethod(e.currentTarget.value)
@@ -296,7 +318,7 @@ const DeliveryForm: React.FC<ITakeawayFormProps> =
                 </ToggleButton>
                 <ToggleButton
                   id='tbg-radio-3'
-                  value='card-at-the-restaurant'
+                  value='Картой на месте'
                   variant='outline-warning'
                   onChange={(e) => {
                     setPaymentMethod(e.currentTarget.value)

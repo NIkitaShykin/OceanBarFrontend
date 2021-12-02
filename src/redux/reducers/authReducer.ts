@@ -1,5 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit'
-import {logIn, logOut} from '../actions'
+import Cookies from 'js-cookie'
+
+import {logIn, logOut, checkAuth} from '../actions'
 
 interface IUserState {
   user: any | null,
@@ -8,7 +10,7 @@ interface IUserState {
 
 const initialState: IUserState = {
   user: null,
-  isAuthorized: !!localStorage.getItem('token')
+  isAuthorized: !!Cookies.get('token')
 }
 
 const authReducer = createReducer(initialState, (builder) => {
@@ -21,7 +23,18 @@ const authReducer = createReducer(initialState, (builder) => {
       }
     })
     .addCase(logOut, (state, action) => {
-      return initialState
+      return {
+        ...state,
+        user: null,
+        isAuthorized: false
+      }
+    })
+    .addCase(checkAuth, (state, action) => {
+      return {
+        ...state,
+        user: action.payload,
+        isAuthorized: true
+      }
     })
 })
 

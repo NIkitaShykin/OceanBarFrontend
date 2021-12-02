@@ -10,15 +10,8 @@ type PropTypes = {
   card: BankCardType,
   cardNumber: number,
   deleteCard: (cardNumber: number) => void
-  preview: boolean
 }
 export default class PaymentForm extends React.Component<PropTypes> {
-  // constructor(props:PropTypes) {
-  //   super(props)
-  //   this.state = this.props.card
-  // }
-
-  // [x: string]: any;
   state = {
     cvc: '',
     expiry: '',
@@ -29,17 +22,15 @@ export default class PaymentForm extends React.Component<PropTypes> {
 
   componentDidMount() {
     this.setState({...this.state, ...this.props.card,
-      // preview: this.props.preview
-      calback: (...args:any[]) => {
-        console.log(args)
-      }
     })
   }
 
   render() {
     return (
-      <div style={{height: '150px', margin: '10px'}} >
-
+      <div style={{height: '150px', margin: '10px'}}
+        key={this.props.card.id}
+        test-key={this.props.card.id}
+      >
         <div id='PaymentForm'
           style={{transform: 'scale(0.6)',
             width: '100px',
@@ -57,15 +48,11 @@ export default class PaymentForm extends React.Component<PropTypes> {
           className='order-block'
         >
           <div className='order-deletion'
-            key={this.props.cardNumber}
             style={{display: 'flex'}}
             onClick={() => this.props.deleteCard(this.props.cardNumber)}
           >
             <i className=
               'far fa-trash-alt icon-height delete-button'></i>
-            {/* <h2>&#128465;</h2> */}
-            {/* <i style=
-              {{marginLeft: '10px', fontSize: '12px'}}>удалить карту</i> */}
           </div>
         </div>
 

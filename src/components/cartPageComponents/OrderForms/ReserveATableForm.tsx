@@ -9,6 +9,7 @@ import {useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 
 import {addOrder} from '../../../redux/actions'
+import totalSum from '../totalSum'
 
 import './OrderForms.scss'
 interface IReserveATableFormProps {
@@ -83,13 +84,16 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       '21:00 - 22:00',
     ]
 
+    const sum = totalSum()
     const dispatch = useDispatch()
     const handleSubmit = (e: React.MouseEvent<Element, MouseEvent>) => {
       dispatch(addOrder({
         date: date.toLocaleDateString(),
         tableSize: tableSize,
-        timeSlot: timeSlot,
-        orderType: 'Бронирование стола'
+        time: timeSlot,
+        type: 'Бронирование стола',
+        paymentType: 'Картой онлайн',
+        price: sum
       }))
       history.push('/confirmation')
     }
@@ -113,7 +117,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
             <div className='section-content'>
               <DatePicker
                 clearIcon={null}
-                format='d-MM-y'
+                format='dd.MM.y'
                 minDate={new Date()}
                 onChange={(date: Date) => setDate(date)}
                 value={date}

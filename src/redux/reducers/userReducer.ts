@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit'
 import {AnyAction} from 'redux'
 import {RootState} from '../store'
 import {ThunkAction} from 'redux-thunk'
-import {getUserAC, toggleLoadingUser} from '../actions'
+import {getUserAC, toggleLoadingUser, removeUser} from '../actions'
 import {ApiUser} from '../../api/ApiUser'
 import {UserType} from '../../common/types/userTypes'
 import {DeliveryAdressType} from '../../common/types/userTypes'
@@ -15,7 +15,7 @@ type InitialStateType={
 const initialState: InitialStateType = {
 
   userProfile: {
-    'id': 10000,
+    'id': 1,
     'name': '',
     'secondname': '',
     'email': '',
@@ -42,6 +42,9 @@ const userReducer = createReducer(initialState, (builder) => {
         isLoading: action.payload,
       }
     })
+    .addCase(removeUser, (state, action) => {
+      return initialState
+    })
 })
 
 export default userReducer
@@ -53,7 +56,7 @@ export const getUserPersonalDataTC =
       try {
         const asyncResp = await ApiUser.getUserPersonalData()
         // @ts-ignore
-        const userData = asyncResp.data.data.user
+        const userData = asyncResp.data.data
         dispatch(getUserAC(userData))
         dispatch(toggleLoadingUser(false))
       } catch (err) {

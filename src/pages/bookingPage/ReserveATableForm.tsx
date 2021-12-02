@@ -6,11 +6,11 @@ import {AppStoreType} from '../../redux/reducers/rootReducer'
 import {useValidation} from '../../utils/validation'
 import {ValidationType} from '../../common/types/userTypes'
 import {UserType} from '../../common/types/userTypes'
-// import {bookingOrderType} from '../../common/types/bookingTypes'
-import './OrderForms.scss'
+import {bookingOrderType} from '../../common/types/bookingTypes'
+import './BookingForms.scss'
 
 interface IReserveATableFormProps {
-  handleBookingData: (bookingOrder: any) => void
+  handleBookingData: (reservOrder: bookingOrderType) => void
 }
 
 const ReserveATableForm: React.FC<IReserveATableFormProps> =
@@ -20,9 +20,10 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     const [date, setDate] = useState<Date>(new Date())
     const [timeSlot, setTimeSlot] = useState<string>('')
-    const [tableSize, setTableSize] = useState<string>('')
+    const [tableSize, setTableSize] = useState<any>()
     const [isTimeInputSkipped, setTimeInputSkipped] = useState<boolean>(false)
     const [isTableInputSkipped, setTableInputSkipped] = useState<boolean>(false)
+    const [orderDataError, setOrderDataError] = useState<boolean>(false)
 
     const useInput = (initialValue: string, validations: ValidationType) => {
       const [value, setValue] = useState(initialValue)
@@ -61,6 +62,17 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       maxLengthError: 30,
     })
 
+
+    const checkBookingData=(reservOrder: any)=>{
+      if (isTableInvalid || isTimeInvalid || !date ||
+        isUserNameInvalid || isPhoneNumberInvalid) {
+        setOrderDataError(true)
+      } else {
+        handleBookingData(reservOrder)
+        setOrderDataError(false)
+      }
+    }
+
     const isTimeInvalid = !time.isDirty || time.isDirty && isTimeInputSkipped
 
     const isTableInvalid = !table.isDirty ||table.isDirty && isTableInputSkipped
@@ -75,7 +87,7 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
       {count: 'двоих гостей', key: 2},
       {count: 'четверых гостей', key: 4},
       {count: 'шестерых гостей', key: 6},
-      {count: 'восьмерых гостей', key: 7},
+      {count: 'восьмерых гостей', key: 8},
       {count: 'десятерых гостей', key: 10},
     ]
 
@@ -114,11 +126,27 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
 
     const reservOrder={
       date: strDate,
-      time: timeSlot,
-      amountofpeople: tableSize,
       name: userName.value,
-      phone: phoneNumber.value
+      phone: phoneNumber.value,
+      time: timeSlot,
+      amountofpeople: tableSize
     }
+
+    // -------------------------------------------------------
+
+    //  const data={date: strDate,
+    //   name: userName.value,
+    //   phone: phoneNumber.value,
+    //   time: timeSlot}
+
+    // let reservOrder: any ={}
+    // if (tableSize==2) {
+    //   reservOrder = {...data, amountofpeople: 2, forTwoPerson: 1}
+    // }
+    // if (tableSize==4) {
+    //   reservOrder = {...data, amountofpeople: 4, forFourPerson: 1}
+    // }
+    // -------------------------------------------------------
 
     return (
       <div className='reserve-a-table-form-booking shadow'>
@@ -166,11 +194,12 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                 controlId='floatingSelectGrid'
                 label='Столик для:'
               >
+                {/* -------------------------------------- */}
                 <Form.Select
                   aria-label='Floating label select example'
                   defaultValue={tableSize}
                   onChange={(e: ChangeEvent<HTMLSelectElement>) => {
-                    setTableSize(e.target.value)
+                    setTableSize(+ e.target.value)
                     setTableInputSkipped(!e.target.value)
                   }}
                   onBlur={(e) => table.onBlur(e)}
@@ -293,16 +322,26 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
           <div className='form-separation'></div>
         </div>
 
+        { orderDataError ?
+          <div style={{
+            color: 'red',
+            fontSize: '16px',
+            marginTop: '10px',
+            marginBottom: '20px',
+          }}>
+                    некорректно заполнены данные
+          </div>: null}
+
         <div className='form-section'>
           <div className='form-buttons'>
             <Modal.Footer className='justify-content-center border-0'>
               <Button
-                onClick={()=>handleBookingData(reservOrder)}
+                onClick={()=>checkBookingData(reservOrder)}
                 style={{width: '140px'}}
                 variant='outline-warning'
-                disabled={ isTableInvalid || isTimeInvalid || !date ||
-                  isUserNameInvalid || isPhoneNumberInvalid
-                }
+                // disabled={ isTableInvalid || isTimeInvalid || !date ||
+                //   isUserNameInvalid || isPhoneNumberInvalid
+                // }
               >
               Забронировать
               </Button>

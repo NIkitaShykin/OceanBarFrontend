@@ -17,7 +17,8 @@ const initialState: InitialStateType = {
       expiry: '1221',
       focus: '',
       name: 'Alain Ducasse',
-      number: '2343534453644564'
+      number: '2343534453644564',
+      id: 123456789
     }
   ],
   isLoading: false

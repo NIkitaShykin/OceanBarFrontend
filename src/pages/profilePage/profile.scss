@@ -5,7 +5,7 @@ $mainColor: #ff9e05;
   gap: 1rem;
   font-size: 48px;
   line-height: 55px;
-  justify-content: start;
+  justify-content: flex-start;
   margin-top: 80px;
   color: $mainColor;
 }
@@ -30,10 +30,13 @@ $mainColor: #ff9e05;
 }
 
 .profile-block {
-  margin-top: 30px;
-  margin-bottom: 30px;
+  width: 100%;
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
   background: #ffffff;
   box-shadow: 0px 12px 40px rgba(96, 96, 96, 0.16);
+  border: 1px solid lightgrey;
+  border-radius: 5px;
   padding: 25px;
   text-align: left;
 }
@@ -45,5 +48,102 @@ $mainColor: #ff9e05;
 }
 
 .history {
-  height: 1040px;
+  .fs {
+    font-size: 28px;
+    font-weight: 600 !important;
+  }
+  .history-order-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  .history-order-block {
+    overflow: auto;
+  }
+  .history-order-item {
+    display: flex;
+    justify-content: space-around;
+    margin: 1rem;
+    padding: 10px 5px;
+    font-size: 18px;
+    gap: 1rem;
+  }
+  .history-details-item {
+    display: flex;
+    margin: 1rem 0;
+    padding: 10px;
+    font-size: 18px;
+  }
+  .history-devider {
+    height: 2px;
+    border-width: 0;
+    color: gray;
+    background-color: gray;
+    margin: 0.5rem 1rem;
+    opacity: 0.25;
+  }
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 18px;
+  }
+  .history-header-name {
+    width: 29rem;
+    margin-left: 5px;
+    .details-notice {
+      font-size: smaller;
+      font-style: italic;
+    }
+  }
+  .history-header-quant {
+    width: 20rem;
+    text-align: center;
+  }
+  .history-header-price {
+    width: 13rem;
+    text-align: center;
+  }
+  .history-total {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .history-order-type-block {
+    margin: 20px 0;
+    font-size: 18px;
+  }
+}
+.nav.nav-tabs .nav-link.active {
+  color: black;
+  border-color: #ff9e05 #ff9e05 #fff;
+}
+.nav.nav-tabs .nav-link {
+  color: #495057;
+  border-color: #fff #fff #ff9e05;
+}
+.nav.nav-tabs {
+  border-bottom: 1px solid #ff9e05;
+}
+
+.border {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+.mb {
+  margin-bottom: 10px;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordion-button:not(.collapsed) {
+  color: black !important;
+  background-color: #efeeee !important;
+}
+
+.my-cards {
+  display: flex;
+  font-size: 18px;
+  flex-wrap: wrap;
 }

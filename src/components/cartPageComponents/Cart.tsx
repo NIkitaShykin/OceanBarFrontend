@@ -52,7 +52,7 @@ const UserCart = (props: PropsType) => {
   const dispatch = useDispatch()
   const handleClearCart = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault()
-    ApiCart.clearCart(Cookies.get('token')).then(() => {})
+    ApiCart.clearCart(Cookies.get('token'))
     dispatch(clearCart())
     orderedToast(`Корзина очищена`)
   }

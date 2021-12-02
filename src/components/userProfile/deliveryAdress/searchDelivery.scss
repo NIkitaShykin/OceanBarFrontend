@@ -1,10 +1,10 @@
 .autocomplete_delivery {
   position: absolute;
   top: 100%;
-  left: 10px;
+  left: 0;
   margin-top: 0.125rem;
   background-color: #fff;
-  width: 97%;
+  width: 100%;
   padding: 0.5rem 0;
   font-size: 1rem;
   color: #212529;
@@ -19,8 +19,7 @@
 }
 
 .autocomplete-warn {
-  padding: 50px 10px;
-  font-size: 1rem;
+  padding: 20px 10px;
   color: gray;
 }
 
@@ -32,6 +31,10 @@
 .autocomplete__item_delivery:hover {
   background: rgba(0, 0, 0, 0.15);
   transition: cubic-bezier(1, 0.82, 0.165, 1) 0.3s all;
+}
+.street-lable {
+  text-align: left;
+  display: block;
 }
 
 
