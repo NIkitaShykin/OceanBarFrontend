@@ -35,28 +35,38 @@ const completedDelivery = (props:PropsType) => {
         <span style={{cursor: 'pointer', color: 'gray', textAlign: 'right'}}
           onClick={()=>delDelivery()}
         >
-      Удалить адрес
+          Удалить адрес
         </span>
       </Row>
       <Row>
-        <Col sm={4} md={3} lg={3}><div className='user-name'>
-          <h5>г.Минск</h5></div></Col>
+        <Col><div className='user-name'>
+          <h5>г.Минск</h5></div>
+        </Col>
       </Row>
       <Row>
-        <Col sm={3} md={3} lg={3}><div className='user-name'>
-          <h5>Улица&nbsp;{delivery.street}</h5></div></Col>
+        <Col><div className='user-name'>
+          <h5>Улица&nbsp;{delivery.street}</h5></div>
+        </Col>
       </Row>
       <Row>
-        <Col sm={3} md={3} lg={3}><div className='user-name'>
-          <h5>Дом&nbsp;{delivery.homeNumber}</h5></div></Col>
+        <Col>
+          <div className='user-name'>
+            <h5>Дом&nbsp;{delivery.homeNumber}</h5>
+          </div>
+        </Col>
       </Row>
       <Row>
-        <Col sm={3} md={3} lg={3}><div className='user-name'>
-          <h5>Корпус&nbsp;{delivery.homePart}</h5></div></Col>
+        <Col>
+          <div className='user-name'>
+            <h5>Корпус&nbsp;{delivery.homePart}</h5>
+          </div></Col>
       </Row>
       <Row>
-        <Col sm={3} md={3} lg={3}><div className='user-name'>
-          <h5>Квартира&nbsp;{delivery.flat}</h5></div></Col>
+        <Col>
+          <div className='user-name'>
+            <h5>Квартира&nbsp;{delivery.flat}</h5>
+          </div>
+        </Col>
       </Row>
       <br/>
       <button

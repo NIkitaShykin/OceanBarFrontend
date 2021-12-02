@@ -5,6 +5,7 @@ import Cookies from 'js-cookie'
 
 import {useAppSelector} from '../../redux/hooks'
 import Message from './Message'
+import Spinner from '../../components/Spinner/Spinner'
 import OrderDetailsSection from
   '../../components/confirmationComponents/OrderDetailsSection'
 import {ApiOrder} from '../../api/ApiOrder'
@@ -18,6 +19,7 @@ const Confirmation = () => {
 
   const [success, setSuccess] = useState<boolean>(false)
   const [orderID, setOrderID] = useState<number>(0)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const orderCompleted = useAppSelector(
     (state) => state.order
@@ -27,8 +29,10 @@ const Confirmation = () => {
     history.goBack()
   }
   const handleSubmit = () => {
+    setIsLoading(true)
     ApiOrder.createOrder(orderCompleted, token)
       .then((response) => {
+        setIsLoading(false)
         const apiOrderID: any = response.data.order.id
         setOrderID(apiOrderID)
       })
@@ -36,6 +40,7 @@ const Confirmation = () => {
 
   return (
     <>
+      {isLoading && <Spinner />}
       {success ?
         <Message orderID={orderID}/> :
         <div className='confirmation'>

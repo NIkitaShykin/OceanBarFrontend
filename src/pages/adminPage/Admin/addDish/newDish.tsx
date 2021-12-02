@@ -227,7 +227,7 @@ const newDish: React.FC<newDishType> =
                 style={{width: '250px'}}
                 id='userName'
                 type='text'
-                placeholder={'по URL адрессу'}
+                placeholder={'по URL адресу'}
                 value={dishURL}
                 onChange={(e) => inputDishURL(e)}
               />
@@ -268,7 +268,7 @@ const newDish: React.FC<newDishType> =
           <div className='form-adminField'>
             <div className='section-header'>
               <div>
-                <span>Добавьте ингридиенты</span>
+                <span>Добавьте ингредиенты</span>
                 <br/>
                 <Button
                   onClick={addIngredientsField}

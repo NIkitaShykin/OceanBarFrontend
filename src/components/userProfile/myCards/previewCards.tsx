@@ -4,6 +4,7 @@ import {userCardsType} from '../../../common/types/bankCardTypes'
 import {AppStoreType} from '../../../redux/reducers/rootReducer'
 import {deleteBankCardTC} from '../../../redux/reducers/bankCardReducer'
 import PreviewCardsItem from '../myCards/previewCardItem'
+import {Row} from 'react-bootstrap'
 
 
 type PropsType = {
@@ -25,19 +26,18 @@ const previewCard = (props:PropsType) => {
 
       {userCards.map((card, i) =>{
         return (
-          <div key={card.id}>
+          <Row key={card.id}>
             <PreviewCardsItem
               cardNumber={i}
               card={card}
               deleteCard={deleteCard}
             />
-          </div>)
+          </Row>)
       }) }
 
       <br/>
       <button
-        className='btn btn-outline-warning offset-md-9'
-        style={{width: '150px'}}
+        className='btn btn-outline-warning offset-md-8'
         onClick={()=>{
           props.changeStatus(true)
         }}

@@ -19,22 +19,32 @@ const completedPersonal = (props:PropsType) => {
       { loading && <Spinner/> }
       <br/>
       <Row>
-        <Col sm={4}>
+        <Col>
           <div className='user-name'>
-            <h5>{user && user.name}</h5></div></Col>
-        <Col sm={7}></Col>
+            <h5>{user && user.name}</h5>
+          </div>
+        </Col>
       </Row>
       <Row>
-        <Col sm={4}><div className='user-name'>
-          <h5>{user && user.secondname}</h5></div></Col>
+        <Col>
+          <div className='user-name'>
+            <h5>{user && user.secondname}</h5>
+          </div>
+        </Col>
       </Row>
       <Row>
-        <Col sm={4}><div className='user-name'>
-          <h5>{user && user.email}</h5></div></Col>
+        <Col >
+          <div className='user-name'>
+            <h5>{user && user.email}</h5>
+          </div>
+        </Col>
       </Row>
       <Row>
-        <Col sm={4}><div className='user-name'>
-          <h5>{user && user.phone}</h5></div></Col>
+        <Col>
+          <div className='user-name'>
+            <h5>{user && user.phone}</h5>
+          </div>
+        </Col>
       </Row>
       <br/>
       <button
@@ -45,9 +55,7 @@ const completedPersonal = (props:PropsType) => {
       >
         Изменить
       </button>
-
     </div>
-
   )
 }
 

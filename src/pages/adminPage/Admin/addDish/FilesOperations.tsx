@@ -1,10 +1,11 @@
 /* eslint-disable require-jsdoc */
 import axios from 'axios'
-export const baseURL = 'http://localhost:3001/api'
+import Cookies from 'js-cookie'
+
+import {url as baseURL} from '../../../../api/index'
 export const instance = axios.create({
   baseURL
 })
-// ------------------------------------------------------------
 
 import {ChangeEvent, useRef} from 'react'
 import {useState} from 'react'
@@ -40,10 +41,12 @@ export default function FilesOperations(props:any) {
 
 
   const send = () => {
+    const token = Cookies.get('token')
     instance.post('menu/image', file,
       {
         headers: {
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `Bearer ${token}`
         }
       }).then((res: any)=>sendImgDeplUrl(res.data.url)
     )

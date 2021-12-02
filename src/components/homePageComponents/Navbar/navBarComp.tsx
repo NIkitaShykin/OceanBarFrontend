@@ -14,7 +14,6 @@ const NavBarComponent: React.FC = () => {
         variant={'dark'}
         expand='xxl'
         fixed='top'
-        className='navbar-fixed'
       >
         <Navbar.Brand as={Link} to='/' className='navbar-brand-mr'>
           Ocean Bar

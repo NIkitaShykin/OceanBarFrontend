@@ -18,9 +18,10 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  overflow-x: hidden;
 }
 
 .main {
-  margin-top: 80px;
+  margin-top: 74px;
   background-color: #f9fafb;
 }
