@@ -16,6 +16,8 @@ const Orders = () => {
   const handleLoad = () => {
     ApiAdmin.getAllOrders().then((el) => {
       dispatch(setUsersOrders(el.data.orders))
+      const a:any = document.querySelector('#delivery')
+      a.classList.add('menuLinkStylesActive')
     })
   }
   useEffect(() => {
@@ -51,7 +53,7 @@ const Orders = () => {
             </a>
           </Col>
           <Col xs={3} sm={3} md={3} lg={3}>
-            <a className={'menuLinkStyles'}>
+            <a id={'delivery'} className={'menuLinkStyles'}>
               <span style={{fontSize: '15px'}}>Доставка</span>
             </a>
           </Col>
@@ -70,11 +72,9 @@ const Orders = () => {
         <div>
           <OrderTypeTakeaway orders={orders} />
         </div>
-      ) : show === 'Доставка' ? (
-        <div>
-          <OrdersDelivery orders={orders} />
-        </div>
-      ) : null}
+      ): <div>
+        <OrdersDelivery orders={orders} />
+      </div>}
     </>
   )
 }
