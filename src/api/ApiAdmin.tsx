@@ -1,43 +1,91 @@
-import axios from 'axios'
-import {url as baseURL} from './index'
 import Cookies from 'js-cookie'
+import {BookingTablesType} from '../common/types/bookingTypes'
+import {$api} from './ApiAuth'
+
 const token = Cookies.get('token')
 
-const instance = axios.create({
-  baseURL
-})
-
 export const ApiAdmin = {
-
-  getNewDishImgFileUrl(file?: string) {
+  getNewDishImgFileUrl(newDishImgFile?: any) {
     {
       return Promise.resolve(
-        instance.post('menu/image', file,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          })
-
+        $api.post('menu/image', newDishImgFile, {
+          headers: {Authorization: `Bearer ${token}`},
+        })
       )
     }
   },
-  setNewDish(newDish:any) {
+  setNewDish(newDish: any) {
     {
       return Promise.resolve(
-        instance.post('menu/', newDish,
-          {headers: {Authorization: `Bearer ${token}`}}
-        )
+        $api.post('menu/', newDish, {
+          headers: {Authorization: `Bearer ${token}`},
+        })
       )
     }
   },
-  deleteDish(dishId:number) {
+  deleteDish(dishId: number) {
     {
       return Promise.resolve(
-        instance.delete(`menu/${dishId}`,
-          {headers: {Authorization: `Bearer ${token}`}}
-        )
+        $api.delete(`menu/${dishId}`, {
+          headers: {Authorization: `Bearer ${token}`},
+        })
       )
     }
-  }
+  },
+  getBookedTables() {
+    {
+      return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
+        $api.get(`booking/usersbooking`)
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
+  getAllOrders() {
+    {
+      return Promise.resolve<{data: {orders: []}}>(
+        $api.get('admin/order/')
+      )
+    }
+  },
+  updateBookedTables(fieldValue: any, id: string, fieldName:any) {
+    {
+      return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
+        $api.patch(`booking/usersbooking/?id=${id}`, {
+          [fieldName]: fieldValue
+        })
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
+  deleteBookedTable(id: string) {
+    {
+      return Promise.resolve<{data: {bookedUsers: BookingTablesType[]}}>(
+        $api.delete(`booking/usersbooking/?id=${id}`)
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
+  deleteOrder(id: string) {
+    {
+      return Promise.resolve(
+        $api.delete(`admin/order/${id}`)
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
+  updateOrder(id: string, orderState:string) {
+    {
+      return Promise.resolve(
+        $api.patch(`admin/order/${id}`, {
+          state: orderState
+        })
+      ).then((resp) => {
+        return resp
+      })
+    }
+  },
 }
