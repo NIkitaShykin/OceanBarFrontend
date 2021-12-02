@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from 'axios'
+import {AxiosResponse} from 'axios'
 
 import {url} from '../api'
 import {CommonOrderType, IGetOrderDishesResponse, IOrderResponse} from
@@ -6,25 +6,19 @@ import {CommonOrderType, IGetOrderDishesResponse, IOrderResponse} from
 import {$api} from './ApiAuth'
 
 
-export const createOrder =
-   async (order: CommonOrderType, token: string | undefined) => {
-     const data = await axios.post<{order: IOrderResponse}>(`${url}/order`,
-       order,
-       {
-         headers: {
-           Authorization: `Bearer ${token}`,
-         }
-       })
-       .then((response) => {
-       })
-       .catch((error) => {
-         throw new Error(error)
-       })
-     return data
-   }
-
-
 export const ApiOrder = {
+  async createOrder(
+    order: CommonOrderType, token: string | undefined
+  ): Promise<AxiosResponse<any>> {
+    return await $api.post<{order: IOrderResponse}>(`${url}/order`,
+      order,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+  },
+
   async getOrders(
     token: string | undefined
   ) : Promise<AxiosResponse<IOrderResponse>> {

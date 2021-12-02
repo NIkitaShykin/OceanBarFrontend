@@ -10,8 +10,12 @@ import {useAppSelector} from '../../redux/hooks'
 
 import './confirmation.scss'
 
+type ConfirmProps = {
+  orderID: number
+}
 
-const Message = () => {
+// eslint-disable-next-line react/prop-types
+const Message: React.FC<ConfirmProps> = ({orderID}) => {
   const history = useHistory()
   const dispatch = useDispatch()
 
@@ -35,7 +39,7 @@ const Message = () => {
           <Card.Body>
             <Card.Title><h2>Спасибо за ваш заказ!</h2></Card.Title>
             <Card.Text className='mb-5 message-text'>
-              Номер вашего заказа : XXX от {date} г.
+              Номер вашего заказа : {orderID} от {date} г.
             </Card.Text>
             <Button
               variant='outline-warning'
