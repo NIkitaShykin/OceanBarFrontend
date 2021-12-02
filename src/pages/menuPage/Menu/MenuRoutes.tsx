@@ -19,7 +19,7 @@ export const PATH = {
 
 const MenuRoutes: React.FC = () => {
   return (
-    <div>
+    <>
       <Switch>
         <Route
           path={PATH.MENU}
@@ -37,7 +37,7 @@ const MenuRoutes: React.FC = () => {
           render={() => <Dish />}
         />
       </Switch>
-    </div>
+    </>
   )
 }
 
