@@ -14,7 +14,7 @@ const AddIngredients = (props:PropsType) => {
           style={{width: '250px', height: '30px', marginBottom: '5px'}}
           id='Ingredients'
           type='text'
-          placeholder={`ингридиет ${i+1}`}
+          placeholder={`ингредиент ${i+1}`}
           value={ingredient}
           onChange={(e) => props.inputDishIngredients(e, i)}
         />

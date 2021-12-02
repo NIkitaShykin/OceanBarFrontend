@@ -194,7 +194,6 @@ const ReserveATableForm: React.FC<IReserveATableFormProps> =
                 controlId='floatingSelectGrid'
                 label='Столик для:'
               >
-                {/* -------------------------------------- */}
                 <Form.Select
                   aria-label='Floating label select example'
                   defaultValue={tableSize}
