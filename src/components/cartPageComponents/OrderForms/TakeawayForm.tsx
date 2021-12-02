@@ -88,7 +88,7 @@ const TakeawayForm: React.FC<ITakeawayFormProps> =
             <div className='section-content'>
               <DatePicker
                 clearIcon={null}
-                format='d-MM-y'
+                format='dd.MM.y'
                 minDate={new Date()}
                 onChange={(date: Date) => setDate(date)}
                 required
