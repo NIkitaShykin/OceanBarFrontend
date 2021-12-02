@@ -39,7 +39,7 @@ const Message: React.FC<ConfirmProps> = ({orderID}) => {
           <Card.Body>
             <Card.Title><h2>Спасибо за ваш заказ!</h2></Card.Title>
             <Card.Text className='mb-5 message-text'>
-              Номер вашего заказа : {orderID} от {date} г.
+              Номер вашего заказа : {orderID}, к выдаче {date} г.
             </Card.Text>
             <Button
               variant='outline-warning'

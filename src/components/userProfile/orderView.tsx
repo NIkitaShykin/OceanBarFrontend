@@ -60,7 +60,7 @@ const OrderView: React.FC<OrderViewProps> = ({
       <Accordion.Item eventKey={id} key={id}>
         <Accordion.Header>
           <div className='history-order-title'>
-              Заказ №{id} от {date}г
+              Заказ №{id} на {date}г
           </div>
         </Accordion.Header>
         <Accordion.Body>

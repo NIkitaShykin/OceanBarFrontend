@@ -126,12 +126,12 @@ const ShiftingDeliveryAPI = (props:PropsType) => {
       <Col>
       </Col>
       <Button
-        className='btn btn-outline-warning offset-md-10'
+        className='btn btn-outline-warning offset-md-9'
         variant='outline-warning'
         type='submit'
         onClick={() => setDelivery()}
       >
-              Сохранить
+        Сохранить
       </Button>
     </div>
   )
